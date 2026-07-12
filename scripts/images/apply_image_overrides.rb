@@ -4,7 +4,7 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG = File.join(ROOT, 'images')
 UA = 'EnciclopediaAnimal/1.0 (educational local)'
 

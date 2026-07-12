@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 require 'json'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 data = JSON.parse(File.read(File.join(ROOT, 'data', 'enciclopedia.json')))
 missing = []
 data['animales'].each do |animal|

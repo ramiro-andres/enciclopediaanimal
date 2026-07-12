@@ -6,10 +6,10 @@ require 'net/http'
 require 'uri'
 require 'digest'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG  = File.join(ROOT, 'images')
 DATA = File.join(ROOT, 'data', 'enciclopedia.json')
-TITLES = JSON.parse(File.read(File.join(ROOT, 'scripts', 'wikipedia_titles.json')))
+TITLES = JSON.parse(File.read(File.join(__dir__, 'wikipedia_titles.json')))
 UA = 'EnciclopediaAnimal/1.0 (https://localhost; uso educativo local; ruby)'
 
 # Razas a corregir según reporte del usuario

@@ -6,7 +6,7 @@ require 'net/http'
 require 'uri'
 require 'openssl'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG  = File.join(ROOT, 'images')
 DATA = File.join(ROOT, 'data', 'enciclopedia.json')
 UA   = 'EnciclopediaAnimal/2.0 (educational local)'

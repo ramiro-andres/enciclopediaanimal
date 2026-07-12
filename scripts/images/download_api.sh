@@ -1,7 +1,8 @@
 #!/bin/bash
 # Resuelve URLs via API de Wikimedia y descarga imágenes
 UA="EnciclopediaAnimal/1.0 (local educational project)"
-DIR="$(cd "$(dirname "$0")/images" && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+DIR="$ROOT/images"
 API="https://commons.wikimedia.org/w/api.php"
 PAUSE=8
 

@@ -1,46 +1,37 @@
 # Enciclopedia Animal
 
-Atlas veterinario con razas, nutrición, enfermedades y diccionario médico.
+Atlas veterinario interactivo con razas, nutrición, enfermedades y diccionario médico.
 
-## Sitio publicado
+**Sitio publicado:** https://ramiro-andres.github.io/enciclopediaanimal/
 
-https://ramiro-andres.github.io/enciclopediaanimal/
+## Inicio rápido
+
+```bash
+bash iniciar.sh              # servidor local → http://localhost:8080
+bash actualizar_datos.sh     # regenerar JS desde JSON
+bash ejecutar_pruebas.sh     # pruebas unitarias + E2E
+```
+
+## Documentación
+
+| Documento | Contenido |
+|-----------|-----------|
+| [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) | Flujo de datos, frontend y scripts |
+| [docs/ESTRUCTURA.md](docs/ESTRUCTURA.md) | Layout del repositorio |
+| [docs/DESARROLLO.md](docs/DESARROLLO.md) | Desarrollo local, datos e imágenes |
+| [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) | GitHub Pages y CI/CD |
+| [scripts/README.md](scripts/README.md) | Índice de scripts por categoría |
 
 ## Contribuir
 
-Lee [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md): cambios a `main` solo vía **pull request** con aprobación del propietario. CI ejecuta `.github/workflows/test.yml` en cada PR.
+Los cambios a `main` solo vía **pull request**. Lee [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
-## GitHub Pages y seguridad (mantenedores)
+## Mantenedores
 
-Tras clonar, con [GitHub CLI](https://cli.github.com/) autenticada (`gh auth login`):
-
-```bash
-bash scripts/setup_github_security.sh
-```
-
-Eso activa **Pages con GitHub Actions** y la protección de `main`. Si prefieres la UI:
-
-1. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**
-2. **Settings → Actions → General → Workflow permissions → `Read and write permissions`**
-3. **Settings → Branches → Add rule** para `main` (PR obligatorio, sin force push, revisión CODEOWNERS)
-
-Luego ejecuta **Actions → Desplegar en GitHub Pages → Run workflow** una vez si hace falta el primer despliegue.
-
-## Desarrollo local
+Configuración inicial de GitHub Pages y protección de rama:
 
 ```bash
-bash iniciar.sh
-# http://localhost:8080
+bash scripts/setup/setup_github_security.sh
 ```
 
-## Regenerar datos
-
-```bash
-bash actualizar_datos.sh
-```
-
-## Pruebas
-
-```bash
-bash ejecutar_pruebas.sh
-```
+Requiere [GitHub CLI](https://cli.github.com/) autenticada (`gh auth login`).

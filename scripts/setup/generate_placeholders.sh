@@ -1,8 +1,8 @@
 #!/bin/bash
 # Genera placeholders SVG para razas sin imagen descargada
-DIR="$(cd "$(dirname "$0")" && pwd)"
-IMG="$DIR/images"
-DATA="$DIR/data/enciclopedia.json"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+IMG="$ROOT/images"
+DATA="$ROOT/data/enciclopedia.json"
 
 ruby -rjson -e '
   data = JSON.parse(File.read(ARGV[0]))

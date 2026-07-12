@@ -334,7 +334,7 @@ class AssetsTest < Minitest::Test
   def test_scripts_de_inicio_existen
     assert File.exist?(File.join(ROOT, 'iniciar.sh'))
     assert File.exist?(File.join(ROOT, 'actualizar_datos.sh'))
-    assert File.exist?(File.join(ROOT, 'scripts', 'build_medical_dictionary.rb'))
+    assert File.exist?(File.join(ROOT, 'scripts', 'data', 'build_medical_dictionary.rb'))
   end
 
   def test_placeholder_existe

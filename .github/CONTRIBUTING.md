@@ -28,16 +28,18 @@ Gracias por mejorar el atlas veterinario. Este repositorio es **público** y `ma
 
 ```bash
 bash iniciar.sh          # servidor en http://localhost:8080
-bash actualizar_datos.sh # regenerar JSON si aplica
-bash ejecutar_pruebas.sh # pruebas unitarias Ruby
+bash actualizar_datos.sh # regenerar JS desde JSON
+bash ejecutar_pruebas.sh # pruebas unitarias + E2E
 ```
+
+Documentación detallada: [docs/DESARROLLO.md](../docs/DESARROLLO.md) y [docs/ESTRUCTURA.md](../docs/ESTRUCTURA.md).
 
 ## Activar GitHub Pages (mantenedores)
 
 Si Pages aún no está activo, un mantenedor con `gh` autenticado puede ejecutar:
 
 ```bash
-bash scripts/setup_github_security.sh
+bash scripts/setup/setup_github_security.sh
 ```
 
 O manualmente: **Settings → Pages → Build and deployment → Source: GitHub Actions**, y **Settings → Actions → General → Workflow permissions → Read and write permissions**.
