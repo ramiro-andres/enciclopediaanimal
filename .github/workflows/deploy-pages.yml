@@ -25,26 +25,42 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: false
 
+      - name: Instalar dependencias de prueba
+        run: gem install minitest
+
       - name: Ejecutar pruebas unitarias
         run: ruby tests/test_enciclopedia.rb
 
-  deploy:
+  build:
     needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar sitio estático
+        run: |
+          mkdir -p _site
+          cp index.html .nojekyll _site/
+          cp -r css js data images _site/
+          echo "Archivos del sitio:"
+          find _site -type f | wc -l
+          du -sh _site
+
+      - name: Subir artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Subir sitio estático
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Desplegar
+      - name: Desplegar en GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
