@@ -7,5 +7,7 @@
 | [DESARROLLO.md](DESARROLLO.md) | Entorno local, datos, imágenes y pruebas |
 | [DESPLIEGUE.md](DESPLIEGUE.md) | GitHub Pages y CI/CD |
 | [CONTRIBUIR.md](CONTRIBUIR.md) | Guía rápida + enlace a CONTRIBUTING |
+| [TRAZADO_RUTA.md](TRAZADO_RUTA.md) | Roadmap por fases, tareas y prioridades |
+| [SCRUM.md](SCRUM.md) | Backlog ágil: épicas, historias, sprints y DoD/DoR |
 
 Entrada principal del proyecto: [README.md](../README.md).
