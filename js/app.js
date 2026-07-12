@@ -921,11 +921,7 @@ const App = {
 };
 
 const DisclaimerModal = {
-  STORAGE_KEY: 'disclaimer_accepted',
-
   init() {
-    if (localStorage.getItem(this.STORAGE_KEY) === 'true') return;
-
     this.overlay = document.getElementById('disclaimerOverlay');
     this.modal = document.getElementById('disclaimerModal');
     this.acceptBtn = document.getElementById('disclaimerAcceptBtn');
@@ -956,7 +952,6 @@ const DisclaimerModal = {
   },
 
   dismiss() {
-    localStorage.setItem(this.STORAGE_KEY, 'true');
     this.isOpen = false;
     this.overlay.hidden = true;
     this.overlay.setAttribute('aria-hidden', 'true');

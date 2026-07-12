@@ -342,7 +342,8 @@ class AssetsTest < Minitest::Test
   def test_app_js_tiene_aviso_educativo
     js = File.read(File.join(ROOT, 'js', 'app.js'))
     assert_includes js, 'DisclaimerModal'
-    assert_includes js, 'disclaimer_accepted'
+    refute_includes js, 'localStorage'
+    refute_includes js, 'disclaimer_accepted'
   end
 
   def test_scripts_de_inicio_existen
