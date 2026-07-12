@@ -1,0 +1,41 @@
+name: Solicitud de funcionalidad
+description: Proponer mejoras de producto, UX o infraestructura
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+      description: ¿Qué limitación tiene hoy el sitio o el flujo de desarrollo?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solución propuesta
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad sugerida
+      options:
+        - Alta — bloquea uso o contribución
+        - Media — mejora notable
+        - Baja — nice to have
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Revisé el backlog en docs/SCRUM.md antes de abrir esta solicitud
