@@ -249,6 +249,13 @@ class HtmlStructureTest < Minitest::Test
     @html = File.read(File.join(ROOT, 'index.html'))
   end
 
+  def test_modal_aviso_educativo
+    assert_match(/role="dialog"/, @html)
+    assert_match(/aria-labelledby="disclaimerTitle"/, @html)
+    assert_match(/id="disclaimerAcceptBtn"/, @html)
+    assert_match(/Aviso importante/, @html)
+  end
+
   def test_elementos_dom_requeridos
     %w[
       welcomeView welcomeCategoryCards welcomeIntro welcomeStats searchInputWelcome
@@ -258,6 +265,7 @@ class HtmlStructureTest < Minitest::Test
       searchClearBtn searchResults browseSection focusSearchBtn
       homeView detailView diseaseView breedDetail diseaseDetail
       backBtn backDiseaseBtn resultsTitle resultsCount
+      disclaimerOverlay disclaimerModal disclaimerTitle disclaimerBody disclaimerAcceptBtn
     ].each do |id|
       assert_match(/id="#{id}"/, @html, "Falta elemento ##{id}")
     end
@@ -307,7 +315,7 @@ end
 class AssetsTest < Minitest::Test
   def test_css_existe_y_tiene_reglas_clave
     css = File.read(File.join(ROOT, 'css', 'styles.css'))
-    %w[.header .sidebar .breed-grid .breed-card .disease-card .empty-state .main-search-panel .search-results .dictionary-term-card .dictionary-page].each do |sel|
+    %w[.header .sidebar .breed-grid .breed-card .disease-card .empty-state .main-search-panel .search-results .dictionary-term-card .dictionary-page .disclaimer-overlay .disclaimer-modal].each do |sel|
       assert_includes css, sel
     end
     assert_operator css.length, :>, 1000
@@ -329,6 +337,12 @@ class AssetsTest < Minitest::Test
     js = File.read(File.join(ROOT, 'js', 'app.js'))
     assert_includes js, 'data-key="${b.animalId}:${b.id}"'
     assert_includes js, "card.dataset.key.split(':')"
+  end
+
+  def test_app_js_tiene_aviso_educativo
+    js = File.read(File.join(ROOT, 'js', 'app.js'))
+    assert_includes js, 'DisclaimerModal'
+    assert_includes js, 'disclaimer_accepted'
   end
 
   def test_scripts_de_inicio_existen

@@ -920,4 +920,70 @@ const App = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => App.init());
+const DisclaimerModal = {
+  STORAGE_KEY: 'disclaimer_accepted',
+
+  init() {
+    if (localStorage.getItem(this.STORAGE_KEY) === 'true') return;
+
+    this.overlay = document.getElementById('disclaimerOverlay');
+    this.modal = document.getElementById('disclaimerModal');
+    this.acceptBtn = document.getElementById('disclaimerAcceptBtn');
+    if (!this.overlay || !this.modal || !this.acceptBtn) return;
+
+    this.isOpen = false;
+    this.previousFocus = document.activeElement;
+    this.onKeydown = (e) => {
+      if (!this.isOpen) return;
+      if (e.key === 'Escape') this.dismiss();
+      if (e.key === 'Tab') this.trapFocus(e);
+    };
+
+    this.acceptBtn.addEventListener('click', () => this.dismiss());
+    this.overlay.addEventListener('click', (e) => {
+      if (e.target === this.overlay) this.dismiss();
+    });
+    document.addEventListener('keydown', this.onKeydown);
+    this.show();
+  },
+
+  show() {
+    this.isOpen = true;
+    this.overlay.hidden = false;
+    this.overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('disclaimer-open');
+    requestAnimationFrame(() => this.acceptBtn.focus());
+  },
+
+  dismiss() {
+    localStorage.setItem(this.STORAGE_KEY, 'true');
+    this.isOpen = false;
+    this.overlay.hidden = true;
+    this.overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('disclaimer-open');
+    document.removeEventListener('keydown', this.onKeydown);
+    (this.previousFocus || document.getElementById('goHomeBtn'))?.focus();
+  },
+
+  trapFocus(e) {
+    const focusable = this.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const items = Array.from(focusable).filter((el) => !el.disabled && el.offsetParent !== null);
+    if (items.length < 2) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  DisclaimerModal.init();
+  App.init();
+});
