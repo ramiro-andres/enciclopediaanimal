@@ -2813,3 +2813,81 @@ body.disclaimer-open {
     font-size: 0.93rem;
   }
 }
+
+/* ── Enlaces cruzados diccionario ↔ enfermedades (US-UX-04) ── */
+.cross-link-block {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(15, 23, 42, 0.12);
+}
+
+.cross-link-block--terms {
+  border-top: none;
+}
+
+.cross-link-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--primary, #4338ca);
+  margin-bottom: 0.5rem;
+}
+
+.cross-link-hint {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 0.6rem;
+}
+
+.cross-link-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cross-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.cross-link-chip:hover {
+  background: #e0e7ff;
+  border-color: var(--primary, #4338ca);
+  transform: translateY(-1px);
+}
+
+.cross-link-chip:focus-visible {
+  outline: 2px solid var(--primary, #4338ca);
+  outline-offset: 2px;
+}
+
+.cross-link-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cross-link-dot.severity-leve { background: #22c55e; }
+.cross-link-dot.severity-moderada { background: #f59e0b; }
+.cross-link-dot.severity-grave { background: #e11d48; }
+
+.cross-link-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+}

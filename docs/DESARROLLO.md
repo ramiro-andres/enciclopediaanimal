@@ -27,7 +27,10 @@ bash actualizar_datos.sh
 Esto:
 
 1. Ejecuta `scripts/data/build_medical_dictionary.rb` → actualiza `diccionario_medicos.json`
-2. Genera `enciclopedia.js` y `diccionario_medicos.js` desde los JSON
+2. Ejecuta `scripts/data/build_cross_links.rb` → genera `enlaces_clinicos.json` (enlaces bidireccionales diccionario ↔ enfermedades)
+3. Genera `enciclopedia.js`, `diccionario_medicos.js` y `enlaces_clinicos.js` desde los JSON
+
+> **Importante:** CI falla si commiteas cambios en los JSON sin regenerar los `.js`. Ejecuta siempre `bash actualizar_datos.sh` antes de abrir la PR.
 
 **Importante:** Si modificas cualquier `data/*.json`, debes ejecutar este script y commitear **tanto el JSON como los `.js` generados**. CI ejecuta `actualizar_datos.sh` y falla si los `.js` no están sincronizados con los JSON.
 
@@ -57,11 +60,27 @@ Los logs de descarga (`*.log`) se escriben en la raíz o cwd y están en `.gitig
 
 ## Pruebas
 
+### Pruebas unitarias (Ruby)
+
 ```bash
 bash ejecutar_pruebas.sh
 ```
 
-Equivale a `ruby tests/test_enciclopedia.rb` (integridad de JSON, HTML, JS). Es el mismo check que corre en CI.
+Ejecuta todos los archivos `tests/test_*.rb` (integridad de JSON, HTML, JS y enlaces clínicos) y la validación de integridad `scripts/setup/validar_integridad.rb`. Es el mismo check que corre en el workflow `test`.
+
+### Pruebas E2E de navegador (sin servidor)
+
+Las pruebas end-to-end usan [Playwright](https://playwright.dev) y cargan `index.html` mediante `file://` (los datos van embebidos como `<script>`, así que **no se necesita servidor**). Requieren Node.js ≥ 18.
+
+```bash
+bash ejecutar_e2e.sh          # instala dependencias la primera vez y corre las pruebas
+```
+
+En CI se ejecutan en el workflow `e2e`. Los escenarios cubren: carga inicial + aviso educativo, raza → enfermedad, enlaces cruzados del glosario y búsqueda global.
+
+### Vista previa de una PR
+
+El workflow `preview` valida la integridad de datos/enlaces y publica un artefacto descargable `vista-previa-sitio` con el `_site` construido, para revisar la PR sin desplegar.
 
 ## Flujo de contribución
 

@@ -1,7 +1,8 @@
 #!/bin/bash
-# Regenera data/enciclopedia.js y data/diccionario_medicos.js desde JSON
+# Regenera los .js derivados (enciclopedia, diccionario y enlaces clínicos) desde JSON
 DIR="$(cd "$(dirname "$0")" && pwd)"
 ruby "$DIR/scripts/data/build_medical_dictionary.rb"
+ruby "$DIR/scripts/data/build_cross_links.rb"
 ruby -rjson -e '
   base = ARGV[0]
   d = JSON.parse(File.read(base + "/data/enciclopedia.json"))
@@ -14,5 +15,12 @@ ruby -rjson -e '
     File.write(base + "/data/diccionario_medicos.js", "window.DICCIONARIO_MEDICOS = " + dict.to_json + ";\n")
     terms = dict["categorias"].sum { |c| c["terminos"].length }
     puts "diccionario_medicos.js actualizado (#{terms} términos)"
+  end
+
+  links_path = base + "/data/enlaces_clinicos.json"
+  if File.exist?(links_path)
+    links = JSON.parse(File.read(links_path))
+    File.write(base + "/data/enlaces_clinicos.js", "window.ENLACES_CLINICOS = " + links.to_json + ";\n")
+    puts "enlaces_clinicos.js actualizado (#{links["total_terminos_enlazados"]} términos enlazados)"
   end
 ' "$DIR"

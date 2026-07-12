@@ -1,6 +1,7 @@
 const App = {
   data: null,
   dictionaryData: null,
+  crossLinks: null,
   dictionaryQuery: '',
   dictionaryCategory: 'todos',
   currentView: 'welcome',
@@ -16,6 +17,7 @@ const App = {
       this.data = await this.loadData();
       if (!this.data?.animales?.length) throw new Error('Datos vacíos o corruptos');
       this.dictionaryData = await this.loadDictionaryData();
+      this.crossLinks = await this.loadCrossLinks();
       this.renderNav();
       this.renderStats();
       this.renderCategoryCards();
@@ -62,6 +64,51 @@ const App = {
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
+  },
+
+  async loadCrossLinks() {
+    if (window.ENLACES_CLINICOS?.por_termino) {
+      return window.ENLACES_CLINICOS;
+    }
+    try {
+      const res = await fetch('data/enlaces_clinicos.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  crossLinksForTerm(termino) {
+    if (!this.crossLinks?.por_termino) return null;
+    return this.crossLinks.por_termino[this.normalizeSearch(termino)] || null;
+  },
+
+  crossLinksForDisease(nombre) {
+    if (!this.crossLinks?.por_enfermedad) return null;
+    return this.crossLinks.por_enfermedad[this.normalizeSearch(nombre)] || null;
+  },
+
+  findBreedById(animalId, breedId) {
+    return this.getAllBreeds().find(b => b.animalId === animalId && b.id === breedId) || null;
+  },
+
+  findDiseaseInBreed(breed, nombre) {
+    if (!breed) return null;
+    const target = this.normalizeSearch(nombre);
+    return (breed.enfermedades || []).find(e => this.normalizeSearch(e.nombre) === target) || null;
+  },
+
+  openDiseaseFromLink(animalId, breedId, nombre) {
+    const breed = this.findBreedById(animalId, breedId);
+    const disease = this.findDiseaseInBreed(breed, nombre);
+    if (breed && disease) this.showDiseaseDetail(breed, disease);
+  },
+
+  openDictionaryWithTerm(termino) {
+    this.dictionaryCategory = 'todos';
+    this.dictionaryQuery = this.normalizeSearch(termino);
+    this.showDictionary();
+    const input = document.getElementById('dictionarySearchInput');
+    if (input) input.value = termino;
   },
 
   showLoadStatus() {
@@ -670,11 +717,45 @@ const App = {
               <h4>${this.esc(term.termino)}</h4>
               <p class="dictionary-definition">${this.esc(term.definicion)}</p>
               ${term.ejemplo ? `<p class="dictionary-example"><span>Ejemplo:</span> ${this.esc(term.ejemplo)}</p>` : ''}
+              ${this.renderTermDiseaseLinks(term)}
             </article>
           `).join('')}
         </div>
       </section>
     `).join('');
+
+    this.bindTermDiseaseLinks(list);
+  },
+
+  renderTermDiseaseLinks(term) {
+    const links = this.crossLinksForTerm(term.termino);
+    if (!links?.ejemplos?.length) return '';
+    const chips = links.ejemplos.map(ej => `
+      <button type="button" class="cross-link-chip dictionary-term-link"
+        data-animal="${this.esc(ej.animalId)}"
+        data-breed="${this.esc(ej.breedId)}"
+        data-disease="${this.esc(ej.nombre)}">
+        <span class="cross-link-dot severity-${ej.gravedad || 'moderada'}"></span>
+        ${this.esc(ej.nombre)}
+      </button>
+    `).join('');
+    const extra = links.total > links.ejemplos.length
+      ? `<span class="cross-link-more">+${links.total - links.ejemplos.length} más</span>`
+      : '';
+    return `
+      <div class="cross-link-block">
+        <span class="cross-link-label">🩺 Enfermedades relacionadas (${links.total})</span>
+        <div class="cross-link-chips">${chips}${extra}</div>
+      </div>`;
+  },
+
+  bindTermDiseaseLinks(container) {
+    if (!container) return;
+    container.querySelectorAll('.dictionary-term-link').forEach(chip => {
+      chip.addEventListener('click', () => {
+        this.openDiseaseFromLink(chip.dataset.animal, chip.dataset.breed, chip.dataset.disease);
+      });
+    });
   },
 
   showDictionary(options = {}) {
@@ -976,12 +1057,15 @@ const App = {
           ${disease.notas_clinicas ? `<div class="detail-block clinical-note"><h4>📝 Notas clínicas</h4><p>${this.esc(disease.notas_clinicas)}</p></div>` : ''}
           ${disease.notas ? `<div class="detail-block"><h4>📋 Notas adicionales</h4><p>${this.esc(disease.notas)}</p></div>` : ''}
           ${disease.urgencia ? `<div class="alert-panel urgent"><strong>🚨 Cuándo acudir de urgencia:</strong> ${this.esc(disease.urgencia)}</div>` : ''}
+          ${this.renderDiseaseTermLinks(disease)}
           <div class="alert-box">
             ⚠️ Información educativa. No sustituye el criterio clínico de un veterinario colegiado. Las dosis requieren prescripción profesional individualizada.
           </div>
         </div>
       </div>
     `;
+
+    this.bindDiseaseTermLinks(el);
     this.showView('disease');
     if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
     this.exportE2EState();
@@ -1002,6 +1086,30 @@ const App = {
       return;
     }
     document.title = 'Enciclopedia Animal — Salud Veterinaria';
+  },
+
+  renderDiseaseTermLinks(disease) {
+    const links = this.crossLinksForDisease(disease.nombre);
+    if (!links?.terminos?.length) return '';
+    const chips = links.terminos.map(t => `
+      <button type="button" class="cross-link-chip disease-term-link"
+        data-termino="${this.esc(t.termino)}">
+        📖 ${this.esc(t.termino)}
+      </button>
+    `).join('');
+    return `
+      <div class="detail-block cross-link-block cross-link-block--terms">
+        <h4>📚 Términos del glosario relacionados</h4>
+        <p class="cross-link-hint">Consulta la definición clínica de los conceptos que aparecen en esta ficha.</p>
+        <div class="cross-link-chips">${chips}</div>
+      </div>`;
+  },
+
+  bindDiseaseTermLinks(container) {
+    if (!container) return;
+    container.querySelectorAll('.disease-term-link').forEach(chip => {
+      chip.addEventListener('click', () => this.openDictionaryWithTerm(chip.dataset.termino));
+    });
   },
 
   showView(view) {
@@ -1030,6 +1138,8 @@ const App = {
       navItems: document.querySelectorAll('#animalNav .nav-btn').length,
       categoryCards: document.querySelectorAll('#welcomeCategoryCards .category-card').length,
       dictionaryTerms: this.getDictionaryTerms().length,
+      crossLinkTerms: this.crossLinks?.total_terminos_enlazados || 0,
+      crossLinkDiseases: this.crossLinks?.total_enfermedades_enlazadas || 0,
       breedCards: inBrowse ? document.querySelectorAll('#breedGrid .breed-card').length : 0,
       statsAnimales: document.querySelector('#statsContent .stat-value')?.textContent,
       error: null

@@ -6,5 +6,10 @@ echo "🧪 Pruebas unitarias — Enciclopedia Animal"
 echo "==========================================="
 echo ""
 
-ruby tests/test_enciclopedia.rb
+ruby -e 'Dir["tests/test_*.rb"].sort.each { |f| require File.expand_path(f) }' || exit $?
+
+echo ""
+echo "🔎 Validación de integridad (datos + enlaces clínicos)"
+echo "======================================================"
+ruby scripts/setup/validar_integridad.rb
 exit $?

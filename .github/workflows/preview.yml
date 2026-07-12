@@ -1,0 +1,50 @@
+name: preview
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos mínimos: solo lectura del repositorio (least privilege).
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: false
+
+      - name: Validar integridad de datos y enlaces
+        run: ruby scripts/setup/validar_integridad.rb
+
+      - name: Construir vista previa estática (_site)
+        run: |
+          mkdir -p _site
+          cp index.html .nojekyll _site/ 2>/dev/null || cp index.html _site/
+          cp -r css js data images _site/
+          echo "Archivos en _site: $(find _site -type f | wc -l)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Tamaño: $(du -sh _site | cut -f1)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Subir artefacto de vista previa
+        uses: actions/upload-artifact@v4
+        with:
+          name: vista-previa-sitio
+          path: _site
+          retention-days: 7
+
+      - name: Resumen de la vista previa
+        run: |
+          {
+            echo "## Vista previa del sitio 🐾"
+            echo ""
+            echo "Se generó una vista previa descargable de la PR en el artefacto **vista-previa-sitio**."
+            echo "Descárgalo desde la pestaña *Summary* de esta ejecución y abre \`index.html\` en tu navegador."
+            echo ""
+            echo "La integridad de datos y de los enlaces clínicos (diccionario ↔ enfermedades) fue validada."
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -25,9 +25,12 @@ jobs:
         run: gem install minitest
 
       - name: Ejecutar pruebas unitarias
-        run: ruby tests/test_enciclopedia.rb
+        run: ruby -e 'Dir["tests/test_*.rb"].sort.each { |f| require File.expand_path(f) }'
 
-      - name: Verificar sincronización JSON → JS
+      - name: Validar sincronización JSON → JS (incluye enlaces clínicos)
         run: |
           bash actualizar_datos.sh
-          git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js
+          git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js data/enlaces_clinicos.js
+
+      - name: Validar integridad de datos y enlaces
+        run: ruby scripts/setup/validar_integridad.rb
