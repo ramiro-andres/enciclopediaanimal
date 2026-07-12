@@ -691,6 +691,29 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 2 — Entregado (navegación clínica y DevOps de calidad)
+
+**Objetivo del sprint:** Conectar el conocimiento clínico (glosario ↔ enfermedades) y reforzar la calidad con pruebas E2E sin servidor y una vista previa validada por PR. Segundo grupo lógico del backlog tras Sprint 1 (épicas EP-05/EP-06).
+
+| Orden | ID | Historia | Puntos | Estado |
+|-------|-----|----------|--------|--------|
+| 1 | US-UX-04 | Enlaces cruzados diccionario ↔ enfermedades | 5 | Hecho |
+| 2 | US-DEV-04 | Tests E2E sin servidor local (Playwright, `file://`) | 5 | Hecho |
+| 3 | US-DEV-09 | Vista previa de PR + validaciones de integridad y sincronización JSON→JS | 3 | Hecho |
+| | | **Total** | **13** | |
+
+**Entregables técnicos:**
+
+- `scripts/data/build_cross_links.rb` → genera `data/enlaces_clinicos.json` (234 términos y 179 enfermedades enlazados de forma bidireccional).
+- UI: chips «Enfermedades relacionadas» en el glosario y «Términos del glosario relacionados» en cada ficha de enfermedad (`js/app.js`, `css/styles.css`).
+- Playwright: `package.json`, `playwright.config.js`, `tests/e2e/atlas.spec.js` (5 flujos), `ejecutar_e2e.sh` y workflow `.github/workflows/e2e.yml`.
+- Workflow `.github/workflows/preview.yml` (artefacto `vista-previa-sitio`) y `scripts/setup/validar_integridad.rb`.
+- Validación de sincronización JSON→JS (incluye enlaces) integrada en `test.yml` y `ejecutar_pruebas.sh`.
+
+> **US-DEV-09** es una historia nueva derivada del grupo de DevOps del backlog («preview PR» y «validaciones»), complementaria a US-DEV-03/US-DEV-08.
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases
@@ -705,3 +728,4 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | Fecha | Cambio |
 |-------|--------|
 | 2026-07-12 | Creación inicial del backlog Scrum (post-Sprint 0, PRs #1–#7 mergeados) |
+| 2026-07-12 | Sprint 2 entregado: US-UX-04 (enlaces cruzados), US-DEV-04 (E2E sin servidor), US-DEV-09 (preview + validaciones) |

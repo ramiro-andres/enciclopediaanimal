@@ -1,0 +1,13 @@
+{
+  "name": "enciclopedia-animal-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pruebas E2E de navegador contra los archivos estáticos de la Enciclopedia Animal (sin servidor Ruby).",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0"
+  }
+}
