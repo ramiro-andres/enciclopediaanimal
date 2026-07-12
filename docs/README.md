@@ -9,5 +9,6 @@
 | [CONTRIBUIR.md](CONTRIBUIR.md) | Guía rápida + enlace a CONTRIBUTING |
 | [TRAZADO_RUTA.md](TRAZADO_RUTA.md) | Roadmap por fases, tareas y prioridades |
 | [SCRUM.md](SCRUM.md) | Backlog ágil: épicas, historias, sprints y DoD/DoR |
+| [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md) | Análisis de fallos CI/CD y despliegue a `main` |
 
 Entrada principal del proyecto: [README.md](../README.md).

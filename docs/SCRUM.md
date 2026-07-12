@@ -746,4 +746,5 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 |-------|--------|
 | 2026-07-12 | Creación inicial del backlog Scrum (post-Sprint 0, PRs #1–#7 mergeados) |
 | 2026-07-12 | Sprint 3 entregado: PWA, i18n, comparador, contenido y comunidad |
+| 2026-07-12 | [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md): análisis de fallos CI/CD (Pages, E2E, JSON→JS, PR #21–#23) |
 | 2026-07-12 | Sprint 2 entregado: US-UX-04 (enlaces cruzados), US-DEV-04 (E2E sin servidor), US-DEV-09 (preview + validaciones) |
