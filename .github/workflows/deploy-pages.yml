@@ -5,14 +5,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Permisos mínimos para publicar con GitHub Actions (plantilla oficial Pages).
 permissions:
   contents: read
   pages: write
   id-token: write
+  # Necesario si configure-pages usa enablement para activar Pages en el repo.
+  administration: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   test:
@@ -32,6 +35,7 @@ jobs:
         run: ruby tests/test_enciclopedia.rb
 
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +54,7 @@ jobs:
           find _site -type f | wc -l
 
       - name: Subir artefacto
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
 
@@ -63,4 +67,4 @@ jobs:
     steps:
       - name: Desplegar
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
