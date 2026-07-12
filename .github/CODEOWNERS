@@ -1,2 +1,9 @@
-# Requiere aprobación del propietario en todos los cambios vía PR.
+# Requiere aprobación del propietario en todos los cambios vía PR (F5-05).
 * @ramiro-andres
+
+/data/ @ramiro-andres
+/js/ @ramiro-andres
+/css/ @ramiro-andres
+/scripts/ @ramiro-andres
+/docs/ @ramiro-andres
+/.github/ @ramiro-andres

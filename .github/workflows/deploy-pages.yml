@@ -26,7 +26,7 @@ jobs:
       - name: Preparar sitio estático
         run: |
           mkdir -p _site
-          cp index.html .nojekyll _site/
+          cp index.html .nojekyll manifest.webmanifest sw.js _site/
           cp -r css js data images _site/
           du -sh _site
           find _site -type f | wc -l
@@ -46,3 +46,19 @@ jobs:
       - name: Desplegar
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verificar sitio publicado (F4-06)
+        run: |
+          URL="${{ steps.deployment.outputs.page_url }}"
+          echo "Comprobando $URL"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "Sitio responde HTTP 200"
+              exit 0
+            fi
+            echo "Intento $i: HTTP $STATUS — reintentando en 10s..."
+            sleep 10
+          done
+          echo "El sitio no respondió HTTP 200 tras el despliegue"
+          exit 1

@@ -6,12 +6,33 @@ const App = {
   currentView: 'welcome',
   currentAnimal: 'todos',
   currentSize: 'todos',
+  currentRegion: 'todos',
   currentBreed: null,
   currentDisease: null,
   searchQuery: '',
+  isRoutingFromHash: false,
+  compareList: [],
+  COMPARE_KEY: 'atlas_compare',
+  COMPARE_MAX: 3,
+
+  t(key) {
+    return window.I18n ? I18n.t(key) : key;
+  },
 
   async init() {
     try {
+      if (window.I18n) {
+        I18n.init();
+        I18n.apply();
+        this.bindLangSwitcher();
+        document.addEventListener('atlas:langchange', () => {
+          I18n.apply();
+          this.updateCompareBadge();
+          if (this.currentView === 'compare') this.renderCompare();
+          this.updateResultsTitle();
+        });
+      }
+      this.loadCompareList();
       this.data = await this.loadData();
       if (!this.data?.animales?.length) throw new Error('Datos vacíos o corruptos');
       this.dictionaryData = await this.loadDictionaryData();
@@ -21,7 +42,8 @@ const App = {
       this.renderWelcome();
       this.bindEvents();
       this.showLoadStatus();
-      this.showView('welcome');
+      this.renderRecentHistory();
+      if (!this.openRouteFromHash()) this.showView('welcome');
       this.exportE2EState();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
@@ -114,6 +136,12 @@ const App = {
 
     document.getElementById('goHomeBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('goDictionaryBtn')?.addEventListener('click', () => this.showDictionary());
+    document.getElementById('goUrgencyBtn')?.addEventListener('click', () => this.showUrgency());
+    document.getElementById('goCompareBtn')?.addEventListener('click', () => this.showCompare());
+    document.getElementById('backCompareBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('clearCompareBtn')?.addEventListener('click', () => this.clearCompare());
+    document.getElementById('backUrgencyBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('btnExploreAll')?.addEventListener('click', () => this.enterBrowse('todos'));
     document.querySelector('.logo')?.addEventListener('click', () => this.goWelcome());
@@ -166,11 +194,14 @@ const App = {
 
     document.getElementById('backBtn').addEventListener('click', () => {
       this.showView('home');
+      this.updateHash(this.browseRoute());
       this.exportE2EState();
     });
     document.getElementById('backDiseaseBtn').addEventListener('click', () => {
       if (this.currentBreed) this.showBreedDetail(this.currentBreed);
     });
+
+    window.addEventListener('hashchange', () => this.openRouteFromHash());
   },
 
   getAllBreeds() {
@@ -193,7 +224,53 @@ const App = {
     if (this.currentSize !== 'todos') {
       breeds = breeds.filter(b => b.tamano === this.currentSize);
     }
+    if (this.currentRegion !== 'todos') {
+      breeds = breeds.filter(b => (b.region || this.inferRegion(b.origen)) === this.currentRegion);
+    }
     return breeds;
+  },
+
+  inferRegion(origen) {
+    if (!origen) return null;
+    const text = String(origen).toLowerCase();
+    const map = {
+      colombia: 'Colombia',
+      méxico: 'México',
+      mexico: 'México',
+      argentina: 'Argentina',
+      chile: 'Chile'
+    };
+    return Object.entries(map).find(([key]) => text.includes(key))?.[1] || null;
+  },
+
+  getAvailableRegions() {
+    const regions = new Set();
+    this.getAllBreeds().forEach(b => {
+      const region = b.region || this.inferRegion(b.origen);
+      if (region) regions.add(region);
+    });
+    return Array.from(regions).sort((a, b) => a.localeCompare(b, 'es'));
+  },
+
+  renderRegionFilters() {
+    const container = document.getElementById('regionFilters');
+    if (!container) return;
+    const regions = this.getAvailableRegions();
+    const items = [{ id: 'todos', label: 'Todas' }, ...regions.map(r => ({ id: r, label: r }))];
+    container.innerHTML = items.map(item => `
+      <li>
+        <button type="button" class="region-btn ${this.currentRegion === item.id ? 'active' : ''}" data-region="${this.esc(item.id)}">
+          ${this.esc(item.label)}
+        </button>
+      </li>
+    `).join('');
+    container.querySelectorAll('.region-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.currentRegion = btn.dataset.region;
+        this.renderRegionFilters();
+        this.renderHome();
+      });
+    });
   },
 
   normalizeSearch(text) {
@@ -205,6 +282,103 @@ const App = {
 
   nameMatches(value, query) {
     return this.normalizeSearch(value).includes(this.normalizeSearch(query));
+  },
+
+  routePart(value) {
+    return encodeURIComponent(String(value || '').trim());
+  },
+
+  diseaseSlug(disease) {
+    return this.normalizeSearch(disease?.nombre || '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  },
+
+  browseRoute() {
+    return this.currentAnimal === 'todos' ? '#razas' : `#animal/${this.routePart(this.currentAnimal)}`;
+  },
+
+  breedRoute(breed) {
+    return `#raza/${this.routePart(breed.animalId)}/${this.routePart(breed.id)}`;
+  },
+
+  diseaseRoute(breed, disease) {
+    return `${this.breedRoute(breed).replace('#raza/', '#enfermedad/')}/${this.routePart(this.diseaseSlug(disease))}`;
+  },
+
+  updateHash(hash) {
+    if (this.isRoutingFromHash || window.location.hash === hash) return;
+    window.history.pushState(null, '', hash);
+  },
+
+  clearHash() {
+    if (this.isRoutingFromHash || !window.location.hash) return;
+    window.history.pushState(null, '', window.location.pathname + window.location.search);
+  },
+
+  findBreed(animalId, breedId) {
+    return this.getAllBreeds().find(b => b.animalId === animalId && b.id === breedId)
+      || this.getAllBreeds().find(b => b.id === breedId);
+  },
+
+  findDisease(breed, diseaseSlug) {
+    return (breed?.enfermedades || []).find(d => this.diseaseSlug(d) === diseaseSlug);
+  },
+
+  openRouteFromHash() {
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (!hash) return false;
+
+    const parts = hash.split('/').filter(Boolean);
+    this.isRoutingFromHash = true;
+    try {
+      if (parts[0] === 'urgencias') {
+        this.showUrgency({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'comparar') {
+        this.showCompare({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'glosario') {
+        this.showDictionary({ updateHash: false, focus: false });
+        return true;
+      }
+
+      if (parts[0] === 'razas') {
+        this.enterBrowse('todos', { updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'animal' && parts[1]) {
+        this.enterBrowse(parts[1], { updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'raza' && parts[1] && parts[2]) {
+        const breed = this.findBreed(parts[1], parts[2]);
+        if (breed) {
+          this.showBreedDetail(breed, { updateHash: false });
+          return true;
+        }
+      }
+
+      if (parts[0] === 'enfermedad' && parts[1] && parts[2] && parts[3]) {
+        const breed = this.findBreed(parts[1], parts[2]);
+        const disease = this.findDisease(breed, parts[3]);
+        if (breed && disease) {
+          this.showDiseaseDetail(breed, disease, { updateHash: false });
+          return true;
+        }
+      }
+    } finally {
+      this.isRoutingFromHash = false;
+    }
+
+    this.goWelcome({ updateHash: false });
+    return false;
   },
 
   getGlobalSearchResults() {
@@ -350,7 +524,7 @@ const App = {
     if (focus && searchInput) searchInput.focus();
   },
 
-  enterBrowse(animalId) {
+  enterBrowse(animalId, options = {}) {
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
     document.querySelectorAll('.filter-btn').forEach(b => {
@@ -362,11 +536,13 @@ const App = {
     if (this.searchQuery) this.clearSearch(false);
     this.showView('home');
     this.renderHome();
+    if (options.updateHash !== false) this.updateHash(this.browseRoute());
   },
 
-  goWelcome() {
+  goWelcome(options = {}) {
     this.currentAnimal = 'todos';
     this.currentSize = 'todos';
+    this.currentRegion = 'todos';
     this.searchQuery = '';
     this.dictionaryQuery = '';
     this.dictionaryCategory = 'todos';
@@ -385,6 +561,7 @@ const App = {
       b.classList.toggle('active', b.dataset.animal === 'todos');
     });
     this.showView('welcome');
+    if (options.updateHash !== false) this.clearHash();
     this.exportE2EState();
   },
 
@@ -404,6 +581,13 @@ const App = {
 
     if (sizeSection) sizeSection.hidden = !onBrowse;
 
+    const regionSection = document.getElementById('regionFiltersSection');
+    if (regionSection) {
+      const showRegions = onBrowse && this.getAvailableRegions().length > 0;
+      regionSection.hidden = !showRegions;
+      if (showRegions) this.renderRegionFilters();
+    }
+
     if (browseContext) {
       const showContext = onBrowse && this.currentAnimal !== 'todos';
       browseContext.hidden = !showContext;
@@ -419,12 +603,14 @@ const App = {
   renderWelcome() {
     const breeds = this.getAllBreeds();
     const diseases = breeds.reduce((acc, b) => acc + (b.enfermedades?.length || 0), 0);
+    const terms = this.dictionaryData?.total_terminos || this.getDictionaryTerms().length;
     const stats = document.getElementById('welcomeStats');
     if (stats) {
       stats.innerHTML = `
         <div class="welcome-stat"><span class="welcome-stat-value">${this.data.animales.length}</span><span class="welcome-stat-label">Tipos de animal</span></div>
         <div class="welcome-stat"><span class="welcome-stat-value">${breeds.length}</span><span class="welcome-stat-label">Razas</span></div>
         <div class="welcome-stat"><span class="welcome-stat-value">${diseases}</span><span class="welcome-stat-label">Enfermedades</span></div>
+        <div class="welcome-stat"><span class="welcome-stat-value">${terms}</span><span class="welcome-stat-label">Términos glosario</span></div>
       `;
     }
   },
@@ -584,30 +770,278 @@ const App = {
     `).join('');
   },
 
-  showDictionary() {
+  showDictionary(options = {}) {
     if (this.searchQuery) this.clearSearch(false);
     this.renderDictionary();
     this.showView('dictionary');
+    if (options.updateHash !== false) this.updateHash('#glosario');
     this.exportE2EState();
-    document.getElementById('dictionarySearchInput')?.focus();
+    if (options.focus !== false) document.getElementById('dictionarySearchInput')?.focus();
+  },
+
+  showUrgency(options = {}) {
+    this.renderUrgency();
+    this.showView('urgency');
+    if (options.updateHash !== false) this.updateHash('#urgencias');
+    this.exportE2EState();
+  },
+
+  bindLangSwitcher() {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        I18n.setLang(btn.dataset.lang);
+        document.querySelectorAll('.lang-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.lang === I18n.lang);
+          b.setAttribute('aria-pressed', b.dataset.lang === I18n.lang ? 'true' : 'false');
+        });
+      });
+      btn.classList.toggle('active', btn.dataset.lang === I18n.lang);
+      btn.setAttribute('aria-pressed', btn.dataset.lang === I18n.lang ? 'true' : 'false');
+    });
+  },
+
+  loadCompareList() {
+    try {
+      const raw = localStorage.getItem(this.COMPARE_KEY);
+      this.compareList = raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      this.compareList = [];
+    }
+    this.updateCompareBadge();
+  },
+
+  saveCompareList() {
+    try {
+      localStorage.setItem(this.COMPARE_KEY, JSON.stringify(this.compareList));
+    } catch (_) { /* sin almacenamiento */ }
+    this.updateCompareBadge();
+  },
+
+  updateCompareBadge() {
+    const badge = document.getElementById('compareBadge');
+    const btn = document.getElementById('goCompareBtn');
+    const count = this.compareList.length;
+    if (badge) {
+      badge.hidden = count === 0;
+      badge.textContent = String(count);
+    }
+    if (btn) btn.setAttribute('aria-label', `${this.t('nav.compare')} (${count})`);
+  },
+
+  isInCompare(animalId, breedId) {
+    return this.compareList.some(item => item.animalId === animalId && item.breedId === breedId);
+  },
+
+  addToCompare(breed) {
+    if (!breed) return;
+    if (this.isInCompare(breed.animalId, breed.id)) return;
+    if (this.compareList.length >= this.COMPARE_MAX) {
+      alert(this.t('compare.full'));
+      return;
+    }
+    this.compareList.push({ animalId: breed.animalId, breedId: breed.id, nombre: breed.nombre });
+    this.saveCompareList();
+  },
+
+  removeFromCompare(animalId, breedId) {
+    this.compareList = this.compareList.filter(item => !(item.animalId === animalId && item.breedId === breedId));
+    this.saveCompareList();
+    if (this.currentView === 'compare') this.renderCompare();
+  },
+
+  clearCompare() {
+    this.compareList = [];
+    this.saveCompareList();
+    if (this.currentView === 'compare') this.renderCompare();
+  },
+
+  getCompareBreeds() {
+    return this.compareList
+      .map(item => this.findBreed(item.animalId, item.breedId))
+      .filter(Boolean);
+  },
+
+  showCompare(options = {}) {
+    this.renderCompare();
+    this.showView('compare');
+    if (options.updateHash !== false) this.updateHash('#comparar');
+    this.exportE2EState();
+  },
+
+  renderCompare() {
+    const container = document.getElementById('compareContent');
+    if (!container) return;
+    const breeds = this.getCompareBreeds();
+    if (!breeds.length) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">⚖️</div>
+          <p>${this.esc(this.t('compare.empty'))}</p>
+        </div>`;
+      return;
+    }
+
+    const fields = [
+      { key: 'origen', label: this.t('compare.field.origin') },
+      { key: 'peso', label: this.t('compare.field.weight') },
+      { key: 'esperanza_vida', label: this.t('compare.field.lifespan') },
+      { key: 'temperamento', label: this.t('compare.field.temperament') },
+      { key: 'cuidados', label: this.t('compare.field.care') },
+      { key: 'alimentacion', label: this.t('compare.field.nutrition') }
+    ];
+
+    container.innerHTML = `
+      <div class="compare-grid" role="table" aria-label="${this.esc(this.t('compare.title'))}">
+        <div class="compare-row compare-row--header" role="row">
+          <div class="compare-cell compare-cell--label" role="columnheader"></div>
+          ${breeds.map(b => `
+            <div class="compare-cell compare-cell--breed" role="columnheader">
+              ${this.renderBreedImage(b, 'compare-breed-img')}
+              <h3>${this.esc(b.nombre)}</h3>
+              <p>${b.animalIcono} ${this.esc(b.animalNombre)} · ${this.sizeLabel(b.tamano)}</p>
+              <button type="button" class="compare-remove-btn" data-key="${b.animalId}:${b.id}">${this.esc(this.t('compare.remove'))}</button>
+            </div>
+          `).join('')}
+        </div>
+        ${fields.map(field => `
+          <div class="compare-row" role="row">
+            <div class="compare-cell compare-cell--label" role="rowheader">${this.esc(field.label)}</div>
+            ${breeds.map(b => `
+              <div class="compare-cell" role="cell">${this.esc(b[field.key] || 'N/D')}</div>
+            `).join('')}
+          </div>
+        `).join('')}
+        <div class="compare-row" role="row">
+          <div class="compare-cell compare-cell--label" role="rowheader">${this.esc(this.t('compare.field.diseases'))}</div>
+          ${breeds.map(b => `
+            <div class="compare-cell" role="cell">${b.enfermedades?.length || 0}</div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    container.querySelectorAll('.compare-remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [animalId, breedId] = btn.dataset.key.split(':');
+        this.removeFromCompare(animalId, breedId);
+      });
+    });
+  },
+
+  renderUrgency() {
+    const container = document.getElementById('urgencyContent');
+    if (!container) return;
+    container.innerHTML = this.data.animales.map(animal => {
+      const breeds = ['pequena', 'mediana', 'grande'].flatMap(size => animal.razas?.[size] || []);
+      const alerts = breeds
+        .flatMap(b => (Array.isArray(b.senales_alerta) ? b.senales_alerta : [b.senales_alerta]).filter(Boolean))
+        .slice(0, 6);
+      const emergencies = breeds.map(b => b.emergencias).filter(Boolean).slice(0, 3);
+      return `
+        <section class="urgency-species-card">
+          <header>
+            <span class="urgency-species-icon">${animal.icono}</span>
+            <div>
+              <h3>${this.esc(animal.nombre)}</h3>
+              <p>${breeds.length} razas documentadas</p>
+            </div>
+          </header>
+          ${alerts.length ? `
+            <div class="urgency-block">
+              <h4>⚠️ Señales de alerta</h4>
+              <ul>${alerts.map(a => `<li>${this.esc(a)}</li>`).join('')}</ul>
+            </div>
+          ` : ''}
+          ${emergencies.length ? `
+            <div class="urgency-block urgency-block--alert">
+              <h4>🚨 Emergencias frecuentes</h4>
+              ${emergencies.map(e => `<p>${this.esc(e)}</p>`).join('')}
+            </div>
+          ` : ''}
+        </section>
+      `;
+    }).join('');
+  },
+
+  getRecentHistory() {
+    try {
+      const raw = sessionStorage.getItem('atlas_recent_history');
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  },
+
+  saveRecentHistory(items) {
+    try {
+      sessionStorage.setItem('atlas_recent_history', JSON.stringify(items.slice(0, 5)));
+    } catch (_) { /* sin almacenamiento */ }
+  },
+
+  trackVisit(entry) {
+    const history = this.getRecentHistory().filter(item => item.key !== entry.key);
+    history.unshift({ ...entry, visitedAt: Date.now() });
+    this.saveRecentHistory(history);
+    this.renderRecentHistory();
+  },
+
+  renderRecentHistory() {
+    const wrapper = document.getElementById('recentHistory');
+    const list = document.getElementById('recentHistoryList');
+    if (!wrapper || !list) return;
+    const history = this.getRecentHistory();
+    wrapper.hidden = history.length === 0;
+    if (!history.length) {
+      list.innerHTML = '';
+      return;
+    }
+    list.innerHTML = history.map(item => `
+      <button type="button" class="recent-history-item" data-key="${this.esc(item.key)}" data-type="${this.esc(item.type)}">
+        <span class="recent-history-type">${item.type === 'disease' ? '🩺' : '🐾'}</span>
+        <span class="recent-history-label">${this.esc(item.label)}</span>
+      </button>
+    `).join('');
+    list.querySelectorAll('.recent-history-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [animalId, breedId, diseaseSlug] = btn.dataset.key.split(':');
+        const breed = this.findBreed(animalId, breedId);
+        if (!breed) return;
+        if (btn.dataset.type === 'disease' && diseaseSlug) {
+          const disease = this.findDisease(breed, diseaseSlug);
+          if (disease) this.showDiseaseDetail(breed, disease);
+        } else {
+          this.showBreedDetail(breed);
+        }
+      });
+    });
+  },
+
+  clearRecentHistory() {
+    try { sessionStorage.removeItem('atlas_recent_history'); } catch (_) { /* noop */ }
+    this.renderRecentHistory();
   },
 
   updateResultsTitle() {
     const title = document.getElementById('resultsTitle');
     const hint = document.getElementById('searchHint');
     if (hint && !this.searchQuery) {
-      hint.textContent = 'Búsqueda general por nombre. Atajo: Ctrl+K';
+      hint.textContent = this.t('search.hint');
     }
     if (this.currentAnimal === 'todos') {
-      title.textContent = 'Todas las razas';
+      title.textContent = this.t('results.all_breeds');
     } else {
       const animal = this.data.animales.find(a => a.id === this.currentAnimal);
-      title.textContent = `Razas de ${animal.nombre}`;
+      title.textContent = `${this.t('results.breeds_of')} ${animal.nombre}`;
     }
   },
 
   sizeLabel(size) {
-    return { pequena: 'Pequeña', mediana: 'Mediana', grande: 'Grande' }[size] || size;
+    const map = {
+      pequena: this.t('size.small'),
+      mediana: this.t('size.medium'),
+      grande: this.t('size.large')
+    };
+    return map[size] || size;
   },
 
   esc(text) {
@@ -679,10 +1113,23 @@ const App = {
 
   renderProtocolo(protocolo) {
     if (!protocolo?.length) return '';
+    const accordion = protocolo.map((p, index) => `
+      <details class="protocol-accordion-item" ${index === 0 ? 'open' : ''}>
+        <summary>${this.esc(p.principio_activo || 'Fármaco')} — ${this.esc(p.dosis_mg_kg || p.dosis || 'N/D')} mg/kg</summary>
+        <dl class="protocol-accordion-body">
+          <div><dt>Nombre comercial</dt><dd>${this.esc(p.nombre_comercial || '—')}</dd></div>
+          <div><dt>Vía</dt><dd>${this.esc(p.via || '—')}</dd></div>
+          <div><dt>Frecuencia</dt><dd>${this.esc(p.frecuencia || '—')}</dd></div>
+          <div><dt>Duración</dt><dd>${this.esc(p.duracion || '—')}</dd></div>
+          <div><dt>Notas</dt><dd>${this.esc(p.notas || '—')}</dd></div>
+        </dl>
+      </details>
+    `).join('');
     return `
-      <div class="detail-block">
+      <div class="detail-block protocol-block">
         <h4>💊 Protocolo farmacológico (mg/kg)</h4>
-        <div class="protocol-table-wrap">
+        <div class="protocol-accordion protocol-mobile-only">${accordion}</div>
+        <div class="protocol-table-wrap protocol-desktop-only">
           <table class="protocol-table">
             <thead>
               <tr>
@@ -710,7 +1157,7 @@ const App = {
             </tbody>
           </table>
         </div>
-        <p style="font-size:0.8rem;color:#856404;margin-top:0.5rem">⚠️ Dosis orientativas. Solo un veterinario debe calcular y prescribir el tratamiento final.</p>
+        <p class="protocol-note">⚠️ Dosis orientativas. Solo un veterinario debe calcular y prescribir el tratamiento final.</p>
       </div>`;
   },
 
@@ -731,6 +1178,7 @@ const App = {
           <div class="breed-card-tags">
             <span class="tag tag-${b.tamano}">${this.sizeLabel(b.tamano)}</span>
             <span class="tag tag-animal">${b.animalIcono} ${b.animalNombre}</span>
+            ${b.region || this.inferRegion(b.origen) ? `<span class="tag tag-region">🌎 ${this.esc(b.region || this.inferRegion(b.origen))}</span>` : ''}
             ${b.enfoque_produccion ? `<span class="tag tag-production">🏭 Producción: ${this.esc(b.tipo_produccion)}</span>` : ''}
           </div>
           <h4>${b.nombre}</h4>
@@ -752,8 +1200,9 @@ const App = {
     });
   },
 
-  showBreedDetail(breed) {
+  showBreedDetail(breed, options = {}) {
     this.currentBreed = breed;
+    this.currentDisease = null;
     const el = document.getElementById('breedDetail');
     el.innerHTML = `
       <div class="breed-hero">
@@ -768,6 +1217,11 @@ const App = {
             ${breed.altura ? `<span class="meta-chip">Altura: ${this.esc(breed.altura)}</span>` : ''}
           </div>
           <p>${this.esc(breed.descripcion)}</p>
+          <div class="breed-hero-actions">
+            <button type="button" class="btn-compare-add" data-compare-key="${breed.animalId}:${breed.id}">
+              ${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.esc(this.t('compare.add'))}
+            </button>
+          </div>
           <div class="info-grid">
             <div class="info-item"><label>Peso promedio</label><span>${this.esc(breed.peso || 'N/D')}</span></div>
             <div class="info-item"><label>Temperamento</label><span>${this.esc(breed.temperamento || 'N/D')}</span></div>
@@ -827,10 +1281,25 @@ const App = {
       });
     });
 
+    el.querySelector('.btn-compare-add')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.addToCompare(breed);
+      const btn = e.currentTarget;
+      btn.textContent = `${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.t('compare.add')}`;
+    });
+
     this.showView('detail');
+    if (options.updateHash !== false) this.updateHash(this.breedRoute(breed));
+    this.trackVisit({
+      key: `${breed.animalId}:${breed.id}`,
+      type: 'breed',
+      label: `${breed.nombre} (${breed.animalNombre})`
+    });
+    this.exportE2EState();
   },
 
-  showDiseaseDetail(breed, disease) {
+  showDiseaseDetail(breed, disease, options = {}) {
+    this.currentBreed = breed;
     this.currentDisease = disease;
     const el = document.getElementById('diseaseDetail');
     el.innerHTML = `
@@ -886,6 +1355,38 @@ const App = {
       </div>
     `;
     this.showView('disease');
+    if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
+    this.trackVisit({
+      key: `${breed.animalId}:${breed.id}:${this.diseaseSlug(disease)}`,
+      type: 'disease',
+      label: `${disease.nombre} — ${breed.nombre}`
+    });
+    this.exportE2EState();
+  },
+
+  updateDocumentTitle() {
+    const suffix = 'Atlas Animal';
+    if (this.currentView === 'detail' && this.currentBreed) {
+      document.title = `${this.currentBreed.nombre} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'disease' && this.currentDisease) {
+      document.title = `${this.currentDisease.nombre} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'dictionary') {
+      document.title = `Glosario medico — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'urgency') {
+      document.title = `${this.t('nav.urgency')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'compare') {
+      document.title = `${this.t('compare.title')} — ${suffix}`;
+      return;
+    }
+    document.title = 'Enciclopedia Animal — Salud Veterinaria';
   },
 
   showView(view) {
@@ -893,9 +1394,12 @@ const App = {
     document.getElementById('welcomeView').classList.toggle('active', view === 'welcome');
     document.getElementById('homeView').classList.toggle('active', view === 'home');
     document.getElementById('dictionaryView').classList.toggle('active', view === 'dictionary');
+    document.getElementById('urgencyView').classList.toggle('active', view === 'urgency');
+    document.getElementById('compareView').classList.toggle('active', view === 'compare');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
+    this.updateDocumentTitle();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 
@@ -936,6 +1440,10 @@ const DisclaimerModal = {
     };
 
     this.acceptBtn.addEventListener('click', () => this.dismiss());
+    document.getElementById('disclaimerUrgencyLink')?.addEventListener('click', () => {
+      this.dismiss();
+      App.showUrgency();
+    });
     this.overlay.addEventListener('click', (e) => {
       if (e.target === this.overlay) this.dismiss();
     });

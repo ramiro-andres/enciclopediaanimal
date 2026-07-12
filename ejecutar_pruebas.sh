@@ -7,4 +7,12 @@ echo "==========================================="
 echo ""
 
 ruby tests/test_enciclopedia.rb
-exit $?
+UNIT=$?
+
+echo ""
+echo "🔬 Validación de contenido clínico"
+echo "-----------------------------------"
+ruby scripts/data/validate_clinical_content.rb
+CLINICAL=$?
+
+exit $(( UNIT + CLINICAL ))

@@ -1,0 +1,36 @@
+name: Solicitud de funcionalidad
+description: Proponer mejoras de UX, DevOps o nuevas características
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe la mejora y el beneficio para usuarios o mantenedores.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+      placeholder: Como [rol], necesito [acción] para [beneficio]
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solución propuesta
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad sugerida
+      options:
+        - Alta
+        - Media
+        - Baja
+    validations:
+      required: true

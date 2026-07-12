@@ -1,0 +1,53 @@
+name: Solicitud de contenido
+description: Proponer nuevas razas, enfermedades o términos del glosario
+title: "[Contenido]: "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propuestas de contenido veterinario. Ver [guía de contribución de contenido](../docs/CONTRIBUIR.md#contribuir-contenido).
+  - type: dropdown
+    id: content_type
+    attributes:
+      label: Tipo de contenido
+      options:
+        - Nueva raza
+        - Nueva enfermedad / ampliación clínica
+        - Término del glosario médico
+        - Corrección editorial
+    validations:
+      required: true
+  - type: input
+    id: title_name
+    attributes:
+      label: Nombre propuesto
+      placeholder: "Ej. Raza X, Enfermedad Y, Término Z"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción y justificación
+      placeholder: ¿Por qué aporta valor? ¿Fuentes bibliográficas?
+    validations:
+      required: true
+  - type: input
+    id: animal_category
+    attributes:
+      label: Categoría animal (si aplica)
+      placeholder: "perros, bovinos, aves, etc."
+  - type: textarea
+    id: sources
+    attributes:
+      label: Fuentes / referencias
+      description: Enlaces o citas que respalden el contenido
+    validations:
+      required: true
+  - type: checkboxes
+    id: license
+    attributes:
+      label: Licencia de imágenes (si adjuntas)
+      options:
+        - label: Confirmo que las imágenes propuestas son de uso permitido o crearé SVG placeholder
+          required: true

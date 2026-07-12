@@ -63,6 +63,7 @@ Tras activar Pages:
 - **`main` protegida**: cambios solo vía PR aprobado.
 - **Repo público**: Pages gratuito requiere visibilidad pública.
 - **Tamaño**: muchas imágenes aumentan el artefacto; el workflow lista tamaño y conteo de archivos.
+- **Verificación post-deploy (F4-06)**: tras publicar, el job `deploy` hace `curl` a la URL de Pages y falla si no responde HTTP 200 en ~50 s.
 - **No modificar paths de assets en raíz** sin actualizar `deploy-pages.yml`.
 
 ## Rollback

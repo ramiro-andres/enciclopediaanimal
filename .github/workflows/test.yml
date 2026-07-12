@@ -26,3 +26,21 @@ jobs:
 
       - name: Ejecutar pruebas unitarias
         run: ruby tests/test_enciclopedia.rb
+
+      - name: Validar contenido clínico
+        run: ruby scripts/data/validate_clinical_content.rb
+
+      - name: Verificar imágenes de razas (F4-03)
+        run: |
+          ruby scripts/images/list_missing_images.rb > /tmp/missing.txt
+          if [ -s /tmp/missing.txt ]; then
+            echo "Razas sin imagen JPG válida:"
+            cat /tmp/missing.txt
+            exit 1
+          fi
+          echo "Todas las razas tienen imagen JPG o SVG de respaldo."
+
+      - name: Verificar sincronización JSON → JS
+        run: |
+          bash actualizar_datos.sh
+          git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js
