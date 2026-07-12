@@ -12,6 +12,8 @@ require_relative 'production_breeds_batch3'
 require_relative 'production_breeds_batch4'
 require_relative 'production_breeds_batch5'
 require_relative 'production_breeds_batch6_colombia'
+require_relative 'production_breeds_batch7_international'
+require_relative 'production_breeds_batch7_latam'
 require_relative 'expand_enciclopedia'
 require 'set'
 
@@ -75,7 +77,8 @@ skipped = 0
 ALL_NEW_BREEDS = (
   NEW_BREEDS + MORE_BREEDS + PRODUCTION_BREEDS +
   PRODUCTION_BREEDS_BATCH4 + PRODUCTION_BREEDS_BATCH5 +
-  PRODUCTION_BREEDS_BATCH6_COLOMBIA
+  PRODUCTION_BREEDS_BATCH6_COLOMBIA + PRODUCTION_BREEDS_BATCH7_LATAM +
+  PRODUCTION_BREEDS_BATCH7_INTERNATIONAL
 ).freeze
 ALL_BREED_EXTRA = BREED_EXTRA
   .merge(MORE_BREED_EXTRA)
@@ -83,11 +86,15 @@ ALL_BREED_EXTRA = BREED_EXTRA
   .merge(PRODUCTION_BREED_EXTRA_BATCH4)
   .merge(PRODUCTION_BREED_EXTRA_BATCH5)
   .merge(PRODUCTION_BREED_EXTRA_BATCH6_COLOMBIA)
+  .merge(PRODUCTION_BREED_EXTRA_BATCH7_LATAM)
+  .merge(PRODUCTION_BREED_EXTRA_BATCH7)
   .freeze
 ALL_PRODUCTION_EXTRA = PRODUCTION_BREED_EXTRA
   .merge(PRODUCTION_BREED_EXTRA_BATCH4)
   .merge(PRODUCTION_BREED_EXTRA_BATCH5)
   .merge(PRODUCTION_BREED_EXTRA_BATCH6_COLOMBIA)
+  .merge(PRODUCTION_BREED_EXTRA_BATCH7_LATAM)
+  .merge(PRODUCTION_BREED_EXTRA_BATCH7)
   .freeze
 
 ALL_NEW_BREEDS.each do |row|

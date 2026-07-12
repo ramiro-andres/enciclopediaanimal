@@ -12,4 +12,12 @@ echo ""
 echo "🔎 Validación de integridad (datos + enlaces clínicos)"
 echo "======================================================"
 ruby scripts/setup/validar_integridad.rb
-exit $?
+INT=$?
+
+echo ""
+echo "🔬 Validación de contenido clínico"
+echo "-----------------------------------"
+ruby scripts/data/validate_clinical_content.rb
+CLIN=$?
+
+exit $(( INT + CLIN ))

@@ -19,9 +19,14 @@
   <meta name="twitter:description" content="Enciclopedia veterinaria educativa: razas, enfermedades, nutrición y glosario médico.">
   <meta name="twitter:image" content="https://ramiro-andres.github.io/enciclopediaanimal/images/og-image.svg">
   <title>Enciclopedia Animal — Salud Veterinaria</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#5b5ef7">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a href="#mainContent" class="skip-link" data-i18n="skip.main">Saltar al contenido principal</a>
   <div class="iso-scene" aria-hidden="true">
     <div class="iso-float iso-float--cube iso-float--1"></div>
     <div class="iso-float iso-float--cube iso-float--2"></div>
@@ -40,10 +45,18 @@
         </div>
       </div>
       <div class="header-actions">
-        <button type="button" id="goHomeBtn" class="header-home-btn" aria-label="Ir al inicio">Inicio</button>
-        <button type="button" id="goDictionaryBtn" class="header-home-btn" aria-label="Abrir diccionario médico">Glosario</button>
-        <button type="button" id="focusSearchBtn" class="header-search-btn" aria-label="Ir al buscador">
-          <span>Explorar atlas</span>
+        <div class="lang-switcher" role="group" aria-label="Idioma">
+          <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" id="goHomeBtn" class="header-home-btn" data-i18n="nav.home" data-i18n-aria="nav.home">Inicio</button>
+        <button type="button" id="goDictionaryBtn" class="header-home-btn" data-i18n="nav.glossary" data-i18n-aria="nav.glossary">Glosario</button>
+        <button type="button" id="goUrgencyBtn" class="header-home-btn" data-i18n="nav.urgency" data-i18n-aria="nav.urgency">Urgencias</button>
+        <button type="button" id="goCompareBtn" class="header-home-btn header-compare-btn" data-i18n="nav.compare" data-i18n-aria="nav.compare">
+          Comparar <span id="compareBadge" class="compare-badge" hidden>0</span>
+        </button>
+        <button type="button" id="focusSearchBtn" class="header-search-btn" data-i18n-aria="nav.explore">
+          <span data-i18n="nav.explore">Explorar atlas</span>
           <span aria-hidden="true">↗</span>
         </button>
       </div>
@@ -69,13 +82,17 @@
           <li><button class="filter-btn" data-size="grande">🐘 Grandes</button></li>
         </ul>
       </nav>
+      <nav id="regionFiltersSection" class="nav-section" hidden>
+        <h3>Región LATAM</h3>
+        <ul id="regionFilters" class="nav-list region-filters"></ul>
+      </nav>
       <div class="stats-panel">
         <h3>Resumen</h3>
         <div id="statsContent"></div>
       </div>
     </aside>
 
-    <main class="main-content">
+    <main id="mainContent" class="main-content" role="main" tabindex="-1">
       <section id="welcomeView" class="view active">
         <div class="welcome-hero">
           <div class="welcome-hero-copy">
@@ -87,6 +104,13 @@
               <button type="button" class="btn-text-link" data-focus-welcome-search>Buscar una especie <span>→</span></button>
             </div>
             <div id="welcomeStats" class="welcome-stats"></div>
+            <div id="recentHistory" class="recent-history" hidden>
+              <div class="recent-history-header">
+                <span class="eyebrow">CONTINUAR EXPLORANDO</span>
+                <button type="button" id="clearHistoryBtn" class="btn-text-link">Limpiar historial</button>
+              </div>
+              <div id="recentHistoryList" class="recent-history-list"></div>
+            </div>
           </div>
           <div class="welcome-visual" aria-label="Muestra visual del contenido de la enciclopedia">
             <div class="visual-main-card">
@@ -238,6 +262,34 @@
         </div>
       </section>
 
+      <section id="urgencyView" class="view">
+        <button id="backUrgencyBtn" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Volver al inicio
+        </button>
+        <div class="urgency-page">
+          <div class="urgency-hero">
+            <span class="eyebrow">GUÍA EDUCATIVA</span>
+            <h2>¿Cuándo ir al veterinario?</h2>
+            <p>Señales de alerta y emergencias frecuentes por tipo de animal. Si observas estos signos, consulta a un profesional de inmediato.</p>
+          </div>
+          <div id="urgencyContent" class="urgency-content"></div>
+        </div>
+      </section>
+
+      <section id="compareView" class="view">
+        <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="compare-page">
+          <div class="compare-hero">
+            <span class="eyebrow">HERRAMIENTA</span>
+            <h2 data-i18n="compare.title">Comparador de razas</h2>
+            <p data-i18n="compare.intro">Compara hasta 3 razas lado a lado: origen, peso, temperamento, nutrición y salud.</p>
+            <button type="button" id="clearCompareBtn" class="btn-text-link" data-i18n="compare.clear">Vaciar comparador</button>
+          </div>
+          <div id="compareContent" class="compare-content"></div>
+        </div>
+      </section>
+
       <section id="detailView" class="view">
         <button id="backBtn" class="back-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -257,7 +309,8 @@
   </div>
 
   <footer class="footer">
-    <p>🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
+    <p data-i18n="footer.text">🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
+    <p class="footer-privacy"><small data-i18n="privacy.analytics">Este sitio puede usar analítica sin cookies. Ver docs/PRIVACIDAD.md.</small></p>
   </footer>
 
   <div id="disclaimerOverlay" class="disclaimer-overlay" hidden aria-hidden="true">
@@ -272,11 +325,14 @@
     >
       <div class="disclaimer-modal-inner">
         <span class="disclaimer-icon" aria-hidden="true">⚕</span>
-        <h2 id="disclaimerTitle">Aviso importante</h2>
+        <h2 id="disclaimerTitle" data-i18n="disclaimer.title">Aviso importante</h2>
         <p id="disclaimerBody">
-          La información de esta enciclopedia es <strong>exclusivamente educativa</strong> y no sustituye el diagnóstico ni el tratamiento de un veterinario colegiado. Si tu animal presenta alguno de estos síntomas o signos de enfermedad, acude a un profesional de inmediato.
+          La información de esta enciclopedia es <strong>exclusivamente educativa</strong> y no sustituye el diagnóstico, la prescripción ni el seguimiento de un veterinario colegiado. Las dosis y protocolos mostrados son orientativos. Si tu animal presenta síntomas, signos de enfermedad o una emergencia, acude a un profesional de inmediato.
         </p>
-        <button type="button" id="disclaimerAcceptBtn" class="disclaimer-accept-btn">Entendido</button>
+        <p class="disclaimer-extra">
+          <button type="button" id="disclaimerUrgencyLink" class="disclaimer-link-btn" data-i18n="disclaimer.urgency">Ver urgencias por especie →</button>
+        </p>
+        <button type="button" id="disclaimerAcceptBtn" class="disclaimer-accept-btn" data-i18n="disclaimer.accept">Entendido</button>
       </div>
     </div>
   </div>
@@ -284,6 +340,19 @@
   <script src="data/enciclopedia.js"></script>
   <script src="data/diccionario_medicos.js"></script>
   <script src="data/enlaces_clinicos.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/analytics-config.js"></script>
+  <script src="js/analytics.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Analytics) Analytics.init();
+    });
+  </script>
 </body>
 </html>

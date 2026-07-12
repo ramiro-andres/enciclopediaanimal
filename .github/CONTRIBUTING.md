@@ -47,4 +47,11 @@ O manualmente: **Settings → Pages → Build and deployment → Source: GitHub 
 
 ## Preguntas
 
-Abre un issue en GitHub describiendo la idea o el problema antes de cambios grandes (nuevas seccions, muchas imágenes, etc.).
+Abre un issue en GitHub describiendo la idea o el problema antes de cambios grandes (nuevas secciones, muchas imágenes, etc.). Usa las plantillas en `.github/ISSUE_TEMPLATE/`.
+
+## Política para colaboradores externos (US-5.1)
+
+- **Solo fork + PR:** los colaboradores sin acceso de escritura deben trabajar desde un fork y abrir PR hacia `main`.
+- **Sin push directo a `main`:** la rama principal está protegida; los merges requieren revisión y CI verde.
+- **Contenido clínico:** toda información nueva debe ser educativa, con fuentes y sin sustituir consulta veterinaria.
+- **Datos:** cambios en JSON exigen regenerar JS con `bash actualizar_datos.sh` y pasar `bash ejecutar_pruebas.sh`.

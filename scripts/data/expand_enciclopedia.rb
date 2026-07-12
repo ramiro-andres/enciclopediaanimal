@@ -220,7 +220,7 @@ def expand_disease(disease, animal_id, breed_id)
   d['sintomas'] = d['sintomas'] + ['Consultar al veterinario ante cualquier signo persistente'] while d['sintomas'].length < 6
 
   d['diagnostico'] = expand_text(d['diagnostico'], [
-    'El veterinario realizará anamnesis detallada sobre inicio, duración y factores desencadenantes.',
+    'La valoración incluye historia clínica detallada sobre inicio, duración y factores desencadenantes.',
     'Se complementará con pruebas específicas según la sospecha clínica y el estado general del animal.',
     'El diagnóstico precoz mejora significativamente el pronóstico y reduce complicaciones secundarias.'
   ])
