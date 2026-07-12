@@ -1707,7 +1707,7 @@ const App = {
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
     this.updateDocumentTitle();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   },
 
   exportE2EState() {
