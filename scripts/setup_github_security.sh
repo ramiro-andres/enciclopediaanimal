@@ -3,7 +3,8 @@
 set -euo pipefail
 
 REPO="ramiro-andres/enciclopediaanimal"
-CHECK_CONTEXT="test / test"
+# Debe coincidir con el nombre del check en Actions (workflow test.yml → check "test").
+CHECK_CONTEXT="test"
 PAGES_JSON='{"build_type":"workflow","source":{"branch":"main","path":"/"}}'
 
 if ! command -v gh >/dev/null 2>&1; then
@@ -36,7 +37,9 @@ gh api "repos/${REPO}/actions/permissions" -X PUT --input - <<'JSON'
 {"enabled":true,"allowed_actions":"all","default_workflow_permissions":"write"}
 JSON
 
-echo "▶ Protección de rama main..."
+echo "▶ Protección de rama main (mantenedor único)..."
+# CODEOWNERS sigue útil para asignar revisores, pero require_code_owner_reviews=true
+# impide que el owner apruebe/fusione sus propios PR si es el único code owner.
 # En repos personales no se pueden restringir pushes por usuario (solo orgs).
 gh api "repos/${REPO}/branches/main/protection" -X PUT --input - <<JSON
 {
@@ -44,12 +47,12 @@ gh api "repos/${REPO}/branches/main/protection" -X PUT --input - <<JSON
     "strict": true,
     "contexts": ["${CHECK_CONTEXT}"]
   },
-  "enforce_admins": true,
+  "enforce_admins": false,
   "required_pull_request_reviews": {
     "dismiss_stale_reviews": true,
-    "require_code_owner_reviews": true,
-    "required_approving_review_count": 1,
-    "require_last_push_approval": true
+    "require_code_owner_reviews": false,
+    "required_approving_review_count": 0,
+    "require_last_push_approval": false
   },
   "restrictions": null,
   "required_linear_history": false,
@@ -63,5 +66,5 @@ JSON
 echo ""
 echo "✅ Configuración aplicada."
 echo "   Pages: https://ramiro-andres.github.io/enciclopediaanimal/"
-echo "   Nota: en repos personales, 'solo el owner puede push a main' se cumple vía PR + CODEOWNERS,"
-echo "   no con 'Restrict who can push' (solo disponible en organizaciones)."
+echo "   main: PR obligatorio + check CI; el owner puede fusionar sin auto-bloqueo de CODEOWNERS."
+echo "   Colaboradores externos (sin write) siguen necesitando que el maintainer haga merge del PR."
