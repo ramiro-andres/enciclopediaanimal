@@ -1,21 +1,22 @@
 ## Descripción
 
-<!-- Qué cambia este PR y por qué -->
+<!-- ¿Qué cambia este PR y por qué? -->
 
 ## Tipo de cambio
 
-- [ ] Nueva raza / datos
-- [ ] Corrección clínica o de contenido
-- [ ] UI / estilos
-- [ ] CI / despliegue
+- [ ] Contenido / datos (razas, imágenes, textos)
+- [ ] Interfaz o estilos
+- [ ] Scripts o automatización
+- [ ] Documentación
 - [ ] Otro
 
 ## Checklist
 
-- [ ] Trabajo hecho en rama `feature/*` (no push directo a `main`)
-- [ ] `bash ejecutar_pruebas.sh` pasa localmente
-- [ ] Sin credenciales ni archivos `.env`
+- [ ] Trabajo en una rama distinta de `main` (p. ej. `feature/mi-cambio`)
+- [ ] `bash ejecutar_pruebas.sh` pasa en local (o equivalente)
+- [ ] No incluyo secretos, tokens ni credenciales
+- [ ] Las imágenes/datos nuevos respetan licencias y tamaño razonable
 
-## Notas para el revisor
+## Notas para revisión
 
-<!-- Contexto adicional para @ramiro-andres -->
+<!-- Contexto extra para @ramiro-andres -->

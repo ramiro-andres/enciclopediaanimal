@@ -6,28 +6,25 @@ Atlas veterinario con razas, nutrición, enfermedades y diccionario médico.
 
 https://ramiro-andres.github.io/enciclopediaanimal/
 
-## Activar GitHub Pages (una sola vez)
+## Contribuir
 
-El error `Get Pages site failed` significa que Pages **no está activado** en el repositorio.
-`enablement: true` **no funciona** con el token por defecto de Actions; hay que activarlo manualmente:
+Lee [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md): cambios a `main` solo vía **pull request** con aprobación del propietario. CI ejecuta `.github/workflows/test.yml` en cada PR.
 
-1. Repo **público** (Settings → General → Change visibility).
-2. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**.
-3. **Settings → Actions → General → Workflow permissions → `Read and write permissions`**.
-4. **Actions → Desplegar en GitHub Pages → Run workflow**.
+## GitHub Pages y seguridad (mantenedores)
 
-Tras el primer despliegue exitoso, cada push a `main` publica automáticamente.
-
-O ejecuta (con [GitHub CLI](https://cli.github.com/) autenticado):
+Tras clonar, con [GitHub CLI](https://cli.github.com/) autenticada (`gh auth login`):
 
 ```bash
 bash scripts/setup_github_security.sh
 ```
 
-## Contribuir con seguridad
+Eso activa **Pages con GitHub Actions** y la protección de `main`. Si prefieres la UI:
 
-- Ramas `feature/*` → Pull Request → aprobación de **@ramiro-andres**
-- Ver [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md)
+1. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**
+2. **Settings → Actions → General → Workflow permissions → `Read and write permissions`**
+3. **Settings → Branches → Add rule** para `main` (PR obligatorio, sin force push, revisión CODEOWNERS)
+
+Luego ejecuta **Actions → Desplegar en GitHub Pages → Run workflow** una vez si hace falta el primer despliegue.
 
 ## Desarrollo local
 

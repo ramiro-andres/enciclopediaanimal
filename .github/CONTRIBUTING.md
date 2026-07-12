@@ -1,30 +1,47 @@
-# Guía de contribución
+# Contribuir a Enciclopedia Animal
 
-## Flujo de trabajo (repositorio público)
+Gracias por mejorar el atlas veterinario. Este repositorio es **público** y `main` está protegida: los cambios llegan solo mediante **pull requests** aprobados por el propietario.
 
-1. **Haz fork** del repositorio o pide acceso de colaborador.
-2. Crea una rama desde `main`:
-   ```bash
-   git checkout -b feature/mi-cambio
-   ```
-3. Realiza tus cambios y ejecuta pruebas:
+## Flujo de trabajo
+
+1. **Fork** del repositorio (colaboradores externos) o crea una rama desde `main` (colaboradores con acceso).
+2. Crea una rama con nombre descriptivo:
+   - `feature/nombre-corto`
+   - `fix/descripcion`
+   - `docs/tema`
+3. Haz commits pequeños y claros en esa rama (no commits directos a `main`).
+4. Antes de abrir el PR, ejecuta las pruebas:
    ```bash
    bash ejecutar_pruebas.sh
    ```
-4. Abre un **Pull Request** hacia `main`.
-5. Espera la **revisión y aprobación de @ramiro-andres** (CODEOWNERS).
-6. Solo tras la aprobación se fusiona a `main` y se despliega en GitHub Pages.
+5. Abre un **Pull Request** hacia `main` y espera la revisión de `@ramiro-andres` (CODEOWNERS).
+6. Tras la aprobación y el merge, el workflow **Desplegar en GitHub Pages** publica el sitio automáticamente.
 
-## Reglas de seguridad
+## Reglas de la rama `main`
 
-- **Nadie externo** debe hacer push directo a `main`.
-- No se permiten **force push** ni borrado de `main`.
-- Los cambios en `main` requieren **PR + aprobación del propietario**.
-- El workflow de pruebas debe pasar antes del merge (cuando la protección de rama esté activa).
+- No se permiten **force push** ni borrado de la rama.
+- Los merges requieren **al menos una aprobación** del code owner.
+- Debe pasar el check de CI **`test / test`** (workflow `.github/workflows/test.yml`).
+- Solo el propietario puede hacer push directo a `main` (cuando la protección de rama lo permite en el plan de GitHub).
 
 ## Desarrollo local
 
 ```bash
-bash iniciar.sh          # http://localhost:8080
-bash actualizar_datos.sh # regenerar JS
+bash iniciar.sh          # servidor en http://localhost:8080
+bash actualizar_datos.sh # regenerar JSON si aplica
+bash ejecutar_pruebas.sh # pruebas unitarias Ruby
 ```
+
+## Activar GitHub Pages (mantenedores)
+
+Si Pages aún no está activo, un mantenedor con `gh` autenticado puede ejecutar:
+
+```bash
+bash scripts/setup_github_security.sh
+```
+
+O manualmente: **Settings → Pages → Build and deployment → Source: GitHub Actions**, y **Settings → Actions → General → Workflow permissions → Read and write permissions**.
+
+## Preguntas
+
+Abre un issue en GitHub describiendo la idea o el problema antes de cambios grandes (nuevas seccions, muchas imágenes, etc.).

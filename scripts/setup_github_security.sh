@@ -32,7 +32,7 @@ gh api "repos/${REPO}/branches/main/protection" -X PUT \
 {
   "required_status_checks": {
     "strict": true,
-    "contexts": ["test"]
+    "contexts": ["test / test"]
   },
   "enforce_admins": true,
   "required_pull_request_reviews": {
