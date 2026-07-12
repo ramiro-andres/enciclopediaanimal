@@ -27,10 +27,11 @@ Gracias por mejorar el atlas veterinario. Este repositorio es **público** y `ma
 ## Desarrollo local
 
 ```bash
-bash iniciar.sh          # servidor en http://localhost:8080
 bash actualizar_datos.sh # regenerar JS desde JSON
-bash ejecutar_pruebas.sh # pruebas unitarias + E2E
+bash ejecutar_pruebas.sh # pruebas unitarias
 ```
+
+Sitio publicado: https://ramiro-andres.github.io/enciclopediaanimal/
 
 Documentación detallada: [docs/DESARROLLO.md](../docs/DESARROLLO.md) y [docs/ESTRUCTURA.md](../docs/ESTRUCTURA.md).
 

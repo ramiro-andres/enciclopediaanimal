@@ -33,9 +33,8 @@ const App = {
         <div class="empty-state">
           <div class="empty-icon">⚠️</div>
           <p><strong>No se pudo cargar la enciclopedia.</strong></p>
-          <p style="margin-top:0.5rem">Ejecuta en la terminal:</p>
-          <p><code>cd local_proyectos/enciclopedia_animal && bash iniciar.sh</code></p>
-          <p style="margin-top:0.5rem">Luego abre <code>http://localhost:8080</code></p>
+          <p style="margin-top:0.5rem">Regenera los datos con <code>bash actualizar_datos.sh</code> o visita el sitio publicado:</p>
+          <p><a href="https://ramiro-andres.github.io/enciclopediaanimal/" target="_blank" rel="noopener">ramiro-andres.github.io/enciclopediaanimal</a></p>
           <p style="margin-top:0.5rem;font-size:0.85rem;color:#888">${err.message}</p>
         </div>`;
       }

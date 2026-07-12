@@ -4,27 +4,17 @@ Guía para trabajar en Enciclopedia Animal en tu máquina.
 
 ## Requisitos
 
-- **Ruby** 3.x (servidor local, scripts, pruebas)
-- **Python 3** (opcional; algunos scripts legacy de imágenes)
-- **curl** (descarga de imágenes shell)
+- **Ruby** 3.x (scripts y pruebas)
 - **Git** y **GitHub CLI** (`gh`) para PRs
 
-## Servidor local
+## Ver el sitio
 
-```bash
-bash iniciar.sh
-# http://localhost:8080
-```
+El sitio es estático y se publica en GitHub Pages. Para previsualizar cambios:
 
-Usa `ruby -run -e httpd` o `python3 -m http.server` según disponibilidad. Abre el navegador automáticamente en macOS.
+- Abre `index.html` directamente en el navegador (los datos se cargan desde `data/enciclopedia.js`), o
+- Visita https://ramiro-andres.github.io/enciclopediaanimal/
 
-Puerto alternativo:
-
-```bash
-bash iniciar.sh 3000
-```
-
-> **Nota:** Abrir `index.html` con `file://` puede fallar por CORS al cargar datos; usa siempre un servidor HTTP.
+> **Nota:** Si abres `index.html` con `file://` y ves pantalla vacía, ejecuta `bash actualizar_datos.sh` para regenerar los `.js` embebidos.
 
 ## Regenerar datos
 
@@ -69,16 +59,7 @@ Los logs de descarga (`*.log`) se escriben en la raíz o cwd y están en `.gitig
 bash ejecutar_pruebas.sh
 ```
 
-Incluye:
-
-1. **Unitarias** — `ruby tests/test_enciclopedia.rb` (integridad de JSON, HTML, JS)
-2. **E2E** — `scripts/shell/ejecutar_pruebas_navegador.sh` (requiere servidor en el puerto de prueba)
-
-Solo unitarias (como en CI):
-
-```bash
-ruby tests/test_enciclopedia.rb
-```
+Equivale a `ruby tests/test_enciclopedia.rb` (integridad de JSON, HTML, JS). Es el mismo check que corre en CI.
 
 ## Flujo de contribución
 
@@ -95,5 +76,4 @@ Detalle en [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md).
 |----------|----------|
 | Pantalla vacía / sin datos | Ejecuta `bash actualizar_datos.sh`; verifica que existan `data/*.js` |
 | Imagen rota | Comprueba `images/{id}.jpg\|svg`; usa `list_missing_images.rb` |
-| E2E falla | Asegura que nada use el puerto 8080 o pasa otro: `TEST_PORT=9090 bash ejecutar_pruebas.sh` |
 | Ruby no encontrado | Instala Ruby 3.x (`brew install ruby`) |

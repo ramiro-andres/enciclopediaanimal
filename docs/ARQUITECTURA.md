@@ -89,7 +89,6 @@ GitHub Actions copia `index.html`, `css/`, `js/`, `data/`, `images/` a `_site/` 
 |--------|---------|
 | Regenerar diccionario + JS | `bash actualizar_datos.sh` |
 | Pipeline completo de datos | `ruby scripts/data/update_enciclopedia_full.rb` |
-| Servidor local | `bash iniciar.sh` |
 | Pruebas | `bash ejecutar_pruebas.sh` |
 
 ## Decisiones de diseño

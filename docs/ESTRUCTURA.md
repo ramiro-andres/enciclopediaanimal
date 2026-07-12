@@ -16,23 +16,20 @@ enciclopedia_animal/
 │   └── diccionario_medicos.js
 ├── images/                 # Fotos y SVG de razas y enfermedades
 ├── tests/
-│   ├── test_enciclopedia.rb    # Pruebas unitarias
-│   └── browser_e2e.rb          # Pruebas E2E
+│   └── test_enciclopedia.rb    # Pruebas unitarias
 ├── docs/                   # Documentación del proyecto
 ├── scripts/
 │   ├── README.md           # Índice de scripts
 │   ├── data/               # Generación de JSON
 │   ├── images/             # Descarga y corrección de imágenes
-│   ├── setup/              # GitHub Pages, placeholders
-│   └── shell/              # Utilidades shell (E2E)
+│   └── setup/              # GitHub Pages, placeholders
 ├── .github/
 │   ├── workflows/
 │   │   ├── test.yml        # CI en PRs
 │   │   └── deploy-pages.yml
 │   └── CONTRIBUTING.md
-├── iniciar.sh              # Wrapper UX — servidor local
 ├── actualizar_datos.sh     # Wrapper UX — JSON → JS
-├── ejecutar_pruebas.sh     # Wrapper UX — unit + E2E
+├── ejecutar_pruebas.sh     # Wrapper UX — pruebas unitarias
 └── README.md               # Entrada — enlaces a docs/
 ```
 
@@ -41,7 +38,7 @@ enciclopedia_animal/
 | Elemento | Motivo |
 |----------|--------|
 | `index.html`, `css/`, `js/`, `data/`, `images/` | GitHub Pages sirve el sitio desde estos paths; el workflow copia tal cual a `_site/`. |
-| `iniciar.sh`, `actualizar_datos.sh`, `ejecutar_pruebas.sh` | Comandos habituales del día a día; wrappers delgados hacia `scripts/`. |
+| `actualizar_datos.sh`, `ejecutar_pruebas.sh` | Comandos habituales del día a día; wrappers delgados hacia `scripts/`. |
 | `_site/` | Artefacto local/gitignored; en CI lo genera el workflow. |
 
 ## Qué no va en la raíz
