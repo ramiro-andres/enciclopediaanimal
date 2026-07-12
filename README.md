@@ -7,10 +7,11 @@ Atlas veterinario interactivo con razas, nutrición, enfermedades y diccionario 
 ## Inicio rápido
 
 ```bash
-bash iniciar.sh              # servidor local → http://localhost:8080
 bash actualizar_datos.sh     # regenerar JS desde JSON
-bash ejecutar_pruebas.sh     # pruebas unitarias + E2E
+bash ejecutar_pruebas.sh     # pruebas unitarias
 ```
+
+Para ver el sitio localmente, abre `index.html` en el navegador o usa la URL de GitHub Pages arriba.
 
 ## Documentación
 
@@ -18,7 +19,7 @@ bash ejecutar_pruebas.sh     # pruebas unitarias + E2E
 |-----------|-----------|
 | [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) | Flujo de datos, frontend y scripts |
 | [docs/ESTRUCTURA.md](docs/ESTRUCTURA.md) | Layout del repositorio |
-| [docs/DESARROLLO.md](docs/DESARROLLO.md) | Desarrollo local, datos e imágenes |
+| [docs/DESARROLLO.md](docs/DESARROLLO.md) | Desarrollo, datos e imágenes |
 | [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) | GitHub Pages y CI/CD |
 | [scripts/README.md](scripts/README.md) | Índice de scripts por categoría |
 

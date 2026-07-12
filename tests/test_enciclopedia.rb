@@ -332,68 +332,12 @@ class AssetsTest < Minitest::Test
   end
 
   def test_scripts_de_inicio_existen
-    assert File.exist?(File.join(ROOT, 'iniciar.sh'))
     assert File.exist?(File.join(ROOT, 'actualizar_datos.sh'))
+    assert File.exist?(File.join(ROOT, 'ejecutar_pruebas.sh'))
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'build_medical_dictionary.rb'))
   end
 
   def test_placeholder_existe
     assert File.exist?(File.join(ROOT, 'images', 'placeholder.svg'))
-  end
-end
-
-class ServerIntegrationTest < Minitest::Test
-  def setup
-    @port = ENV['TEST_PORT'] || '8080'
-    @base = "http://localhost:#{@port}"
-  end
-
-  def server_up?
-    require 'net/http'
-    uri = URI("#{@base}/index.html")
-    Net::HTTP.get_response(uri).code == '200'
-  rescue StandardError
-    false
-  end
-
-  def test_servidor_sirve_index
-    skip 'Servidor no activo en puerto 8080' unless server_up?
-    require 'net/http'
-    res = Net::HTTP.get_response(URI("#{@base}/index.html"))
-    assert_equal '200', res.code
-    assert_includes res.body, 'Enciclopedia Animal'
-    assert_includes res.body, 'data/enciclopedia.js'
-    assert_includes res.body, 'id="breedGrid"'
-  end
-
-  def test_servidor_sirve_app_js
-    skip 'Servidor no activo en puerto 8080' unless server_up?
-    require 'net/http'
-    res = Net::HTTP.get_response(URI("#{@base}/js/app.js"))
-    assert_equal '200', res.code
-    assert_includes res.body, 'const App'
-  end
-
-  def test_servidor_sirve_css
-    skip 'Servidor no activo en puerto 8080' unless server_up?
-    require 'net/http'
-    res = Net::HTTP.get_response(URI("#{@base}/css/styles.css"))
-    assert_equal '200', res.code
-  end
-
-  def test_servidor_sirve_enciclopedia_js
-    skip 'Servidor no activo en puerto 8080' unless server_up?
-    require 'net/http'
-    res = Net::HTTP.get_response(URI("#{@base}/data/enciclopedia.js"))
-    assert_equal '200', res.code
-    assert_includes res.body, 'window.ENCICLOPEDIA_DATA'
-    assert_includes res.body, '"perros"'
-  end
-
-  def test_e2e_page_existe
-    assert File.exist?(File.join(ROOT, 'tests', 'e2e_browser.html'))
-    e2e = File.read(File.join(ROOT, 'tests', 'e2e_browser.html'))
-    assert_includes e2e, '__E2E_RESULTS__'
-    assert_includes e2e, 'runInteractionTests'
   end
 end

@@ -8,8 +8,7 @@ Scripts de mantenimiento organizados por propósito. Los datos e imágenes del s
 scripts/
 ├── data/      # Generación y enriquecimiento de enciclopedia.json / diccionario
 ├── images/    # Descarga y corrección de imágenes de razas y enfermedades
-├── setup/     # Configuración del repo y placeholders
-└── shell/     # Utilidades de shell (E2E, etc.)
+└── setup/     # Configuración del repo y placeholders
 ```
 
 ## data/ — Datos de la enciclopedia
@@ -36,13 +35,11 @@ bash actualizar_datos.sh   # JSON → enciclopedia.js + diccionario_medicos.js
 | Script | Uso |
 |--------|-----|
 | `download_google_images.rb` | Descarga imágenes vía búsqueda Google |
-| `download_images_multi.rb` | Descarga multi-fuente con concurrencia |
-| `download_breed_specific.rb` | Fuentes específicas por raza |
 | `download_disease_google_images.rb` | Imágenes de enfermedades |
+| `download_breed_specific.rb` | Fuentes específicas por raza |
 | `fix_wikipedia_images.rb` | Corrige imágenes con Wikipedia |
 | `list_missing_images.rb` | Lista razas sin imagen válida |
 | `apply_image_overrides.rb` | Aplica overrides manuales |
-| `download_api.sh`, `download_images.sh`, `download_images.py` | Descargas legacy desde Wikimedia |
 
 Archivos de apoyo: `breed_searches.json`, `wikipedia_titles.json`.
 
@@ -57,12 +54,6 @@ Archivos de apoyo: `breed_searches.json`, `wikipedia_titles.json`.
 bash scripts/setup/generate_placeholders.sh
 bash scripts/setup/setup_github_security.sh
 ```
-
-## shell/
-
-| Script | Uso |
-|--------|-----|
-| `ejecutar_pruebas_navegador.sh` | E2E con servidor local (llamado desde `ejecutar_pruebas.sh` en la raíz) |
 
 ## Convención de rutas
 
