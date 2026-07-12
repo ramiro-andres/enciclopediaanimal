@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enciclopedia Animal — Salud Veterinaria</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="iso-scene" aria-hidden="true">
+    <div class="iso-float iso-float--cube iso-float--1"></div>
+    <div class="iso-float iso-float--cube iso-float--2"></div>
+    <div class="iso-float iso-float--cube iso-float--3"></div>
+    <div class="iso-float iso-float--tile iso-float--4"></div>
+    <div class="iso-float iso-float--tile iso-float--5"></div>
+  </div>
+
+  <header class="header header-3d">
+    <div class="header-inner">
+      <div class="logo" role="button" tabindex="0" aria-label="Ir al inicio">
+        <span class="logo-icon">A.</span>
+        <div>
+          <h1>Atlas Animal</h1>
+          <p>Enciclopedia veterinaria</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="goHomeBtn" class="header-home-btn" aria-label="Ir al inicio">Inicio</button>
+        <button type="button" id="goDictionaryBtn" class="header-home-btn" aria-label="Abrir diccionario médico">Glosario</button>
+        <button type="button" id="focusSearchBtn" class="header-search-btn" aria-label="Ir al buscador">
+          <span>Explorar atlas</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="appLayout" class="layout layout--full">
+    <aside id="appSidebar" class="sidebar">
+      <div id="browseContext" class="browse-context" hidden>
+        <button type="button" id="changeCategoryBtn" class="change-category-btn">← Cambiar categoría</button>
+        <div id="selectedAnimalChip" class="selected-animal-chip"></div>
+      </div>
+      <nav id="animalNavSection" class="nav-section" hidden>
+        <h3>Tipo de animal</h3>
+        <ul id="animalNav" class="nav-list"></ul>
+      </nav>
+      <nav id="sizeFiltersSection" class="nav-section" hidden>
+        <h3>Tamaño de raza</h3>
+        <ul class="nav-list size-filters">
+          <li><button class="filter-btn active" data-size="todos">Todos</button></li>
+          <li><button class="filter-btn" data-size="pequena">🐁 Pequeñas</button></li>
+          <li><button class="filter-btn" data-size="mediana">🐕 Medianas</button></li>
+          <li><button class="filter-btn" data-size="grande">🐘 Grandes</button></li>
+        </ul>
+      </nav>
+      <div class="stats-panel">
+        <h3>Resumen</h3>
+        <div id="statsContent"></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section id="welcomeView" class="view active">
+        <div class="welcome-hero">
+          <div class="welcome-hero-copy">
+            <span class="eyebrow">CONOCIMIENTO ANIMAL, ORGANIZADO</span>
+            <h2>Una mirada más profunda al <em>mundo animal.</em></h2>
+            <p id="welcomeIntro">Cargando enciclopedia...</p>
+            <div class="hero-actions">
+              <button type="button" id="btnExploreAll" class="btn-explore-all">Explorar todas las razas</button>
+              <button type="button" class="btn-text-link" data-focus-welcome-search>Buscar una especie <span>→</span></button>
+            </div>
+            <div id="welcomeStats" class="welcome-stats"></div>
+          </div>
+          <div class="welcome-visual" aria-label="Muestra visual del contenido de la enciclopedia">
+            <div class="visual-main-card">
+              <img src="images/holstein.jpg" alt="Vaca Holstein">
+              <div class="visual-caption">
+                <span>BOVINOS · PRODUCCIÓN</span>
+                <strong>Holstein</strong>
+              </div>
+            </div>
+            <div class="visual-floating-card visual-floating-card--top">
+              <img src="images/maine_coon.jpg" alt="Gato Maine Coon">
+              <span>Razas</span>
+            </div>
+            <div class="visual-floating-card visual-floating-card--bottom">
+              <span class="visual-medical-icon">+</span>
+              <div><strong>1.967</strong><small>fichas clínicas</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-intro">
+          <span class="eyebrow">TODO EN UN SOLO LUGAR</span>
+          <h3>Explora, comprende y cuida mejor.</h3>
+          <p>Información clara para descubrir razas, conocer sus necesidades y consultar contenido veterinario detallado.</p>
+        </div>
+
+        <div class="welcome-features">
+          <article class="feature-card feature-card--dark">
+            <span class="feature-number">01</span>
+            <div>
+              <h3>Descubre cada especie</h3>
+              <p>Entra por categoría y encuentra únicamente las razas del animal que te interesa.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <div>
+              <h3>Conoce cada raza</h3>
+              <p>Origen, características, alimentación, cuidados y aptitudes en una ficha visual.</p>
+            </div>
+          </article>
+          <article class="feature-card feature-card--sage">
+            <span class="feature-number">03</span>
+            <div>
+              <h3>Consulta su salud</h3>
+              <p>Síntomas, diagnóstico, prevención y protocolos clínicos con enfoque veterinario.</p>
+            </div>
+          </article>
+          <article class="feature-card feature-card--dictionary" id="openDictionaryCard" role="button" tabindex="0" aria-label="Abrir diccionario de términos médicos">
+            <span class="feature-number">04</span>
+            <div>
+              <h3>Diccionario médico</h3>
+              <p>Más de 500 términos: enfermedades, exámenes, fármacos, síntomas y conceptos de cada ficha clínica.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="welcome-picker">
+          <div class="picker-heading">
+            <div>
+              <span class="eyebrow">EXPLORA EL ATLAS</span>
+              <h3>Elige un grupo animal</h3>
+            </div>
+            <p>Selecciona una categoría para ver solo las razas que pertenecen a ella.</p>
+          </div>
+          <div id="welcomeCategoryCards" class="category-grid"></div>
+        </div>
+
+        <div class="main-search-panel welcome-search">
+          <div class="search-copy">
+            <span class="eyebrow">BÚSQUEDA GLOBAL</span>
+            <label class="main-search-label" for="searchInputWelcome">¿Qué quieres conocer hoy?</label>
+            <p>Busca una raza o enfermedad en toda la enciclopedia.</p>
+          </div>
+          <div class="search-box search-box--large">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input
+              type="search"
+              id="searchInputWelcome"
+              placeholder="Ej. Chihuahua, mastitis, tilapia..."
+              autocomplete="off"
+              enterkeyhint="search"
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="homeView" class="view">
+        <div class="main-search-panel iso-panel">
+          <label class="main-search-label" for="searchInput">Buscar en toda la enciclopedia</label>
+          <div class="search-box search-box--large">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Nombre de raza o enfermedad (ej: Chihuahua, mastitis, tilapia)..."
+              autocomplete="off"
+              enterkeyhint="search"
+            >
+            <button type="button" id="searchClearBtn" class="search-clear" aria-label="Limpiar búsqueda" hidden>×</button>
+          </div>
+          <p id="searchHint" class="search-hint">Búsqueda general por nombre. Atajo: <kbd>Ctrl</kbd>+<kbd>K</kbd></p>
+        </div>
+
+        <div id="searchResults" class="search-results" hidden></div>
+
+        <div id="browseSection">
+        <div class="section-header">
+          <h3 id="resultsTitle">Todas las razas</h3>
+          <span id="resultsCount" class="badge">0</span>
+        </div>
+        <div id="breedGrid" class="breed-grid">
+          <div class="empty-state"><div class="empty-icon">⏳</div><p>Cargando razas...</p></div>
+        </div>
+        </div>
+      </section>
+
+      <section id="dictionaryView" class="view">
+        <button id="backDictionaryBtn" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Volver al inicio
+        </button>
+        <div id="dictionaryContent" class="dictionary-page">
+          <div class="dictionary-hero">
+            <span class="eyebrow">REFERENCIA CLÍNICA</span>
+            <h2 id="dictionaryTitle">Diccionario de términos médicos</h2>
+            <p id="dictionaryIntro">Cargando glosario...</p>
+          </div>
+          <div class="dictionary-toolbar">
+            <div class="search-box search-box--dictionary">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input
+                type="search"
+                id="dictionarySearchInput"
+                placeholder="Buscar término (ej. anamnesis, mg/kg, mastitis)..."
+                autocomplete="off"
+              >
+            </div>
+            <div id="dictionaryCategoryFilters" class="dictionary-filters"></div>
+          </div>
+          <div id="dictionaryStats" class="dictionary-stats"></div>
+          <div id="dictionaryList" class="dictionary-list"></div>
+        </div>
+      </section>
+
+      <section id="detailView" class="view">
+        <button id="backBtn" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Volver
+        </button>
+        <div id="breedDetail"></div>
+      </section>
+
+      <section id="diseaseView" class="view">
+        <button id="backDiseaseBtn" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Volver a la raza
+        </button>
+        <div id="diseaseDetail"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
+  </footer>
+
+  <script src="data/enciclopedia.js"></script>
+  <script src="data/diccionario_medicos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

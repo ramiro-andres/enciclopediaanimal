@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="280" viewBox="0 0 440 280">
+  <rect width="440" height="280" fill="#e8ece3"/>
+  <rect x="24" y="24" width="392" height="232" fill="#f8f7f2" stroke="#c8cac4"/>
+  <text x="220" y="118" text-anchor="middle" font-family="Arial,sans-serif" font-size="42">🩺</text>
+  <text x="220" y="158" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="bold" fill="#1e3b2f">Ictioftiriasis (punto blanco)</text>
+  <text x="220" y="182" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#5f645d">Peces</text>
+</svg>
