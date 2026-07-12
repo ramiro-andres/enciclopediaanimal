@@ -1,0 +1,71 @@
+name: Reporte de error
+description: Informar un fallo en el sitio, datos o CI
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por ayudar a mejorar la Enciclopedia Animal. Describe el problema con el mayor detalle posible.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      options:
+        - Sitio web (UI/navegación)
+        - Datos (razas, enfermedades, diccionario)
+        - Imágenes
+        - CI/CD o GitHub Actions
+        - Documentación
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del problema
+      description: ¿Qué ocurrió y qué esperabas que ocurriera?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. Ir a https://ramiro-andres.github.io/enciclopediaanimal/
+        2. Buscar "Chihuahua"
+        3. Abrir ficha de raza
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL o hash afectado
+      placeholder: "https://ramiro-andres.github.io/enciclopediaanimal/#raza/perros/chihuahua"
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Navegador / entorno
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Móvil (iOS)
+        - Móvil (Android)
+        - Local (file://)
+        - Otro
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: Busqué issues existentes antes de abrir este reporte
+          required: true

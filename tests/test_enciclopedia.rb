@@ -310,6 +310,22 @@ class HtmlStructureTest < Minitest::Test
       assert_match(/data-size="#{size}"/, @html)
     end
   end
+
+  def test_meta_tags_seo_y_open_graph
+    assert_match(/<meta name="description"/, @html)
+    assert_match(/educativ/i, @html)
+    assert_match(/property="og:title"/, @html)
+    assert_match(/property="og:description"/, @html)
+    assert_match(/property="og:image"/, @html)
+    assert_match(/property="og:url"/, @html)
+    assert_match(/name="twitter:card"/, @html)
+    assert_match(/name="twitter:image"/, @html)
+    assert_match(/images\/og-image\.svg/, @html)
+  end
+
+  def test_imagen_og_existe
+    assert File.exist?(File.join(ROOT, 'images', 'og-image.svg'))
+  end
 end
 
 class AssetsTest < Minitest::Test
@@ -344,6 +360,42 @@ class AssetsTest < Minitest::Test
     assert_includes js, 'DisclaimerModal'
     refute_includes js, 'localStorage'
     refute_includes js, 'disclaimer_accepted'
+  end
+
+  def test_app_js_routing_por_hash
+    js = File.read(File.join(ROOT, 'js', 'app.js'))
+    %w[
+      openRouteFromHash updateHash clearHash breedRoute diseaseRoute browseRoute
+      diseaseSlug findBreed findDisease hashchange
+    ].each do |fragment|
+      assert_includes js, fragment, "Falta soporte de hash: #{fragment}"
+    end
+    assert_match(/#raza\//, js)
+    assert_match(/#enfermedad\//, js)
+    assert_includes js, '#glosario'
+  end
+
+  def test_plantillas_de_issues_existen
+    %w[bug_report.yml content_request.yml feature_request.yml].each do |file|
+      path = File.join(ROOT, '.github', 'ISSUE_TEMPLATE', file)
+      assert File.exist?(path), "Falta plantilla #{file}"
+    end
+  end
+
+  def test_workflow_ci_valida_json_js
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    assert_includes workflow, 'actualizar_datos.sh'
+    assert_includes workflow, 'git diff --exit-code'
+    assert_includes workflow, 'permissions:'
+    assert_includes workflow, 'contents: read'
+  end
+
+  def test_workflow_deploy_tiene_permisos_minimos
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
+    assert_includes workflow, 'permissions:'
+    assert_includes workflow, 'contents: read'
+    assert_includes workflow, 'pages: write'
+    assert_includes workflow, 'id-token: write'
   end
 
   def test_scripts_de_inicio_existen

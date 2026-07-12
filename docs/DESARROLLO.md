@@ -29,6 +29,8 @@ Esto:
 1. Ejecuta `scripts/data/build_medical_dictionary.rb` → actualiza `diccionario_medicos.json`
 2. Genera `enciclopedia.js` y `diccionario_medicos.js` desde los JSON
 
+**Importante:** Si modificas cualquier `data/*.json`, debes ejecutar este script y commitear **tanto el JSON como los `.js` generados**. CI ejecuta `actualizar_datos.sh` y falla si los `.js` no están sincronizados con los JSON.
+
 ### Pipeline completo de enciclopedia
 
 Para regenerar contenido desde los scripts de lote:
@@ -77,3 +79,14 @@ Detalle en [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md).
 | Pantalla vacía / sin datos | Ejecuta `bash actualizar_datos.sh`; verifica que existan `data/*.js` |
 | Imagen rota | Comprueba `images/{id}.jpg\|svg`; usa `list_missing_images.rb` |
 | Ruby no encontrado | Instala Ruby 3.x (`brew install ruby`) |
+
+## Mantenimiento del repositorio
+
+Tras mergear PRs, elimina ramas remotas obsoletas para mantener solo `main` activa:
+
+```bash
+git fetch --prune origin
+gh api repos/OWNER/REPO/branches --jq '.[].name'
+```
+
+Ramas mergeadas pueden borrarse con `gh api -X DELETE repos/OWNER/REPO/git/refs/heads/NOMBRE-RAMA`.

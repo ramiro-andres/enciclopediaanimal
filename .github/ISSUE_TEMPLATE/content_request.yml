@@ -1,0 +1,55 @@
+name: Solicitud de contenido
+description: Proponer nuevas razas, enfermedades o términos del glosario
+title: "[Contenido]: "
+labels:
+  - content
+body:
+  - type: dropdown
+    id: content_type
+    attributes:
+      label: Tipo de contenido
+      options:
+        - Nueva raza
+        - Nueva enfermedad o ficha clínica
+        - Término del diccionario médico
+        - Ampliación de ficha existente
+        - Imagen faltante o incorrecta
+    validations:
+      required: true
+
+  - type: input
+    id: title_name
+    attributes:
+      label: Nombre del contenido
+      placeholder: Raza Criolla colombiana, Mastitis subclínica, etc.
+    validations:
+      required: true
+
+  - type: input
+    id: animal_category
+    attributes:
+      label: Categoría animal (si aplica)
+      placeholder: bovinos, perros, aves...
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción o datos propuestos
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Fuentes bibliográficas
+      placeholder: Merck Veterinary Manual, guías clínicas oficiales, etc.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: El contenido es educativo y no sustituye consulta veterinaria
+          required: true
+        - label: Verifiqué que no existe ya una ficha similar en el atlas
+          required: true
