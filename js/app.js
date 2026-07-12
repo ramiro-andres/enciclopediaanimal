@@ -1242,6 +1242,202 @@ const App = {
       </div>`;
   },
 
+  getDoseCalculatorData(breed) {
+    const calc = breed.calculadora_dosis;
+    if (calc?.farmacos?.length) return calc;
+    const farmacos = [];
+    const seen = new Set();
+    (breed.enfermedades || []).forEach(enf => {
+      (enf.protocolo_farmacologico || []).forEach(p => {
+        const key = (p.principio_activo || '').toLowerCase();
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        farmacos.push({
+          id: key.replace(/[^a-z0-9]+/g, '_'),
+          principio_activo: p.principio_activo,
+          nombre_comercial: p.nombre_comercial,
+          dosis_texto: p.dosis_mg_kg,
+          via: p.via,
+          frecuencia: p.frecuencia,
+          duracion: p.duracion,
+          notas: p.notas,
+          enfermedad_origen: enf.nombre,
+          calculable: false
+        });
+      });
+    });
+    return {
+      peso_tipico_kg: this.parseTypicalWeightKg(breed.peso),
+      peso_texto: breed.peso,
+      farmacos
+    };
+  },
+
+  parseTypicalWeightKg(pesoTexto) {
+    if (!pesoTexto) return 10;
+    const range = String(pesoTexto).match(/(\d[\d.,]*)\s*-\s*(\d[\d.,]*)\s*kg/i);
+    if (range) {
+      const min = parseFloat(range[1].replace(',', '.'));
+      const max = parseFloat(range[2].replace(',', '.'));
+      return Math.round(((min + max) / 2) * 100) / 100;
+    }
+    const single = String(pesoTexto).match(/(\d[\d.,]*)\s*kg/i);
+    if (single) return parseFloat(single[1].replace(',', '.'));
+    return 10;
+  },
+
+  calculateDoseForDrug(weightKg, drug) {
+    if (!drug?.calculable || !weightKg || weightKg <= 0) {
+      return {
+        calculable: false,
+        message: 'Esta presentación requiere criterio veterinario individual (baño acuario, dosis fija por animal, etc.).'
+      };
+    }
+
+    const minTotal = Math.round(drug.min_por_kg * weightKg * 1000) / 1000;
+    const maxTotal = Math.round(drug.max_por_kg * weightKg * 1000) / 1000;
+    const unit = (drug.unidad || '').split('/')[0] || 'mg';
+    const rangeText = minTotal === maxTotal
+      ? `${this.formatDoseNumber(minTotal)} ${unit}`
+      : `${this.formatDoseNumber(minTotal)} – ${this.formatDoseNumber(maxTotal)} ${unit}`;
+
+    const result = {
+      calculable: true,
+      unit,
+      minTotal,
+      maxTotal,
+      rangeText,
+      perKgText: drug.dosis_texto,
+      via: drug.via,
+      frecuencia: drug.frecuencia
+    };
+
+    if (unit === 'mg' && drug.concentracion_mg_ml) {
+      const minVol = Math.round((minTotal / drug.concentracion_mg_ml) * 100) / 100;
+      const maxVol = Math.round((maxTotal / drug.concentracion_mg_ml) * 100) / 100;
+      result.volumeText = minVol === maxVol
+        ? `${this.formatDoseNumber(minVol)} ml`
+        : `${this.formatDoseNumber(minVol)} – ${this.formatDoseNumber(maxVol)} ml`;
+      result.concentracionText = `${drug.concentracion_mg_ml} mg/ml (referencia comercial orientativa)`;
+    } else if (unit === 'ml') {
+      result.volumeText = rangeText;
+    }
+
+    return result;
+  },
+
+  formatDoseNumber(value) {
+    if (value >= 100) return Math.round(value).toString();
+    if (value >= 10) return (Math.round(value * 10) / 10).toString();
+    return (Math.round(value * 100) / 100).toString().replace('.', ',');
+  },
+
+  renderDoseCalculator(breed) {
+    const calc = this.getDoseCalculatorData(breed);
+    const farmacos = calc.farmacos || [];
+    if (!farmacos.length) return '';
+
+    const defaultWeight = calc.peso_tipico_kg || this.parseTypicalWeightKg(breed.peso);
+    const options = farmacos.map((f, i) => `
+      <option value="${i}" ${f.calculable ? '' : 'data-noncalc="1"'}>
+        ${this.esc(f.principio_activo)} — ${this.esc(f.dosis_texto)} (${this.esc(f.via || 'N/D')})
+      </option>`).join('');
+
+    return `
+      <section class="dose-calculator-section" aria-labelledby="doseCalcTitle">
+        <div class="dose-calculator-panel">
+          <h3 id="doseCalcTitle">🧮 Calculadora de dosis</h3>
+          <p class="dose-calculator-intro">
+            Estima dosis totales a partir de los protocolos documentados para esta raza.
+            Peso típico de referencia: <strong>${this.esc(calc.peso_texto || breed.peso || 'N/D')}</strong>.
+          </p>
+          <form class="dose-calculator-form" id="doseCalculatorForm" novalidate>
+            <div class="dose-calculator-grid">
+              <div class="dose-field">
+                <label for="doseWeightInput">Peso del animal (kg)</label>
+                <input
+                  type="number"
+                  id="doseWeightInput"
+                  name="peso_kg"
+                  min="0.01"
+                  step="0.01"
+                  value="${defaultWeight}"
+                  inputmode="decimal"
+                  aria-describedby="doseWeightHint doseCalcDisclaimer"
+                  required
+                >
+                <span id="doseWeightHint" class="dose-field-hint">Ajusta al peso real medido en consulta.</span>
+              </div>
+              <div class="dose-field">
+                <label for="doseDrugSelect">Fármaco / medicamento</label>
+                <select id="doseDrugSelect" name="farmaco" aria-describedby="doseDrugMeta">
+                  ${options}
+                </select>
+                <span id="doseDrugMeta" class="dose-field-hint">Protocolos de enfermedades de esta raza y catálogo de especie.</span>
+              </div>
+            </div>
+            <div class="dose-result" id="doseCalcResult" role="status" aria-live="polite" aria-atomic="true"></div>
+            <p id="doseCalcDisclaimer" class="dose-calculator-disclaimer" role="note">
+              ⚕️ <strong>Aviso educativo:</strong> esta calculadora no sustituye el diagnóstico ni la prescripción de un veterinario colegiado.
+              Las dosis deben individualizarse según edad, comorbilidades, vía, formulación y normativa local.
+            </p>
+          </form>
+        </div>
+      </section>`;
+  },
+
+  bindDoseCalculator(root, breed) {
+    const form = root.querySelector('#doseCalculatorForm');
+    const weightInput = root.querySelector('#doseWeightInput');
+    const drugSelect = root.querySelector('#doseDrugSelect');
+    const resultEl = root.querySelector('#doseCalcResult');
+    if (!form || !weightInput || !drugSelect || !resultEl) return;
+
+    const calc = this.getDoseCalculatorData(breed);
+    const update = () => {
+      const weight = parseFloat(String(weightInput.value).replace(',', '.'));
+      const drug = calc.farmacos[parseInt(drugSelect.value, 10)];
+      if (!drug) {
+        resultEl.innerHTML = '<p class="dose-result-empty">Selecciona un fármaco.</p>';
+        return;
+      }
+      if (!weight || weight <= 0) {
+        resultEl.innerHTML = '<p class="dose-result-warn">Introduce un peso válido en kilogramos.</p>';
+        return;
+      }
+
+      const outcome = this.calculateDoseForDrug(weight, drug);
+      if (!outcome.calculable) {
+        resultEl.innerHTML = `
+          <div class="dose-result-card dose-result-card--info">
+            <p><strong>${this.esc(drug.principio_activo)}</strong> — ${this.esc(drug.dosis_texto)}</p>
+            <p>${this.esc(outcome.message)}</p>
+            ${drug.notas ? `<p class="dose-result-note">${this.esc(drug.notas)}</p>` : ''}
+          </div>`;
+        return;
+      }
+
+      resultEl.innerHTML = `
+        <div class="dose-result-card">
+          <p class="dose-result-heading">Dosis estimada para <strong>${this.formatDoseNumber(weight)} kg</strong></p>
+          <dl class="dose-result-metrics">
+            <div><dt>Dosis por kg</dt><dd>${this.esc(outcome.perKgText)}</dd></div>
+            <div><dt>Dosis total</dt><dd><span class="dosis-badge">${this.esc(outcome.rangeText)}</span></dd></div>
+            ${outcome.volumeText ? `<div><dt>Volumen aprox.</dt><dd>${this.esc(outcome.volumeText)}</dd></div>` : ''}
+            ${outcome.concentracionText ? `<div><dt>Concentración ref.</dt><dd>${this.esc(outcome.concentracionText)}</dd></div>` : ''}
+            <div><dt>Vía</dt><dd>${this.esc(outcome.via || drug.via || '—')}</dd></div>
+            <div><dt>Frecuencia</dt><dd>${this.esc(outcome.frecuencia || drug.frecuencia || '—')}</dd></div>
+          </dl>
+          ${drug.enfermedad_origen ? `<p class="dose-result-source">Fuente protocolo: ${this.esc(drug.enfermedad_origen)}</p>` : ''}
+          ${drug.notas ? `<p class="dose-result-note">${this.esc(drug.notas)}</p>` : ''}
+        </div>`;
+    };
+
+    weightInput.addEventListener('input', update);
+    drugSelect.addEventListener('change', update);
+    update();
+  },
+
   renderBreeds() {
     const breeds = this.getFilteredBreeds();
     const grid = document.getElementById('breedGrid');
@@ -1338,6 +1534,7 @@ const App = {
         ${this.renderPanel('Revisiones veterinarias', breed.revisiones, '📅')}
         ${breed.emergencias ? `<div class="detail-panel alert-panel urgent"><h4>🚨 Emergencias frecuentes</h4><p>${this.esc(breed.emergencias)}</p></div>` : ''}
       </div>
+      ${this.renderDoseCalculator(breed)}
       <section class="diseases-section">
         <h3>Enfermedades y condiciones (${breed.enfermedades?.length || 0})</h3>
         <div class="disease-list">
@@ -1368,6 +1565,7 @@ const App = {
       const btn = e.currentTarget;
       btn.textContent = `${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.t('compare.add')}`;
     });
+    this.bindDoseCalculator(el, breed);
 
     this.showView('detail');
     if (options.updateHash !== false) this.updateHash(this.breedRoute(breed));
