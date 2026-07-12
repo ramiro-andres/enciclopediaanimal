@@ -18,6 +18,17 @@ El error `Get Pages site failed` significa que Pages **no está activado** en el
 
 Tras el primer despliegue exitoso, cada push a `main` publica automáticamente.
 
+O ejecuta (con [GitHub CLI](https://cli.github.com/) autenticado):
+
+```bash
+bash scripts/setup_github_security.sh
+```
+
+## Contribuir con seguridad
+
+- Ramas `feature/*` → Pull Request → aprobación de **@ramiro-andres**
+- Ver [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md)
+
 ## Desarrollo local
 
 ```bash
