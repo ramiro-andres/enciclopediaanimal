@@ -15,15 +15,23 @@ def http_get(url)
 end
 
 def ensure_server!
-  res = http_get("#{BASE}/index.html")
-  return if res.code == '200'
+  begin
+    res = http_get("#{BASE}/index.html")
+    return if res.code == '200'
+  rescue StandardError
+    # servidor no disponible — arrancar abajo
+  end
 
   puts 'Iniciando servidor...'
   pid = spawn("cd #{ROOT} && ruby -run -e httpd . -p #{PORT}", %i[out err] => '/dev/null')
   Process.detach(pid)
   10.times do
     sleep 0.5
-    return if http_get("#{BASE}/index.html").code == '200'
+    begin
+      return if http_get("#{BASE}/index.html").code == '200'
+    rescue StandardError
+      next
+    end
   end
   abort 'No se pudo iniciar el servidor'
 end

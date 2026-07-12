@@ -9,7 +9,7 @@ require 'digest'
 require 'open3'
 require 'fileutils'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG  = File.join(ROOT, 'images')
 DATA = File.join(ROOT, 'data', 'enciclopedia.json')
 UA   = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'

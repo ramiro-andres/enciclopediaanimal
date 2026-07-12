@@ -1,7 +1,8 @@
 #!/bin/bash
 # Descarga imágenes con pausa anti rate-limit (Wikimedia Commons)
 UA="EnciclopediaAnimal/1.0 (local educational; ramirokun)"
-DIR="$(cd "$(dirname "$0")/images" && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+DIR="$ROOT/images"
 cd "$DIR"
 PAUSE=3
 

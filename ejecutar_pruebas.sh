@@ -12,8 +12,8 @@ UNIT=$?
 
 echo ""
 echo "▶ 2/2 Pruebas E2E en navegador (página real)..."
-chmod +x ejecutar_pruebas_navegador.sh
-bash ejecutar_pruebas_navegador.sh
+chmod +x scripts/shell/ejecutar_pruebas_navegador.sh
+bash scripts/shell/ejecutar_pruebas_navegador.sh
 E2E=$?
 
 echo ""

@@ -2,7 +2,7 @@
 
 require 'json'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 INPUT = File.join(ROOT, 'data', 'enciclopedia.json')
 OUTPUT = INPUT
 

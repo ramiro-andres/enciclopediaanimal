@@ -8,7 +8,7 @@ require 'cgi'
 require 'fileutils'
 require 'open3'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG_DIR = File.join(ROOT, 'images', 'enfermedades')
 DATA = File.join(ROOT, 'data', 'enciclopedia.json')
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'

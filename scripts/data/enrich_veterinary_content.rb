@@ -4,7 +4,7 @@
 
 require 'json'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 INPUT = File.join(ROOT, 'data', 'enciclopedia.json')
 
 require_relative 'clinical_disease_library'

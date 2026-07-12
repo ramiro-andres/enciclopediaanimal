@@ -4,8 +4,8 @@
 import os
 import urllib.request
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-IMG_DIR = os.path.join(BASE, "images")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+IMG_DIR = os.path.join(ROOT, "images")
 os.makedirs(IMG_DIR, exist_ok=True)
 
 IMAGES = {

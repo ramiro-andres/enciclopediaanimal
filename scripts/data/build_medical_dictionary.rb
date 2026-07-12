@@ -7,7 +7,7 @@ require 'json'
 require_relative 'clinical_disease_library'
 require_relative 'pharma_protocols'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 
 def term(termino, definicion, ejemplo = nil)
   { 'termino' => termino, 'definicion' => definicion, 'ejemplo' => ejemplo }.compact

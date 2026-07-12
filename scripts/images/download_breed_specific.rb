@@ -5,10 +5,10 @@ require 'net/http'
 require 'uri'
 require 'digest'
 
-ROOT = File.expand_path('..', __dir__)
+ROOT = File.expand_path('../..', __dir__)
 IMG  = File.join(ROOT, 'images')
 DATA = File.join(ROOT, 'data', 'enciclopedia.json')
-SEARCHES = JSON.parse(File.read(File.join(ROOT, 'scripts', 'breed_searches.json')))
+SEARCHES = JSON.parse(File.read(File.join(__dir__, 'breed_searches.json')))
 UA = 'EnciclopediaAnimal/3.0 (educational; breed-specific images)'
 
 DOG_CEO = {
