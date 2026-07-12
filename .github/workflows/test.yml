@@ -26,3 +26,8 @@ jobs:
 
       - name: Ejecutar pruebas unitarias
         run: ruby tests/test_enciclopedia.rb
+
+      - name: Verificar sincronización JSON → JS
+        run: |
+          bash actualizar_datos.sh
+          git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js
