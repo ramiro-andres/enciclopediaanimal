@@ -315,7 +315,7 @@ end
 class AssetsTest < Minitest::Test
   def test_css_existe_y_tiene_reglas_clave
     css = File.read(File.join(ROOT, 'css', 'styles.css'))
-    %w[.header .sidebar .breed-grid .breed-card .disease-card .empty-state .main-search-panel .search-results .dictionary-term-card .dictionary-page .disclaimer-overlay .disclaimer-modal].each do |sel|
+    %w[.header .sidebar .breed-grid .breed-card .disease-card .empty-state .main-search-panel .search-results .dictionary-term-card .dictionary-page .disclaimer-overlay .disclaimer-modal .dose-calculator-panel].each do |sel|
       assert_includes css, sel
     end
     assert_operator css.length, :>, 1000
@@ -328,6 +328,7 @@ class AssetsTest < Minitest::Test
       showBreedDetail showDiseaseDetail showView sizeLabel
       enterBrowse goWelcome renderWelcome updateSidebar renderNutritionSection renderDiseaseImage
       showDictionary renderDictionary loadDictionaryData
+      renderDoseCalculator bindDoseCalculator calculateDoseForDrug getDoseCalculatorData
     ].each do |method|
       assert_match(/#{method}\(/, js, "Falta método #{method}")
     end
@@ -354,5 +355,92 @@ class AssetsTest < Minitest::Test
 
   def test_placeholder_existe
     assert File.exist?(File.join(ROOT, 'images', 'placeholder.svg'))
+  end
+end
+
+class DoseCalculatorTest < Minitest::Test
+  def setup
+    @data = load_json
+    @breeds = all_breeds(@data)
+  end
+
+  def test_cada_raza_tiene_calculadora_dosis
+    @breeds.each do |raza|
+      calc = raza['calculadora_dosis']
+      refute_nil calc, "Raza #{raza['id']} sin calculadora_dosis"
+      assert calc['peso_tipico_kg'].is_a?(Numeric) && calc['peso_tipico_kg'] > 0
+      assert calc['farmacos'].is_a?(Array) && calc['farmacos'].length >= 3,
+             "Raza #{raza['id']} con pocos fármacos en calculadora"
+    end
+  end
+
+  def test_farmacos_calculadora_tienen_campos_requeridos
+    required = %w[
+      id principio_activo nombre_comercial dosis_texto calculable
+      via frecuencia duracion notas enfermedad_origen origen
+    ]
+    @breeds.each do |raza|
+      raza['calculadora_dosis']['farmacos'].each do |f|
+        required.each { |field| refute_nil f[field], "Fármaco en #{raza['id']} sin #{field}" if field != 'calculable' }
+        refute_nil f['calculable'], "Fármaco en #{raza['id']} sin calculable"
+        if f['calculable']
+          assert f['unidad'], "Fármaco calculable sin unidad en #{raza['id']}"
+          assert f['min_por_kg'], "Fármaco calculable sin min_por_kg en #{raza['id']}"
+          assert f['max_por_kg'], "Fármaco calculable sin max_por_kg en #{raza['id']}"
+        end
+      end
+    end
+  end
+
+  def test_parse_dosis_mg_kg_rango
+    require_relative '../scripts/data/build_dose_calculator'
+    parsed = parse_dosis('0,5-1 mg/kg')
+    assert parsed[:calculable]
+    assert_equal 'mg/kg', parsed[:unidad]
+    assert_in_delta 0.5, parsed[:min_por_kg], 0.001
+    assert_in_delta 1.0, parsed[:max_por_kg], 0.001
+  end
+
+  def test_parse_dosis_ml_kg
+    require_relative '../scripts/data/build_dose_calculator'
+    parsed = parse_dosis('2-5 ml/kg')
+    assert parsed[:calculable]
+    assert_equal 'ml/kg', parsed[:unidad]
+    assert_in_delta 2.0, parsed[:min_por_kg], 0.001
+    assert_in_delta 5.0, parsed[:max_por_kg], 0.001
+  end
+
+  def test_parse_peso_tipico_chihuahua
+    require_relative '../scripts/data/build_dose_calculator'
+    peso = parse_peso_kg('1.5-3 kg')
+    assert_in_delta 2.25, peso[:tipico], 0.01
+    chihuahua = @breeds.find { |b| b['id'] == 'chihuahua' }
+    assert_in_delta 2.25, chihuahua['calculadora_dosis']['peso_tipico_kg'], 0.01
+  end
+
+  def test_calculo_dosis_total_meloxicam_10kg
+    drug = {
+      'calculable' => true,
+      'min_por_kg' => 0.1,
+      'max_por_kg' => 0.1,
+      'unidad' => 'mg/kg',
+      'dosis_texto' => '0,1 mg/kg',
+      'concentracion_mg_ml' => 1.5
+    }
+    min_total = drug['min_por_kg'] * 10
+    max_total = drug['max_por_kg'] * 10
+    assert_in_delta 1.0, min_total, 0.001
+    assert_in_delta 1.0, max_total, 0.001
+    volume = min_total / drug['concentracion_mg_ml']
+    assert_in_delta 0.67, volume, 0.05
+  end
+
+  def test_app_js_tiene_calculadora_accesible
+    js = File.read(File.join(ROOT, 'js', 'app.js'))
+    assert_includes js, 'doseWeightInput'
+    assert_includes js, 'doseDrugSelect'
+    assert_includes js, 'aria-live="polite"'
+    assert_includes js, 'Aviso educativo'
+    assert_includes js, 'no sustituye el diagnóstico'
   end
 end
