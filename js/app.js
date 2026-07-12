@@ -9,6 +9,7 @@ const App = {
   currentBreed: null,
   currentDisease: null,
   searchQuery: '',
+  isRoutingFromHash: false,
 
   async init() {
     try {
@@ -21,7 +22,7 @@ const App = {
       this.renderWelcome();
       this.bindEvents();
       this.showLoadStatus();
-      this.showView('welcome');
+      if (!this.openRouteFromHash()) this.showView('welcome');
       this.exportE2EState();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
@@ -166,11 +167,14 @@ const App = {
 
     document.getElementById('backBtn').addEventListener('click', () => {
       this.showView('home');
+      this.updateHash(this.browseRoute());
       this.exportE2EState();
     });
     document.getElementById('backDiseaseBtn').addEventListener('click', () => {
       if (this.currentBreed) this.showBreedDetail(this.currentBreed);
     });
+
+    window.addEventListener('hashchange', () => this.openRouteFromHash());
   },
 
   getAllBreeds() {
@@ -205,6 +209,93 @@ const App = {
 
   nameMatches(value, query) {
     return this.normalizeSearch(value).includes(this.normalizeSearch(query));
+  },
+
+  routePart(value) {
+    return encodeURIComponent(String(value || '').trim());
+  },
+
+  diseaseSlug(disease) {
+    return this.normalizeSearch(disease?.nombre || '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  },
+
+  browseRoute() {
+    return this.currentAnimal === 'todos' ? '#razas' : `#animal/${this.routePart(this.currentAnimal)}`;
+  },
+
+  breedRoute(breed) {
+    return `#raza/${this.routePart(breed.animalId)}/${this.routePart(breed.id)}`;
+  },
+
+  diseaseRoute(breed, disease) {
+    return `${this.breedRoute(breed).replace('#raza/', '#enfermedad/')}/${this.routePart(this.diseaseSlug(disease))}`;
+  },
+
+  updateHash(hash) {
+    if (this.isRoutingFromHash || window.location.hash === hash) return;
+    window.history.pushState(null, '', hash);
+  },
+
+  clearHash() {
+    if (this.isRoutingFromHash || !window.location.hash) return;
+    window.history.pushState(null, '', window.location.pathname + window.location.search);
+  },
+
+  findBreed(animalId, breedId) {
+    return this.getAllBreeds().find(b => b.animalId === animalId && b.id === breedId)
+      || this.getAllBreeds().find(b => b.id === breedId);
+  },
+
+  findDisease(breed, diseaseSlug) {
+    return (breed?.enfermedades || []).find(d => this.diseaseSlug(d) === diseaseSlug);
+  },
+
+  openRouteFromHash() {
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (!hash) return false;
+
+    const parts = hash.split('/').filter(Boolean);
+    this.isRoutingFromHash = true;
+    try {
+      if (parts[0] === 'glosario') {
+        this.showDictionary({ updateHash: false, focus: false });
+        return true;
+      }
+
+      if (parts[0] === 'razas') {
+        this.enterBrowse('todos', { updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'animal' && parts[1]) {
+        this.enterBrowse(parts[1], { updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'raza' && parts[1] && parts[2]) {
+        const breed = this.findBreed(parts[1], parts[2]);
+        if (breed) {
+          this.showBreedDetail(breed, { updateHash: false });
+          return true;
+        }
+      }
+
+      if (parts[0] === 'enfermedad' && parts[1] && parts[2] && parts[3]) {
+        const breed = this.findBreed(parts[1], parts[2]);
+        const disease = this.findDisease(breed, parts[3]);
+        if (breed && disease) {
+          this.showDiseaseDetail(breed, disease, { updateHash: false });
+          return true;
+        }
+      }
+    } finally {
+      this.isRoutingFromHash = false;
+    }
+
+    this.goWelcome({ updateHash: false });
+    return false;
   },
 
   getGlobalSearchResults() {
@@ -350,7 +441,7 @@ const App = {
     if (focus && searchInput) searchInput.focus();
   },
 
-  enterBrowse(animalId) {
+  enterBrowse(animalId, options = {}) {
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
     document.querySelectorAll('.filter-btn').forEach(b => {
@@ -362,9 +453,10 @@ const App = {
     if (this.searchQuery) this.clearSearch(false);
     this.showView('home');
     this.renderHome();
+    if (options.updateHash !== false) this.updateHash(this.browseRoute());
   },
 
-  goWelcome() {
+  goWelcome(options = {}) {
     this.currentAnimal = 'todos';
     this.currentSize = 'todos';
     this.searchQuery = '';
@@ -385,6 +477,7 @@ const App = {
       b.classList.toggle('active', b.dataset.animal === 'todos');
     });
     this.showView('welcome');
+    if (options.updateHash !== false) this.clearHash();
     this.exportE2EState();
   },
 
@@ -584,12 +677,13 @@ const App = {
     `).join('');
   },
 
-  showDictionary() {
+  showDictionary(options = {}) {
     if (this.searchQuery) this.clearSearch(false);
     this.renderDictionary();
     this.showView('dictionary');
+    if (options.updateHash !== false) this.updateHash('#glosario');
     this.exportE2EState();
-    document.getElementById('dictionarySearchInput')?.focus();
+    if (options.focus !== false) document.getElementById('dictionarySearchInput')?.focus();
   },
 
   updateResultsTitle() {
@@ -752,7 +846,7 @@ const App = {
     });
   },
 
-  showBreedDetail(breed) {
+  showBreedDetail(breed, options = {}) {
     this.currentBreed = breed;
     const el = document.getElementById('breedDetail');
     el.innerHTML = `
@@ -828,9 +922,12 @@ const App = {
     });
 
     this.showView('detail');
+    if (options.updateHash !== false) this.updateHash(this.breedRoute(breed));
+    this.exportE2EState();
   },
 
-  showDiseaseDetail(breed, disease) {
+  showDiseaseDetail(breed, disease, options = {}) {
+    this.currentBreed = breed;
     this.currentDisease = disease;
     const el = document.getElementById('diseaseDetail');
     el.innerHTML = `
@@ -886,6 +983,25 @@ const App = {
       </div>
     `;
     this.showView('disease');
+    if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
+    this.exportE2EState();
+  },
+
+  updateDocumentTitle() {
+    const suffix = 'Atlas Animal';
+    if (this.currentView === 'detail' && this.currentBreed) {
+      document.title = `${this.currentBreed.nombre} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'disease' && this.currentDisease) {
+      document.title = `${this.currentDisease.nombre} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'dictionary') {
+      document.title = `Glosario médico — ${suffix}`;
+      return;
+    }
+    document.title = 'Enciclopedia Animal — Salud Veterinaria';
   },
 
   showView(view) {
@@ -896,6 +1012,7 @@ const App = {
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
+    this.updateDocumentTitle();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 
