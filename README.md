@@ -6,11 +6,23 @@ Atlas veterinario con razas, nutrición, enfermedades y diccionario médico.
 
 https://ramiro-andres.github.io/enciclopediaanimal/
 
+## Activar GitHub Pages (una sola vez)
+
+El error `Get Pages site failed` significa que Pages **no está activado** en el repositorio.
+`enablement: true` **no funciona** con el token por defecto de Actions; hay que activarlo manualmente:
+
+1. Repo **público** (Settings → General → Change visibility).
+2. **Settings → Pages → Build and deployment → Source: `GitHub Actions`**.
+3. **Settings → Actions → General → Workflow permissions → `Read and write permissions`**.
+4. **Actions → Desplegar en GitHub Pages → Run workflow**.
+
+Tras el primer despliegue exitoso, cada push a `main` publica automáticamente.
+
 ## Desarrollo local
 
 ```bash
 bash iniciar.sh
-# Abrir http://localhost:8080
+# http://localhost:8080
 ```
 
 ## Regenerar datos
@@ -24,17 +36,3 @@ bash actualizar_datos.sh
 ```bash
 bash ejecutar_pruebas.sh
 ```
-
-## Despliegue
-
-El workflow `.github/workflows/deploy-pages.yml` publica en GitHub Pages. El paso `configure-pages` usa `enablement: true` para intentar activar Pages si aún no está habilitado.
-
-### Activar Pages (obligatorio si el workflow falla)
-
-1. Repo **público** (GitHub Pages gratis en cuentas personales).
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. **Settings → Actions → General → Workflow permissions → Read and write permissions** (el token del workflow necesita permisos de escritura, incluido `administration` para el enablement automático).
-
-Luego en **Actions** ejecuta **Desplegar en GitHub Pages → Run workflow** si hace falta relanzar.
-
-Sitio: https://ramiro-andres.github.io/enciclopediaanimal/
