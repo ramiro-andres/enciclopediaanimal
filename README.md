@@ -35,6 +35,8 @@ El workflow `.github/workflows/deploy-pages.yml` publica en GitHub Pages.
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. **Settings → Actions → General → Workflow permissions → Read and write permissions**.
 
+El workflow usa `enablement: true` para activar Pages automáticamente en el primer despliegue.
+
 Luego en **Actions** ejecuta **Desplegar en GitHub Pages → Run workflow** si hace falta relanzar.
 
 Sitio: https://ramiro-andres.github.io/enciclopediaanimal/
