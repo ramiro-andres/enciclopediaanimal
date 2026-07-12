@@ -2699,3 +2699,117 @@ body {
     justify-self: start;
   }
 }
+
+/* ── Aviso educativo (modal) ── */
+body.disclaimer-open {
+  overflow: hidden;
+}
+
+.disclaimer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  background: rgba(30, 27, 75, 0.28);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.disclaimer-overlay[hidden] {
+  display: none;
+}
+
+.disclaimer-modal {
+  width: min(100%, 480px);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  outline: none;
+}
+
+.disclaimer-modal-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem 1.75rem;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.disclaimer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--surface-alt), #e0e7ff);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.disclaimer-modal-inner h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.02em;
+}
+
+.disclaimer-modal-inner p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.disclaimer-modal-inner p strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.disclaimer-accept-btn {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--primary), #7c3aed);
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(67, 56, 202, 0.22);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.disclaimer-accept-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(67, 56, 202, 0.28);
+}
+
+.disclaimer-accept-btn:focus-visible {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .disclaimer-modal-inner {
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-radius: var(--radius);
+  }
+
+  .disclaimer-modal-inner h2 {
+    font-size: 1.2rem;
+  }
+
+  .disclaimer-modal-inner p {
+    font-size: 0.93rem;
+  }
+}

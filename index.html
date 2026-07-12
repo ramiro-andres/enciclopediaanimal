@@ -245,6 +245,27 @@
     <p>🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
   </footer>
 
+  <div id="disclaimerOverlay" class="disclaimer-overlay" hidden aria-hidden="true">
+    <div
+      id="disclaimerModal"
+      class="disclaimer-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="disclaimerTitle"
+      aria-describedby="disclaimerBody"
+      tabindex="-1"
+    >
+      <div class="disclaimer-modal-inner">
+        <span class="disclaimer-icon" aria-hidden="true">⚕</span>
+        <h2 id="disclaimerTitle">Aviso importante</h2>
+        <p id="disclaimerBody">
+          La información de esta enciclopedia es <strong>exclusivamente educativa</strong> y no sustituye el diagnóstico ni el tratamiento de un veterinario colegiado. Si tu animal presenta alguno de estos síntomas o signos de enfermedad, acude a un profesional de inmediato.
+        </p>
+        <button type="button" id="disclaimerAcceptBtn" class="disclaimer-accept-btn">Entendido</button>
+      </div>
+    </div>
+  </div>
+
   <script src="data/enciclopedia.js"></script>
   <script src="data/diccionario_medicos.js"></script>
   <script src="js/app.js"></script>
