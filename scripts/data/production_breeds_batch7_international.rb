@@ -31,7 +31,7 @@ PRODUCTION_BREEDS_BATCH7_INTERNATIONAL = [
   ['aves', 'pequena', 'diamante_gould', 'Diamante de Gould', 'Australia', '12-17 g', '5-8 años', 'Activo, colorido y delicado', 'Pinzón australiano de extraordinaria coloración', 'Jaula amplia, pareja, protección del frío', 'Semillas finas, verduras tiernas'],
 
   # Equinos internacionales
-  ['equinos', 'mediana', 'criollo_argentino', 'Criollo Argentino', 'Argentina', '350-450 kg', '25-30 años', 'Rústico, resistente y dócil', 'Caballo criollo de la pampa argentina para trabajo y campo', 'Pastoreo, cascos regulares, control de parásitos', 'Forraje de calidad, sal mineral'],
+  ['equinos', 'mediana', 'criollo_argentino_caballo', 'Caballo Criollo Argentino', 'Argentina', '400-500 kg', '20-30 años', 'Rústico, resistente y versátil', 'Caballo criollo de la pampa argentina para trabajo ganadero y travesías largas', 'Herraje regular, desparasitación y agua en recorridos extensos', 'Pasto, avena y suplemento según carga de trabajo'],
   ['equinos', 'mediana', 'paso_fino_colombiano', 'Paso Fino Colombiano', 'Colombia', '400-500 kg', '25-30 años', 'Elegante, suave y enérgico', 'Caballo de paso suave característico de Colombia', 'Entrenamiento regular, cuidado de cascos', 'Forraje y concentrado según trabajo'],
   ['equinos', 'grande', 'lipizzano', 'Lipizzano', 'Austria/Eslovenia', '400-500 kg', '25-30 años', 'Noble, atlético y dócil', 'Caballo clásico de la Escuela Española de Equitación de Viena', 'Entrenamiento progresivo, cuidado articular', 'Dieta de caballo de deporte'],
   ['equinos', 'mediana', 'quarter_horse_intl', 'Quarter Horse Americano', 'EE.UU.', '430-550 kg', '25-30 años', 'Ágil, tranquilo y versátil', 'Raza más popular de EE.UU. para trabajo, rodeo y ocio', 'Ejercicio regular, cascos cada 6-8 semanas', 'Forraje y ración según actividad'],
@@ -112,7 +112,7 @@ PRODUCTION_METADATA_BATCH7 = {
   'guacamayo_azul_dorado' => ['Compañía de por vida', 'Espacio muy amplio', 'Gran guacamayo longevo'],
   'caique' => ['Compañía juguetona', 'Jaula amplia', 'Loro acrobático de personalidad'],
   'diamante_gould' => ['Ornamental y cría', 'Aviario controlado', 'Pinzón de color excepcional'],
-  'criollo_argentino' => ['Trabajo y campo', 'Campo extensivo', 'Caballo rústico de la pampa'],
+  'criollo_argentino_caballo' => ['Trabajo y campo', 'Campo extensivo', 'Caballo rústico de la pampa'],
   'paso_fino_colombiano' => ['Monta y exhibición', 'Campo y pista', 'Paso suave característico'],
   'lipizzano' => ['Alta escuela y deporte', 'Centro ecuestre', 'Caballo clásico de Viena'],
   'quarter_horse_intl' => ['Trabajo y rodeo', 'Campo y pista', 'Raza más versátil de EE.UU.'],

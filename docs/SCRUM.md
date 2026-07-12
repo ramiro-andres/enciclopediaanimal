@@ -691,6 +691,25 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 3 — Completado (rama `sprint-3/pwa-i18n-contenido-comunidad`)
+
+**Objetivo:** PWA offline, comparador de razas, accesibilidad WCAG, i18n ES/EN, expansión de contenido (+76 razas netas), analytics privacy-friendly, validación clínica en CI y comunidad.
+
+| ID | Historia | Estado |
+|----|----------|--------|
+| US-UX-06 | PWA (manifest + service worker) | Hecho |
+| — | Comparador de razas (hasta 3) | Hecho |
+| US-UX-08 | Accesibilidad WCAG 2.1 AA básica | Hecho |
+| US-UX-07 | i18n UI ES/EN | Hecho |
+| US-CON-05 | +50 razas (431 total) | Hecho |
+| US-DEV-06 | Analytics GoatCounter (opt-in) | Hecho |
+| — | Validación contenido clínico en CI | Hecho |
+| US-GOV-03 / EP-09 | Plantillas issues + guía contenido | Hecho |
+
+**Métricas:** 431 razas · 2 555 enfermedades · 60 tests verdes
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases

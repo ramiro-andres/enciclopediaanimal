@@ -156,7 +156,7 @@ class AppLogicTest < Minitest::Test
 
   def test_get_all_breeds_total
     assert_operator @breeds.length, :>=, 405
-    assert_equal 432, @breeds.length
+    assert_equal 431, @breeds.length
   end
 
   def test_filtro_por_animal_perros
@@ -195,12 +195,12 @@ class AppLogicTest < Minitest::Test
   def test_contar_enfermedades
     total = @breeds.sum { |b| b['enfermedades'].length }
     assert_operator total, :>=, 2500
-    assert_equal 2561, total
+    assert_equal 2555, total
   end
 
   def test_razas_productivas_tienen_datos_zootecnicos
     productivas = @breeds.select { |b| b['enfoque_produccion'] }
-    assert_equal 182, productivas.length
+    assert_equal 181, productivas.length
 
     required = %w[
       tipo_produccion sistema_productivo rendimiento_productivo
