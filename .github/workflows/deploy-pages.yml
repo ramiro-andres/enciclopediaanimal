@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -25,28 +25,29 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: false
 
-      - name: Instalar dependencias de prueba
+      - name: Instalar minitest
         run: gem install minitest
 
       - name: Ejecutar pruebas unitarias
         run: ruby tests/test_enciclopedia.rb
 
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
 
       - name: Preparar sitio estático
         run: |
           mkdir -p _site
           cp index.html .nojekyll _site/
           cp -r css js data images _site/
-          echo "Archivos del sitio:"
-          find _site -type f | wc -l
           du -sh _site
+          find _site -type f | wc -l
 
-      - name: Subir artefacto de Pages
+      - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -58,9 +59,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Desplegar en GitHub Pages
+      - name: Desplegar
         id: deployment
         uses: actions/deploy-pages@v4

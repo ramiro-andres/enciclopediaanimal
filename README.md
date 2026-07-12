@@ -27,6 +27,14 @@ bash ejecutar_pruebas.sh
 
 ## Despliegue
 
-El workflow `.github/workflows/deploy-pages.yml` ejecuta pruebas y publica en GitHub Pages.
+El workflow `.github/workflows/deploy-pages.yml` publica en GitHub Pages.
 
-**Requisito en GitHub:** Settings → Pages → Build and deployment → **GitHub Actions**.
+### Activar Pages (obligatorio)
+
+1. Repo **público** (GitHub Pages gratis en cuentas personales).
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. **Settings → Actions → General → Workflow permissions → Read and write permissions**.
+
+Luego en **Actions** ejecuta **Desplegar en GitHub Pages → Run workflow** si hace falta relanzar.
+
+Sitio: https://ramiro-andres.github.io/enciclopediaanimal/
