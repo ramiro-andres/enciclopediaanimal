@@ -49,6 +49,7 @@ const App = {
       this.exportE2EState();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
+      window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
       const intro = document.getElementById('welcomeIntro');
       if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
       const grid = document.getElementById('breedGrid');
@@ -1693,7 +1694,6 @@ const App = {
     container.querySelectorAll('.disease-term-link').forEach(chip => {
       chip.addEventListener('click', () => this.openDictionaryWithTerm(chip.dataset.termino));
     });
-  },
   },
 
   showView(view) {
