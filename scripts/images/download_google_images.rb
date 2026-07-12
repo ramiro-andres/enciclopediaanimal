@@ -396,7 +396,22 @@ GOOGLE_QUERIES = {
   'capaz' => 'capaz Pimelodus grosskopfii pez Colombia',
   'bagre_rayado' => 'bagre rayado Pseudoplatystoma magdaleniatum Colombia',
   'gallina_criolla_colombiana' => 'gallina criolla colombiana traspatio',
-  'pato_criollo_colombiano' => 'pato criollo colombiano granja'
+  'pato_criollo_colombiano' => 'pato criollo colombiano granja',
+
+  'hereford_argentino' => 'Hereford cattle Argentina campo vaca',
+  'landrace_intl' => 'Landrace pig international breed swine',
+  'alpaca_argentina' => 'alpaca Argentina Andes livestock',
+  'alpaca_chilena' => 'alpaca Chile Andes herd',
+  'alpine_intl' => 'Alpine goat international dairy breed',
+  'merino_australiano' => 'Merino sheep Australia wool flock',
+  'guanaco_dom' => 'guanaco South America wild camelid',
+  'gigante_flandes_extra' => 'Flemish Giant rabbit breed large',
+  'berkshire_intl' => 'Berkshire pig black white breed international',
+  'criollo_argentino_caballo' => 'caballo Criollo Argentino campo',
+  'iguana_verde_intl' => 'green iguana reptile pet terrarium',
+  'suffolk_intl' => 'Suffolk sheep black face international flock',
+  'llama_argentina' => 'llama Argentina Andes pack animal',
+  'australiano_chileno' => 'oveja Australiano chileno raza',
 }.freeze
 
 def http_get(url, limit: 6)
