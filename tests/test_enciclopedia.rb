@@ -397,3 +397,5 @@ class ServerIntegrationTest < Minitest::Test
     assert_includes e2e, 'runInteractionTests'
   end
 end
+
+# SECURITY_TEST: cambio no aprobado (simulación contribuidor externo)
