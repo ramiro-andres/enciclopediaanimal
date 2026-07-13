@@ -1,3 +1,15 @@
+function prefersReducedMotion() {
+  try {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (_) {
+    return false;
+  }
+}
+
+function scrollBehaviorPref() {
+  return prefersReducedMotion() ? 'auto' : 'smooth';
+}
+
 const App = {
   data: null,
   dictionaryData: null,
@@ -711,7 +723,7 @@ const App = {
       if (!activeInput) return;
       if (this.currentView === 'welcome') this.showView('welcome');
       else this.showView('home');
-      activeInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      activeInput.scrollIntoView({ behavior: scrollBehaviorPref(), block: 'center' });
       activeInput.focus();
     });
 
@@ -749,7 +761,7 @@ const App = {
       }
     });
     document.querySelector('[data-focus-welcome-search]')?.addEventListener('click', () => {
-      searchInputWelcome?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      searchInputWelcome?.scrollIntoView({ behavior: scrollBehaviorPref(), block: 'center' });
       searchInputWelcome?.focus();
     });
 
@@ -1828,7 +1840,7 @@ const App = {
     this.setJsonLd(this.jsonLdForTerm(term));
     this.exportE2EState();
     requestAnimationFrame(() => {
-      document.querySelector('.dictionary-term-card--active')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      document.querySelector('.dictionary-term-card--active')?.scrollIntoView({ behavior: scrollBehaviorPref(), block: 'nearest' });
     });
   },
 
@@ -4393,7 +4405,7 @@ const App = {
     this.updateSidebar();
     this.updateMobileTabBar(view);
     this.updateDocumentTitle();
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: scrollBehaviorPref() });
   },
 
   exportE2EState() {
@@ -4524,7 +4536,7 @@ const WelcomeTour = {
   },
 
   tryStart() {
-    if (this.wasDone() || window.location.hash) return;
+    if (prefersReducedMotion() || this.wasDone() || window.location.hash) return;
     const overlay = document.getElementById('welcomeTourOverlay');
     if (!overlay) return;
     this.overlay = overlay;
@@ -4558,7 +4570,7 @@ const WelcomeTour = {
     if (target) {
       target.classList.add('welcome-tour-highlight');
       this.highlightEl = target;
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.scrollIntoView({ behavior: scrollBehaviorPref(), block: 'center' });
     }
     const total = steps.length;
     this.stepLabel.textContent = this.t('tour.step_label')

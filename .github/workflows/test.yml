@@ -49,6 +49,19 @@ jobs:
           fi
           echo "Todas las razas tienen imagen JPG o SVG de respaldo."
 
+      - name: Verificar imágenes de enfermedades (F3-02 / US-DEV-18)
+        run: |
+          ruby scripts/images/list_missing_disease_images.rb > /tmp/missing_diseases.txt 2>/tmp/missing_diseases_meta.txt || true
+          if [ -s /tmp/missing_diseases.txt ]; then
+            echo "Enfermedades sin imagen JPG (>8 KB) ni SVG:"
+            cat /tmp/missing_diseases.txt
+            cat /tmp/missing_diseases_meta.txt
+            echo "Ejecuta: ruby scripts/images/download_disease_google_images.rb --only-missing"
+            exit 1
+          fi
+          cat /tmp/missing_diseases_meta.txt
+          echo "Todas las enfermedades únicas tienen imagen JPG o SVG de respaldo."
+
       - name: Validar sincronización JSON → JS (incluye enlaces clínicos)
         run: |
           SOLO_JS=1 bash actualizar_datos.sh

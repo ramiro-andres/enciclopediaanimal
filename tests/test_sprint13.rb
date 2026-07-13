@@ -134,6 +134,8 @@ end
 class Sprint13SwTest < Minitest::Test
   def test_sw_version_bump
     sw = File.read(File.join(ROOT, 'sw.js'))
-    assert_includes sw, 'atlas-v13'
+    m = sw.match(/CACHE_VERSION\s*=\s*'atlas-v(\d+)'/)
+    assert m, 'CACHE_VERSION atlas-vN no encontrado'
+    assert_operator m[1].to_i, :>=, 13
   end
 end

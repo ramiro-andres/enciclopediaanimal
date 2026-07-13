@@ -1,6 +1,6 @@
 # Backlog Scrum — Enciclopedia Animal
 
-> **Última actualización:** 13 de julio de 2026 (Sprint 13 en progreso)  
+> **Última actualización:** 13 de julio de 2026 (Sprint 14 — backlog núcleo COMPLETADO)  
 > **Sitio en producción:** https://ramiro-andres.github.io/enciclopediaanimal/  
 > **Repositorio:** [ramiro-andres/enciclopediaanimal](https://github.com/ramiro-andres/enciclopediaanimal)
 
@@ -1270,7 +1270,33 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 - `scripts/data/integrate_suggested_links_sprint13.rb` (pipeline tras `build_cross_links.rb`)
 - Filtro macro-región (LATAM, Europa…) + país en `js/app.js`, i18n ES/EN, `css/styles.css`
 - `scripts/setup/prune_merged_branches.sh` · `.github/dependabot.yml` (github-actions + npm)
-- `tests/test_sprint13.rb` · E2E filtro región · `sw.js` atlas-v12
+- `tests/test_sprint13.rb` · E2E filtro región · `sw.js` atlas-v13
+
+---
+
+## Sprint 14 — EP-19: Cierre backlog atlas (último sprint núcleo) — COMPLETADO
+
+**Objetivo:** Cerrar el backlog núcleo del atlas con badges CI, verificación de imágenes de enfermedades, accesibilidad `prefers-reduced-motion` y gobernanza ampliada de contribución.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-DEV-17 | Badges CI en README (test, e2e, deploy-pages) — F4-05 | 2 | Hecho |
+| US-DEV-18 | Verificación imágenes enfermedades en CI + `--only-missing` — F3-02 / F4-03 | 3 | Hecho |
+| US-UX-18 | `prefers-reduced-motion` en CSS, showView y WelcomeTour — F2-08 | 3 | Hecho |
+| US-GOV-05 | Labels GitHub + guía contenido clínico en CONTRIBUIR — F5-04 | 3 | Hecho |
+| | **Total** | **11** | |
+
+**Backlog núcleo:** COMPLETADO (Sprints 0–14).
+
+**Métricas:** 482 razas · 0 imágenes raza faltantes · 0 enfermedades únicas sin JPG/SVG · badges test/e2e/deploy · 12 labels GitHub · `tests/test_sprint14.rb`
+
+**Entregables técnicos:**
+- Badges `test`, `e2e`, `deploy` en `README.md`
+- `scripts/images/list_missing_disease_images.rb` + paso CI en `test.yml`
+- `prefersReducedMotion()` / `scrollBehaviorPref()` en `js/app.js`; tour omitido con reduced-motion
+- `@media (prefers-reduced-motion: reduce)` ampliado en `css/styles.css`
+- `scripts/setup/setup_github_labels.sh` (12 etiquetas) · `docs/CONTRIBUIR.md` guía clínica
+- `tests/test_sprint14.rb` · `sw.js` atlas-v14
 
 ---
 
@@ -1297,6 +1323,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-13 | Sprint 11 (EP-16): laboratorio, raza de la semana, lazy load chunks, inconsistencias CI (PR #34) |
 | 2026-07-13 | Sprint 12 (EP-17): changelog, batch 8 razas, footer Contribuye, sugerencias enlaces CI |
 | 2026-07-13 | Sprint 13 (EP-18): diccionario +100, enlaces clínicos, filtro región, higiene repo |
+| 2026-07-13 | Sprint 14 (EP-19): badges CI, imágenes enfermedades CI, reduced-motion, labels y guía clínica — **backlog núcleo COMPLETADO** |
 | 2026-07-13 | Pre-Sprint 14: auditoría de cobertura, `tests/test_security.rb` + `tests/test_regression.rb`, 3 E2E nuevos (toxicología, región, favoritos) |
 | 2026-07-13 | Sprint 9 (EP-14): BCS visual, toxicología ampliada, directorio emergencias LATAM, flashcards glosario |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |
