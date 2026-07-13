@@ -1,13 +1,13 @@
 function prefersReducedMotion() {
-  try {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch (_) {
-    return false;
-  }
+  return window.AtlasUtils
+    ? AtlasUtils.prefersReducedMotion()
+    : false;
 }
 
 function scrollBehaviorPref() {
-  return prefersReducedMotion() ? 'auto' : 'smooth';
+  return window.AtlasUtils
+    ? AtlasUtils.scrollBehaviorPref()
+    : 'auto';
 }
 
 const App = {
@@ -619,21 +619,18 @@ const App = {
     this.themeMode = mode;
     try { localStorage.setItem(this.THEME_KEY, mode); } catch (_) { /* noop */ }
     document.documentElement.setAttribute('data-theme-mode', mode);
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = mode === 'dark' || (mode === 'auto' && prefersDark);
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    const resolved = AtlasUtils.resolveTheme(mode);
+    document.documentElement.setAttribute('data-theme', resolved.dataTheme);
     const btn = document.getElementById('themeToggleBtn');
     if (btn) {
-      const label = isDark ? this.t('theme.light') : this.t('theme.dark');
+      const label = resolved.isDark ? this.t('theme.light') : this.t('theme.dark');
       btn.setAttribute('aria-label', label);
       btn.title = label;
     }
   },
 
   toggleTheme() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const currentlyDark = this.themeMode === 'dark'
-      || (this.themeMode === 'auto' && prefersDark);
+    const currentlyDark = AtlasUtils.resolveTheme(this.themeMode).isDark;
     this.applyTheme(currentlyDark ? 'light' : 'dark');
   },
 
@@ -1064,10 +1061,6 @@ const App = {
     }
 
     return { matched: false };
-  },
-
-  nameMatches(value, query) {
-    return this.matchesSearch(value, query).matched;
   },
 
   formatSearchHint(key, term) {
@@ -2087,21 +2080,12 @@ const App = {
     return '—';
   },
 
-  BCS_DOG_CAT_SCORES: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  BCS_EQUINE_SCORES: [1, 2, 3, 4, 5],
-
-  FLUID_PROFILES: {
-    perros: { mlKgDay: 60, shockMin: 10, shockMax: 20 },
-    gatos: { mlKgDay: 50, shockMin: 10, shockMax: 15 },
-    equinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
-    bovinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
-    aves: { mlKgDay: 80, shockMin: 5, shockMax: 10 },
-    conejos: { mlKgDay: 100, shockMin: 5, shockMax: 10 },
-    _default: { mlKgDay: 50, shockMin: 10, shockMax: 20 }
-  },
+  get BCS_DOG_CAT_SCORES() { return AtlasTools.BCS_DOG_CAT_SCORES; },
+  get BCS_EQUINE_SCORES() { return AtlasTools.BCS_EQUINE_SCORES; },
+  get FLUID_PROFILES() { return AtlasTools.FLUID_PROFILES; },
 
   getFluidProfile(speciesId) {
-    return this.FLUID_PROFILES[speciesId] || this.FLUID_PROFILES._default;
+    return AtlasTools.getFluidProfile(speciesId);
   },
 
   renderTools() {
@@ -2172,30 +2156,18 @@ const App = {
     });
   },
 
-  MER_FACTORS: [
-    { id: 'castrado', labelKey: 'rer.factor.neutered', factor: 1.6 },
-    { id: 'intacto', labelKey: 'rer.factor.intact', factor: 1.8 },
-    { id: 'perdida', labelKey: 'rer.factor.weight_loss', factor: 1.0 },
-    { id: 'trabajo_ligero', labelKey: 'rer.factor.light_work', factor: 2.0 },
-    { id: 'trabajo_moderado', labelKey: 'rer.factor.moderate_work', factor: 3.0 },
-    { id: 'trabajo_pesado', labelKey: 'rer.factor.heavy_work', factor: 4.0 },
-    { id: 'cachorro_joven', labelKey: 'rer.factor.puppy_young', factor: 3.0 },
-    { id: 'cachorro_mayor', labelKey: 'rer.factor.puppy_older', factor: 2.0 },
-    { id: 'gestacion', labelKey: 'rer.factor.gestation', factor: 3.0 },
-    { id: 'lactancia', labelKey: 'rer.factor.lactation', factor: 4.0 }
-  ],
+  get MER_FACTORS() { return AtlasTools.MER_FACTORS; },
 
   kgToLb(kg) {
-    return kg * 2.2046226218;
+    return AtlasTools.kgToLb(kg);
   },
 
   lbToKg(lb) {
-    return lb / 2.2046226218;
+    return AtlasTools.lbToKg(lb);
   },
 
   calculateRer(kg) {
-    if (!kg || kg <= 0) return null;
-    return 70 * Math.pow(kg, 0.75);
+    return AtlasTools.calculateRer(kg);
   },
 
   formatEnergy(kcal) {
@@ -3727,13 +3699,7 @@ const App = {
   },
 
   esc(text) {
-    if (text == null || text === false) return '';
-    return String(text)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+    return AtlasUtils.esc(text);
   },
 
   renderList(items) {
@@ -3884,62 +3850,26 @@ const App = {
   },
 
   parseTypicalWeightKg(pesoTexto) {
-    if (!pesoTexto) return 10;
-    const range = String(pesoTexto).match(/(\d[\d.,]*)\s*-\s*(\d[\d.,]*)\s*kg/i);
-    if (range) {
-      const min = parseFloat(range[1].replace(',', '.'));
-      const max = parseFloat(range[2].replace(',', '.'));
-      return Math.round(((min + max) / 2) * 100) / 100;
-    }
-    const single = String(pesoTexto).match(/(\d[\d.,]*)\s*kg/i);
-    if (single) return parseFloat(single[1].replace(',', '.'));
-    return 10;
+    return AtlasTools.parseTypicalWeightKg(pesoTexto);
   },
 
   calculateDoseForDrug(weightKg, drug) {
-    if (!drug?.calculable || !weightKg || weightKg <= 0) {
+    const result = AtlasTools.calculateDoseTotals(weightKg, drug);
+    if (!result.calculable) {
       return {
         calculable: false,
         message: this.t('dose.noncalc')
       };
     }
-
-    const minTotal = Math.round(drug.min_por_kg * weightKg * 1000) / 1000;
-    const maxTotal = Math.round(drug.max_por_kg * weightKg * 1000) / 1000;
-    const unit = (drug.unidad || '').split('/')[0] || 'mg';
-    const rangeText = minTotal === maxTotal
-      ? `${this.formatDoseNumber(minTotal)} ${unit}`
-      : `${this.formatDoseNumber(minTotal)} – ${this.formatDoseNumber(maxTotal)} ${unit}`;
-
-    const result = {
-      calculable: true,
-      unit,
-      minTotal,
-      maxTotal,
-      rangeText,
-      perKgText: drug.dosis_texto,
-      via: drug.via,
-      frecuencia: drug.frecuencia
-    };
-
-    if (unit === 'mg' && drug.concentracion_mg_ml) {
-      const minVol = Math.round((minTotal / drug.concentracion_mg_ml) * 100) / 100;
-      const maxVol = Math.round((maxTotal / drug.concentracion_mg_ml) * 100) / 100;
-      result.volumeText = minVol === maxVol
-        ? `${this.formatDoseNumber(minVol)} ml`
-        : `${this.formatDoseNumber(minVol)} – ${this.formatDoseNumber(maxVol)} ml`;
-      result.concentracionText = this.t('dose.conc_note').replace('{value}', drug.concentracion_mg_ml);
-    } else if (unit === 'ml') {
-      result.volumeText = rangeText;
+    if (result.concentracionMgMl != null) {
+      result.concentracionText = this.t('dose.conc_note').replace('{value}', result.concentracionMgMl);
+      delete result.concentracionMgMl;
     }
-
     return result;
   },
 
   formatDoseNumber(value) {
-    if (value >= 100) return Math.round(value).toString();
-    if (value >= 10) return (Math.round(value * 10) / 10).toString();
-    return (Math.round(value * 100) / 100).toString().replace('.', ',');
+    return AtlasTools.formatDoseNumber(value);
   },
 
   renderDoseCalculator(breed) {

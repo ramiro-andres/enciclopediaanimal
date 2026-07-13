@@ -1,3 +1,9 @@
+/*
+  DIFERIDO (auditoría calidad): no fragmentar styles.css sin bundler.
+  Tokens vivos en el bloque «Minimalista Quirúrgico» más abajo + overrides dark.
+  Extraer a css/tokens.css solo cuando haya concatenación/CI de CSS o un solo
+  <link> generado; hoy los tests de sprint leen variables desde este archivo.
+*/
 :root {
   --bg: #F8FAFC;
   --bg-accent: #F1F5F9;
