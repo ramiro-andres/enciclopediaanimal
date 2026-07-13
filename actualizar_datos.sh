@@ -2,6 +2,7 @@
 # Regenera los .js derivados (enciclopedia, diccionario y enlaces clínicos) desde JSON
 DIR="$(cd "$(dirname "$0")" && pwd)"
 ruby "$DIR/scripts/data/build_medical_dictionary.rb"
+ruby "$DIR/scripts/data/build_search_index.rb"
 ruby "$DIR/scripts/data/build_cross_links.rb"
 ruby "$DIR/scripts/data/build_toxicologia.rb"
 ruby "$DIR/scripts/data/build_sitemap.rb"

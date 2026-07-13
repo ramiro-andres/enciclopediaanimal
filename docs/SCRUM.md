@@ -1,6 +1,6 @@
 # Backlog Scrum — Enciclopedia Animal
 
-> **Última actualización:** 12 de julio de 2026  
+> **Última actualización:** 13 de julio de 2026  
 > **Sitio en producción:** https://ramiro-andres.github.io/enciclopediaanimal/  
 > **Repositorio:** [ramiro-andres/enciclopediaanimal](https://github.com/ramiro-andres/enciclopediaanimal)
 
@@ -872,9 +872,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 7 — En progreso (rama `sprint-7/ep-13-ux-atlas`)
-
-### EP-13 — UX Atlas público
+## Sprint 7 — Completado (EP-13: UX Atlas público)
 
 **Objetivo:** Mejorar la experiencia móvil y de consulta del atlas educativo: navegación inferior, favoritos locales, impresión de fichas, disclaimer por sesión y fuentes bibliográficas visibles.
 
@@ -886,6 +884,46 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | US-UX-12 | Disclaimer una vez por sesión (sessionStorage) | 2 | Hecho |
 | US-CON-08 | Fuentes bibliográficas en diseaseView | 2 | Hecho |
 | | | **15** | |
+
+---
+
+## Sprint 8 — En progreso (EP-13: UX Atlas público, continuación)
+
+**Objetivo:** Mejorar la descubribilidad del contenido clínico con búsqueda tolerante a sinónimos y errores tipográficos.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-UX-13 | Búsqueda con sinónimos y typos (razas, enfermedades, glosario) | 5 | En progreso |
+
+#### US-UX-13 · Búsqueda con sinónimos y typos
+
+**Como** usuario del atlas educativo, **quiero** buscar razas, enfermedades y términos del glosario usando sinónimos comunes y con tolerancia a errores de escritura, **para** encontrar contenido aunque no recuerde el nombre exacto.
+
+| Campo | Valor |
+|-------|-------|
+| Estado | En progreso |
+| Prioridad | Alta |
+| Story points | 5 |
+
+**Tareas técnicas:**
+- [x] Índice precomputado `data/search_synonyms.json` + `search_synonyms.js` vía `scripts/data/build_search_index.rb`
+- [x] Integración en `actualizar_datos.sh` e `index.html`
+- [x] `matchesSearch` en `js/app.js`: normalización, sinónimos y Levenshtein ligero
+- [x] Resultados globales incluyen glosario; UI muestra «Coincide por sinónimo» / «Coincidencia aproximada»
+- [x] i18n ES/EN (`search.synonym_match`, `search.typo_match`, etc.)
+- [x] Precache PWA en `sw.js`
+- [x] Tests `tests/test_search_synonyms.rb`
+
+**Criterios de aceptación:**
+- [x] Índice de sinónimos en `data/` generado por script Ruby
+- [x] Búsqueda global coincide por sinónimos (ej. parvovirus ↔ parvovirosis; mastitis ↔ inflamación mamaria)
+- [x] Tolerancia ligera a typos (Levenshtein en cliente + normalización de acentos)
+- [x] UI indica el término buscado y el motivo de coincidencia por sinónimo o aproximación
+- [x] Búsqueda por nombre directo sigue funcionando
+- [x] i18n ES/EN en mensajes de búsqueda
+- [x] `bash ejecutar_pruebas.sh` sin fallos
+
+---
 
 #### US-UX-09 · Tab bar móvil
 

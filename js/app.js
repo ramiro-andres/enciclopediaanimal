@@ -1,6 +1,8 @@
 const App = {
   data: null,
   dictionaryData: null,
+  searchSynonyms: null,
+  synonymGroups: null,
   crossLinks: null,
   toxicologyData: null,
   vaccinationCalendars: null,
@@ -201,6 +203,8 @@ const App = {
       this.data = await this.loadData();
       if (!this.data?.animales?.length) throw new Error('Datos vacíos o corruptos');
       this.dictionaryData = await this.loadDictionaryData();
+      this.searchSynonyms = await this.loadSearchSynonyms();
+      this.buildSynonymIndex();
       this.crossLinks = await this.loadCrossLinks();
       this.toxicologyData = await this.loadToxicologyData();
       this.vaccinationCalendars = await this.loadVaccinationCalendars();
@@ -254,6 +258,25 @@ const App = {
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
+  },
+
+  async loadSearchSynonyms() {
+    if (window.SEARCH_SYNONYMS?.terms) {
+      return window.SEARCH_SYNONYMS;
+    }
+    try {
+      const res = await fetch('data/search_synonyms.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  buildSynonymIndex() {
+    const terms = this.searchSynonyms?.terms || {};
+    this.synonymGroups = Object.entries(terms).map(([canonical, synonyms]) => {
+      const group = new Set([canonical, ...synonyms]);
+      return [...group];
+    });
   },
 
   async loadCrossLinks() {
@@ -550,8 +573,91 @@ const App = {
       .replace(/[\u0300-\u036f]/g, '');
   },
 
+  levenshtein(a, b) {
+    if (a === b) return 0;
+    const m = a.length;
+    const n = b.length;
+    if (m === 0) return n;
+    if (n === 0) return m;
+    let prev = Array.from({ length: n + 1 }, (_, i) => i);
+    for (let i = 1; i <= m; i++) {
+      const curr = [i];
+      for (let j = 1; j <= n; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      }
+      prev = curr;
+    }
+    return prev[n];
+  },
+
+  findSynonymGroupFor(query) {
+    const norm = this.normalizeSearch(query);
+    if (!norm || !this.synonymGroups?.length) return null;
+    for (const group of this.synonymGroups) {
+      if (group.some(term => term === norm || term.includes(norm) || norm.includes(term))) {
+        return group;
+      }
+    }
+    return null;
+  },
+
+  matchesTypo(normText, normQuery) {
+    if (normQuery.length < 4) return null;
+    const maxDist = normQuery.length <= 5 ? 1 : 2;
+    const words = normText.split(/[^a-z0-9]+/).filter(w => w.length >= 3);
+    for (const word of words) {
+      if (Math.abs(word.length - normQuery.length) > maxDist) continue;
+      const dist = this.levenshtein(word, normQuery);
+      if (dist > 0 && dist <= maxDist) return { word, distance: dist };
+    }
+    return null;
+  },
+
+  matchesSearch(text, query) {
+    if (!query) return { matched: true, type: 'direct' };
+    const normText = this.normalizeSearch(text);
+    const normQuery = this.normalizeSearch(query);
+    if (!normQuery) return { matched: false };
+
+    if (normText.includes(normQuery)) {
+      return { matched: true, type: 'direct' };
+    }
+
+    const group = this.findSynonymGroupFor(normQuery);
+    if (group) {
+      for (const term of group) {
+        if (term !== normQuery && normText.includes(term)) {
+          return { matched: true, type: 'synonym', term: query };
+        }
+      }
+    }
+
+    const typo = this.matchesTypo(normText, normQuery);
+    if (typo) {
+      return { matched: true, type: 'typo', term: typo.word };
+    }
+
+    return { matched: false };
+  },
+
   nameMatches(value, query) {
-    return this.normalizeSearch(value).includes(this.normalizeSearch(query));
+    return this.matchesSearch(value, query).matched;
+  },
+
+  formatSearchHint(key, term) {
+    return this.t(key).replace('{term}', term || '');
+  },
+
+  renderSearchMatchHint(match) {
+    if (!match || match.type === 'direct') return '';
+    if (match.type === 'synonym') {
+      return `<span class="search-match-hint">${this.esc(this.formatSearchHint('search.synonym_match', match.term))}</span>`;
+    }
+    if (match.type === 'typo') {
+      return `<span class="search-match-hint">${this.esc(this.formatSearchHint('search.typo_match', match.term))}</span>`;
+    }
+    return '';
   },
 
   routePart(value) {
@@ -676,26 +782,42 @@ const App = {
   getGlobalSearchResults() {
     const breeds = [];
     const diseases = [];
+    const glossary = [];
     const seenDiseases = new Set();
+    const seenGlossary = new Set();
 
     this.getAllBreeds().forEach(breed => {
-      if (
-        this.nameMatches(breed.nombre, this.searchQuery) ||
-        this.nameMatches(breed.id, this.searchQuery)
-      ) {
-        breeds.push(breed);
+      const nameMatch = this.matchesSearch(breed.nombre, this.searchQuery);
+      const idMatch = this.matchesSearch(breed.id, this.searchQuery);
+      if (nameMatch.matched || idMatch.matched) {
+        breeds.push({ breed, match: nameMatch.matched ? nameMatch : idMatch });
       }
 
       (breed.enfermedades || []).forEach(disease => {
-        if (!this.nameMatches(disease.nombre, this.searchQuery)) return;
+        const match = this.matchesSearch(disease.nombre, this.searchQuery);
+        if (!match.matched) return;
         const key = `${breed.animalId}:${breed.id}:${disease.nombre}`;
         if (seenDiseases.has(key)) return;
         seenDiseases.add(key);
-        diseases.push({ disease, breed });
+        diseases.push({ disease, breed, match });
       });
     });
 
-    return { breeds, diseases };
+    this.getDictionaryTerms().forEach(term => {
+      const haystack = [
+        term.termino,
+        term.definicion,
+        term.ejemplo,
+        term.categoriaNombre
+      ].join(' ');
+      const match = this.matchesSearch(haystack, this.searchQuery);
+      if (!match.matched) return;
+      if (seenGlossary.has(term.termino)) return;
+      seenGlossary.add(term.termino);
+      glossary.push({ term, match });
+    });
+
+    return { breeds, diseases, glossary };
   },
 
   renderHome() {
@@ -712,8 +834,8 @@ const App = {
   },
 
   renderSearchResults() {
-    const { breeds, diseases } = this.getGlobalSearchResults();
-    const total = breeds.length + diseases.length;
+    const { breeds, diseases, glossary } = this.getGlobalSearchResults();
+    const total = breeds.length + diseases.length + glossary.length;
     const container = document.getElementById('searchResults');
     const browse = document.getElementById('browseSection');
 
@@ -724,40 +846,45 @@ const App = {
     const hint = document.getElementById('searchHint');
     if (hint) {
       hint.textContent = total
-        ? `${total} resultado(s): ${breeds.length} raza(s) y ${diseases.length} enfermedad(es). Pulsa Esc para volver al listado.`
-        : 'Sin coincidencias por nombre. Prueba otro término o pulsa Esc.';
+        ? this.formatSearchHint('search.results_summary', '')
+          .replace('{total}', total)
+          .replace('{breeds}', breeds.length)
+          .replace('{diseases}', diseases.length)
+          .replace('{glossary}', glossary.length)
+        : this.t('search.no_matches');
     }
 
     if (!total) {
       container.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">🔍</div>
-          <p>No hay razas ni enfermedades con el nombre <strong>“${this.esc(this.searchQuery)}”</strong>.</p>
+          <p>${this.esc(this.t('search.no_results').replace('{query}', this.searchQuery))}</p>
         </div>`;
       return;
     }
 
     container.innerHTML = `
       <div class="search-results-header">
-        <h3>Resultados para “${this.esc(this.searchQuery)}”</h3>
+        <h3>${this.esc(this.t('search.results_for').replace('{query}', this.searchQuery))}</h3>
         <span class="badge">${total}</span>
       </div>
       ${breeds.length ? `
         <section class="search-section">
-          <h4>🐾 Razas <span class="search-section-count">${breeds.length}</span></h4>
+          <h4>🐾 ${this.esc(this.t('search.breeds_section'))} <span class="search-section-count">${breeds.length}</span></h4>
           <div class="search-breed-grid">
-            ${breeds.map(b => `
-              <article class="breed-card search-hit-card" data-key="${b.animalId}:${b.id}">
-                ${this.renderBreedImage(b, 'breed-card-img')}
+            ${breeds.map(({ breed, match }) => `
+              <article class="breed-card search-hit-card" data-key="${breed.animalId}:${breed.id}">
+                ${this.renderBreedImage(breed, 'breed-card-img')}
                 <div class="breed-card-body">
                   <div class="breed-card-tags">
-                    <span class="tag tag-${b.tamano}">${this.sizeLabel(b.tamano)}</span>
-                    <span class="tag tag-animal">${b.animalIcono} ${b.animalNombre}</span>
+                    <span class="tag tag-${breed.tamano}">${this.sizeLabel(breed.tamano)}</span>
+                    <span class="tag tag-animal">${breed.animalIcono} ${breed.animalNombre}</span>
                   </div>
-                  <h4>${this.esc(b.nombre)}</h4>
-                  <p>${this.esc(b.descripcion)}</p>
+                  <h4>${this.esc(breed.nombre)}</h4>
+                  ${this.renderSearchMatchHint(match)}
+                  <p>${this.esc(breed.descripcion)}</p>
                   <div class="breed-card-footer">
-                    <span>${b.enfermedades?.length || 0} enfermedades</span>
+                    <span>${breed.enfermedades?.length || 0} enfermedades</span>
                     <span>Ver raza →</span>
                   </div>
                 </div>
@@ -768,13 +895,29 @@ const App = {
       ` : ''}
       ${diseases.length ? `
         <section class="search-section">
-          <h4>🩺 Enfermedades <span class="search-section-count">${diseases.length}</span></h4>
+          <h4>🩺 ${this.esc(this.t('search.diseases_section'))} <span class="search-section-count">${diseases.length}</span></h4>
           <div class="search-disease-list">
-            ${diseases.map(({ disease, breed }, index) => `
+            ${diseases.map(({ disease, breed, match }, index) => `
               <button type="button" class="search-disease-item" data-index="${index}">
                 <span class="severity severity-${disease.gravedad || 'moderada'}">${(disease.gravedad || 'moderada').toUpperCase()}</span>
                 <span class="search-disease-name">${this.esc(disease.nombre)}</span>
+                ${this.renderSearchMatchHint(match)}
                 <span class="search-disease-breed">${breed.animalIcono} ${this.esc(breed.nombre)} · ${this.esc(breed.animalNombre)}</span>
+              </button>
+            `).join('')}
+          </div>
+        </section>
+      ` : ''}
+      ${glossary.length ? `
+        <section class="search-section">
+          <h4>📚 ${this.esc(this.t('search.glossary_section'))} <span class="search-section-count">${glossary.length}</span></h4>
+          <div class="search-glossary-list">
+            ${glossary.map(({ term, match }, index) => `
+              <button type="button" class="search-glossary-item" data-index="${index}">
+                <span class="search-glossary-icon">${term.categoriaIcono || '📖'}</span>
+                <span class="search-glossary-name">${this.esc(term.termino)}</span>
+                ${this.renderSearchMatchHint(match)}
+                <span class="search-glossary-category">${this.esc(term.categoriaNombre)}</span>
               </button>
             `).join('')}
           </div>
@@ -785,8 +928,8 @@ const App = {
     container.querySelectorAll('.search-hit-card').forEach(card => {
       card.addEventListener('click', () => {
         const [animalId, breedId] = card.dataset.key.split(':');
-        const breed = breeds.find(b => b.animalId === animalId && b.id === breedId);
-        if (breed) this.showBreedDetail(breed);
+        const hit = breeds.find(b => b.breed.animalId === animalId && b.breed.id === breedId);
+        if (hit) this.showBreedDetail(hit.breed);
       });
     });
 
@@ -794,6 +937,13 @@ const App = {
       item.addEventListener('click', () => {
         const match = diseases[parseInt(item.dataset.index, 10)];
         if (match) this.showDiseaseDetail(match.breed, match.disease);
+      });
+    });
+
+    container.querySelectorAll('.search-glossary-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const hit = glossary[parseInt(item.dataset.index, 10)];
+        if (hit) this.showDictionaryTerm(hit.term);
       });
     });
   },
@@ -969,7 +1119,7 @@ const App = {
       term.ejemplo,
       term.categoriaNombre
     ].join(' ');
-    return this.nameMatches(haystack, query);
+    return this.matchesSearch(haystack, query).matched;
   },
 
   renderDictionaryFilters() {
