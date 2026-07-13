@@ -1475,7 +1475,7 @@ const App = {
     if (animalId !== 'todos') {
       await this.loadChunk(animalId);
     } else if (!this.isAllChunksLoaded()) {
-      await this.preloadAllChunks();
+      void this.preloadAllChunks();
     }
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
