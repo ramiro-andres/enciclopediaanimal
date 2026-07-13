@@ -4362,7 +4362,8 @@ const App = {
     this.updateSidebar();
     this.updateMobileTabBar(view);
     this.updateDocumentTitle();
-    window.scrollTo({ top: 0, behavior: scrollBehaviorPref() });
+    // Salto de vista: siempre instantáneo (el smooth pelea con scrollIntoView y flaquea E2E).
+    window.scrollTo({ top: 0, behavior: 'auto' });
   },
 
   exportE2EState() {
