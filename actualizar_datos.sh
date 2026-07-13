@@ -16,15 +16,31 @@ ruby "$DIR/scripts/data/build_lab_reference.rb"
 ruby "$DIR/scripts/data/build_changelog.rb"
 ruby "$DIR/scripts/data/build_sitemap.rb"
 ruby -rjson -e '
+  def deep_sort(obj)
+    case obj
+    when Hash
+      obj.sort.to_h.transform_values { |v| deep_sort(v) }
+    when Array
+      obj.map { |v| deep_sort(v) }
+    else
+      obj
+    end
+  end
+
+  def write_js_window(path, global, data)
+    payload = deep_sort(data).to_json
+    File.write(path, "window.#{global} = #{payload};\n")
+  end
+
   base = ARGV[0]
   d = JSON.parse(File.read(base + "/data/enciclopedia.json"))
-  File.write(base + "/data/enciclopedia.js", "window.ENCICLOPEDIA_DATA = " + d.to_json + ";\n")
+  write_js_window(base + "/data/enciclopedia.js", "ENCICLOPEDIA_DATA", d)
   puts "enciclopedia.js actualizado (#{d["animales"].length} animales)"
 
   dict_path = base + "/data/diccionario_medicos.json"
   if File.exist?(dict_path)
     dict = JSON.parse(File.read(dict_path))
-    File.write(base + "/data/diccionario_medicos.js", "window.DICCIONARIO_MEDICOS = " + dict.to_json + ";\n")
+    write_js_window(base + "/data/diccionario_medicos.js", "DICCIONARIO_MEDICOS", dict)
     terms = dict["categorias"].sum { |c| c["terminos"].length }
     puts "diccionario_medicos.js actualizado (#{terms} términos)"
   end
@@ -32,21 +48,21 @@ ruby -rjson -e '
   links_path = base + "/data/enlaces_clinicos.json"
   if File.exist?(links_path)
     links = JSON.parse(File.read(links_path))
-    File.write(base + "/data/enlaces_clinicos.js", "window.ENLACES_CLINICOS = " + links.to_json + ";\n")
+    write_js_window(base + "/data/enlaces_clinicos.js", "ENLACES_CLINICOS", links)
     puts "enlaces_clinicos.js actualizado (#{links["total_terminos_enlazados"]} términos enlazados)"
   end
 
   cal_path = base + "/data/calendario_vacunacion.json"
   if File.exist?(cal_path)
     cal = JSON.parse(File.read(cal_path))
-    File.write(base + "/data/calendario_vacunacion.js", "window.CALENDARIO_VACUNACION = " + cal.to_json + ";\n")
+    write_js_window(base + "/data/calendario_vacunacion.js", "CALENDARIO_VACUNACION", cal)
     puts "calendario_vacunacion.js actualizado (#{cal["especies"].length} especies)"
   end
 
   changelog_path = base + "/data/changelog.json"
   if File.exist?(changelog_path)
     changelog = JSON.parse(File.read(changelog_path))
-    File.write(base + "/data/changelog.js", "window.ATLAS_CHANGELOG = " + changelog.to_json + ";\n")
+    write_js_window(base + "/data/changelog.js", "ATLAS_CHANGELOG", changelog)
     puts "changelog.js actualizado (#{changelog["entries"].length} entradas)"
   end
 ' "$DIR"
