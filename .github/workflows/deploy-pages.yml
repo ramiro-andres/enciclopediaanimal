@@ -102,7 +102,7 @@ jobs:
           find _site -type f | wc -l
 
       - name: Subir artefacto
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
