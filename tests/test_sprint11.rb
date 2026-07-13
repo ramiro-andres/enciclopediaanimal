@@ -152,7 +152,7 @@ class ChunksLazyLoadTest < Minitest::Test
   def test_sw_precache_manifest
     assert_includes @sw, 'data/chunks/manifest.js'
     assert_includes @sw, 'data/search_index.js'
-    assert_match(/atlas-v1[12]/, @sw)
+    assert_match(/atlas-v1[123]/, @sw)
   end
 end
 

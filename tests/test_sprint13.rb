@@ -134,6 +134,6 @@ end
 class Sprint13SwTest < Minitest::Test
   def test_sw_version_bump
     sw = File.read(File.join(ROOT, 'sw.js'))
-    assert_includes sw, 'atlas-v12'
+    assert_includes sw, 'atlas-v13'
   end
 end

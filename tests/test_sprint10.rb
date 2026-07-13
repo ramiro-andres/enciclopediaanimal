@@ -163,6 +163,33 @@ class ModoNocturnoTest < Minitest::Test
     assert_includes @i18n, "'theme.dark'"
   end
 
+  def test_text_on_light_variables_en_modo_oscuro
+    dark_block = @css[/:root\[data-theme="dark"\]\s*\{[^}]+\}/m]
+    assert_includes dark_block, '--text-on-light:'
+    assert_includes dark_block, '--text-on-light-muted:'
+    assert_includes @css, '.card-light-bg'
+  end
+
+  def test_feature_cards_welcome_overrides_explicitos
+    assert_match(/\[data-theme="dark"\][^\n]*\.welcome-features \.feature-card--tools/, @css)
+    assert_match(/\[data-theme="dark"\][^\n]*\.welcome-features \.feature-card--predis/, @css)
+    assert_match(/\[data-theme="dark"\][^\n]*\.welcome-features \.feature-card--dictionary/, @css)
+    assert_includes @css, 'background: var(--surface)'
+  end
+
+  LIGHT_FEATURE_CARD_VARS = %w[
+    --feature-card-tools-bg --feature-card-predis-bg
+  ].freeze
+
+  def test_feature_card_vars_sin_pastel_en_dark
+    dark_block = @css[/:root\[data-theme="dark"\]\s*\{[^}]+\}/m]
+    refute_includes dark_block, '#FAF5FF', 'tools no debe usar lavanda en dark'
+    refute_includes dark_block, '#ECFDF5', 'predis no debe usar mint en dark'
+    LIGHT_FEATURE_CARD_VARS.each do |var|
+      assert_includes dark_block, var
+    end
+  end
+
   CRITICAL_DARK_VARS = %w[
     --chip-bg --chip-text --warn-bg --warn-text
     --dose-panel-bg --tab-bar-bg --zoonotic-bg --zoonotic-text
