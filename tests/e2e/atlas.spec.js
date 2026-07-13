@@ -188,6 +188,8 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.lab-disclaimer')).toBeVisible();
 
     // Lazy load: tras explorar razas, el estado E2E refleja manifest + chunks
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
     await page.locator('#btnExploreAll').click();
     await expect(page.locator('#homeView')).toHaveClass(/active/);
     await page.waitForFunction(() => (window.__E2E_STATE__?.chunksLoaded || 0) > 0);

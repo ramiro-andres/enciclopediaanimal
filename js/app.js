@@ -907,7 +907,7 @@ const App = {
       italia: 'Italia',
       'reino unido': 'Reino Unido',
       inglaterra: 'Reino Unido',
-      estados unidos: 'Estados Unidos',
+      'estados unidos': 'Estados Unidos',
       usa: 'Estados Unidos',
       canadá: 'Canadá',
       canada: 'Canadá',
