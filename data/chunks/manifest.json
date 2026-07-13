@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-07-13T04:23:10Z",
-  "total_breeds": 431,
-  "total_diseases": 2555,
+  "generated_at": "2026-07-13T04:32:58Z",
+  "total_breeds": 482,
+  "total_diseases": 2861,
   "animales": [
     {
       "id": "perros",
@@ -34,11 +34,11 @@
       "icono": "🦜",
       "breed_counts": {
         "pequena": 10,
-        "mediana": 38,
+        "mediana": 42,
         "grande": 23
       },
-      "total_breeds": 71,
-      "total_diseases": 422
+      "total_breeds": 75,
+      "total_diseases": 446
     },
     {
       "id": "equinos",
@@ -46,11 +46,11 @@
       "icono": "🐎",
       "breed_counts": {
         "pequena": 4,
-        "mediana": 11,
+        "mediana": 18,
         "grande": 9
       },
-      "total_breeds": 24,
-      "total_diseases": 141
+      "total_breeds": 31,
+      "total_diseases": 183
     },
     {
       "id": "bovinos",
@@ -58,11 +58,11 @@
       "icono": "🐄",
       "breed_counts": {
         "pequena": 4,
-        "mediana": 24,
-        "grande": 20
+        "mediana": 32,
+        "grande": 24
       },
-      "total_breeds": 48,
-      "total_diseases": 286
+      "total_breeds": 60,
+      "total_diseases": 358
     },
     {
       "id": "porcinos",
@@ -70,11 +70,11 @@
       "icono": "🐖",
       "breed_counts": {
         "pequena": 4,
-        "mediana": 15,
+        "mediana": 21,
         "grande": 8
       },
-      "total_breeds": 27,
-      "total_diseases": 159
+      "total_breeds": 33,
+      "total_diseases": 195
     },
     {
       "id": "conejos",
@@ -82,11 +82,11 @@
       "icono": "🐇",
       "breed_counts": {
         "pequena": 6,
-        "mediana": 11,
+        "mediana": 12,
         "grande": 6
       },
-      "total_breeds": 23,
-      "total_diseases": 135
+      "total_breeds": 24,
+      "total_diseases": 141
     },
     {
       "id": "reptiles",
@@ -106,11 +106,11 @@
       "icono": "🐠",
       "breed_counts": {
         "pequena": 6,
-        "mediana": 21,
-        "grande": 21
+        "mediana": 25,
+        "grande": 22
       },
-      "total_breeds": 48,
-      "total_diseases": 285
+      "total_breeds": 53,
+      "total_diseases": 315
     },
     {
       "id": "ovinos",
@@ -118,11 +118,11 @@
       "icono": "🐑",
       "breed_counts": {
         "pequena": 3,
-        "mediana": 23,
+        "mediana": 27,
         "grande": 4
       },
-      "total_breeds": 30,
-      "total_diseases": 179
+      "total_breeds": 34,
+      "total_diseases": 203
     },
     {
       "id": "caprinos",
@@ -130,11 +130,11 @@
       "icono": "🐐",
       "breed_counts": {
         "pequena": 2,
-        "mediana": 20,
+        "mediana": 27,
         "grande": 4
       },
-      "total_breeds": 26,
-      "total_diseases": 155
+      "total_breeds": 33,
+      "total_diseases": 197
     },
     {
       "id": "camelidos",
@@ -142,23 +142,23 @@
       "icono": "🦙",
       "breed_counts": {
         "pequena": 0,
-        "mediana": 6,
+        "mediana": 10,
         "grande": 7
       },
-      "total_breeds": 13,
-      "total_diseases": 77
+      "total_breeds": 17,
+      "total_diseases": 101
     },
     {
       "id": "roedores",
       "nombre": "Roedores",
       "icono": "🐹",
       "breed_counts": {
-        "pequena": 9,
+        "pequena": 10,
         "mediana": 6,
         "grande": 2
       },
-      "total_breeds": 17,
-      "total_diseases": 99
+      "total_breeds": 18,
+      "total_diseases": 105
     }
   ]
 }

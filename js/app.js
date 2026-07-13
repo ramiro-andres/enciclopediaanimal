@@ -17,6 +17,7 @@ const App = {
   searchIndex: null,
   chunkCache: {},
   labReferenceData: null,
+  changelogData: null,
   labSpecies: 'perros',
   toxicologyQuery: '',
   toxicologySpecies: 'todos',
@@ -43,6 +44,9 @@ const App = {
   COMPARE_MAX: 3,
   SITE_URL: 'https://ramiro-andres.github.io/enciclopediaanimal/',
   GITHUB_ISSUES_REPO: 'ramiro-andres/enciclopediaanimal',
+  GITHUB_REPO_URL: 'https://github.com/ramiro-andres/enciclopediaanimal',
+  CONTRIBUTE_DOC_URL: 'https://github.com/ramiro-andres/enciclopediaanimal/blob/main/docs/CONTRIBUIR.md',
+  GOOD_FIRST_ISSUE_URL: 'https://github.com/ramiro-andres/enciclopediaanimal/issues?q=label%3A%22good+first+issue%22',
   DEFAULT_META: {
     title: 'Enciclopedia Animal — Salud Veterinaria',
     description: 'Atlas Animal: enciclopedia veterinaria educativa con más de 350 razas, 2.000 enfermedades y glosario médico. Información de referencia que no sustituye la consulta con un veterinario colegiado.',
@@ -228,9 +232,11 @@ const App = {
           if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
           if (this.currentView === 'triaje') this.renderTriaje();
           if (this.currentView === 'laboratorio') this.renderLaboratorio();
+          if (this.currentView === 'changelog') this.renderChangelog();
           if (this.currentView === 'dictionary') this.renderDictionary();
           this.renderBreedOfWeek();
           this.renderFavorites();
+          this.renderFooterContribute();
           this.updateMobileTabBar();
           this.updateResultsTitle();
         });
@@ -247,12 +253,14 @@ const App = {
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.triajeData = await this.loadTriajeData();
       this.labReferenceData = await this.loadLabReferenceData();
+      this.changelogData = await this.loadChangelogData();
       this.initTheme();
       this.vaccinationCalendars = await this.loadVaccinationCalendars();
       this.renderNav();
       this.renderStats();
       this.renderCategoryCards();
       this.renderWelcome();
+      this.renderFooterContribute();
       this.renderBreedOfWeek();
       this.bindEvents();
       this.showLoadStatus();
@@ -400,6 +408,15 @@ const App = {
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
+  },
+
+  async loadChangelogData() {
+    if (window.ATLAS_CHANGELOG?.entries) return window.ATLAS_CHANGELOG;
+    try {
+      const res = await fetch('data/changelog.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return { entries: [], source: 'none' };
   },
 
   getWeekOfYear(date = new Date()) {
@@ -702,6 +719,9 @@ const App = {
     document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('backTriajeBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backLaboratorioBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backChangelogBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('footerChangelogBtn')?.addEventListener('click', () => this.showChangelog());
+    document.getElementById('welcomeChangelogBtn')?.addEventListener('click', () => this.showChangelog());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
@@ -1023,6 +1043,11 @@ const App = {
 
       if (parts[0] === 'laboratorio') {
         this.showLaboratorio({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'changelog') {
+        this.showChangelog({ updateHash: false });
         return true;
       }
 
@@ -1883,6 +1908,71 @@ const App = {
       });
     });
     container.querySelector('#labPrintBtn')?.addEventListener('click', () => window.print());
+  },
+
+  showChangelog(options = {}) {
+    this.renderChangelog();
+    this.showView('changelog');
+    if (options.updateHash !== false) this.updateHash('#changelog');
+    this.exportE2EState();
+  },
+
+  renderChangelog() {
+    const container = document.getElementById('changelogContent');
+    if (!container) return;
+    const entries = this.changelogData?.entries || [];
+    const source = this.changelogData?.source || 'git';
+
+    if (!entries.length) {
+      container.innerHTML = `<p class="changelog-empty">${this.esc(this.t('changelog.empty'))}</p>`;
+      return;
+    }
+
+    const sourceLabel = source === 'changelog.md'
+      ? this.t('changelog.source_md')
+      : this.t('changelog.source_git');
+
+    container.innerHTML = `
+      <p class="changelog-source">${this.esc(sourceLabel)}</p>
+      <ol class="changelog-list">
+        ${entries.map(entry => `
+          <li class="changelog-entry">
+            <header class="changelog-entry-header">
+              <h3>${this.esc(entry.title || entry.version || '')}</h3>
+              ${entry.date ? `<time datetime="${this.esc(entry.date)}">${this.esc(entry.date)}</time>` : ''}
+            </header>
+            ${(entry.items || []).length ? `
+              <ul class="changelog-items">
+                ${entry.items.map(item => `<li>${this.esc(item)}</li>`).join('')}
+              </ul>
+            ` : ''}
+          </li>
+        `).join('')}
+      </ol>
+    `;
+  },
+
+  renderFooterContribute() {
+    const el = document.getElementById('footerContribute');
+    if (!el) return;
+    const stats = this.getCatalogStats();
+    const terms = this.dictionaryData?.total_terminos || this.getDictionaryTerms().length;
+    el.innerHTML = `
+      <div class="footer-contribute-inner">
+        <h2 class="footer-contribute-title">${this.esc(this.t('contribute.title'))}</h2>
+        <p class="footer-contribute-desc">${this.esc(this.t('contribute.desc'))}</p>
+        <dl class="footer-contribute-stats">
+          <div><dt>${this.esc(this.t('welcome.stat_breeds'))}</dt><dd>${stats.breeds}</dd></div>
+          <div><dt>${this.esc(this.t('welcome.stat_diseases'))}</dt><dd>${stats.diseases}</dd></div>
+          <div><dt>${this.esc(this.t('welcome.stat_glossary'))}</dt><dd>${terms}</dd></div>
+        </dl>
+        <div class="footer-contribute-links">
+          <a href="${this.GITHUB_REPO_URL}" target="_blank" rel="noopener noreferrer">${this.esc(this.t('contribute.github'))}</a>
+          <a href="${this.CONTRIBUTE_DOC_URL}" target="_blank" rel="noopener noreferrer">${this.esc(this.t('contribute.guide'))}</a>
+          <a href="${this.GOOD_FIRST_ISSUE_URL}" target="_blank" rel="noopener noreferrer">${this.esc(this.t('contribute.good_first'))}</a>
+        </div>
+      </div>
+    `;
   },
 
   formatLabRange(row) {
@@ -4220,6 +4310,7 @@ const App = {
     document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');
     document.getElementById('triajeView').classList.toggle('active', view === 'triaje');
     document.getElementById('laboratorioView').classList.toggle('active', view === 'laboratorio');
+    document.getElementById('changelogView').classList.toggle('active', view === 'changelog');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();

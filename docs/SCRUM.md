@@ -1,6 +1,6 @@
 # Backlog Scrum — Enciclopedia Animal
 
-> **Última actualización:** 13 de julio de 2026 (Sprint 11 en progreso)  
+> **Última actualización:** 13 de julio de 2026 (Sprint 12 en progreso)  
 > **Sitio en producción:** https://ramiro-andres.github.io/enciclopediaanimal/  
 > **Repositorio:** [ramiro-andres/enciclopediaanimal](https://github.com/ramiro-andres/enciclopediaanimal)
 
@@ -964,18 +964,18 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 11 — En progreso (EP-16: Contenido clínico y rendimiento atlas)
+## Sprint 11 — Completado (EP-16: Contenido clínico y rendimiento atlas)
 
 **Objetivo:** Rangos de laboratorio consultables, destacado semanal de razas, carga diferida de la enciclopedia (431 razas) y detección de inconsistencias en CI.
 
-**Rama:** `sprint-11/lab-rendimiento`
+**Rama:** `sprint-11/lab-rendimiento` (PR #34 mergeado 13 jul 2026)
 
 | ID | Historia | Puntos | Estado |
 |----|----------|--------|--------|
-| US-CON-13 | Rangos de referencia de laboratorio por especie (`#laboratorio`) | 5 | En progreso |
-| US-UX-17 | «Raza de la semana» en welcomeView (rotación por semana del año) | 3 | En progreso |
-| US-DEV-14 | Carga diferida: chunks por `animalId` + manifest + índice búsqueda | 8 | En progreso |
-| US-DEV-15 | Script CI: dosis fuera de rango, campos vacíos, descripciones duplicadas | 3 | En progreso |
+| US-CON-13 | Rangos de referencia de laboratorio por especie (`#laboratorio`) | 5 | Hecho |
+| US-UX-17 | «Raza de la semana» en welcomeView (rotación por semana del año) | 3 | Hecho |
+| US-DEV-14 | Carga diferida: chunks por `animalId` + manifest + índice búsqueda | 8 | Hecho |
+| US-DEV-15 | Script CI: dosis fuera de rango, campos vacíos, descripciones duplicadas | 3 | Hecho |
 | | | **19** | |
 
 #### US-CON-13 · Rangos de laboratorio
@@ -1018,6 +1018,59 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 - `data/lab_reference.json`, `data/chunks/*`, `data/search_index.json`
 - `tests/test_sprint11.rb`; ruta `#laboratorio` en `build_sitemap.rb`
 - Test E2E Sprint 11 en `tests/e2e/atlas.spec.js`
+
+---
+
+## Sprint 12 — En progreso (EP-17: Comunidad y expansión contenido atlas)
+
+**Objetivo:** Changelog público, +50 razas internacionales/LATAM (batch 8), sección «Contribuye» en footer y script CI de sugerencias de enlaces glosario↔enfermedad.
+
+**Rama:** `sprint-12/comunidad-contenido`
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-UX-18 | Changelog público `#changelog` desde CHANGELOG.md o git log | 3 | En progreso |
+| US-CON-15 | +50 razas batch 8 internacional/LATAM (≥481 razas) | 8 | En progreso |
+| US-GOV-04 | Footer «Contribuye»: GitHub, guía CONTRIBUIR, stats dinámicos | 3 | En progreso |
+| US-DEV-16 | Script CI sugerencias enlaces glosario↔enfermedad → `sugerencias_enlaces.json` | 3 | En progreso |
+| | | **17** | |
+
+#### US-UX-18 · Changelog público
+
+**Tareas técnicas:**
+- [x] `scripts/data/build_changelog.rb` desde `CHANGELOG.md` o `git log`
+- [x] `data/changelog.json` + `changelog.js` vía `actualizar_datos.sh`
+- [x] Vista `#changelog` en `index.html`, `js/app.js`, `css/styles.css`
+- [x] Enlace desde footer y welcome; i18n ES/EN
+- [x] Ruta en `build_sitemap.rb`; precache PWA `sw.js` atlas-v11
+
+#### US-CON-15 · Batch 8 razas
+
+**Tareas técnicas:**
+- [x] `scripts/data/production_breeds_batch8.rb` (Perú, Ecuador, Bolivia, Venezuela, Uruguay, Paraguay, Centroamérica, Caribe, Brasil)
+- [x] Integración en `update_enciclopedia_full.rb`
+- [x] Regeneración chunks, search_index, sitemap
+- [x] Placeholders SVG para nuevas razas
+
+#### US-GOV-04 · Footer Contribuye
+
+**Tareas técnicas:**
+- [x] `#footerContribute` con stats desde `manifest` / `getCatalogStats()`
+- [x] Enlaces: repositorio GitHub, `docs/CONTRIBUIR.md`, issues `good-first-issue`
+- [x] i18n ES/EN
+
+#### US-DEV-16 · Sugerencias enlaces CI
+
+**Tareas técnicas:**
+- [x] `scripts/data/suggest_glossary_links.rb` (similitud Jaccard + texto clínico)
+- [x] Salida `data/sugerencias_enlaces.json` para revisión manual
+- [x] Integrado en `ejecutar_pruebas.sh` y `.github/workflows/test.yml`
+
+**Entregables técnicos:**
+- Vista changelog y footer contribuye en `index.html`, `css/styles.css`, `js/app.js`
+- `CHANGELOG.md`, `data/changelog.json`, `data/sugerencias_enlaces.json`
+- `scripts/data/production_breeds_batch8.rb`, `build_changelog.rb`, `suggest_glossary_links.rb`
+- `tests/test_sprint12.rb`; E2E Sprint 12 en `tests/e2e/atlas.spec.js`
 
 ---
 
@@ -1218,6 +1271,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
-| 2026-07-13 | Sprint 8 (EP-13): fluidoterapia, mapa predisposiciones, conversor unidades, tour bienvenida; US-UX-13 mergeada |
+| 2026-07-13 | Sprint 11 (EP-16): laboratorio, raza de la semana, lazy load chunks, inconsistencias CI (PR #34) |
+| 2026-07-13 | Sprint 12 (EP-17): changelog, batch 8 razas, footer Contribuye, sugerencias enlaces CI |
 | 2026-07-13 | Sprint 9 (EP-14): BCS visual, toxicología ampliada, directorio emergencias LATAM, flashcards glosario |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

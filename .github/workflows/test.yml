@@ -33,6 +33,9 @@ jobs:
       - name: Detección de inconsistencias (Sprint 11)
         run: ruby scripts/data/detect_inconsistencies.rb
 
+      - name: Sugerencias enlaces glosario↔enfermedad (Sprint 12)
+        run: ruby scripts/data/suggest_glossary_links.rb
+
       - name: Verificar imágenes de razas (F4-03)
         run: |
           ruby scripts/images/list_missing_images.rb > /tmp/missing.txt

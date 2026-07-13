@@ -26,4 +26,10 @@ echo "--------------------------------------------"
 ruby scripts/data/detect_inconsistencies.rb
 INC=$?
 
-exit $(( INT + CLIN + INC ))
+echo ""
+echo "🔗 Sugerencias de enlaces glosario↔enfermedad (Sprint 12)"
+echo "---------------------------------------------------------"
+ruby scripts/data/suggest_glossary_links.rb
+SUG=$?
+
+exit $(( INT + CLIN + INC + SUG ))

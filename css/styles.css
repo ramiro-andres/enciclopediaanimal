@@ -5291,3 +5291,155 @@ body.welcome-tour-open {
   }
 }
 
+/* Sprint 12 — Changelog y footer Contribuye */
+.footer-contribute {
+  margin: 1.25rem auto 0;
+  max-width: 720px;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-contribute-title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.footer-contribute-desc {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.footer-contribute-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin: 0 0 0.85rem;
+}
+
+.footer-contribute-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footer-contribute-stats dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.footer-contribute-stats dd {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.footer-contribute-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.footer-contribute-links a {
+  color: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-links {
+  margin: 0.75rem 0 0;
+}
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.changelog-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.changelog-hero {
+  margin-bottom: 1.5rem;
+}
+
+.changelog-source {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.changelog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.changelog-entry {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--surface-elevated, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.08));
+}
+
+.changelog-entry-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.changelog-entry-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.changelog-entry-header time {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.changelog-items {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.92rem;
+}
+
+.changelog-items li + li {
+  margin-top: 0.35rem;
+}
+
+.changelog-empty {
+  opacity: 0.8;
+}
+
+:root[data-theme="dark"] .footer-contribute {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .footer-contribute {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
