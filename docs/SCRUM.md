@@ -807,6 +807,83 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 5 — En progreso (rama `sprint-5/ep-10-herramientas-clinicas`)
+
+### EP-10 — Herramientas clínicas de bolsillo
+
+**Objetivo:** Añadir calculadoras y referencias rápidas (RER/MER, toxicología), compartir fichas por URL y visibilidad de enfermedades zoonóticas con calendarios de vacunación orientativos por especie.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-TOOL-01 | Calculadora RER/MER con kg/lb | 3 | Hecho |
+| US-TOOL-02 | Índice de toxicología por especie | 5 | Hecho |
+| US-TOOL-03 | Compartir/copiar enlace de ficha | 2 | Hecho |
+| US-TOOL-04 | Badges zoonóticos + calendario vacunación | 5 | Hecho |
+| | | **15** | |
+
+#### US-TOOL-01 · Calculadora RER/MER
+
+**Como** estudiante o clínico, **quiero** calcular RER y MER con toggle kg/lb, **para** estimar necesidades energéticas en consulta.
+
+**Tareas técnicas:**
+- [x] Vista `#rer-mer` y hub `#herramientas` en `js/app.js` / `index.html`.
+- [x] Fórmula RER = 70 × kg^0,75; factores MER (castrado, activo, cachorro, etc.).
+- [x] Toggle kg/lb, disclaimer educativo, i18n ES/EN.
+- [x] Enlace desde cabecera y tarjeta en welcome.
+
+**Criterios de aceptación:**
+- [x] Cálculo en tiempo real al cambiar peso o factor.
+- [x] Hash `#rer-mer` restaura la vista al recargar.
+
+#### US-TOOL-02 · Índice de toxicología
+
+**Como** profesional en urgencias, **quiero** consultar sustancias tóxicas por especie, **para** orientar la actuación inicial ante intoxicaciones.
+
+**Tareas técnicas:**
+- [x] `data/toxicologia.json` (20 sustancias: chocolate, xilitol, uvas, etc.).
+- [x] `scripts/data/build_toxicologia.rb` + `data/toxicologia.js` vía `actualizar_datos.sh`.
+- [x] Vista `#toxicologia` con búsqueda y filtro por especie.
+- [x] Enlace desde vista de urgencias.
+
+**Criterios de aceptación:**
+- [x] ≥15 sustancias documentadas para perros y/o gatos.
+- [x] Precache offline en `sw.js` (`atlas-v4`).
+
+#### US-TOOL-03 · Compartir ficha
+
+**Como** usuario, **quiero** compartir o copiar el enlace de una ficha de raza o enfermedad, **para** enviarla a colegas o clientes.
+
+**Tareas técnicas:**
+- [x] Botón en `showBreedDetail` y `showDiseaseDetail`.
+- [x] `navigator.share` con fallback `clipboard.writeText`.
+- [x] Toast visual (`#toastContainer`).
+
+**Criterios de aceptación:**
+- [x] URL incluye hash de ruta (`#raza/...`, `#enfermedad/...`).
+- [x] Feedback accesible (`aria-live` en toast).
+
+#### US-TOOL-04 · Zoonóticas y vacunación
+
+**Como** consultor de salud pública veterinaria, **quiero** ver badges zoonóticos y calendarios de vacunación por etapa de vida, **para** educar sobre riesgos compartidos humano-animal.
+
+**Tareas técnicas:**
+- [x] `scripts/data/mark_zoonotic_diseases.rb` → campo `zoonotica` en enfermedades.
+- [x] Badge en `diseaseView` para `zoonotica: true`.
+- [x] `data/calendario_vacunacion.json` (13 especies: cachorro/adulto/senior).
+- [x] Bloque `renderVaccinationCalendar` en ficha de raza; disclaimer por país.
+
+**Criterios de aceptación:**
+- [x] ≥20 enfermedades marcadas como zoonóticas.
+- [x] Calendario visible en fichas de perros y gatos (y resto de especies con datos).
+
+**Entregables técnicos:**
+- `data/toxicologia.json`, `data/calendario_vacunacion.json`, scripts Ruby asociados.
+- Vistas herramientas en `index.html`, lógica en `js/app.js`, estilos en `css/styles.css`.
+- `sw.js` `atlas-v4` con precache de nuevos datos JS.
+- `tests/test_sprint5.rb`.
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases
@@ -825,3 +902,4 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md): análisis de fallos CI/CD (Pages, E2E, JSON→JS, PR #21–#23) |
 | 2026-07-12 | Sprint 2 entregado: US-UX-04 (enlaces cruzados), US-DEV-04 (E2E sin servidor), US-DEV-09 (preview + validaciones) |
 | 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |
+| 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación |

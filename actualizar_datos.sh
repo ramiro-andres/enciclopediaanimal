@@ -3,6 +3,7 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"
 ruby "$DIR/scripts/data/build_medical_dictionary.rb"
 ruby "$DIR/scripts/data/build_cross_links.rb"
+ruby "$DIR/scripts/data/build_toxicologia.rb"
 ruby -rjson -e '
   base = ARGV[0]
   d = JSON.parse(File.read(base + "/data/enciclopedia.json"))
@@ -22,5 +23,12 @@ ruby -rjson -e '
     links = JSON.parse(File.read(links_path))
     File.write(base + "/data/enlaces_clinicos.js", "window.ENLACES_CLINICOS = " + links.to_json + ";\n")
     puts "enlaces_clinicos.js actualizado (#{links["total_terminos_enlazados"]} términos enlazados)"
+  end
+
+  cal_path = base + "/data/calendario_vacunacion.json"
+  if File.exist?(cal_path)
+    cal = JSON.parse(File.read(cal_path))
+    File.write(base + "/data/calendario_vacunacion.js", "window.CALENDARIO_VACUNACION = " + cal.to_json + ";\n")
+    puts "calendario_vacunacion.js actualizado (#{cal["especies"].length} especies)"
   end
 ' "$DIR"

@@ -2,6 +2,11 @@ const App = {
   data: null,
   dictionaryData: null,
   crossLinks: null,
+  toxicologyData: null,
+  vaccinationCalendars: null,
+  toxicologyQuery: '',
+  toxicologySpecies: 'todos',
+  rerMerUnit: 'kg',
   dictionaryQuery: '',
   dictionaryCategory: 'todos',
   currentView: 'welcome',
@@ -30,6 +35,10 @@ const App = {
           I18n.apply();
           this.updateCompareBadge();
           if (this.currentView === 'compare') this.renderCompare();
+          if (this.currentView === 'tools') this.renderTools();
+          if (this.currentView === 'rerMer') this.renderRerMer();
+          if (this.currentView === 'toxicologia') this.renderToxicologia();
+          if (this.currentView === 'urgency') this.renderUrgency();
           this.updateResultsTitle();
         });
       }
@@ -38,6 +47,8 @@ const App = {
       if (!this.data?.animales?.length) throw new Error('Datos vacíos o corruptos');
       this.dictionaryData = await this.loadDictionaryData();
       this.crossLinks = await this.loadCrossLinks();
+      this.toxicologyData = await this.loadToxicologyData();
+      this.vaccinationCalendars = await this.loadVaccinationCalendars();
       this.renderNav();
       this.renderStats();
       this.renderCategoryCards();
@@ -94,6 +105,28 @@ const App = {
     }
     try {
       const res = await fetch('data/enlaces_clinicos.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  async loadToxicologyData() {
+    if (window.TOXICOLOGIA_DATA?.sustancias?.length) {
+      return window.TOXICOLOGIA_DATA;
+    }
+    try {
+      const res = await fetch('data/toxicologia.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  async loadVaccinationCalendars() {
+    if (window.CALENDARIO_VACUNACION?.especies) {
+      return window.CALENDARIO_VACUNACION;
+    }
+    try {
+      const res = await fetch('data/calendario_vacunacion.json');
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
@@ -184,11 +217,15 @@ const App = {
 
     document.getElementById('goHomeBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('goDictionaryBtn')?.addEventListener('click', () => this.showDictionary());
+    document.getElementById('goToolsBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('goUrgencyBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('goCompareBtn')?.addEventListener('click', () => this.showCompare());
     document.getElementById('backCompareBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('clearCompareBtn')?.addEventListener('click', () => this.clearCompare());
     document.getElementById('backUrgencyBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backToolsBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backRerMerBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backToxicologiaBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('btnExploreAll')?.addEventListener('click', () => this.enterBrowse('todos'));
@@ -211,6 +248,18 @@ const App = {
         e.preventDefault();
         openDictionary();
       }
+    });
+    const openTools = () => this.showTools();
+    document.getElementById('openToolsCard')?.addEventListener('click', openTools);
+    document.getElementById('openToolsCard')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openTools();
+      }
+    });
+    document.getElementById('toxicologiaSearchInput')?.addEventListener('input', (e) => {
+      this.toxicologyQuery = e.target.value.toLowerCase().trim();
+      this.renderToxicologia();
     });
     document.getElementById('backDictionaryBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('dictionarySearchInput')?.addEventListener('input', (e) => {
@@ -382,6 +431,21 @@ const App = {
     try {
       if (parts[0] === 'urgencias') {
         this.showUrgency({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'herramientas') {
+        this.showTools({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'rer-mer') {
+        this.showRerMer({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'toxicologia') {
+        this.showToxicologia({ updateHash: false });
         return true;
       }
 
@@ -868,6 +932,339 @@ const App = {
     this.exportE2EState();
   },
 
+  showTools(options = {}) {
+    this.renderTools();
+    this.showView('tools');
+    if (options.updateHash !== false) this.updateHash('#herramientas');
+    this.exportE2EState();
+  },
+
+  showRerMer(options = {}) {
+    this.renderRerMer();
+    this.showView('rerMer');
+    if (options.updateHash !== false) this.updateHash('#rer-mer');
+    this.exportE2EState();
+  },
+
+  showToxicologia(options = {}) {
+    this.renderToxicologia();
+    this.showView('toxicologia');
+    if (options.updateHash !== false) this.updateHash('#toxicologia');
+    this.exportE2EState();
+  },
+
+  renderTools() {
+    const grid = document.getElementById('toolsGrid');
+    if (!grid) return;
+    const cards = [
+      {
+        icon: '🧮',
+        title: this.t('rer.title'),
+        desc: this.t('rer.card_desc'),
+        action: () => this.showRerMer()
+      },
+      {
+        icon: '☠️',
+        title: this.t('tox.title'),
+        desc: this.t('tox.card_desc'),
+        action: () => this.showToxicologia()
+      }
+    ];
+    grid.innerHTML = cards.map((c, i) => `
+      <article class="tools-card" role="button" tabindex="0" data-tool-index="${i}" aria-label="${this.esc(c.title)}">
+        <span class="tools-card-icon" aria-hidden="true">${c.icon}</span>
+        <h3>${this.esc(c.title)}</h3>
+        <p>${this.esc(c.desc)}</p>
+        <span class="tools-card-link">${this.esc(this.t('tools.open'))} →</span>
+      </article>
+    `).join('');
+    grid.querySelectorAll('.tools-card').forEach(card => {
+      const idx = parseInt(card.dataset.toolIndex, 10);
+      const open = () => cards[idx]?.action();
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+  },
+
+  MER_FACTORS: [
+    { id: 'castrado', labelKey: 'rer.factor.neutered', factor: 1.6 },
+    { id: 'intacto', labelKey: 'rer.factor.intact', factor: 1.8 },
+    { id: 'perdida', labelKey: 'rer.factor.weight_loss', factor: 1.0 },
+    { id: 'trabajo_ligero', labelKey: 'rer.factor.light_work', factor: 2.0 },
+    { id: 'trabajo_moderado', labelKey: 'rer.factor.moderate_work', factor: 3.0 },
+    { id: 'trabajo_pesado', labelKey: 'rer.factor.heavy_work', factor: 4.0 },
+    { id: 'cachorro_joven', labelKey: 'rer.factor.puppy_young', factor: 3.0 },
+    { id: 'cachorro_mayor', labelKey: 'rer.factor.puppy_older', factor: 2.0 },
+    { id: 'gestacion', labelKey: 'rer.factor.gestation', factor: 3.0 },
+    { id: 'lactancia', labelKey: 'rer.factor.lactation', factor: 4.0 }
+  ],
+
+  kgToLb(kg) {
+    return kg * 2.2046226218;
+  },
+
+  lbToKg(lb) {
+    return lb / 2.2046226218;
+  },
+
+  calculateRer(kg) {
+    if (!kg || kg <= 0) return null;
+    return 70 * Math.pow(kg, 0.75);
+  },
+
+  formatEnergy(kcal) {
+    if (kcal == null) return '—';
+    return `${Math.round(kcal)} kcal/día`;
+  },
+
+  renderRerMer() {
+    const container = document.getElementById('rerMerContent');
+    if (!container) return;
+    const factorOptions = this.MER_FACTORS.map(f => `
+      <option value="${f.factor}">${this.esc(this.t(f.labelKey))} (×${f.factor})</option>
+    `).join('');
+    const unitKg = this.rerMerUnit === 'kg';
+    container.innerHTML = `
+      <form class="rer-mer-form" id="rerMerForm" novalidate>
+        <div class="rer-mer-grid">
+          <div class="rer-field">
+            <fieldset class="rer-unit-toggle">
+              <legend>${this.esc(this.t('rer.weight'))}</legend>
+              <label class="rer-unit-label">
+                <input type="radio" name="rer_unit" value="kg" ${unitKg ? 'checked' : ''}>
+                kg
+              </label>
+              <label class="rer-unit-label">
+                <input type="radio" name="rer_unit" value="lb" ${!unitKg ? 'checked' : ''}>
+                lb
+              </label>
+            </fieldset>
+            <label for="rerWeightInput">${this.esc(this.t('rer.weight_value'))}</label>
+            <input type="number" id="rerWeightInput" name="peso" min="0.01" step="0.01" value="10" inputmode="decimal" required aria-describedby="rerResult rerDisclaimer">
+          </div>
+          <div class="rer-field">
+            <label for="rerFactorSelect">${this.esc(this.t('rer.mer_factor'))}</label>
+            <select id="rerFactorSelect" name="factor" aria-describedby="rerResult">
+              ${factorOptions}
+            </select>
+          </div>
+        </div>
+        <div class="rer-result" id="rerResult" role="status" aria-live="polite" aria-atomic="true"></div>
+        <p id="rerDisclaimer" class="rer-disclaimer" role="note">
+          ⚕️ ${this.esc(this.t('rer.disclaimer'))}
+        </p>
+      </form>
+    `;
+    this.bindRerMerCalculator(container);
+  },
+
+  bindRerMerCalculator(root) {
+    const form = root.querySelector('#rerMerForm');
+    const weightInput = root.querySelector('#rerWeightInput');
+    const factorSelect = root.querySelector('#rerFactorSelect');
+    const resultEl = root.querySelector('#rerResult');
+    const unitRadios = root.querySelectorAll('input[name="rer_unit"]');
+    if (!form || !weightInput || !factorSelect || !resultEl) return;
+
+    const update = () => {
+      const unit = root.querySelector('input[name="rer_unit"]:checked')?.value || 'kg';
+      this.rerMerUnit = unit;
+      let weight = parseFloat(String(weightInput.value).replace(',', '.'));
+      if (!weight || weight <= 0) {
+        resultEl.innerHTML = `<p class="rer-result-warn">${this.esc(this.t('rer.invalid_weight'))}</p>`;
+        return;
+      }
+      const kg = unit === 'lb' ? this.lbToKg(weight) : weight;
+      const rer = this.calculateRer(kg);
+      const factor = parseFloat(factorSelect.value);
+      const mer = rer * factor;
+      const altWeight = unit === 'kg'
+        ? `${this.formatDoseNumber(this.kgToLb(kg))} lb`
+        : `${this.formatDoseNumber(kg)} kg`;
+      resultEl.innerHTML = `
+        <div class="rer-result-card">
+          <dl class="rer-metrics">
+            <div><dt>RER</dt><dd><strong>${this.formatEnergy(rer)}</strong></dd></div>
+            <div><dt>MER (×${factor})</dt><dd><strong>${this.formatEnergy(mer)}</strong></dd></div>
+            <div><dt>${this.esc(this.t('rer.equivalent'))}</dt><dd>${this.esc(altWeight)}</dd></div>
+          </dl>
+          <p class="rer-formula">${this.esc(this.t('rer.formula'))}</p>
+        </div>`;
+    };
+
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    update();
+  },
+
+  getFilteredToxicology() {
+    const items = this.toxicologyData?.sustancias || [];
+    return items.filter(item => {
+      if (this.toxicologySpecies !== 'todos' && !(item.especies || []).includes(this.toxicologySpecies)) {
+        return false;
+      }
+      if (!this.toxicologyQuery) return true;
+      const haystack = [
+        item.nombre, item.categoria, item.toxicidad, item.accion,
+        item.mecanismo, item.antidoto,
+        ...(item.sintomas || []),
+        ...(item.especies || [])
+      ].join(' ').toLowerCase();
+      return haystack.includes(this.toxicologyQuery);
+    });
+  },
+
+  renderToxicologia() {
+    const title = document.getElementById('toxicologiaTitle');
+    const intro = document.getElementById('toxicologiaIntro');
+    const filters = document.getElementById('toxicologiaSpeciesFilters');
+    const list = document.getElementById('toxicologiaList');
+    if (!list) return;
+
+    if (title) title.textContent = this.toxicologyData?.titulo || this.t('tox.title');
+    if (intro) intro.textContent = this.toxicologyData?.introduccion || '';
+
+    if (filters) {
+      const species = [{ id: 'todos', label: this.t('tox.all_species') }];
+      (this.data?.animales || []).forEach(a => {
+        species.push({ id: a.id, label: `${a.icono} ${a.nombre}` });
+      });
+      filters.innerHTML = species.map(s => `
+        <button type="button" class="tox-filter-btn ${this.toxicologySpecies === s.id ? 'active' : ''}"
+          data-species="${s.id}" aria-pressed="${this.toxicologySpecies === s.id}">
+          ${this.esc(s.label)}
+        </button>
+      `).join('');
+      filters.querySelectorAll('.tox-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.toxicologySpecies = btn.dataset.species;
+          this.renderToxicologia();
+        });
+      });
+    }
+
+    const items = this.getFilteredToxicology();
+    if (!items.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>${this.esc(this.t('tox.empty'))}</p></div>`;
+      return;
+    }
+
+    list.innerHTML = items.map(item => `
+      <article class="tox-card tox-card--${item.toxicidad}" aria-labelledby="tox-${item.id}">
+        <header class="tox-card-header">
+          <h3 id="tox-${item.id}">${this.esc(item.nombre)}</h3>
+          <span class="tox-badge tox-badge--${item.toxicidad}">${this.esc(item.toxicidad)}</span>
+        </header>
+        <p class="tox-meta">
+          <span>${this.esc(this.t('tox.category'))}: ${this.esc(item.categoria)}</span>
+          <span>${this.esc(this.t('tox.species'))}: ${(item.especies || []).map(e => this.esc(e)).join(', ')}</span>
+        </p>
+        ${item.umbral_orientativo ? `<p class="tox-threshold"><strong>${this.esc(this.t('tox.threshold'))}:</strong> ${this.esc(item.umbral_orientativo)}</p>` : ''}
+        <div class="tox-block">
+          <h4>${this.esc(this.t('tox.symptoms'))}</h4>
+          <ul>${(item.sintomas || []).map(s => `<li>${this.esc(s)}</li>`).join('')}</ul>
+        </div>
+        ${item.mecanismo ? `<div class="tox-block"><h4>${this.esc(this.t('tox.mechanism'))}</h4><p>${this.esc(item.mecanismo)}</p></div>` : ''}
+        <div class="tox-block tox-block--action">
+          <h4>${this.esc(this.t('tox.action'))}</h4>
+          <p>${this.esc(item.accion)}</p>
+        </div>
+        ${item.antidoto ? `<div class="tox-block"><h4>${this.esc(this.t('tox.antidote'))}</h4><p>${this.esc(item.antidoto)}</p></div>` : ''}
+      </article>
+    `).join('');
+  },
+
+  showToast(message) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.textContent = message;
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('toast--visible'));
+    setTimeout(() => {
+      toast.classList.remove('toast--visible');
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  },
+
+  async shareUrl(url, title) {
+    const shareData = { title: title || 'Atlas Animal', url };
+    try {
+      if (navigator.share && navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
+        this.showToast(this.t('share.shared'));
+        return;
+      }
+    } catch (err) {
+      if (err?.name === 'AbortError') return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      this.showToast(this.t('share.copied'));
+    } catch (_) {
+      this.showToast(this.t('share.failed'));
+    }
+  },
+
+  renderShareButton(hash, title) {
+    return `
+      <button type="button" class="btn-share" data-share-hash="${this.esc(hash)}" data-share-title="${this.esc(title)}"
+        aria-label="${this.esc(this.t('share.label'))}">
+        <span aria-hidden="true">🔗</span> ${this.esc(this.t('share.button'))}
+      </button>`;
+  },
+
+  bindShareButtons(root) {
+    if (!root) return;
+    root.querySelectorAll('.btn-share').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const hash = btn.dataset.shareHash || '';
+        const title = btn.dataset.shareTitle || 'Atlas Animal';
+        const url = `${window.location.origin}${window.location.pathname}${hash}`;
+        this.shareUrl(url, title);
+      });
+    });
+  },
+
+  renderVaccinationCalendar(breed) {
+    const cal = this.vaccinationCalendars?.especies?.[breed.animalId];
+    if (!cal) return '';
+    const phases = [
+      { key: 'cachorro', label: this.t('vax.puppy') },
+      { key: 'adulto', label: this.t('vax.adult') },
+      { key: 'senior', label: this.t('vax.senior') }
+    ];
+    const columns = phases.map(phase => `
+      <div class="vax-phase">
+        <h4>${this.esc(phase.label)}</h4>
+        <ul>${(cal[phase.key] || []).map(item => `<li>${this.esc(item)}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+    const disclaimer = this.vaccinationCalendars?.disclaimer || this.t('vax.disclaimer');
+    return `
+      <section class="vax-calendar-section" aria-labelledby="vaxCalTitle">
+        <div class="detail-panel vax-calendar-panel">
+          <h4 id="vaxCalTitle">📆 ${this.esc(this.t('vax.title'))} — ${cal.icono} ${this.esc(cal.nombre)}</h4>
+          <p class="vax-ref">${this.esc(cal.referencia || '')}</p>
+          <div class="vax-calendar-grid">${columns}</div>
+          <p class="vax-disclaimer" role="note">⚠️ ${this.esc(disclaimer)}</p>
+        </div>
+      </section>`;
+  },
+
+  renderZoonoticBadge(disease) {
+    if (!disease?.zoonotica) return '';
+    return `<span class="zoonotic-badge" title="${this.esc(this.t('zoonotic.hint'))}">🦠 ${this.esc(this.t('zoonotic.label'))}</span>`;
+  },
+
   bindLangSwitcher() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1013,7 +1410,12 @@ const App = {
   renderUrgency() {
     const container = document.getElementById('urgencyContent');
     if (!container) return;
-    container.innerHTML = this.data.animales.map(animal => {
+    const toxLink = `
+      <div class="urgency-tools-banner">
+        <p>${this.esc(this.t('tox.urgency_link'))}</p>
+        <button type="button" class="btn-text-link urgency-tox-btn">${this.esc(this.t('tox.open'))} →</button>
+      </div>`;
+    container.innerHTML = toxLink + this.data.animales.map(animal => {
       const breeds = ['pequena', 'mediana', 'grande'].flatMap(size => animal.razas?.[size] || []);
       const alerts = breeds
         .flatMap(b => (Array.isArray(b.senales_alerta) ? b.senales_alerta : [b.senales_alerta]).filter(Boolean))
@@ -1043,6 +1445,7 @@ const App = {
         </section>
       `;
     }).join('');
+    container.querySelector('.urgency-tox-btn')?.addEventListener('click', () => this.showToxicologia());
   },
 
   getRecentHistory() {
@@ -1499,6 +1902,7 @@ const App = {
             <button type="button" class="btn-compare-add" data-compare-key="${breed.animalId}:${breed.id}">
               ${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.esc(this.t('compare.add'))}
             </button>
+            ${this.renderShareButton(this.breedRoute(breed), breed.nombre)}
           </div>
           <div class="info-grid">
             <div class="info-item"><label>Peso promedio</label><span>${this.esc(breed.peso || 'N/D')}</span></div>
@@ -1535,6 +1939,7 @@ const App = {
         ${this.renderPanel('Revisiones veterinarias', breed.revisiones, '📅')}
         ${breed.emergencias ? `<div class="detail-panel alert-panel urgent"><h4>🚨 Emergencias frecuentes</h4><p>${this.esc(breed.emergencias)}</p></div>` : ''}
       </div>
+      ${this.renderVaccinationCalendar(breed)}
       ${this.renderDoseCalculator(breed)}
       <section class="diseases-section">
         <h3>Enfermedades y condiciones (${breed.enfermedades?.length || 0})</h3>
@@ -1566,6 +1971,7 @@ const App = {
       const btn = e.currentTarget;
       btn.textContent = `${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.t('compare.add')}`;
     });
+    this.bindShareButtons(el);
     this.bindDoseCalculator(el, breed);
 
     this.showView('detail');
@@ -1590,9 +1996,15 @@ const App = {
             <div>
               <h2>${this.esc(disease.nombre)}</h2>
               <p class="breed-ref">${breed.animalIcono} ${this.esc(breed.nombre)} — ${this.esc(breed.animalNombre)}</p>
-              <span class="severity severity-${disease.gravedad || 'moderada'}" style="margin-top:0.5rem;display:inline-block">
-                Gravedad: ${disease.gravedad || 'moderada'}
-              </span>
+              <div class="disease-badges">
+                <span class="severity severity-${disease.gravedad || 'moderada'}" style="margin-top:0.5rem;display:inline-block">
+                  Gravedad: ${disease.gravedad || 'moderada'}
+                </span>
+                ${this.renderZoonoticBadge(disease)}
+              </div>
+              <div class="disease-share-row">
+                ${this.renderShareButton(this.diseaseRoute(breed, disease), `${disease.nombre} — ${breed.nombre}`)}
+              </div>
             </div>
           </div>
         </div>
@@ -1637,6 +2049,7 @@ const App = {
     `;
 
     this.bindDiseaseTermLinks(el);
+    this.bindShareButtons(el);
     this.showView('disease');
     if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
     this.trackVisit({
@@ -1667,6 +2080,18 @@ const App = {
     }
     if (this.currentView === 'compare') {
       document.title = `${this.t('compare.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'tools') {
+      document.title = `${this.t('tools.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'rerMer') {
+      document.title = `${this.t('rer.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'toxicologia') {
+      document.title = `${this.t('tox.title')} — ${suffix}`;
       return;
     }
     document.title = 'Enciclopedia Animal — Salud Veterinaria';
@@ -1703,6 +2128,9 @@ const App = {
     document.getElementById('dictionaryView').classList.toggle('active', view === 'dictionary');
     document.getElementById('urgencyView').classList.toggle('active', view === 'urgency');
     document.getElementById('compareView').classList.toggle('active', view === 'compare');
+    document.getElementById('toolsView').classList.toggle('active', view === 'tools');
+    document.getElementById('rerMerView').classList.toggle('active', view === 'rerMer');
+    document.getElementById('toxicologiaView').classList.toggle('active', view === 'toxicologia');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
