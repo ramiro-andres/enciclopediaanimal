@@ -190,6 +190,57 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     expect(estado.breedOfWeek).toBe(true);
   });
 
+  test('herramienta clínica: toxicología lista sustancias', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#goToolsBtn').click();
+    await expect(page.locator('#toolsView')).toHaveClass(/active/);
+    await page.locator('.tools-card').filter({ hasText: /toxicolog/i }).click();
+    await expect(page.locator('#toxicologiaView')).toHaveClass(/active/);
+    await expect(page.locator('.tox-card').first()).toBeVisible();
+  });
+
+  test('filtro región reduce razas en explorador', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    const regionSection = page.locator('#regionFiltersSection');
+    await expect(regionSection).toBeVisible();
+
+    const totalInicial = await page.locator('#breedGrid .breed-card').count();
+    expect(totalInicial).toBeGreaterThan(10);
+
+    const btnMexico = page.locator('.region-btn').filter({ hasText: /México|Mexico/i }).first();
+    await expect(btnMexico).toBeVisible();
+    await btnMexico.click();
+
+    const totalFiltrado = await page.locator('#breedGrid .breed-card').count();
+    expect(totalFiltrado).toBeGreaterThan(0);
+    expect(totalFiltrado).toBeLessThan(totalInicial);
+    await expect(page.locator('#breedGrid .tag-region').first()).toContainText(/México|Mexico/i);
+  });
+
+  test('favoritos: marcar raza y ver en panel welcome', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#btnExploreAll').click();
+    await page.locator('#breedGrid .breed-card').first().click();
+    await expect(page.locator('#detailView')).toHaveClass(/active/);
+
+    const favBtn = page.locator('#breedDetail .btn-favorite').first();
+    await expect(favBtn).toBeVisible();
+    await favBtn.click();
+
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await expect(page.locator('#favoritesPanel')).toBeVisible();
+    await expect(page.locator('#favoritesList .favorite-item').first()).toBeVisible();
+  });
+
   test('Sprint 12: changelog y footer Contribuye (US-UX-18, US-GOV-04)', async ({ page }) => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);

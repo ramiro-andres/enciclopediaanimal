@@ -1272,6 +1272,6 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
 | 2026-07-13 | Sprint 11 (EP-16): laboratorio, raza de la semana, lazy load chunks, inconsistencias CI (PR #34) |
-| 2026-07-13 | Sprint 12 (EP-17): changelog, batch 8 razas, footer Contribuye, sugerencias enlaces CI |
+| 2026-07-13 | Pre-Sprint 14: auditoría de cobertura, `tests/test_security.rb` + `tests/test_regression.rb`, 3 E2E nuevos (toxicología, región, favoritos) |
 | 2026-07-13 | Sprint 9 (EP-14): BCS visual, toxicología ampliada, directorio emergencias LATAM, flashcards glosario |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

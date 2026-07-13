@@ -6,7 +6,12 @@ echo "🧪 Pruebas unitarias — Enciclopedia Animal"
 echo "==========================================="
 echo ""
 
-ruby -e 'Dir["tests/test_*.rb"].sort.each { |f| require File.expand_path(f) }' || exit $?
+ruby -e 'Dir["tests/test_*.rb"].sort.reject { |f| f.include?("security") }.each { |f| require File.expand_path(f) }' || exit $?
+
+echo ""
+echo "🔒 Auditoría de seguridad estática"
+echo "==================================="
+ruby tests/test_security.rb || exit $?
 
 echo ""
 echo "🔎 Validación de integridad (datos + enlaces clínicos)"

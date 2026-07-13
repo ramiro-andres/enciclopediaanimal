@@ -27,6 +27,9 @@ jobs:
       - name: Ejecutar pruebas unitarias
         run: ruby -e 'Dir["tests/test_*.rb"].sort.each { |f| require File.expand_path(f) }'
 
+      - name: Auditoría de seguridad estática
+        run: ruby tests/test_security.rb
+
       - name: Validar contenido clínico
         run: ruby scripts/data/validate_clinical_content.rb
 
