@@ -1945,6 +1945,7 @@ const App = {
         if (action) action();
       });
     });
+    if (window.I18n) I18n.apply(bar);
     this.updateMobileTabBar();
   },
 

@@ -18,6 +18,7 @@ const I18n = {
       'tab.home': 'Inicio',
       'tab.explore': 'Explorar',
       'tab.glossary': 'Glosario',
+      'tab.glosary': 'Glosario',
       'tab.urgency': 'Urgencias',
       'tab.tools': 'Herramientas',
       'favorites.title': 'MIS FAVORITOS',
@@ -141,6 +142,7 @@ const I18n = {
       'tab.home': 'Home',
       'tab.explore': 'Explore',
       'tab.glossary': 'Glossary',
+      'tab.glosary': 'Glossary',
       'tab.urgency': 'Emergencies',
       'tab.tools': 'Tools',
       'favorites.title': 'MY FAVORITES',
@@ -261,10 +263,19 @@ const I18n = {
       if (saved === 'en' || saved === 'es') this.lang = saved;
     } catch (_) { /* sin localStorage */ }
     document.documentElement.lang = this.lang;
+    this.apply();
+  },
+
+  translate(key) {
+    if (!key) return null;
+    const value = this.strings[this.lang]?.[key];
+    if (value !== undefined) return value;
+    const fallback = this.strings.es[key];
+    return fallback !== undefined ? fallback : null;
   },
 
   t(key) {
-    return this.strings[this.lang]?.[key] || this.strings.es[key] || key;
+    return this.translate(key) ?? key;
   },
 
   setLang(lang) {
@@ -278,7 +289,8 @@ const I18n = {
   apply(root = document) {
     root.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      const text = this.t(key);
+      const text = this.translate(key);
+      if (text === null) return;
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         if (el.hasAttribute('data-i18n-placeholder')) el.placeholder = text;
       } else {
@@ -286,12 +298,20 @@ const I18n = {
       }
     });
     root.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      el.placeholder = this.t(el.getAttribute('data-i18n-placeholder'));
+      const text = this.translate(el.getAttribute('data-i18n-placeholder'));
+      if (text !== null) el.placeholder = text;
     });
     root.querySelectorAll('[data-i18n-aria]').forEach(el => {
-      el.setAttribute('aria-label', this.t(el.getAttribute('data-i18n-aria')));
+      const text = this.translate(el.getAttribute('data-i18n-aria'));
+      if (text !== null) el.setAttribute('aria-label', text);
     });
   }
 };
 
 window.I18n = I18n;
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => I18n.init());
+} else {
+  I18n.init();
+}
