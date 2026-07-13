@@ -20,6 +20,16 @@ async function cerrarDisclaimer(page) {
     await aceptar.click();
     await expect(page.locator('#disclaimerOverlay')).toBeHidden();
   }
+  // Sprint 8: el tour de bienvenida se abre al aceptar el aviso y su backdrop
+  // intercepta clics en el resto de la UI (fallo E2E en CI).
+  const tourSkip = page.locator('#welcomeTourSkipBtn');
+  try {
+    await tourSkip.waitFor({ state: 'visible', timeout: 5000 });
+    await tourSkip.click();
+    await expect(page.locator('#welcomeTourOverlay')).toBeHidden();
+  } catch {
+    // Tour ya completado o no mostrado en esta sesión.
+  }
 }
 
 test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
