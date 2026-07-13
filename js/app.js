@@ -13,6 +13,11 @@ const App = {
   themeMode: 'auto',
   THEME_KEY: 'atlas_theme',
   vaccinationCalendars: null,
+  manifest: null,
+  searchIndex: null,
+  chunkCache: {},
+  labReferenceData: null,
+  labSpecies: 'perros',
   toxicologyQuery: '',
   toxicologySpecies: 'todos',
   rerMerUnit: 'kg',
@@ -222,7 +227,9 @@ const App = {
           if (this.currentView === 'flashcards') this.renderFlashcards();
           if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
           if (this.currentView === 'triaje') this.renderTriaje();
+          if (this.currentView === 'laboratorio') this.renderLaboratorio();
           if (this.currentView === 'dictionary') this.renderDictionary();
+          this.renderBreedOfWeek();
           this.renderFavorites();
           this.updateMobileTabBar();
           this.updateResultsTitle();
@@ -231,6 +238,7 @@ const App = {
       this.loadCompareList();
       this.data = await this.loadData();
       if (!this.data?.animales?.length) throw new Error('Datos vacíos o corruptos');
+      this.searchIndex = await this.loadSearchIndex();
       this.dictionaryData = await this.loadDictionaryData();
       this.searchSynonyms = await this.loadSearchSynonyms();
       this.buildSynonymIndex();
@@ -238,18 +246,21 @@ const App = {
       this.toxicologyData = await this.loadToxicologyData();
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.triajeData = await this.loadTriajeData();
+      this.labReferenceData = await this.loadLabReferenceData();
       this.initTheme();
       this.vaccinationCalendars = await this.loadVaccinationCalendars();
       this.renderNav();
       this.renderStats();
       this.renderCategoryCards();
       this.renderWelcome();
+      this.renderBreedOfWeek();
       this.bindEvents();
       this.showLoadStatus();
       this.renderRecentHistory();
       this.renderFavorites();
       this.bindMobileTabBar();
-      if (!this.openRouteFromHash()) this.showView('welcome');
+      await this.preloadAllChunks();
+      if (!(await this.openRouteFromHash())) this.showView('welcome');
       if (DisclaimerModal.wasAccepted() && !window.location.hash) WelcomeTour.tryStart();
       this.exportE2EState();
     } catch (err) {
@@ -273,13 +284,191 @@ const App = {
 
   async loadData() {
     if (window.ENCICLOPEDIA_DATA?.animales?.length) {
+      this.manifest = null;
       return window.ENCICLOPEDIA_DATA;
     }
+    if (window.ENCICLOPEDIA_MANIFEST?.animales?.length) {
+      this.manifest = window.ENCICLOPEDIA_MANIFEST;
+      return this.buildDataFromManifest(this.manifest);
+    }
+    try {
+      const res = await fetch('data/chunks/manifest.json');
+      if (res.ok) {
+        this.manifest = await res.json();
+        return this.buildDataFromManifest(this.manifest);
+      }
+    } catch (_) { /* fetch falla en file:// */ }
     try {
       const res = await fetch('data/enciclopedia.json');
+      if (res.ok) {
+        this.manifest = null;
+        return await res.json();
+      }
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  buildDataFromManifest(manifest) {
+    return {
+      animales: manifest.animales.map(a => ({
+        id: a.id,
+        nombre: a.nombre,
+        icono: a.icono,
+        razas: { pequena: [], mediana: [], grande: [] }
+      }))
+    };
+  },
+
+  async loadSearchIndex() {
+    if (window.SEARCH_INDEX?.breeds?.length) return window.SEARCH_INDEX;
+    try {
+      const res = await fetch('data/search_index.json');
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
+  },
+
+  async loadChunk(animalId) {
+    if (!animalId || animalId === 'todos' || this.chunkCache[animalId]) {
+      return this.chunkCache[animalId] || null;
+    }
+    let chunk = window.ENCICLOPEDIA_CHUNKS?.[animalId] || null;
+    if (!chunk) {
+      try {
+        const res = await fetch(`data/chunks/${animalId}.json`);
+        if (res.ok) chunk = await res.json();
+      } catch (_) { /* fetch falla en file:// */ }
+    }
+    if (!chunk) chunk = await this.loadChunkViaScript(animalId);
+    if (!chunk) return null;
+    this.chunkCache[animalId] = chunk;
+    const animal = this.data?.animales?.find(a => a.id === animalId);
+    if (animal) animal.razas = chunk.razas;
+    return chunk;
+  },
+
+  loadChunkViaScript(animalId) {
+    if (window.ENCICLOPEDIA_CHUNKS?.[animalId]) {
+      return Promise.resolve(window.ENCICLOPEDIA_CHUNKS[animalId]);
+    }
+    this._chunkScriptPending = this._chunkScriptPending || {};
+    if (this._chunkScriptPending[animalId]) return this._chunkScriptPending[animalId];
+    this._chunkScriptPending[animalId] = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = `data/chunks/${animalId}.js`;
+      script.onload = () => resolve(window.ENCICLOPEDIA_CHUNKS?.[animalId] || null);
+      script.onerror = () => resolve(null);
+      document.head.appendChild(script);
+    });
+    return this._chunkScriptPending[animalId];
+  },
+
+  isAllChunksLoaded() {
+    if (!this.manifest?.animales?.length) return !this.manifest;
+    return this.manifest.animales.every(a => this.chunkCache[a.id]);
+  },
+
+  async preloadAllChunks() {
+    if (!this.manifest?.animales?.length) return;
+    await Promise.all(this.manifest.animales.map(a => this.loadChunk(a.id)));
+    this.renderWelcome();
+    this.renderBreedOfWeek();
+    this.renderStats();
+    this.showLoadStatus();
+    if (this.currentView === 'home') this.renderHome();
+    this.exportE2EState();
+  },
+
+  getCatalogStats() {
+    if (this.manifest) {
+      return {
+        breeds: this.manifest.total_breeds || 0,
+        diseases: this.manifest.total_diseases || 0
+      };
+    }
+    const breeds = this.getAllBreeds();
+    return {
+      breeds: breeds.length,
+      diseases: breeds.reduce((n, b) => n + (b.enfermedades?.length || 0), 0)
+    };
+  },
+
+  async loadLabReferenceData() {
+    if (window.LAB_REFERENCE?.especies?.length) return window.LAB_REFERENCE;
+    try {
+      const res = await fetch('data/lab_reference.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  getWeekOfYear(date = new Date()) {
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  },
+
+  getBreedOfWeekEntry() {
+    const breeds = (this.searchIndex?.breeds || [])
+      .slice()
+      .sort((a, b) => `${a.animalId}:${a.id}`.localeCompare(`${b.animalId}:${b.id}`, 'es'));
+    if (!breeds.length) return null;
+    const year = new Date().getFullYear();
+    const week = this.getWeekOfYear();
+    const idx = (year * 53 + week) % breeds.length;
+    const entry = breeds[idx];
+    const animal = this.data?.animales?.find(a => a.id === entry.animalId);
+    return {
+      ...entry,
+      animalNombre: animal?.nombre || entry.animalId,
+      animalIcono: animal?.icono || '🐾'
+    };
+  },
+
+  renderBreedOfWeek() {
+    const panel = document.getElementById('breedOfWeekPanel');
+    if (!panel) return;
+    const entry = this.getBreedOfWeekEntry();
+    if (!entry) {
+      panel.hidden = true;
+      return;
+    }
+    const week = this.getWeekOfYear();
+    const fullBreed = this.findBreed(entry.animalId, entry.id);
+    const img = fullBreed?.imagen || 'images/placeholder.svg';
+    panel.hidden = false;
+    panel.innerHTML = `
+      <div class="breed-of-week-header">
+        <span class="eyebrow">${this.esc(this.t('breed_week.eyebrow'))}</span>
+        <span class="breed-of-week-badge">${this.esc(this.t('breed_week.week').replace('{week}', week))}</span>
+      </div>
+      <article class="breed-of-week-card" role="button" tabindex="0"
+        aria-label="${this.esc(this.t('breed_week.open').replace('{name}', entry.nombre))}"
+        data-animal="${this.esc(entry.animalId)}" data-breed="${this.esc(entry.id)}">
+        <img class="breed-of-week-img" src="${this.esc(img)}" alt="${this.esc(entry.nombre)}" loading="lazy">
+        <div class="breed-of-week-copy">
+          <span class="breed-of-week-species">${entry.animalIcono} ${this.esc(entry.animalNombre)}</span>
+          <h3>${this.esc(entry.nombre)}</h3>
+          <p>${this.esc(this.t('breed_week.desc'))}</p>
+          <span class="breed-of-week-link">${this.esc(this.t('breed_week.cta'))} →</span>
+        </div>
+      </article>
+    `;
+    const open = async (card) => {
+      await this.loadChunk(card.dataset.animal);
+      const breed = this.findBreed(card.dataset.animal, card.dataset.breed);
+      if (breed) this.showBreedDetail(breed);
+    };
+    const card = panel.querySelector('.breed-of-week-card');
+    card?.addEventListener('click', () => open(card));
+    card?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open(card);
+      }
+    });
   },
 
   async loadDictionaryData() {
@@ -445,14 +634,15 @@ const App = {
   },
 
   showLoadStatus() {
-    const total = this.getAllBreeds().length;
-    const diseases = this.getAllBreeds().reduce((acc, b) => acc + (b.enfermedades?.length || 0), 0);
+    const stats = this.getCatalogStats();
     const intro = document.getElementById('welcomeIntro');
     if (intro) {
-      intro.textContent = `Más de ${total} razas y ${diseases} enfermedades documentadas. Elige una categoría para explorar solo ese tipo, o busca por nombre en toda la enciclopedia.`;
+      intro.textContent = this.t('welcome.intro_stats')
+        .replace('{breeds}', stats.breeds)
+        .replace('{diseases}', stats.diseases);
     }
     const btnAll = document.getElementById('btnExploreAll');
-    if (btnAll) btnAll.textContent = `Ver todas las razas (${total})`;
+    if (btnAll) btnAll.textContent = this.t('welcome.explore_all_count').replace('{count}', stats.breeds);
   },
 
   bindEvents() {
@@ -511,6 +701,7 @@ const App = {
     document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.showDictionary());
     document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('backTriajeBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backLaboratorioBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
@@ -813,7 +1004,7 @@ const App = {
     return (breed?.enfermedades || []).find(d => this.diseaseSlug(d) === diseaseSlug);
   },
 
-  openRouteFromHash() {
+  async openRouteFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
     if (!hash) return false;
 
@@ -827,6 +1018,11 @@ const App = {
 
       if (parts[0] === 'herramientas') {
         this.showTools({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'laboratorio') {
+        this.showLaboratorio({ updateHash: false });
         return true;
       }
 
@@ -903,6 +1099,7 @@ const App = {
       }
 
       if (parts[0] === 'raza' && parts[1] && parts[2]) {
+        await this.loadChunk(parts[1]);
         const breed = this.findBreed(parts[1], parts[2]);
         if (breed) {
           this.showBreedDetail(breed, { updateHash: false });
@@ -911,6 +1108,7 @@ const App = {
       }
 
       if (parts[0] === 'enfermedad' && parts[1] && parts[2] && parts[3]) {
+        await this.loadChunk(parts[1]);
         const breed = this.findBreed(parts[1], parts[2]);
         const disease = this.findDisease(breed, parts[3]);
         if (breed && disease) {
@@ -926,7 +1124,63 @@ const App = {
     return false;
   },
 
+  getGlobalSearchResultsFromIndex() {
+    const breeds = [];
+    const diseases = [];
+    const glossary = [];
+    const seenDiseases = new Set();
+    const seenGlossary = new Set();
+    const indexBreeds = this.searchIndex?.breeds || [];
+
+    indexBreeds.forEach(entry => {
+      const nameMatch = this.matchesSearch(entry.nombre, this.searchQuery);
+      const idMatch = this.matchesSearch(entry.id, this.searchQuery);
+      if (nameMatch.matched || idMatch.matched) {
+        const animal = this.data.animales.find(a => a.id === entry.animalId);
+        const stub = {
+          id: entry.id,
+          nombre: entry.nombre,
+          animalId: entry.animalId,
+          animalNombre: animal?.nombre || entry.animalId,
+          animalIcono: animal?.icono || '🐾',
+          enfermedades: (entry.diseases || []).map(n => ({ nombre: n }))
+        };
+        breeds.push({ breed: stub, match: nameMatch.matched ? nameMatch : idMatch });
+      }
+      (entry.diseases || []).forEach(diseaseName => {
+        const match = this.matchesSearch(diseaseName, this.searchQuery);
+        if (!match.matched) return;
+        const key = `${entry.animalId}:${entry.id}:${diseaseName}`;
+        if (seenDiseases.has(key)) return;
+        seenDiseases.add(key);
+        const animal = this.data.animales.find(a => a.id === entry.animalId);
+        const stubBreed = {
+          id: entry.id,
+          nombre: entry.nombre,
+          animalId: entry.animalId,
+          animalNombre: animal?.nombre || entry.animalId,
+          enfermedades: [{ nombre: diseaseName }]
+        };
+        diseases.push({ disease: { nombre: diseaseName }, breed: stubBreed, match });
+      });
+    });
+
+    this.getDictionaryTerms().forEach(term => {
+      const haystack = [term.termino, term.definicion, term.ejemplo, term.categoriaNombre].join(' ');
+      const match = this.matchesSearch(haystack, this.searchQuery);
+      if (!match.matched) return;
+      if (seenGlossary.has(term.termino)) return;
+      seenGlossary.add(term.termino);
+      glossary.push({ term, match });
+    });
+
+    return { breeds, diseases, glossary };
+  },
+
   getGlobalSearchResults() {
+    if (!this.isAllChunksLoaded()) {
+      return this.getGlobalSearchResultsFromIndex();
+    }
     const breeds = [];
     const diseases = [];
     const glossary = [];
@@ -1073,17 +1327,23 @@ const App = {
     `;
 
     container.querySelectorAll('.search-hit-card').forEach(card => {
-      card.addEventListener('click', () => {
+      card.addEventListener('click', async () => {
         const [animalId, breedId] = card.dataset.key.split(':');
+        await this.loadChunk(animalId);
         const hit = breeds.find(b => b.breed.animalId === animalId && b.breed.id === breedId);
-        if (hit) this.showBreedDetail(hit.breed);
+        const breed = hit ? this.findBreed(animalId, breedId) || hit.breed : null;
+        if (breed) this.showBreedDetail(breed);
       });
     });
 
     container.querySelectorAll('.search-disease-item').forEach(item => {
-      item.addEventListener('click', () => {
+      item.addEventListener('click', async () => {
         const match = diseases[parseInt(item.dataset.index, 10)];
-        if (match) this.showDiseaseDetail(match.breed, match.disease);
+        if (!match) return;
+        await this.loadChunk(match.breed.animalId);
+        const breed = this.findBreed(match.breed.animalId, match.breed.id) || match.breed;
+        const disease = this.findDiseaseInBreed(breed, match.disease.nombre) || match.disease;
+        if (breed && disease) this.showDiseaseDetail(breed, disease);
       });
     });
 
@@ -1113,7 +1373,12 @@ const App = {
     if (focus && searchInput) searchInput.focus();
   },
 
-  enterBrowse(animalId, options = {}) {
+  async enterBrowse(animalId, options = {}) {
+    if (animalId !== 'todos') {
+      await this.loadChunk(animalId);
+    } else if (!this.isAllChunksLoaded()) {
+      await this.preloadAllChunks();
+    }
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
     document.querySelectorAll('.filter-btn').forEach(b => {
@@ -1191,16 +1456,15 @@ const App = {
   },
 
   renderWelcome() {
-    const breeds = this.getAllBreeds();
-    const diseases = breeds.reduce((acc, b) => acc + (b.enfermedades?.length || 0), 0);
+    const stats = this.getCatalogStats();
     const terms = this.dictionaryData?.total_terminos || this.getDictionaryTerms().length;
-    const stats = document.getElementById('welcomeStats');
-    if (stats) {
-      stats.innerHTML = `
-        <div class="welcome-stat"><span class="welcome-stat-value">${this.data.animales.length}</span><span class="welcome-stat-label">Tipos de animal</span></div>
-        <div class="welcome-stat"><span class="welcome-stat-value">${breeds.length}</span><span class="welcome-stat-label">Razas</span></div>
-        <div class="welcome-stat"><span class="welcome-stat-value">${diseases}</span><span class="welcome-stat-label">Enfermedades</span></div>
-        <div class="welcome-stat"><span class="welcome-stat-value">${terms}</span><span class="welcome-stat-label">Términos glosario</span></div>
+    const statsEl = document.getElementById('welcomeStats');
+    if (statsEl) {
+      statsEl.innerHTML = `
+        <div class="welcome-stat"><span class="welcome-stat-value">${this.data.animales.length}</span><span class="welcome-stat-label">${this.esc(this.t('welcome.stat_animals'))}</span></div>
+        <div class="welcome-stat"><span class="welcome-stat-value">${stats.breeds}</span><span class="welcome-stat-label">${this.esc(this.t('welcome.stat_breeds'))}</span></div>
+        <div class="welcome-stat"><span class="welcome-stat-value">${stats.diseases}</span><span class="welcome-stat-label">${this.esc(this.t('welcome.stat_diseases'))}</span></div>
+        <div class="welcome-stat"><span class="welcome-stat-value">${terms}</span><span class="welcome-stat-label">${this.esc(this.t('welcome.stat_glossary'))}</span></div>
       `;
     }
   },
@@ -1220,12 +1484,11 @@ const App = {
   },
 
   renderStats() {
-    const breeds = this.getAllBreeds();
-    const diseases = breeds.reduce((acc, b) => acc + (b.enfermedades?.length || 0), 0);
+    const stats = this.getCatalogStats();
     document.getElementById('statsContent').innerHTML = `
-      <div class="stat-item"><span>Animales</span><span class="stat-value">${this.data.animales.length}</span></div>
-      <div class="stat-item"><span>Razas</span><span class="stat-value">${breeds.length}</span></div>
-      <div class="stat-item"><span>Enfermedades</span><span class="stat-value">${diseases}</span></div>
+      <div class="stat-item"><span>${this.esc(this.t('welcome.stat_animals'))}</span><span class="stat-value">${this.data.animales.length}</span></div>
+      <div class="stat-item"><span>${this.esc(this.t('welcome.stat_breeds'))}</span><span class="stat-value">${stats.breeds}</span></div>
+      <div class="stat-item"><span>${this.esc(this.t('welcome.stat_diseases'))}</span><span class="stat-value">${stats.diseases}</span></div>
     `;
   },
 
@@ -1233,7 +1496,8 @@ const App = {
     const grid = document.getElementById('welcomeCategoryCards');
     if (!grid) return;
     grid.innerHTML = this.data.animales.map(a => {
-      const count = ['pequena','mediana','grande'].reduce((n, s) => n + (a.razas[s]?.length || 0), 0);
+      const meta = this.manifest?.animales?.find(m => m.id === a.id);
+      const count = meta?.total_breeds ?? ['pequena', 'mediana', 'grande'].reduce((n, s) => n + (a.razas[s]?.length || 0), 0);
       return `
         <div class="category-card" data-animal="${a.id}">
           <div class="cat-icon">${a.icono}</div>
@@ -1324,8 +1588,10 @@ const App = {
         <span class="dictionary-stat"><strong>${totalVisible}</strong> término(s) mostrados</span>
         <span class="dictionary-stat-muted">de ${totalAll} en el glosario</span>
         <button type="button" class="dictionary-study-btn" id="openFlashcardsFromDict">${this.esc(this.t('flash.open'))} →</button>
+        <button type="button" class="dictionary-study-btn dictionary-lab-btn" id="openLabFromDict">${this.esc(this.t('lab.open_from_dict'))}</button>
       `;
       stats.querySelector('#openFlashcardsFromDict')?.addEventListener('click', () => this.showFlashcards());
+      stats.querySelector('#openLabFromDict')?.addEventListener('click', () => this.showLaboratorio());
     }
 
     if (!list) return;
@@ -1542,6 +1808,92 @@ const App = {
     this.exportE2EState();
   },
 
+  showLaboratorio(options = {}) {
+    this.renderLaboratorio();
+    this.showView('laboratorio');
+    if (options.updateHash !== false) this.updateHash('#laboratorio');
+    this.exportE2EState();
+  },
+
+  renderLaboratorio() {
+    const container = document.getElementById('laboratorioContent');
+    if (!container || !this.labReferenceData?.especies?.length) return;
+    const lang = I18n?.lang === 'en' ? 'en' : 'es';
+    const species = this.labReferenceData.especies;
+    const current = species.find(s => s.id === this.labSpecies) || species[0];
+    this.labSpecies = current.id;
+
+    const speciesTabs = species.map(s => `
+      <button type="button" class="lab-species-btn ${s.id === current.id ? 'active' : ''}"
+        data-lab-species="${this.esc(s.id)}" aria-pressed="${s.id === current.id}">
+        <span aria-hidden="true">${s.icono}</span> ${this.esc(lang === 'en' ? s.nombre_en : s.nombre_es)}
+      </button>
+    `).join('');
+
+    const renderTable = (titleKey, rows, type) => {
+      if (!rows?.length) return '';
+      const nameKey = lang === 'en' ? 'parametro_en' : 'parametro_es';
+      const notesKey = lang === 'en' ? 'notas_en' : 'notas_es';
+      return `
+        <section class="lab-table-section" aria-labelledby="lab-${type}-title">
+          <h3 id="lab-${type}-title">${this.esc(this.t(titleKey))}</h3>
+          <div class="lab-table-wrap">
+            <table class="lab-table">
+              <thead>
+                <tr>
+                  <th scope="col">${this.esc(this.t('lab.col.parameter'))}</th>
+                  <th scope="col">${this.esc(this.t('lab.col.unit'))}</th>
+                  <th scope="col">${this.esc(this.t('lab.col.range'))}</th>
+                  <th scope="col">${this.esc(this.t('lab.col.notes'))}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows.map(row => `
+                  <tr>
+                    <td>${this.esc(row[nameKey])}</td>
+                    <td>${this.esc(row.unidad)}</td>
+                    <td>${this.esc(this.formatLabRange(row))}</td>
+                    <td>${this.esc(row[notesKey] || '—')}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    };
+
+    container.innerHTML = `
+      <div class="lab-toolbar">
+        <div class="lab-species-tabs" role="group" aria-label="${this.esc(this.t('lab.species_filter'))}">
+          ${speciesTabs}
+        </div>
+        <button type="button" id="labPrintBtn" class="btn-text-link lab-print-btn" data-i18n="lab.print">${this.esc(this.t('lab.print'))}</button>
+      </div>
+      <p class="lab-species-notes">${this.esc(lang === 'en' ? current.notas_en : current.notas_es)}</p>
+      ${renderTable('lab.hemogram', current.hemograma, 'hemogram')}
+      ${renderTable('lab.biochemistry', current.bioquimica, 'biochem')}
+      <p class="lab-disclaimer" role="note">⚕️ ${this.esc(lang === 'en' ? this.labReferenceData.disclaimer_en : this.labReferenceData.disclaimer_es)}</p>
+    `;
+
+    container.querySelectorAll('[data-lab-species]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.labSpecies = btn.dataset.labSpecies;
+        this.renderLaboratorio();
+      });
+    });
+    container.querySelector('#labPrintBtn')?.addEventListener('click', () => window.print());
+  },
+
+  formatLabRange(row) {
+    const min = row.min;
+    const max = row.max;
+    if (min != null && max != null) return `${min} – ${max}`;
+    if (min != null) return `≥ ${min}`;
+    if (max != null) return `≤ ${max}`;
+    return '—';
+  },
+
   BCS_DOG_CAT_SCORES: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   BCS_EQUINE_SCORES: [1, 2, 3, 4, 5],
 
@@ -1598,6 +1950,12 @@ const App = {
         title: this.t('triaje.title'),
         desc: this.t('triaje.card_desc'),
         action: () => this.showTriaje()
+      },
+      {
+        icon: '🧪',
+        title: this.t('lab.title'),
+        desc: this.t('lab.card_desc'),
+        action: () => this.showLaboratorio()
       }
     ];
     grid.innerHTML = cards.map((c, i) => `
@@ -3861,6 +4219,7 @@ const App = {
     document.getElementById('flashcardsView').classList.toggle('active', view === 'flashcards');
     document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');
     document.getElementById('triajeView').classList.toggle('active', view === 'triaje');
+    document.getElementById('laboratorioView').classList.toggle('active', view === 'laboratorio');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
@@ -3870,6 +4229,7 @@ const App = {
   },
 
   exportE2EState() {
+    const stats = this.getCatalogStats();
     const breeds = this.getAllBreeds();
     const inBrowse = this.currentView === 'home' && !this.searchQuery;
     window.__E2E_STATE__ = {
@@ -3878,8 +4238,10 @@ const App = {
       welcomeActive: this.currentView === 'welcome',
       currentAnimal: this.currentAnimal,
       animales: this.data.animales.length,
-      razas: breeds.length,
-      enfermedades: breeds.reduce((n, b) => n + (b.enfermedades?.length || 0), 0),
+      razas: stats.breeds || breeds.length,
+      enfermedades: stats.diseases || breeds.reduce((n, b) => n + (b.enfermedades?.length || 0), 0),
+      chunksLoaded: Object.keys(this.chunkCache).length,
+      lazyLoad: !!this.manifest,
       navItems: document.querySelectorAll('#animalNav .nav-btn').length,
       categoryCards: document.querySelectorAll('#welcomeCategoryCards .category-card').length,
       dictionaryTerms: this.getDictionaryTerms().length,
@@ -3887,6 +4249,7 @@ const App = {
       crossLinkDiseases: this.crossLinks?.total_enfermedades_enlazadas || 0,
       breedCards: inBrowse ? document.querySelectorAll('#breedGrid .breed-card').length : 0,
       statsAnimales: document.querySelector('#statsContent .stat-value')?.textContent,
+      breedOfWeek: !!document.getElementById('breedOfWeekPanel') && !document.getElementById('breedOfWeekPanel').hidden,
       error: null
     };
   }

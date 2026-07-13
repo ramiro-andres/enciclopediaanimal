@@ -124,6 +124,7 @@
               </div>
               <div id="favoritesList" class="favorites-list"></div>
             </div>
+            <div id="breedOfWeekPanel" class="breed-of-week-panel" hidden></div>
           </div>
           <div class="welcome-visual" aria-label="Muestra visual del contenido de la enciclopedia">
             <div class="visual-main-card">
@@ -443,6 +444,18 @@
         </div>
       </section>
 
+      <section id="laboratorioView" class="view">
+        <button id="backLaboratorioBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="laboratorio-page">
+          <div class="laboratorio-hero">
+            <span class="eyebrow" data-i18n="lab.eyebrow">LABORATORIO</span>
+            <h2 data-i18n="lab.title">Rangos de laboratorio</h2>
+            <p data-i18n="lab.intro">Tablas de referencia por especie para hemograma y panel bioquímico básico. Los intervalos varían según laboratorio y método.</p>
+          </div>
+          <div id="laboratorioContent" class="laboratorio-content"></div>
+        </div>
+      </section>
+
       <section id="compareView" class="view">
         <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="compare-page">
@@ -549,7 +562,9 @@
     </div>
   </div>
 
-  <script src="data/enciclopedia.js"></script>
+  <script src="data/chunks/manifest.js"></script>
+  <script src="data/search_index.js"></script>
+  <script src="data/lab_reference.js"></script>
   <script src="data/diccionario_medicos.js"></script>
   <script src="data/enlaces_clinicos.js"></script>
   <script src="data/toxicologia.js"></script>

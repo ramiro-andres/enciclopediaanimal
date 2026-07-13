@@ -30,6 +30,9 @@ jobs:
       - name: Validar contenido clínico
         run: ruby scripts/data/validate_clinical_content.rb
 
+      - name: Detección de inconsistencias (Sprint 11)
+        run: ruby scripts/data/detect_inconsistencies.rb
+
       - name: Verificar imágenes de razas (F4-03)
         run: |
           ruby scripts/images/list_missing_images.rb > /tmp/missing.txt
