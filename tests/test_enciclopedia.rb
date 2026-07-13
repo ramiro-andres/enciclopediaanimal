@@ -555,6 +555,77 @@ class Sprint3BacklogTest < Minitest::Test
     assert_includes @js, 'I18n'
     assert_match(/data-lang="es"/, @html)
     assert File.exist?(File.join(ROOT, 'docs', 'I18N.md'))
+    assert_includes File.read(File.join(ROOT, 'docs', 'I18N.md')), 'contenido clínico'
+  end
+
+  def extract_i18n_keys(i18n_src, lang)
+    m = i18n_src.match(/\b#{lang}\s*:\s*\{/)
+    assert m, "No se encontró bloque #{lang} en i18n.js"
+    start = m.end(0) - 1
+    depth = 0
+    i = start
+    in_str = false
+    quote = nil
+    escape = false
+    while i < i18n_src.length
+      ch = i18n_src[i]
+      if in_str
+        if escape
+          escape = false
+        elsif ch == '\\'
+          escape = true
+        elsif ch == quote
+          in_str = false
+        end
+      else
+        if ch == "'" || ch == '"'
+          in_str = true
+          quote = ch
+        elsif ch == '{'
+          depth += 1
+        elsif ch == '}'
+          depth -= 1
+          break if depth.zero?
+        end
+      end
+      i += 1
+    end
+    obj = i18n_src[start..i]
+    obj.scan(/['"]([a-zA-Z0-9_.]+)['"]\s*:/).flatten.uniq
+  end
+
+  def test_i18n_parity_es_en
+    i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
+    es = extract_i18n_keys(i18n, 'es')
+    en = extract_i18n_keys(i18n, 'en')
+    miss_en = es - en
+    miss_es = en - es
+    assert_empty miss_en, "Claves en ES sin par EN: #{miss_en.take(20).join(', ')}"
+    assert_empty miss_es, "Claves en EN sin par ES: #{miss_es.take(20).join(', ')}"
+    assert es.length > 300, "Se esperaban muchas claves UI, hay #{es.length}"
+  end
+
+  def test_i18n_html_data_keys_existen
+    i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
+    es = extract_i18n_keys(i18n, 'es')
+    en = extract_i18n_keys(i18n, 'en')
+    keys = @html.scan(/data-i18n(?:-placeholder|-aria|-html|-title)?="([^"]+)"/).flatten.uniq
+    assert keys.length > 40, "Pocos data-i18n en HTML: #{keys.length}"
+    keys.each do |key|
+      assert_includes es, key, "Falta clave HTML #{key} en ES"
+      assert_includes en, key, "Falta clave HTML #{key} en EN"
+    end
+  end
+
+  def test_i18n_langchange_rerender_dinamico
+    assert_includes @js, 'atlas:langchange'
+    assert_includes @js, 'showLoadStatus()'
+    assert_includes @js, "this.currentView === 'detail'"
+    assert_includes @js, "this.currentView === 'home'"
+    i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
+    assert_includes i18n, 'data-i18n-html'
+    assert_includes @html, 'data-i18n-html="welcome.hero_title"'
+    assert_includes @html, 'data-i18n-html="disclaimer.body"'
   end
 
   def test_comparador_de_razas
@@ -679,7 +750,7 @@ class DoseCalculatorTest < Minitest::Test
     assert_includes js, 'doseWeightInput'
     assert_includes js, 'doseDrugSelect'
     assert_includes js, 'aria-live="polite"'
-    assert_includes js, 'Aviso educativo'
-    assert_includes js, 'no sustituye el diagnóstico'
+    assert_includes js, "t('dose.disclaimer')"
+    assert_includes js, "t('dose.title')"
   end
 end

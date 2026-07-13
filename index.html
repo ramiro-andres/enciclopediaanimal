@@ -72,20 +72,20 @@
   <div id="appLayout" class="layout layout--full">
     <aside id="appSidebar" class="sidebar">
       <div id="browseContext" class="browse-context" hidden>
-        <button type="button" id="changeCategoryBtn" class="change-category-btn">← Cambiar categoría</button>
+        <button type="button" id="changeCategoryBtn" class="change-category-btn" data-i18n="sidebar.change_category">← Cambiar categoría</button>
         <div id="selectedAnimalChip" class="selected-animal-chip"></div>
       </div>
       <nav id="animalNavSection" class="nav-section" hidden>
-        <h3>Tipo de animal</h3>
+        <h3 data-i18n="sidebar.animal_type">Tipo de animal</h3>
         <ul id="animalNav" class="nav-list"></ul>
       </nav>
       <nav id="sizeFiltersSection" class="nav-section" hidden>
-        <h3>Tamaño de raza</h3>
+        <h3 data-i18n="sidebar.size">Tamaño de raza</h3>
         <ul class="nav-list size-filters">
-          <li><button class="filter-btn active" data-size="todos">Todos</button></li>
-          <li><button class="filter-btn" data-size="pequena">🐁 Pequeñas</button></li>
-          <li><button class="filter-btn" data-size="mediana">🐕 Medianas</button></li>
-          <li><button class="filter-btn" data-size="grande">🐘 Grandes</button></li>
+          <li><button class="filter-btn active" data-size="todos" data-i18n="size.all">Todos</button></li>
+          <li><button class="filter-btn" data-size="pequena">🐁 <span data-i18n="size.small">Pequeñas</span></button></li>
+          <li><button class="filter-btn" data-size="mediana">🐕 <span data-i18n="size.medium">Medianas</span></button></li>
+          <li><button class="filter-btn" data-size="grande">🐘 <span data-i18n="size.large">Grandes</span></button></li>
         </ul>
       </nav>
       <nav id="regionFiltersSection" class="nav-section" hidden>
@@ -93,7 +93,7 @@
         <ul id="regionFilters" class="nav-list region-filters"></ul>
       </nav>
       <div class="stats-panel">
-        <h3>Resumen</h3>
+        <h3 data-i18n="sidebar.summary">Resumen</h3>
         <div id="statsContent"></div>
       </div>
     </aside>
@@ -102,19 +102,19 @@
       <section id="welcomeView" class="view active">
         <div class="welcome-hero">
           <div class="welcome-hero-copy">
-            <span class="eyebrow">CONOCIMIENTO ANIMAL, ORGANIZADO</span>
-            <h2>Una mirada más profunda al <em>mundo animal.</em></h2>
-            <p id="welcomeIntro">Cargando enciclopedia...</p>
+            <span class="eyebrow" data-i18n="welcome.eyebrow">CONOCIMIENTO ANIMAL, ORGANIZADO</span>
+            <h2 data-i18n-html="welcome.hero_title">Una mirada más profunda al <em>mundo animal.</em></h2>
+            <p id="welcomeIntro" data-i18n="welcome.loading">Cargando enciclopedia...</p>
             <div class="hero-actions">
-              <button type="button" id="btnExploreAll" class="btn-explore-all">Explorar todas las razas</button>
-              <button type="button" class="btn-text-link" data-focus-welcome-search>Buscar una especie <span>→</span></button>
+              <button type="button" id="btnExploreAll" class="btn-explore-all" data-i18n="welcome.explore_all">Explorar todas las razas</button>
+              <button type="button" class="btn-text-link" data-focus-welcome-search><span data-i18n="welcome.search_species">Buscar una especie</span> <span>→</span></button>
               <button type="button" id="welcomeChangelogBtn" class="btn-text-link" data-i18n="changelog.link">Ver changelog</button>
             </div>
             <div id="welcomeStats" class="welcome-stats"></div>
             <div id="recentHistory" class="recent-history" hidden>
               <div class="recent-history-header">
-                <span class="eyebrow">CONTINUAR EXPLORANDO</span>
-                <button type="button" id="clearHistoryBtn" class="btn-text-link">Limpiar historial</button>
+                <span class="eyebrow" data-i18n="history.eyebrow">CONTINUAR EXPLORANDO</span>
+                <button type="button" id="clearHistoryBtn" class="btn-text-link" data-i18n="history.clear">Limpiar historial</button>
               </div>
               <div id="recentHistoryList" class="recent-history-list"></div>
             </div>
@@ -127,7 +127,7 @@
             </div>
             <div id="breedOfWeekPanel" class="breed-of-week-panel" hidden></div>
           </div>
-          <div class="welcome-visual" aria-label="Muestra visual del contenido de la enciclopedia">
+          <div class="welcome-visual" data-i18n-aria="welcome.visual_aria" aria-label="Muestra visual del contenido de la enciclopedia">
             <div class="visual-main-card">
               <img src="images/holstein.jpg" alt="Vaca Holstein">
               <div class="visual-caption">
@@ -137,58 +137,58 @@
             </div>
             <div class="visual-floating-card visual-floating-card--top">
               <img src="images/maine_coon.jpg" alt="Gato Maine Coon">
-              <span>Razas</span>
+              <span data-i18n="welcome.visual_breeds">Razas</span>
             </div>
             <div class="visual-floating-card visual-floating-card--bottom">
               <span class="visual-medical-icon">+</span>
-              <div><strong>1.967</strong><small>fichas clínicas</small></div>
+              <div><strong>1.967</strong><small data-i18n="welcome.visual_clinical">fichas clínicas</small></div>
             </div>
           </div>
         </div>
 
         <div class="editorial-intro">
-          <span class="eyebrow">TODO EN UN SOLO LUGAR</span>
-          <h3>Explora, comprende y cuida mejor.</h3>
-          <p>Información clara para descubrir razas, conocer sus necesidades y consultar contenido veterinario detallado.</p>
+          <span class="eyebrow" data-i18n="welcome.editorial_eyebrow">TODO EN UN SOLO LUGAR</span>
+          <h3 data-i18n="welcome.editorial_title">Explora, comprende y cuida mejor.</h3>
+          <p data-i18n="welcome.editorial_body">Información clara para descubrir razas, conocer sus necesidades y consultar contenido veterinario detallado.</p>
         </div>
 
         <div class="welcome-features">
           <article class="feature-card feature-card--dark">
             <span class="feature-number">01</span>
             <div>
-              <h3>Descubre cada especie</h3>
-              <p>Entra por categoría y encuentra únicamente las razas del animal que te interesa.</p>
+              <h3 data-i18n="welcome.feature1_title">Descubre cada especie</h3>
+              <p data-i18n="welcome.feature1_body">Entra por categoría y encuentra únicamente las razas del animal que te interesa.</p>
             </div>
           </article>
           <article class="feature-card">
             <span class="feature-number">02</span>
             <div>
-              <h3>Conoce cada raza</h3>
-              <p>Origen, características, alimentación, cuidados y aptitudes en una ficha visual.</p>
+              <h3 data-i18n="welcome.feature2_title">Conoce cada raza</h3>
+              <p data-i18n="welcome.feature2_body">Origen, características, alimentación, cuidados y aptitudes en una ficha visual.</p>
             </div>
           </article>
           <article class="feature-card feature-card--sage">
             <span class="feature-number">03</span>
             <div>
-              <h3>Consulta su salud</h3>
-              <p>Síntomas, diagnóstico, prevención y protocolos clínicos con enfoque veterinario.</p>
+              <h3 data-i18n="welcome.feature3_title">Consulta su salud</h3>
+              <p data-i18n="welcome.feature3_body">Síntomas, diagnóstico, prevención y protocolos clínicos con enfoque veterinario.</p>
             </div>
           </article>
-          <article class="feature-card feature-card--dictionary" id="openDictionaryCard" role="button" tabindex="0" aria-label="Abrir diccionario de términos médicos">
+          <article class="feature-card feature-card--dictionary" id="openDictionaryCard" role="button" tabindex="0" data-i18n-aria="welcome.feature4_aria" aria-label="Abrir diccionario de términos médicos">
             <span class="feature-number">04</span>
             <div>
-              <h3>Diccionario médico</h3>
-              <p>Más de 500 términos: enfermedades, exámenes, fármacos, síntomas y conceptos de cada ficha clínica.</p>
+              <h3 data-i18n="welcome.feature4_title">Diccionario médico</h3>
+              <p data-i18n="welcome.feature4_body">Más de 500 términos: enfermedades, exámenes, fármacos, síntomas y conceptos de cada ficha clínica.</p>
             </div>
           </article>
-          <article class="feature-card feature-card--tools" id="openToolsCard" role="button" tabindex="0" aria-label="Abrir herramientas clínicas">
+          <article class="feature-card feature-card--tools" id="openToolsCard" role="button" tabindex="0" data-i18n-aria="welcome.feature5_aria" aria-label="Abrir herramientas clínicas">
             <span class="feature-number">05</span>
             <div>
-              <h3>Herramientas clínicas</h3>
-              <p>Calculadora RER/MER, índice de toxicología y calendarios de vacunación para consulta rápida en campo.</p>
+              <h3 data-i18n="welcome.feature5_title">Herramientas clínicas</h3>
+              <p data-i18n="welcome.feature5_body">Calculadora RER/MER, índice de toxicología y calendarios de vacunación para consulta rápida en campo.</p>
             </div>
           </article>
-          <article class="feature-card feature-card--predis" id="openPredisposicionesCard" role="button" tabindex="0" aria-label="Abrir mapa de predisposiciones genéticas">
+          <article class="feature-card feature-card--predis" id="openPredisposicionesCard" role="button" tabindex="0" data-i18n-aria="welcome.feature6_aria" aria-label="Abrir mapa de predisposiciones genéticas">
             <span class="feature-number">06</span>
             <div>
               <h3 data-i18n="predis.card_title">Predisposiciones genéticas</h3>
@@ -200,19 +200,19 @@
         <div class="welcome-picker">
           <div class="picker-heading">
             <div>
-              <span class="eyebrow">EXPLORA EL ATLAS</span>
-              <h3>Elige un grupo animal</h3>
+              <span class="eyebrow" data-i18n="welcome.picker_eyebrow">EXPLORA EL ATLAS</span>
+              <h3 data-i18n="welcome.picker_title">Elige un grupo animal</h3>
             </div>
-            <p>Selecciona una categoría para ver solo las razas que pertenecen a ella.</p>
+            <p data-i18n="welcome.picker_hint">Selecciona una categoría para ver solo las razas que pertenecen a ella.</p>
           </div>
           <div id="welcomeCategoryCards" class="category-grid"></div>
         </div>
 
         <div class="main-search-panel welcome-search">
           <div class="search-copy">
-            <span class="eyebrow">BÚSQUEDA GLOBAL</span>
-            <label class="main-search-label" for="searchInputWelcome">¿Qué quieres conocer hoy?</label>
-            <p>Busca una raza o enfermedad en toda la enciclopedia.</p>
+            <span class="eyebrow" data-i18n="welcome.search_eyebrow">BÚSQUEDA GLOBAL</span>
+            <label class="main-search-label" for="searchInputWelcome" data-i18n="welcome.search_label">¿Qué quieres conocer hoy?</label>
+            <p data-i18n="welcome.search_hint_short">Busca una raza o enfermedad en toda la enciclopedia.</p>
           </div>
           <div class="search-box search-box--large">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -221,6 +221,7 @@
             <input
               type="search"
               id="searchInputWelcome"
+              data-i18n-placeholder="welcome.search_placeholder"
               placeholder="Ej. Chihuahua, mastitis, tilapia..."
               autocomplete="off"
               enterkeyhint="search"
@@ -231,7 +232,7 @@
 
       <section id="homeView" class="view">
         <div class="main-search-panel iso-panel">
-          <label class="main-search-label" for="searchInput">Buscar en toda la enciclopedia</label>
+          <label class="main-search-label" for="searchInput" data-i18n="search.label">Buscar en toda la enciclopedia</label>
           <div class="search-box search-box--large">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
@@ -239,24 +240,25 @@
             <input
               type="search"
               id="searchInput"
+              data-i18n-placeholder="search.placeholder"
               placeholder="Nombre de raza o enfermedad (ej: Chihuahua, mastitis, tilapia)..."
               autocomplete="off"
               enterkeyhint="search"
             >
-            <button type="button" id="searchClearBtn" class="search-clear" aria-label="Limpiar búsqueda" hidden>×</button>
+            <button type="button" id="searchClearBtn" class="search-clear" data-i18n-aria="search.clear" aria-label="Limpiar búsqueda" hidden>×</button>
           </div>
-          <p id="searchHint" class="search-hint">Búsqueda general por nombre. Atajo: <kbd>Ctrl</kbd>+<kbd>K</kbd></p>
+          <p id="searchHint" class="search-hint" data-i18n="search.hint">Búsqueda por nombre, sinónimos o términos similares. Atajo: Ctrl+K</p>
         </div>
 
         <div id="searchResults" class="search-results" hidden></div>
 
         <div id="browseSection">
         <div class="section-header">
-          <h3 id="resultsTitle">Todas las razas</h3>
+          <h3 id="resultsTitle" data-i18n="results.all_breeds">Todas las razas</h3>
           <span id="resultsCount" class="badge">0</span>
         </div>
         <div id="breedGrid" class="breed-grid">
-          <div class="empty-state"><div class="empty-icon">⏳</div><p>Cargando razas...</p></div>
+          <div class="empty-state"><div class="empty-icon">⏳</div><p data-i18n="common.loading_breeds">Cargando razas...</p></div>
         </div>
         </div>
       </section>
@@ -264,13 +266,13 @@
       <section id="dictionaryView" class="view">
         <button id="backDictionaryBtn" class="back-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Volver al inicio
+          <span data-i18n="back.home">Volver al inicio</span>
         </button>
         <div id="dictionaryContent" class="dictionary-page">
           <div class="dictionary-hero">
-            <span class="eyebrow">REFERENCIA CLÍNICA</span>
-            <h2 id="dictionaryTitle">Diccionario de términos médicos</h2>
-            <p id="dictionaryIntro">Cargando glosario...</p>
+            <span class="eyebrow" data-i18n="dict.eyebrow">REFERENCIA CLÍNICA</span>
+            <h2 id="dictionaryTitle" data-i18n="dict.title">Diccionario de términos médicos</h2>
+            <p id="dictionaryIntro" data-i18n="dict.loading">Cargando glosario...</p>
           </div>
           <div class="dictionary-toolbar">
             <div class="search-box search-box--dictionary">
@@ -280,6 +282,7 @@
               <input
                 type="search"
                 id="dictionarySearchInput"
+                data-i18n-placeholder="dict.search"
                 placeholder="Buscar término (ej. anamnesis, mg/kg, mastitis)..."
                 autocomplete="off"
               >
@@ -294,13 +297,13 @@
       <section id="urgencyView" class="view">
         <button id="backUrgencyBtn" class="back-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Volver al inicio
+          <span data-i18n="back.home">Volver al inicio</span>
         </button>
         <div class="urgency-page">
           <div class="urgency-hero">
-            <span class="eyebrow">GUÍA EDUCATIVA</span>
-            <h2>¿Cuándo ir al veterinario?</h2>
-            <p>Señales de alerta y emergencias frecuentes por tipo de animal. Si observas estos signos, consulta a un profesional de inmediato.</p>
+            <span class="eyebrow" data-i18n="urgency.eyebrow">GUÍA EDUCATIVA</span>
+            <h2 data-i18n="urgency.title">¿Cuándo ir al veterinario?</h2>
+            <p data-i18n="urgency.intro">Señales de alerta y emergencias frecuentes por tipo de animal. Si observas estos signos, consulta a un profesional de inmediato.</p>
           </div>
           <div id="urgencyContent" class="urgency-content"></div>
         </div>
@@ -310,7 +313,7 @@
         <button id="backToolsBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="tools-page">
           <div class="tools-hero">
-            <span class="eyebrow">HERRAMIENTAS</span>
+            <span class="eyebrow" data-i18n="tools.eyebrow">HERRAMIENTAS</span>
             <h2 data-i18n="tools.title">Herramientas clínicas de bolsillo</h2>
             <p data-i18n="tools.intro">Calculadoras y referencias rápidas para estudiantes y profesionales. Uso educativo exclusivamente.</p>
           </div>
@@ -322,7 +325,7 @@
         <button id="backRerMerBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="rer-mer-page">
           <div class="rer-mer-hero">
-            <span class="eyebrow">NUTRICIÓN</span>
+            <span class="eyebrow" data-i18n="rer.eyebrow">NUTRICIÓN</span>
             <h2 data-i18n="rer.title">Calculadora RER / MER</h2>
             <p data-i18n="rer.intro">Estima el requerimiento energético en reposo (RER) y el mantenimiento (MER) según el estado fisiológico del animal.</p>
           </div>
@@ -334,7 +337,7 @@
         <button id="backFluidoterapiaBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="fluidoterapia-page">
           <div class="fluidoterapia-hero">
-            <span class="eyebrow">FLUIDOTERAPIA</span>
+            <span class="eyebrow" data-i18n="fluid.eyebrow">FLUIDOTERAPIA</span>
             <h2 data-i18n="fluid.title">Calculadora de fluidoterapia de mantenimiento</h2>
             <p data-i18n="fluid.intro">Estima volúmenes de mantenimiento diario y bolos de reanimación orientativos según especie. Referencia educativa basada en guías clínicas veterinarias.</p>
           </div>
@@ -346,7 +349,7 @@
         <button id="backUnidadesBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="unidades-page">
           <div class="unidades-hero">
-            <span class="eyebrow">CONVERSIÓN</span>
+            <span class="eyebrow" data-i18n="units.eyebrow">CONVERSIÓN</span>
             <h2 data-i18n="units.title">Conversor de unidades clínicas</h2>
             <p data-i18n="units.intro">Conversiones frecuentes en consulta: masas, dosis por peso, temperatura y gotas por mililitro.</p>
           </div>
@@ -358,7 +361,7 @@
         <button id="backPredisposicionesBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="predisposiciones-page">
           <div class="predisposiciones-hero">
-            <span class="eyebrow">GENÉTICA</span>
+            <span class="eyebrow" data-i18n="predis.eyebrow">GENÉTICA</span>
             <h2 data-i18n="predis.title">Mapa de predisposiciones genéticas</h2>
             <p data-i18n="predis.intro">Cruza las predisposiciones documentadas en las 431 razas del atlas. Filtra por categoría animal o por condición genética.</p>
           </div>
@@ -369,7 +372,7 @@
               </svg>
               <input type="search" id="predisSearchInput" data-i18n-placeholder="predis.search" placeholder="Buscar predisposición..." autocomplete="off" aria-label="Buscar predisposición genética">
             </div>
-            <div id="predisAnimalFilters" class="predisposiciones-filters" role="group" aria-label="Filtrar por categoría animal"></div>
+            <div id="predisAnimalFilters" class="predisposiciones-filters" role="group" data-i18n-aria="predis.filter_aria" aria-label="Filtrar por categoría animal"></div>
           </div>
           <div id="predisSummary" class="predisposiciones-summary" role="status" aria-live="polite"></div>
           <div id="predisList" class="predisposiciones-list"></div>
@@ -380,9 +383,9 @@
         <button id="backToxicologiaBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="toxicologia-page">
           <div class="toxicologia-hero">
-            <span class="eyebrow">TOXICOLOGÍA</span>
-            <h2 id="toxicologiaTitle">Índice de toxicología</h2>
-            <p id="toxicologiaIntro">Cargando...</p>
+            <span class="eyebrow" data-i18n="tox.eyebrow">TOXICOLOGÍA</span>
+            <h2 id="toxicologiaTitle" data-i18n="tox.title">Índice de toxicología</h2>
+            <p id="toxicologiaIntro" data-i18n="tox.loading">Cargando...</p>
           </div>
           <div class="toxicologia-toolbar">
             <div class="search-box search-box--dictionary">
@@ -391,7 +394,7 @@
               </svg>
               <input type="search" id="toxicologiaSearchInput" data-i18n-placeholder="tox.search" placeholder="Buscar sustancia..." autocomplete="off" aria-label="Buscar sustancia tóxica">
             </div>
-            <div id="toxicologiaSpeciesFilters" class="toxicologia-filters" role="group" aria-label="Filtrar por especie"></div>
+            <div id="toxicologiaSpeciesFilters" class="toxicologia-filters" role="group" data-i18n-aria="tox.filter_aria" aria-label="Filtrar por especie"></div>
           </div>
           <div id="toxicologiaList" class="toxicologia-list"></div>
         </div>
@@ -401,7 +404,7 @@
         <button id="backBcsBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="bcs-page">
           <div class="bcs-hero">
-            <span class="eyebrow">NUTRICIÓN</span>
+            <span class="eyebrow" data-i18n="bcs.eyebrow">NUTRICIÓN</span>
             <h2 data-i18n="bcs.title">Guía visual de condición corporal (BCS)</h2>
             <p data-i18n="bcs.intro">Escala de condición corporal para evaluar grasa y masa muscular. Perros y gatos: 1–9; equinos: 1–5. Referencia educativa WSAVA / Henneke.</p>
           </div>
@@ -413,7 +416,7 @@
         <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.glossary">Volver al glosario</button>
         <div class="flashcards-page">
           <div class="flashcards-hero">
-            <span class="eyebrow">ESTUDIO</span>
+            <span class="eyebrow" data-i18n="flash.eyebrow">ESTUDIO</span>
             <h2 data-i18n="flash.title">Modo estudio — flashcards del glosario</h2>
             <p data-i18n="flash.intro">Repasa términos médicos: muestra el término, revela la definición y marca tu progreso. El avance se guarda en este dispositivo.</p>
           </div>
@@ -425,9 +428,9 @@
         <button id="backEmergenciasLatamBtn" class="back-btn" data-i18n="back.urgency">Volver a urgencias</button>
         <div class="emergencias-latam-page">
           <div class="emergencias-latam-hero">
-            <span class="eyebrow">LATAM</span>
-            <h2 id="emergenciasLatamTitle">Directorio de emergencias LATAM</h2>
-            <p id="emergenciasLatamIntro">Cargando...</p>
+            <span class="eyebrow" data-i18n="emerg.eyebrow">LATAM</span>
+            <h2 id="emergenciasLatamTitle" data-i18n="emerg.title">Directorio de emergencias LATAM</h2>
+            <p id="emergenciasLatamIntro" data-i18n="tox.loading">Cargando...</p>
           </div>
           <div id="emergenciasLatamList" class="emergencias-latam-list"></div>
         </div>
@@ -547,7 +550,7 @@
       <div class="disclaimer-modal-inner">
         <span class="disclaimer-icon" aria-hidden="true">⚕</span>
         <h2 id="disclaimerTitle" data-i18n="disclaimer.title">Aviso importante</h2>
-        <p id="disclaimerBody">
+        <p id="disclaimerBody" data-i18n-html="disclaimer.body">
           La información de esta enciclopedia es <strong>exclusivamente educativa</strong> y no sustituye el diagnóstico, la prescripción ni el seguimiento de un veterinario colegiado. Las dosis y protocolos mostrados son orientativos. Si tu animal presenta síntomas, signos de enfermedad o una emergencia, acude a un profesional de inmediato.
         </p>
         <p class="disclaimer-extra">

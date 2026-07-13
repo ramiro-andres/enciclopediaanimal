@@ -189,7 +189,7 @@ const App = {
       url: this.pageUrl(this.termRoute(term)),
       inDefinedTermSet: {
         '@type': 'DefinedTermSet',
-        name: this.dictionaryData?.titulo || 'Diccionario de términos médicos',
+        name: this.t('dict.title'),
         url: this.pageUrl('#glosario')
       }
     };
@@ -238,6 +238,18 @@ const App = {
         document.addEventListener('atlas:langchange', () => {
           I18n.apply();
           this.updateCompareBadge();
+          this.showLoadStatus();
+          this.renderWelcome();
+          this.renderCategoryCards();
+          this.renderStats();
+          this.renderNav();
+          this.renderRecentHistory();
+          this.renderBreedOfWeek();
+          this.renderFavorites();
+          this.renderFooterContribute();
+          this.updateMobileTabBar();
+          this.updateResultsTitle();
+          if (this.currentView === 'home') this.renderHome();
           if (this.currentView === 'compare') this.renderCompare();
           if (this.currentView === 'tools') this.renderTools();
           if (this.currentView === 'rerMer') this.renderRerMer();
@@ -253,11 +265,13 @@ const App = {
           if (this.currentView === 'laboratorio') this.renderLaboratorio();
           if (this.currentView === 'changelog') this.renderChangelog();
           if (this.currentView === 'dictionary') this.renderDictionary();
-          this.renderBreedOfWeek();
-          this.renderFavorites();
-          this.renderFooterContribute();
-          this.updateMobileTabBar();
-          this.updateResultsTitle();
+          if (this.currentView === 'detail' && this.currentBreed) {
+            this.showBreedDetail(this.currentBreed, { updateHash: false });
+          }
+          if (this.currentView === 'disease' && this.currentBreed && this.currentDisease) {
+            this.showDiseaseDetail(this.currentBreed, this.currentDisease, { updateHash: false });
+          }
+          this.updateDocumentTitle();
         });
       }
       this.loadCompareList();
@@ -296,14 +310,14 @@ const App = {
       if (!window.__E2E_STATE__?.ready) {
         window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
         const intro = document.getElementById('welcomeIntro');
-        if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
+        if (intro) intro.textContent = this.t('common.load_error');
         const grid = document.getElementById('breedGrid');
         if (grid) {
           grid.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">⚠️</div>
-          <p><strong>No se pudo cargar la enciclopedia.</strong></p>
-          <p style="margin-top:0.5rem">Regenera los datos con <code>bash actualizar_datos.sh</code> o visita el sitio publicado:</p>
+          <p><strong>${this.esc(this.t('common.load_failed'))}</strong></p>
+          <p style="margin-top:0.5rem">${this.esc(this.t('common.load_hint'))}</p>
           <p><a href="https://ramiro-andres.github.io/enciclopediaanimal/" target="_blank" rel="noopener noreferrer">ramiro-andres.github.io/enciclopediaanimal</a></p>
           <p style="margin-top:0.5rem;font-size:0.85rem;color:#888">${this.esc(err.message)}</p>
         </div>`;
@@ -804,7 +818,7 @@ const App = {
       this.renderDictionary();
       if (!this.isRoutingFromHash) this.updateHash('#glosario');
       this.updatePageMeta({
-        title: 'Glosario médico — Atlas Animal',
+        title: `${this.t('dict.doc_title')} — Atlas Animal`,
         description: this.dictionaryData?.introduccion || this.DEFAULT_META.description,
         image: 'images/og-image.svg',
         url: this.pageUrl('#glosario'),
@@ -1398,7 +1412,7 @@ const App = {
                   ${this.renderSearchMatchHint(match)}
                   <p>${this.esc(breed.descripcion)}</p>
                   <div class="breed-card-footer">
-                    <span>${breed.enfermedades?.length || 0} enfermedades</span>
+                    <span>${this.esc(this.t('common.diseases_count').replace('{count}', breed.enfermedades?.length || 0))}</span>
                     <span>Ver raza →</span>
                   </div>
                 </div>
@@ -1413,7 +1427,7 @@ const App = {
           <div class="search-disease-list">
             ${diseases.map(({ disease, breed, match }, index) => `
               <button type="button" class="search-disease-item" data-index="${index}">
-                <span class="severity severity-${disease.gravedad || 'moderada'}">${(disease.gravedad || 'moderada').toUpperCase()}</span>
+                <span class="severity severity-${disease.gravedad || 'moderada'}">${this.esc(this.severityLabel(disease.gravedad).toUpperCase())}</span>
                 <span class="search-disease-name">${this.esc(disease.nombre)}</span>
                 ${this.renderSearchMatchHint(match)}
                 <span class="search-disease-breed">${breed.animalIcono} ${this.esc(breed.nombre)} · ${this.esc(breed.animalNombre)}</span>
@@ -1586,7 +1600,7 @@ const App = {
   renderNav() {
     const nav = document.getElementById('animalNav');
     if (!nav) return;
-    const items = [{ id: 'todos', nombre: 'Todos', icono: '🌿' }, ...this.data.animales];
+    const items = [{ id: 'todos', nombre: this.t('nav.all'), icono: '🌿' }, ...this.data.animales];
     nav.innerHTML = items.map(a => `
       <li><button class="nav-btn ${a.id === this.currentAnimal ? 'active' : ''}" data-animal="${a.id}">
         <span>${a.icono}</span> ${a.nombre}
@@ -1616,7 +1630,7 @@ const App = {
         <div class="category-card" data-animal="${a.id}">
           <div class="cat-icon">${a.icono}</div>
           <h4>${a.nombre}</h4>
-          <span>${count} razas</span>
+          <span>${this.esc(this.t('common.breeds_count').replace('{count}', count))}</span>
         </div>`;
     }).join('');
     grid.querySelectorAll('.category-card').forEach(card => {
@@ -1651,7 +1665,7 @@ const App = {
     const container = document.getElementById('dictionaryCategoryFilters');
     if (!container || !this.dictionaryData) return;
     const categories = [
-      { id: 'todos', nombre: 'Todas', icono: '📚' },
+      { id: 'todos', nombre: this.t('dict.all_categories'), icono: '📚' },
       ...this.dictionaryData.categorias.map(c => ({ id: c.id, nombre: c.nombre, icono: c.icono }))
     ];
     container.innerHTML = categories.map(cat => `
@@ -1676,13 +1690,13 @@ const App = {
     const list = document.getElementById('dictionaryList');
 
     if (!this.dictionaryData) {
-      if (intro) intro.textContent = 'No se pudo cargar el diccionario médico.';
-      if (list) list.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><p>Glosario no disponible.</p></div>';
+      if (intro) intro.textContent = this.t('dict.load_error');
+      if (list) list.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('flash.no_glossary'))}</p></div>`;
       return;
     }
 
-    if (title) title.textContent = this.dictionaryData.titulo || 'Diccionario de términos médicos';
-    if (intro) intro.textContent = this.dictionaryData.introduccion || '';
+    if (title) title.textContent = this.t('dict.title');
+    if (intro) intro.textContent = this.dictionaryData.introduccion || this.t('dict.loading');
 
     this.renderDictionaryFilters();
 
@@ -1699,8 +1713,8 @@ const App = {
 
     if (stats) {
       stats.innerHTML = `
-        <span class="dictionary-stat"><strong>${totalVisible}</strong> término(s) mostrados</span>
-        <span class="dictionary-stat-muted">de ${totalAll} en el glosario</span>
+        <span class="dictionary-stat">${this.esc(this.t('dict.terms_shown').replace('{count}', totalVisible))}</span>
+        <span class="dictionary-stat-muted">${this.esc(this.t('dict.terms_of').replace('{total}', totalAll))}</span>
         <button type="button" class="dictionary-study-btn" id="openFlashcardsFromDict">${this.esc(this.t('flash.open'))} →</button>
         <button type="button" class="dictionary-study-btn dictionary-lab-btn" id="openLabFromDict">${this.esc(this.t('lab.open_from_dict'))}</button>
       `;
@@ -1714,7 +1728,7 @@ const App = {
       list.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">🔍</div>
-          <p>No hay términos que coincidan con <strong>“${this.esc(this.dictionaryQuery)}”</strong>.</p>
+          <p>${this.esc(this.t('dict.no_match').replace('{query}', this.dictionaryQuery))}</p>
         </div>`;
       return;
     }
@@ -1736,7 +1750,7 @@ const App = {
               aria-label="${this.esc(term.termino)}">
               <h4>${this.esc(term.termino)}</h4>
               <p class="dictionary-definition">${this.esc(term.definicion)}</p>
-              ${term.ejemplo ? `<p class="dictionary-example"><span>Ejemplo:</span> ${this.esc(term.ejemplo)}</p>` : ''}
+              ${term.ejemplo ? `<p class="dictionary-example"><span>${this.esc(this.t('dict.example'))}:</span> ${this.esc(term.ejemplo)}</p>` : ''}
               ${this.renderTermDiseaseLinks(term)}
             </article>
           `).join('')}
@@ -1761,7 +1775,7 @@ const App = {
       </button>
     `).join('');
     const extra = links.total > links.ejemplos.length
-      ? `<span class="cross-link-more">+${links.total - links.ejemplos.length} más</span>`
+      ? `<span class="cross-link-more">${this.esc(this.t('common.more').replace('{count}', links.total - links.ejemplos.length))}</span>`
       : '';
     return `
       <div class="cross-link-block">
@@ -1807,7 +1821,7 @@ const App = {
     if (options.updateHash !== false) this.updateHash('#glosario');
     if (!this.currentDictionaryTerm) {
       this.updatePageMeta({
-        title: 'Glosario médico — Atlas Animal',
+        title: `${this.t('dict.doc_title')} — Atlas Animal`,
         description: this.dictionaryData?.introduccion || this.DEFAULT_META.description,
         image: 'images/og-image.svg',
         url: this.pageUrl('#glosario'),
@@ -2186,7 +2200,7 @@ const App = {
 
   formatEnergy(kcal) {
     if (kcal == null) return '—';
-    return `${Math.round(kcal)} kcal/día`;
+    return this.t('rer.kcal_day').replace('{kcal}', Math.round(kcal));
   },
 
   renderRerMer() {
@@ -3342,7 +3356,7 @@ const App = {
           <div class="compare-row" role="row">
             <div class="compare-cell compare-cell--label" role="rowheader">${this.esc(field.label)}</div>
             ${breeds.map(b => `
-              <div class="compare-cell" role="cell">${this.esc(b[field.key] || 'N/D')}</div>
+              <div class="compare-cell" role="cell">${this.esc(b[field.key] || this.t('common.nd'))}</div>
             `).join('')}
           </div>
         `).join('')}
@@ -3398,13 +3412,13 @@ const App = {
           </header>
           ${alerts.length ? `
             <div class="urgency-block">
-              <h4>⚠️ Señales de alerta</h4>
+              <h4>⚠️ ${this.esc(this.t('urgency.alerts'))}</h4>
               <ul>${alerts.map(a => `<li>${this.esc(a)}</li>`).join('')}</ul>
             </div>
           ` : ''}
           ${emergencies.length ? `
             <div class="urgency-block urgency-block--alert">
-              <h4>🚨 Emergencias frecuentes</h4>
+              <h4>🚨 ${this.esc(this.t('urgency.emergencies'))}</h4>
               ${emergencies.map(e => `<p>${this.esc(e)}</p>`).join('')}
             </div>
           ` : ''}
@@ -3707,6 +3721,11 @@ const App = {
     return map[size] || size;
   },
 
+  severityLabel(gravedad) {
+    const key = `severity.${gravedad || 'moderada'}`;
+    return this.t(key);
+  },
+
   esc(text) {
     if (!text) return '';
     return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -3739,16 +3758,16 @@ const App = {
 
     return `
       <div class="detail-panel nutrition-panel">
-        <h4>🥗 Nutrición de la raza</h4>
+        <h4>🥗 ${this.esc(this.t('nutrition.title'))}</h4>
         <p class="nutrition-summary">${this.esc(nutricion.resumen)}</p>
-        ${dietTags ? `<div class="nutrition-block"><h5>Tipos de dieta</h5><div class="nutrition-tags">${dietTags}</div></div>` : ''}
-        ${nutricion.frecuencia_alimentacion ? `<div class="nutrition-block"><h5>Frecuencia</h5><p>${this.esc(nutricion.frecuencia_alimentacion)}</p></div>` : ''}
-        ${nutricion.porcion_diaria ? `<div class="nutrition-block"><h5>Porciones y cantidad</h5><p>${this.esc(nutricion.porcion_diaria)}</p></div>` : ''}
-        ${nutricion.requerimientos_nutricionales?.length ? `<div class="nutrition-block"><h5>Requerimientos nutricionales</h5>${this.renderList(nutricion.requerimientos_nutricionales)}</div>` : ''}
-        ${nutricion.alimentos_recomendados?.length ? `<div class="nutrition-block"><h5>Alimentos recomendados</h5>${this.renderList(nutricion.alimentos_recomendados)}</div>` : ''}
-        ${nutricion.alimentos_evitar?.length ? `<div class="nutrition-block nutrition-block--warn"><h5>Evitar</h5>${this.renderList(nutricion.alimentos_evitar)}</div>` : ''}
-        ${etapasHtml ? `<div class="nutrition-block"><h5>Dietas por etapa</h5>${etapasHtml}</div>` : ''}
-        ${nutricion.produccion ? `<div class="nutrition-block"><h5>Nutrición productiva</h5><p>${this.esc(nutricion.produccion)}</p></div>` : ''}
+        ${dietTags ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.diet_types'))}</h5><div class="nutrition-tags">${dietTags}</div></div>` : ''}
+        ${nutricion.frecuencia_alimentacion ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.frequency'))}</h5><p>${this.esc(nutricion.frecuencia_alimentacion)}</p></div>` : ''}
+        ${nutricion.porcion_diaria ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.portions'))}</h5><p>${this.esc(nutricion.porcion_diaria)}</p></div>` : ''}
+        ${nutricion.requerimientos_nutricionales?.length ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.requirements'))}</h5>${this.renderList(nutricion.requerimientos_nutricionales)}</div>` : ''}
+        ${nutricion.alimentos_recomendados?.length ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.recommended'))}</h5>${this.renderList(nutricion.alimentos_recomendados)}</div>` : ''}
+        ${nutricion.alimentos_evitar?.length ? `<div class="nutrition-block nutrition-block--warn"><h5>${this.esc(this.t('nutrition.avoid'))}</h5>${this.renderList(nutricion.alimentos_evitar)}</div>` : ''}
+        ${etapasHtml ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.by_stage'))}</h5>${etapasHtml}</div>` : ''}
+        ${nutricion.produccion ? `<div class="nutrition-block"><h5>${this.esc(this.t('nutrition.productive'))}</h5><p>${this.esc(nutricion.produccion)}</p></div>` : ''}
       </div>`;
   },
 
@@ -3771,46 +3790,47 @@ const App = {
 
   renderExams(examenes) {
     if (!examenes?.length) return '';
-    return `<div class="detail-panel"><h4>🔬 Exámenes complementarios</h4><div class="exam-tags">${examenes.map(e => `<span class="exam-tag">${this.esc(e)}</span>`).join('')}</div></div>`;
+    return `<div class="detail-panel"><h4>🔬 ${this.esc(this.t('disease.exams'))}</h4><div class="exam-tags">${examenes.map(e => `<span class="exam-tag">${this.esc(e)}</span>`).join('')}</div></div>`;
   },
 
   renderProtocolo(protocolo) {
     if (!protocolo?.length) return '';
+    const nd = this.t('common.nd');
     const accordion = protocolo.map((p, index) => `
       <details class="protocol-accordion-item" ${index === 0 ? 'open' : ''}>
-        <summary>${this.esc(p.principio_activo || 'Fármaco')} — ${this.esc(p.dosis_mg_kg || p.dosis || 'N/D')} mg/kg</summary>
+        <summary>${this.esc(p.principio_activo || this.t('protocol.drug'))} — ${this.esc(p.dosis_mg_kg || p.dosis || nd)} mg/kg</summary>
         <dl class="protocol-accordion-body">
-          <div><dt>Nombre comercial</dt><dd>${this.esc(p.nombre_comercial || '—')}</dd></div>
-          <div><dt>Vía</dt><dd>${this.esc(p.via || '—')}</dd></div>
-          <div><dt>Frecuencia</dt><dd>${this.esc(p.frecuencia || '—')}</dd></div>
-          <div><dt>Duración</dt><dd>${this.esc(p.duracion || '—')}</dd></div>
-          <div><dt>Notas</dt><dd>${this.esc(p.notas || '—')}</dd></div>
+          <div><dt>${this.esc(this.t('protocol.trade'))}</dt><dd>${this.esc(p.nombre_comercial || '—')}</dd></div>
+          <div><dt>${this.esc(this.t('protocol.route'))}</dt><dd>${this.esc(p.via || '—')}</dd></div>
+          <div><dt>${this.esc(this.t('protocol.frequency'))}</dt><dd>${this.esc(p.frecuencia || '—')}</dd></div>
+          <div><dt>${this.esc(this.t('protocol.duration'))}</dt><dd>${this.esc(p.duracion || '—')}</dd></div>
+          <div><dt>${this.esc(this.t('protocol.notes'))}</dt><dd>${this.esc(p.notas || '—')}</dd></div>
         </dl>
       </details>
     `).join('');
     return `
       <div class="detail-block protocol-block">
-        <h4>💊 Protocolo farmacológico (mg/kg)</h4>
+        <h4>💊 ${this.esc(this.t('protocol.title'))}</h4>
         <div class="protocol-accordion protocol-mobile-only">${accordion}</div>
         <div class="protocol-table-wrap protocol-desktop-only">
           <table class="protocol-table">
             <thead>
               <tr>
-                <th>Principio activo</th>
-                <th>Nombre comercial</th>
-                <th>Dosis mg/kg</th>
-                <th>Vía</th>
-                <th>Frecuencia</th>
-                <th>Duración</th>
-                <th>Notas</th>
+                <th>${this.esc(this.t('protocol.active'))}</th>
+                <th>${this.esc(this.t('protocol.trade'))}</th>
+                <th>${this.esc(this.t('protocol.dose'))}</th>
+                <th>${this.esc(this.t('protocol.route'))}</th>
+                <th>${this.esc(this.t('protocol.frequency'))}</th>
+                <th>${this.esc(this.t('protocol.duration'))}</th>
+                <th>${this.esc(this.t('protocol.notes'))}</th>
               </tr>
             </thead>
             <tbody>
               ${protocolo.map(p => `
                 <tr>
-                  <td><strong>${this.esc(p.principio_activo || 'N/D')}</strong></td>
+                  <td><strong>${this.esc(p.principio_activo || nd)}</strong></td>
                   <td>${this.esc(p.nombre_comercial || '—')}</td>
-                  <td><span class="dosis-badge">${this.esc(p.dosis_mg_kg || p.dosis || 'N/D')}</span></td>
+                  <td><span class="dosis-badge">${this.esc(p.dosis_mg_kg || p.dosis || nd)}</span></td>
                   <td>${this.esc(p.via || '—')}</td>
                   <td>${this.esc(p.frecuencia || '—')}</td>
                   <td>${this.esc(p.duracion || '—')}</td>
@@ -3820,7 +3840,7 @@ const App = {
             </tbody>
           </table>
         </div>
-        <p class="protocol-note">⚠️ Dosis orientativas. Solo un veterinario debe calcular y prescribir el tratamiento final.</p>
+        <p class="protocol-note">⚠️ ${this.esc(this.t('protocol.note'))}</p>
       </div>`;
   },
 
@@ -3872,7 +3892,7 @@ const App = {
     if (!drug?.calculable || !weightKg || weightKg <= 0) {
       return {
         calculable: false,
-        message: 'Esta presentación requiere criterio veterinario individual (baño acuario, dosis fija por animal, etc.).'
+        message: this.t('dose.noncalc')
       };
     }
 
@@ -3900,7 +3920,7 @@ const App = {
       result.volumeText = minVol === maxVol
         ? `${this.formatDoseNumber(minVol)} ml`
         : `${this.formatDoseNumber(minVol)} – ${this.formatDoseNumber(maxVol)} ml`;
-      result.concentracionText = `${drug.concentracion_mg_ml} mg/ml (referencia comercial orientativa)`;
+      result.concentracionText = this.t('dose.conc_note').replace('{value}', drug.concentracion_mg_ml);
     } else if (unit === 'ml') {
       result.volumeText = rangeText;
     }
@@ -3922,21 +3942,21 @@ const App = {
     const defaultWeight = calc.peso_tipico_kg || this.parseTypicalWeightKg(breed.peso);
     const options = farmacos.map((f, i) => `
       <option value="${i}" ${f.calculable ? '' : 'data-noncalc="1"'}>
-        ${this.esc(f.principio_activo)} — ${this.esc(f.dosis_texto)} (${this.esc(f.via || 'N/D')})
+        ${this.esc(f.principio_activo)} — ${this.esc(f.dosis_texto)} (${this.esc(f.via || this.t('common.nd'))})
       </option>`).join('');
 
+    const nd = this.t('common.nd');
+    const weightLabel = this.esc(calc.peso_texto || breed.peso || nd);
+    const introHtml = this.esc(this.t('dose.intro')).replace('{weight}', weightLabel);
     return `
       <section class="dose-calculator-section" aria-labelledby="doseCalcTitle">
         <div class="dose-calculator-panel">
-          <h3 id="doseCalcTitle">🧮 Calculadora de dosis</h3>
-          <p class="dose-calculator-intro">
-            Estima dosis totales a partir de los protocolos documentados para esta raza.
-            Peso típico de referencia: <strong>${this.esc(calc.peso_texto || breed.peso || 'N/D')}</strong>.
-          </p>
+          <h3 id="doseCalcTitle">🧮 ${this.esc(this.t('dose.title'))}</h3>
+          <p class="dose-calculator-intro">${introHtml}</p>
           <form class="dose-calculator-form" id="doseCalculatorForm" novalidate>
             <div class="dose-calculator-grid">
               <div class="dose-field">
-                <label for="doseWeightInput">Peso del animal (kg)</label>
+                <label for="doseWeightInput">${this.esc(this.t('dose.weight'))}</label>
                 <input
                   type="number"
                   id="doseWeightInput"
@@ -3948,14 +3968,14 @@ const App = {
                   aria-describedby="doseWeightHint doseCalcDisclaimer"
                   required
                 >
-                <span id="doseWeightHint" class="dose-field-hint">Ajusta al peso real medido en consulta.</span>
+                <span id="doseWeightHint" class="dose-field-hint">${this.esc(this.t('dose.weight_hint'))}</span>
               </div>
               <div class="dose-field">
-                <label for="doseDrugSelect">Fármaco / medicamento</label>
+                <label for="doseDrugSelect">${this.esc(this.t('dose.drug'))}</label>
                 <select id="doseDrugSelect" name="farmaco" aria-describedby="doseDrugMeta">
                   ${options}
                 </select>
-                <span id="doseDrugMeta" class="dose-field-hint">Protocolos de enfermedades de esta raza y catálogo de especie.</span>
+                <span id="doseDrugMeta" class="dose-field-hint">${this.esc(this.t('dose.drug_hint'))}</span>
               </div>
             </div>
             <div class="dose-result" id="doseCalcResult" role="status" aria-live="polite" aria-atomic="true"></div>
@@ -3965,8 +3985,7 @@ const App = {
               </button>
             </p>
             <p id="doseCalcDisclaimer" class="dose-calculator-disclaimer" role="note">
-              ⚕️ <strong>Aviso educativo:</strong> esta calculadora no sustituye el diagnóstico ni la prescripción de un veterinario colegiado.
-              Las dosis deben individualizarse según edad, comorbilidades, vía, formulación y normativa local.
+              ⚕️ ${this.esc(this.t('dose.disclaimer'))}
             </p>
           </form>
         </div>
@@ -3985,11 +4004,11 @@ const App = {
       const weight = parseFloat(String(weightInput.value).replace(',', '.'));
       const drug = calc.farmacos[parseInt(drugSelect.value, 10)];
       if (!drug) {
-        resultEl.innerHTML = '<p class="dose-result-empty">Selecciona un fármaco.</p>';
+        resultEl.innerHTML = `<p class="dose-result-empty">${this.esc(this.t('dose.select_drug'))}</p>`;
         return;
       }
       if (!weight || weight <= 0) {
-        resultEl.innerHTML = '<p class="dose-result-warn">Introduce un peso válido en kilogramos.</p>';
+        resultEl.innerHTML = `<p class="dose-result-warn">${this.esc(this.t('dose.invalid_weight'))}</p>`;
         return;
       }
 
@@ -4006,16 +4025,16 @@ const App = {
 
       resultEl.innerHTML = `
         <div class="dose-result-card">
-          <p class="dose-result-heading">Dosis estimada para <strong>${this.formatDoseNumber(weight)} kg</strong></p>
+          <p class="dose-result-heading">${this.esc(this.t('dose.estimated_for'))} <strong>${this.formatDoseNumber(weight)} kg</strong></p>
           <dl class="dose-result-metrics">
-            <div><dt>Dosis por kg</dt><dd>${this.esc(outcome.perKgText)}</dd></div>
-            <div><dt>Dosis total</dt><dd><span class="dosis-badge">${this.esc(outcome.rangeText)}</span></dd></div>
-            ${outcome.volumeText ? `<div><dt>Volumen aprox.</dt><dd>${this.esc(outcome.volumeText)}</dd></div>` : ''}
-            ${outcome.concentracionText ? `<div><dt>Concentración ref.</dt><dd>${this.esc(outcome.concentracionText)}</dd></div>` : ''}
-            <div><dt>Vía</dt><dd>${this.esc(outcome.via || drug.via || '—')}</dd></div>
-            <div><dt>Frecuencia</dt><dd>${this.esc(outcome.frecuencia || drug.frecuencia || '—')}</dd></div>
+            <div><dt>${this.esc(this.t('dose.per_kg'))}</dt><dd>${this.esc(outcome.perKgText)}</dd></div>
+            <div><dt>${this.esc(this.t('dose.total'))}</dt><dd><span class="dosis-badge">${this.esc(outcome.rangeText)}</span></dd></div>
+            ${outcome.volumeText ? `<div><dt>${this.esc(this.t('dose.volume'))}</dt><dd>${this.esc(outcome.volumeText)}</dd></div>` : ''}
+            ${outcome.concentracionText ? `<div><dt>${this.esc(this.t('dose.conc_ref'))}</dt><dd>${this.esc(outcome.concentracionText)}</dd></div>` : ''}
+            <div><dt>${this.esc(this.t('protocol.route'))}</dt><dd>${this.esc(outcome.via || drug.via || '—')}</dd></div>
+            <div><dt>${this.esc(this.t('protocol.frequency'))}</dt><dd>${this.esc(outcome.frecuencia || drug.frecuencia || '—')}</dd></div>
           </dl>
-          ${drug.enfermedad_origen ? `<p class="dose-result-source">Fuente protocolo: ${this.esc(drug.enfermedad_origen)}</p>` : ''}
+          ${drug.enfermedad_origen ? `<p class="dose-result-source">${this.esc(this.t('dose.source').replace('{name}', drug.enfermedad_origen))}</p>` : ''}
           ${drug.notas ? `<p class="dose-result-note">${this.esc(drug.notas)}</p>` : ''}
         </div>`;
     };
@@ -4032,7 +4051,7 @@ const App = {
     document.getElementById('resultsCount').textContent = breeds.length;
 
     if (!breeds.length) {
-      grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>No se encontraron razas con los filtros del menú lateral.</p></div>`;
+      grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>${this.esc(this.t('results.empty_filters'))}</p></div>`;
       return;
     }
 
@@ -4044,13 +4063,13 @@ const App = {
             <span class="tag tag-${b.tamano}">${this.sizeLabel(b.tamano)}</span>
             <span class="tag tag-animal">${b.animalIcono} ${b.animalNombre}</span>
             ${this.getBreedRegion(b) ? `<span class="tag tag-region">🌎 ${this.esc(this.getBreedRegion(b))}</span>` : ''}
-            ${b.enfoque_produccion ? `<span class="tag tag-production">🏭 Producción: ${this.esc(b.tipo_produccion)}</span>` : ''}
+            ${b.enfoque_produccion ? `<span class="tag tag-production">🏭 ${this.esc(this.t('breed.tag.production').replace('{value}', b.tipo_produccion))}</span>` : ''}
           </div>
           <h4>${b.nombre}</h4>
           <p>${b.descripcion}</p>
           <div class="breed-card-footer">
-            <span>${b.enfermedades?.length || 0} enfermedades documentadas</span>
-            <span>Ver detalle →</span>
+            <span>${this.esc(this.t('common.diseases_documented').replace('{count}', b.enfermedades?.length || 0))}</span>
+            <span>${this.esc(this.t('common.view_detail'))}</span>
           </div>
         </div>
       </article>
@@ -4076,10 +4095,10 @@ const App = {
           <h2>${this.esc(breed.nombre)}</h2>
           <div class="breed-meta">
             <span class="meta-chip">${breed.animalIcono} ${this.esc(breed.animalNombre)}</span>
-            <span class="meta-chip">Tamaño: ${this.sizeLabel(breed.tamano)}</span>
-            <span class="meta-chip">Origen: ${this.esc(breed.origen || 'N/D')}</span>
-            <span class="meta-chip">Esperanza de vida: ${this.esc(breed.esperanza_vida || 'N/D')}</span>
-            ${breed.altura ? `<span class="meta-chip">Altura: ${this.esc(breed.altura)}</span>` : ''}
+            <span class="meta-chip">${this.esc(this.t('breed.meta.size').replace('{size}', this.sizeLabel(breed.tamano)))}</span>
+            <span class="meta-chip">${this.esc(this.t('breed.meta.origin').replace('{value}', breed.origen || this.t('common.nd')))}</span>
+            <span class="meta-chip">${this.esc(this.t('breed.meta.lifespan').replace('{value}', breed.esperanza_vida || this.t('common.nd')))}</span>
+            ${breed.altura ? `<span class="meta-chip">${this.esc(this.t('breed.meta.height').replace('{value}', breed.altura))}</span>` : ''}
           </div>
           <p>${this.esc(breed.descripcion)}</p>
           <div class="breed-hero-actions">
@@ -4097,50 +4116,50 @@ const App = {
             ${this.renderReportErrorButton({ kind: 'Raza', name: breed.nombre, animalCategory: breed.animalNombre, hash: this.breedRoute(breed) })}
           </div>
           <div class="info-grid">
-            <div class="info-item"><label>Peso promedio</label><span>${this.esc(breed.peso || 'N/D')}</span></div>
-            <div class="info-item"><label>Temperamento</label><span>${this.esc(breed.temperamento || 'N/D')}</span></div>
-            <div class="info-item"><label>Cuidados especiales</label><span>${this.esc(breed.cuidados || 'N/D')}</span></div>
-            <div class="info-item"><label>Alimentación</label><span>${this.esc(breed.alimentacion || 'N/D')}</span></div>
+            <div class="info-item"><label>${this.esc(this.t('breed.label.weight'))}</label><span>${this.esc(breed.peso || this.t('common.nd'))}</span></div>
+            <div class="info-item"><label>${this.esc(this.t('breed.label.temperament'))}</label><span>${this.esc(breed.temperamento || this.t('common.nd'))}</span></div>
+            <div class="info-item"><label>${this.esc(this.t('breed.label.care'))}</label><span>${this.esc(breed.cuidados || this.t('common.nd'))}</span></div>
+            <div class="info-item"><label>${this.esc(this.t('breed.label.feeding'))}</label><span>${this.esc(breed.alimentacion || this.t('common.nd'))}</span></div>
           </div>
         </div>
       </div>
       <div class="detail-sections">
-        ${this.renderPanel('Historia y origen', breed.historia, '📜')}
-        ${this.renderPanel('Características físicas', breed.caracteristicas, '📋')}
-        ${this.renderPanel('Aptitudes y uso', breed.aptitudes, '⭐')}
+        ${this.renderPanel(this.t('breed.panel.history'), breed.historia, '📜')}
+        ${this.renderPanel(this.t('breed.panel.traits'), breed.caracteristicas, '📋')}
+        ${this.renderPanel(this.t('breed.panel.aptitudes'), breed.aptitudes, '⭐')}
         ${this.renderNutritionSection(breed.nutricion_detallada)}
-        ${breed.enfoque_produccion ? this.renderPanel('Tipo de producción', breed.tipo_produccion, '🏭') : ''}
-        ${breed.sistema_productivo ? this.renderPanel('Sistema productivo', breed.sistema_productivo, '🏡') : ''}
-        ${breed.rendimiento_productivo ? this.renderPanel('Rendimiento productivo', breed.rendimiento_productivo, '📈') : ''}
-        ${breed.indicadores_productivos ? this.renderPanel('Indicadores productivos', breed.indicadores_productivos, '📊') : ''}
-        ${breed.manejo_productivo ? this.renderPanel('Manejo productivo', breed.manejo_productivo, '🧑‍🌾') : ''}
-        ${breed.nutricion_productiva ? this.renderPanel('Nutrición para producción', breed.nutricion_productiva, '🌾') : ''}
-        ${breed.bioseguridad_productiva ? this.renderPanel('Bioseguridad productiva', breed.bioseguridad_productiva, '🛡️') : ''}
-        ${breed.bienestar_productivo ? this.renderPanel('Bienestar animal', breed.bienestar_productivo, '💚') : ''}
-        ${breed.registros_productivos ? this.renderPanel('Registros recomendados', breed.registros_productivos, '🗂️') : ''}
-        ${this.renderPanel('Parámetros de salud', breed.parametros_salud, '🩺')}
-        ${this.renderPanel('Vacunación recomendada', breed.vacunacion, '💉')}
-        ${breed.vacunacion_detallada ? this.renderPanel('Calendario de vacunación', breed.vacunacion_detallada, '📆') : ''}
-        ${this.renderPanel('Desparasitación', breed.desparasitacion, '🐛')}
-        ${breed.predisposiciones_geneticas ? `${this.renderPanel('Predisposiciones genéticas', breed.predisposiciones_geneticas, '🧬')}<p class="predis-map-link-wrap"><button type="button" class="btn-text-link predis-map-link">${this.esc(this.t('predis.map_link'))} →</button></p>` : ''}
-        ${breed.cribado_salud_recomendado ? this.renderPanel('Cribado de salud recomendado', breed.cribado_salud_recomendado, '🔍') : ''}
-        ${breed.nutricion_clinica ? this.renderPanel('Nutrición clínica', breed.nutricion_clinica, '🥗') : ''}
-        ${breed.manejo_clinico ? this.renderPanel('Manejo clínico', breed.manejo_clinico, '🏥') : ''}
-        ${breed.contraindicaciones_especie ? this.renderPanel('Contraindicaciones de especie', breed.contraindicaciones_especie, '⛔') : ''}
-        ${this.renderPanel('Señales de alerta', breed.senales_alerta, '⚠️')}
-        ${this.renderPanel('Revisiones veterinarias', breed.revisiones, '📅')}
-        ${breed.emergencias ? `<div class="detail-panel alert-panel urgent"><h4>🚨 Emergencias frecuentes</h4><p>${this.esc(breed.emergencias)}</p></div>` : ''}
+        ${breed.enfoque_produccion ? this.renderPanel(this.t('breed.panel.production_type'), breed.tipo_produccion, '🏭') : ''}
+        ${breed.sistema_productivo ? this.renderPanel(this.t('breed.panel.production_system'), breed.sistema_productivo, '🏡') : ''}
+        ${breed.rendimiento_productivo ? this.renderPanel(this.t('breed.panel.production_yield'), breed.rendimiento_productivo, '📈') : ''}
+        ${breed.indicadores_productivos ? this.renderPanel(this.t('breed.panel.production_indicators'), breed.indicadores_productivos, '📊') : ''}
+        ${breed.manejo_productivo ? this.renderPanel(this.t('breed.panel.production_mgmt'), breed.manejo_productivo, '🧑‍🌾') : ''}
+        ${breed.nutricion_productiva ? this.renderPanel(this.t('breed.panel.production_nutrition'), breed.nutricion_productiva, '🌾') : ''}
+        ${breed.bioseguridad_productiva ? this.renderPanel(this.t('breed.panel.biosecurity'), breed.bioseguridad_productiva, '🛡️') : ''}
+        ${breed.bienestar_productivo ? this.renderPanel(this.t('breed.panel.welfare'), breed.bienestar_productivo, '💚') : ''}
+        ${breed.registros_productivos ? this.renderPanel(this.t('breed.panel.records'), breed.registros_productivos, '🗂️') : ''}
+        ${this.renderPanel(this.t('breed.panel.health_params'), breed.parametros_salud, '🩺')}
+        ${this.renderPanel(this.t('breed.panel.vaccination'), breed.vacunacion, '💉')}
+        ${breed.vacunacion_detallada ? this.renderPanel(this.t('breed.panel.vax_calendar'), breed.vacunacion_detallada, '📆') : ''}
+        ${this.renderPanel(this.t('breed.panel.deworming'), breed.desparasitacion, '🐛')}
+        ${breed.predisposiciones_geneticas ? `${this.renderPanel(this.t('breed.panel.predispositions'), breed.predisposiciones_geneticas, '🧬')}<p class="predis-map-link-wrap"><button type="button" class="btn-text-link predis-map-link">${this.esc(this.t('predis.map_link'))} →</button></p>` : ''}
+        ${breed.cribado_salud_recomendado ? this.renderPanel(this.t('breed.panel.screening'), breed.cribado_salud_recomendado, '🔍') : ''}
+        ${breed.nutricion_clinica ? this.renderPanel(this.t('breed.panel.clinical_nutrition'), breed.nutricion_clinica, '🥗') : ''}
+        ${breed.manejo_clinico ? this.renderPanel(this.t('breed.panel.clinical_mgmt'), breed.manejo_clinico, '🏥') : ''}
+        ${breed.contraindicaciones_especie ? this.renderPanel(this.t('breed.panel.contraindications'), breed.contraindicaciones_especie, '⛔') : ''}
+        ${this.renderPanel(this.t('breed.panel.alerts'), breed.senales_alerta, '⚠️')}
+        ${this.renderPanel(this.t('breed.panel.checkups'), breed.revisiones, '📅')}
+        ${breed.emergencias ? `<div class="detail-panel alert-panel urgent"><h4>🚨 ${this.esc(this.t('breed.panel.emergencies'))}</h4><p>${this.esc(breed.emergencias)}</p></div>` : ''}
       </div>
       ${this.renderVaccinationCalendar(breed)}
       ${this.renderDoseCalculator(breed)}
       <section class="diseases-section">
-        <h3>Enfermedades y condiciones (${breed.enfermedades?.length || 0})</h3>
+        <h3>${this.esc(this.t('breed.diseases_section').replace('{count}', breed.enfermedades?.length || 0))}</h3>
         <div class="disease-list">
           ${(breed.enfermedades || []).map((e, i) => `
             <div class="disease-card" data-index="${i}">
               ${this.renderDiseaseImage(e, 'disease-card-img')}
               <div class="disease-card-body">
-                <span class="severity severity-${e.gravedad || 'moderada'}">${(e.gravedad || 'moderada').toUpperCase()}</span>
+                <span class="severity severity-${e.gravedad || 'moderada'}">${this.esc(this.severityLabel(e.gravedad).toUpperCase())}</span>
                 <h4>${this.esc(e.nombre)}</h4>
                 <p>${this.esc((e.sintomas || []).slice(0, 3).join(', '))}...</p>
               </div>
@@ -4203,7 +4222,7 @@ const App = {
               <p class="breed-ref">${breed.animalIcono} ${this.esc(breed.nombre)} — ${this.esc(breed.animalNombre)}</p>
               <div class="disease-badges">
                 <span class="severity severity-${disease.gravedad || 'moderada'}" style="margin-top:0.5rem;display:inline-block">
-                  Gravedad: ${disease.gravedad || 'moderada'}
+                  ${this.esc(this.t('disease.severity_label').replace('{value}', this.severityLabel(disease.gravedad)))}
                 </span>
                 ${this.renderZoonoticBadge(disease)}
               </div>
@@ -4229,40 +4248,40 @@ const App = {
             <p class="study-summary-hint">${this.esc(this.t('study.summary_hint'))}</p>
           </div>` : ''}
           <div class="detail-block">
-            <h4>🩺 Síntomas</h4>
+            <h4>🩺 ${this.esc(this.t('disease.symptoms'))}</h4>
             ${this.renderList(disease.sintomas)}
           </div>
-          ${disease.causas ? `<div class="detail-block"><h4>🔍 Causas</h4><p>${this.esc(disease.causas)}</p></div>` : ''}
-          ${disease.factores_riesgo ? `<div class="detail-block"><h4>⚡ Factores de riesgo</h4>${this.renderList(disease.factores_riesgo)}</div>` : ''}
-          ${disease.criterios_diagnostico ? `<div class="detail-block"><h4>✅ Criterios diagnósticos</h4><p>${this.esc(disease.criterios_diagnostico)}</p></div>` : ''}
-          ${disease.diagnostico_diferencial ? `<div class="detail-block"><h4>↔️ Diagnóstico diferencial</h4>${this.renderList(disease.diagnostico_diferencial)}</div>` : ''}
-          ${disease.clasificacion ? `<div class="detail-block"><h4>📊 Clasificación / estadiamiento</h4><p>${this.esc(disease.clasificacion)}</p></div>` : ''}
+          ${disease.causas ? `<div class="detail-block"><h4>🔍 ${this.esc(this.t('disease.causes'))}</h4><p>${this.esc(disease.causas)}</p></div>` : ''}
+          ${disease.factores_riesgo ? `<div class="detail-block"><h4>⚡ ${this.esc(this.t('disease.risk_factors'))}</h4>${this.renderList(disease.factores_riesgo)}</div>` : ''}
+          ${disease.criterios_diagnostico ? `<div class="detail-block"><h4>✅ ${this.esc(this.t('disease.diag_criteria'))}</h4><p>${this.esc(disease.criterios_diagnostico)}</p></div>` : ''}
+          ${disease.diagnostico_diferencial ? `<div class="detail-block"><h4>↔️ ${this.esc(this.t('disease.diff_diag'))}</h4>${this.renderList(disease.diagnostico_diferencial)}</div>` : ''}
+          ${disease.clasificacion ? `<div class="detail-block"><h4>📊 ${this.esc(this.t('disease.staging'))}</h4><p>${this.esc(disease.clasificacion)}</p></div>` : ''}
           <div class="detail-block">
-            <h4>🔬 Diagnóstico</h4>
+            <h4>🔬 ${this.esc(this.t('disease.diagnosis'))}</h4>
             <p>${this.esc(disease.diagnostico)}</p>
           </div>
           ${this.renderExams(disease.examenes)}
           <div class="detail-block">
-            <h4>💊 Tratamiento</h4>
+            <h4>💊 ${this.esc(this.t('disease.treatment'))}</h4>
             <p>${this.esc(disease.tratamiento)}</p>
           </div>
           ${this.renderProtocolo(disease.protocolo_farmacologico)}
-          ${!disease.protocolo_farmacologico?.length && disease.medicamentos ? `<div class="detail-block"><h4>💉 Medicamentos habituales</h4>${this.renderList(disease.medicamentos)}</div>` : ''}
+          ${!disease.protocolo_farmacologico?.length && disease.medicamentos ? `<div class="detail-block"><h4>💉 ${this.esc(this.t('disease.meds'))}</h4>${this.renderList(disease.medicamentos)}</div>` : ''}
           <div class="detail-block">
-            <h4>🛡️ Prevención</h4>
+            <h4>🛡️ ${this.esc(this.t('disease.prevention'))}</h4>
             <p>${this.esc(disease.prevencion)}</p>
           </div>
-          ${disease.cuidados_casa ? `<div class="detail-block"><h4>🏠 Cuidados en casa</h4><p>${this.esc(disease.cuidados_casa)}</p></div>` : ''}
-          ${disease.evolucion ? `<div class="detail-block"><h4>📈 Evolución</h4><p>${this.esc(disease.evolucion)}</p></div>` : ''}
-          ${disease.pronostico ? `<div class="detail-block"><h4>📊 Pronóstico</h4><p>${this.esc(disease.pronostico)}</p></div>` : ''}
-          ${disease.contraindicaciones ? `<div class="detail-block"><h4>⛔ Contraindicaciones</h4>${this.renderList(disease.contraindicaciones)}</div>` : ''}
-          ${disease.notas_clinicas ? `<div class="detail-block clinical-note"><h4>📝 Notas clínicas</h4><p>${this.esc(disease.notas_clinicas)}</p></div>` : ''}
-          ${disease.notas ? `<div class="detail-block"><h4>📋 Notas adicionales</h4><p>${this.esc(disease.notas)}</p></div>` : ''}
-          ${disease.urgencia ? `<div class="alert-panel urgent"><strong>🚨 Cuándo acudir de urgencia:</strong> ${this.esc(disease.urgencia)}</div>` : ''}
+          ${disease.cuidados_casa ? `<div class="detail-block"><h4>🏠 ${this.esc(this.t('disease.home_care'))}</h4><p>${this.esc(disease.cuidados_casa)}</p></div>` : ''}
+          ${disease.evolucion ? `<div class="detail-block"><h4>📈 ${this.esc(this.t('disease.course'))}</h4><p>${this.esc(disease.evolucion)}</p></div>` : ''}
+          ${disease.pronostico ? `<div class="detail-block"><h4>📊 ${this.esc(this.t('disease.prognosis'))}</h4><p>${this.esc(disease.pronostico)}</p></div>` : ''}
+          ${disease.contraindicaciones ? `<div class="detail-block"><h4>⛔ ${this.esc(this.t('disease.contraindications'))}</h4>${this.renderList(disease.contraindicaciones)}</div>` : ''}
+          ${disease.notas_clinicas ? `<div class="detail-block clinical-note"><h4>📝 ${this.esc(this.t('disease.clinical_notes'))}</h4><p>${this.esc(disease.notas_clinicas)}</p></div>` : ''}
+          ${disease.notas ? `<div class="detail-block"><h4>📋 ${this.esc(this.t('disease.extra_notes'))}</h4><p>${this.esc(disease.notas)}</p></div>` : ''}
+          ${disease.urgencia ? `<div class="alert-panel urgent"><strong>🚨 ${this.esc(this.t('disease.urgency_when'))}</strong> ${this.esc(disease.urgencia)}</div>` : ''}
           ${this.renderDiseaseTermLinks(disease)}
           ${this.renderBibliographicSources(disease.fuentes_bibliograficas || disease.referencias)}
           <div class="alert-box">
-            ⚠️ Información educativa. No sustituye el criterio clínico de un veterinario colegiado. Las dosis requieren prescripción profesional individualizada.
+            ⚠️ ${this.esc(this.t('disease.edu_alert'))}
           </div>
         </div>
         ${this.renderPrintDisclaimer()}
@@ -4303,7 +4322,7 @@ const App = {
       return;
     }
     if (this.currentView === 'dictionary') {
-      document.title = `Glosario médico — ${suffix}`;
+      document.title = `${this.t('dict.doc_title')} — ${suffix}`;
       return;
     }
     if (this.currentView === 'urgency') {
