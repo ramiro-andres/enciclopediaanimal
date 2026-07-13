@@ -47,6 +47,7 @@ class MobileTabBarTest < Minitest::Test
   def test_logica_tab_bar_en_app
     assert_includes @app, 'bindMobileTabBar'
     assert_includes @app, 'updateMobileTabBar'
+    assert_includes @app, 'I18n.apply(bar)'
     assert_includes @app, 'mobileTabForView'
     assert_includes @app, 'showDictionary'
     assert_includes @app, 'showUrgency'
@@ -58,6 +59,35 @@ class MobileTabBarTest < Minitest::Test
     %w[tab.home tab.explore tab.glossary tab.urgency tab.tools tab.nav].each do |key|
       assert_includes @i18n, "'#{key}'"
     end
+    assert_includes @i18n, "'tab.glosary'"
+  end
+
+  def test_i18n_tab_bar_valores_es_en
+    expected = {
+      'tab.home' => { es: 'Inicio', en: 'Home' },
+      'tab.explore' => { es: 'Explorar', en: 'Explore' },
+      'tab.glossary' => { es: 'Glosario', en: 'Glossary' },
+      'tab.urgency' => { es: 'Urgencias', en: 'Emergencies' },
+      'tab.tools' => { es: 'Herramientas', en: 'Tools' }
+    }
+    expected.each do |key, labels|
+      assert_match(/es:\s*\{[^}]*'#{key}':\s*'#{labels[:es]}'/, @i18n, "Falta #{key} en ES")
+      assert_match(/en:\s*\{[^}]*'#{key}':\s*'#{labels[:en]}'/, @i18n, "Falta #{key} en EN")
+    end
+  end
+
+  def test_html_no_expone_claves_i18n_crudas_en_tab_bar
+    %w[tab.home tab.explore tab.glossary tab.glosary tab.urgency tab.tools].each do |key|
+      refute_match(/>\s*#{Regexp.escape(key)}\s*</, @html, "La tab bar no debe mostrar la clave cruda #{key}")
+    end
+    assert_includes @html, 'data-i18n="tab.glossary">Glosario</span>'
+    assert_includes @html, '>Inicio</span>'
+    assert_includes @html, '>Explorar</span>'
+  end
+
+  def test_i18n_apply_no_sobrescribe_con_clave_faltante
+    assert_includes @i18n, 'translate(key)'
+    assert_includes @i18n, 'if (text === null) return'
   end
 end
 
