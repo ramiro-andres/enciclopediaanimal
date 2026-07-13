@@ -1,6 +1,6 @@
 {
   "titulo": "Diccionario de términos médicos",
-  "introduccion": "Glosario veterinario con 527 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
+  "introduccion": "Glosario veterinario con 631 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
   "categorias": [
     {
       "id": "ficha_enfermedad",
@@ -131,6 +131,38 @@
         {
           "termino": "Secuela",
           "definicion": "Consecuencia permanente o prolongada tras una enfermedad o tratamiento."
+        },
+        {
+          "termino": "Estadiaje clínico",
+          "definicion": "Clasificación de extensión y gravedad de una enfermedad para orientar pronóstico y tratamiento."
+        },
+        {
+          "termino": "Escala de dolor (ESAS)",
+          "definicion": "Herramienta visual para estimar intensidad del dolor en animales según conducta y postura."
+        },
+        {
+          "termino": "Plan terapéutico multimodal",
+          "definicion": "Combinación de fármacos, nutrición, fisioterapia y manejo ambiental en un mismo caso."
+        },
+        {
+          "termino": "Seguimiento postoperatorio",
+          "definicion": "Controles tras cirugía: herida, dolor, apetito, eliminaciones y signos de infección."
+        },
+        {
+          "termino": "Consentimiento informado",
+          "definicion": "Documento donde el propietario acepta procedimientos, riesgos y alternativas tras explicación veterinaria."
+        },
+        {
+          "termino": "Historia clínica electrónica",
+          "definicion": "Registro digital de consultas, tratamientos y resultados de laboratorio del paciente."
+        },
+        {
+          "termino": "Pronóstico reservado",
+          "definicion": "Expectativa incierta; evolución depende de respuesta al tratamiento y comorbilidades."
+        },
+        {
+          "termino": "Alta hospitalaria",
+          "definicion": "Momento en que el paciente puede continuar recuperación en casa con instrucciones escritas."
         }
       ]
     },
@@ -199,6 +231,34 @@
         {
           "termino": "Enriquecimiento ambiental",
           "definicion": "Estímulos físicos y mentales que reducen estrés y mejoran bienestar."
+        },
+        {
+          "termino": "Certificado de salud de exportación",
+          "definicion": "Documento oficial que acredita estado sanitario para movilización internacional de animales."
+        },
+        {
+          "termino": "Cuarentena de ingreso",
+          "definicion": "Aislamiento temporal de animales nuevos para detectar enfermedades antes de integrarlos al rebaño."
+        },
+        {
+          "termino": "Programa de bienestar animal",
+          "definicion": "Conjunto de prácticas que minimizan estrés, dolor y sufrimiento en explotaciones."
+        },
+        {
+          "termino": "Trazabilidad individual",
+          "definicion": "Identificación única que permite seguir historial sanitario y productivo de cada animal."
+        },
+        {
+          "termino": "Protocolo de desinfección de instalaciones",
+          "definicion": "Limpieza y desinfección programada de corrales, jaulas o establos."
+        },
+        {
+          "termino": "Manejo en manga o brete",
+          "definicion": "Restricción física segura para examen, vacunación o tratamiento sin sedación."
+        },
+        {
+          "termino": "Registro genealógico",
+          "definicion": "Documentación de linaje y pureza racial en razas con asociación oficial."
         }
       ]
     },
@@ -267,6 +327,34 @@
         {
           "termino": "Ayuno prequirúrgico",
           "definicion": "Periodo sin comida antes de anestesia para reducir riesgo de aspiración."
+        },
+        {
+          "termino": "Energía metabolizable (EM)",
+          "definicion": "Energía disponible tras digestión y absorción; base para formular raciones."
+        },
+        {
+          "termino": "Proteína bruta digestible",
+          "definicion": "Fracción de proteína que el animal puede utilizar metabólicamente."
+        },
+        {
+          "termino": "Relación calcio:fósforo",
+          "definicion": "Balance mineral crítico en huesos, huevos y producción láctea; desequilibrio causa osteodistrofias."
+        },
+        {
+          "termino": "Fibra detergente neutra (FDN)",
+          "definicion": "Fracción fibrosa del forraje que limita el consumo en rumiantes."
+        },
+        {
+          "termino": "Materia seca (MS)",
+          "definicion": "Porción del alimento sin agua; permite comparar raciones con distinta humedad."
+        },
+        {
+          "termino": "Aditivo probiótico",
+          "definicion": "Microorganismos vivos que modulan la microbiota intestinal y mejoran digestión."
+        },
+        {
+          "termino": "Prebiótico",
+          "definicion": "Sustrato no digerible que favorece el crecimiento de bacterias beneficiosas en el intestino."
         }
       ]
     },
@@ -343,6 +431,34 @@
         {
           "termino": "Mortalidad",
           "definicion": "Porcentaje de animales que mueren en un lote o periodo; indicador sanitario clave."
+        },
+        {
+          "termino": "Densidad de carga animal",
+          "definicion": "Número de animales por hectárea o unidad de instalación; afecta sanidad y rendimiento."
+        },
+        {
+          "termino": "Índice de conversión alimenticia (ICA)",
+          "definicion": "Kg de alimento por kg de producto obtenido; indicador de eficiencia productiva."
+        },
+        {
+          "termino": "Mortalidad pre-destete",
+          "definicion": "Porcentaje de crías que mueren antes del destete; alerta de manejo o sanidad."
+        },
+        {
+          "termino": "Intervalo entre partos (IEP)",
+          "definicion": "Días entre dos partos consecutivos en hembras productivas."
+        },
+        {
+          "termino": "Tasa de preñez",
+          "definicion": "Porcentaje de hembras gestantes tras servicio o inseminación en un periodo."
+        },
+        {
+          "termino": "Plan sanitario de granja",
+          "definicion": "Calendario anual de vacunas, desparasitación y controles según especie y sistema."
+        },
+        {
+          "termino": "Registro de tratamientos (withdrawal)",
+          "definicion": "Anotación de fármacos y periodos de retiro antes de sacrificio o ordeño."
         }
       ]
     },
@@ -435,6 +551,38 @@
         {
           "termino": "Periodo de retirada (fármaco)",
           "definicion": "Tiempo mínimo entre última dosis y consumo de producto animal."
+        },
+        {
+          "termino": "Vía subcutánea (SC)",
+          "definicion": "Inyección bajo la piel; absorción moderada; común en vacunas y fluidos."
+        },
+        {
+          "termino": "Vía intramuscular (IM)",
+          "definicion": "Inyección en músculo; absorción rápida; evitar nervios y vasos."
+        },
+        {
+          "termino": "Vía intravenosa (IV)",
+          "definicion": "Inyección directa en vena; acción inmediata; requiere técnica aséptica."
+        },
+        {
+          "termino": "Vía oral (PO)",
+          "definicion": "Administración por boca: comprimidos, jarabes o mezcla en alimento."
+        },
+        {
+          "termino": "Vía tópica",
+          "definicion": "Aplicación sobre piel, oído u ojo: ungüentos, gotas o sprays."
+        },
+        {
+          "termino": "Antimicrobiano de amplio espectro",
+          "definicion": "Activo contra muchas bacterias; uso prudente para reducir resistencia."
+        },
+        {
+          "termino": "Antiinflamatorio no esteroideo (AINE)",
+          "definicion": "Reduce dolor e inflamación; vigilar función renal y gastrointestinal."
+        },
+        {
+          "termino": "Periodo de retiro (withdrawal)",
+          "definicion": "Tiempo mínimo entre última dosis y consumo de carne, leche o huevos."
         }
       ]
     },
@@ -571,6 +719,34 @@
         {
           "termino": "Pruebas de imagen",
           "definicion": "Término general para radiografía, ecografía, TC o resonancia según caso."
+        },
+        {
+          "termino": "Citología de impresión",
+          "definicion": "Extendido de células de lesión sobre portaobjetos para diagnóstico rápido."
+        },
+        {
+          "termino": "Urocultivo",
+          "definicion": "Cultivo de orina para identificar bacteria y antibiograma en infecciones urinarias."
+        },
+        {
+          "termino": "Coprocultivo",
+          "definicion": "Cultivo de heces para detectar enteropatógenos bacterianos."
+        },
+        {
+          "termino": "Ecocardiografía",
+          "definicion": "Ultrasonido del corazón para evaluar contractilidad y válvulas."
+        },
+        {
+          "termino": "Radiografía digital (DR)",
+          "definicion": "Imagen radiográfica en formato digital con menor exposición y mejor contraste."
+        },
+        {
+          "termino": "Tomografía computarizada (TC)",
+          "definicion": "Imagen en cortes tridimensionales; útil en trauma y tumores complejos."
+        },
+        {
+          "termino": "Resonancia magnética (RM)",
+          "definicion": "Imagen de tejidos blandos: cerebro, médula y articulaciones."
         }
       ]
     },
@@ -695,6 +871,38 @@
         {
           "termino": "Muerte súbita",
           "definicion": "Fallecimiento inesperado sin signos prolongados; cardíaca, tóxica o infecciosa."
+        },
+        {
+          "termino": "Ortopnea",
+          "definicion": "Postura con cuello extendido para facilitar respiración; común en distress respiratorio."
+        },
+        {
+          "termino": "Abducción de codos",
+          "definicion": "Separación de codos al respirar; signo de esfuerzo respiratorio."
+        },
+        {
+          "termino": "Petequias",
+          "definicion": "Manchas rojas puntiformes por hemorragia capilar en mucosas o piel."
+        },
+        {
+          "termino": "Equimosis",
+          "definicion": "Moretón visible por acumulación de sangre bajo la piel."
+        },
+        {
+          "termino": "Nictalopía / ceguera nocturna",
+          "definicion": "Dificultad para ver con poca luz; déficit de vitamina A en aves."
+        },
+        {
+          "termino": "Bruxismo",
+          "definicion": "Rechinar de dientes o mandíbula; dolor abdominal o estrés en equinos y roedores."
+        },
+        {
+          "termino": "Fasciculaciones musculares",
+          "definicion": "Contracciones finas visibles bajo la piel; electrolitos o neuromuscular."
+        },
+        {
+          "termino": "Estridor inspiratorio",
+          "definicion": "Ruido agudo al inhalar; obstrucción de vías aéreas superiores."
         }
       ]
     },
@@ -763,6 +971,34 @@
         {
           "termino": "Bazo",
           "definicion": "Órgano linfático y sangre; puede romperse en traumatismos (hemangiosarcoma)."
+        },
+        {
+          "termino": "Peritoneo",
+          "definicion": "Membrana que recubre cavidad abdominal y órganos internos."
+        },
+        {
+          "termino": "Mesenterio",
+          "definicion": "Pliegue peritoneal que sostiene intestino y aporta vasos sanguíneos."
+        },
+        {
+          "termino": "Diafragma",
+          "definicion": "Músculo que separa tórax y abdomen; esencial en respiración."
+        },
+        {
+          "termino": "Glándula tiroides",
+          "definicion": "Regula metabolismo mediante hormonas T3 y T4."
+        },
+        {
+          "termino": "Glándula paratiroides",
+          "definicion": "Controla calcio sérico mediante parathormona."
+        },
+        {
+          "termino": "Suprarrenal",
+          "definicion": "Produce cortisol y adrenalina; estrés y equilibrio electrolítico."
+        },
+        {
+          "termino": "Médula ósea",
+          "definicion": "Tejido interior del hueso; produce células sanguíneas."
         }
       ]
     },
@@ -827,6 +1063,34 @@
         {
           "termino": "Destete",
           "definicion": "Separación de cría; reduce transmisión de parásitos y estrés materno."
+        },
+        {
+          "termino": "Celo silencioso",
+          "definicion": "Ovulación sin signos externos evidentes; dificulta la monta en algunas especies."
+        },
+        {
+          "termino": "Servicio natural",
+          "definicion": "Monta con macho entero para fecundación."
+        },
+        {
+          "termino": "Inseminación artificial (IA)",
+          "definicion": "Depósito de semen en tracto reproductivo sin monta."
+        },
+        {
+          "termino": "Transferencia de embriones (TE)",
+          "definicion": "Implante de embriones de alta genética en receptoras."
+        },
+        {
+          "termino": "Prostaglandina F2α",
+          "definicion": "Hormona para sincronizar celo o tratar piometra en hembras."
+        },
+        {
+          "termino": "Retención de lóquios",
+          "definicion": "Restos placentarios o secreciones postparto retenidos en útero."
+        },
+        {
+          "termino": "Metritis puerperal",
+          "definicion": "Infección uterina tras el parto con fiebre y secreción fetida."
         }
       ]
     },
@@ -919,6 +1183,38 @@
         {
           "termino": "Bioseguridad sanitaria",
           "definicion": "Conjunto de barreras contra patógenos en granja o hogar."
+        },
+        {
+          "termino": "Zoonosis emergente",
+          "definicion": "Enfermedad transmitible animal-humano de aparición reciente o expansión nueva."
+        },
+        {
+          "termino": "Reservorio silvestre",
+          "definicion": "Especie salvaje que mantiene un patógeno sin enfermar gravemente."
+        },
+        {
+          "termino": "Portador asintomático",
+          "definicion": "Animal infectado que elimina el agente sin signos clínicos evidentes."
+        },
+        {
+          "termino": "Biosseguridad nivel 2",
+          "definicion": "Medidas de contención para patógenos moderados con vacunas o tratamiento disponible."
+        },
+        {
+          "termino": "Cadena de frío vacunal",
+          "definicion": "Mantenimiento de vacunas entre 2-8 °C hasta su administración."
+        },
+        {
+          "termino": "Seroconversión",
+          "definicion": "Aparición de anticuerpos en sangre tras infección o vacunación."
+        },
+        {
+          "termino": "Título de anticuerpos",
+          "definicion": "Concentración de anticuerpos medida en laboratorio; indica inmunidad o exposición."
+        },
+        {
+          "termino": "Enfermedad de notificación obligatoria",
+          "definicion": "Condición que debe reportarse a autoridades sanitarias por riesgo epidemiológico."
         }
       ]
     },
@@ -979,6 +1275,30 @@
         {
           "termino": "Aireación",
           "definicion": "Suministro de oxígeno en estanques o acuarios intensivos."
+        },
+        {
+          "termino": "Oxígeno disuelto (OD)",
+          "definicion": "Concentración de O₂ en agua; crítico para supervivencia de peces."
+        },
+        {
+          "termino": "Amonio no ionizado (NH₃)",
+          "definicion": "Forma tóxica del nitrógeno en agua; sube con pH alto y temperatura."
+        },
+        {
+          "termino": "Nitrito (NO₂)",
+          "definicion": "Compuesto nitrogenado tóxico que dificulta transporte de oxígeno en sangre."
+        },
+        {
+          "termino": "Biomasa por unidad de volumen",
+          "definicion": "Peso total de peces por m³; guía manejo y alimentación."
+        },
+        {
+          "termino": "Muda (ecdisis)",
+          "definicion": "Renovación del exoesqueleto en crustáceos; periodo de vulnerabilidad."
+        },
+        {
+          "termino": "Laricultura",
+          "definicion": "Fase de cría de larvas en hatchery antes del engorde."
         }
       ]
     },
@@ -1031,6 +1351,30 @@
         {
           "termino": "Bioseguridad aviar",
           "definicion": "Control estricto de acceso, desinfección y lotes en avicultura."
+        },
+        {
+          "termino": "Gallinas de reemplazo",
+          "definicion": "Aves jóvenes destinadas a convertirse en ponedoras comerciales."
+        },
+        {
+          "termino": "Muda forzada",
+          "definicion": "Interrupción controlada de la puesta para renovar plumaje y tracto reproductivo."
+        },
+        {
+          "termino": "Espray vacunal",
+          "definicion": "Aplicación de vacuna en aerosol para inmunización masiva de aves."
+        },
+        {
+          "termino": "Pododermatitis (úlcera de planta)",
+          "definicion": "Lesión inflamatoria en almohadilla plantar por humedad o perchas inadecuadas."
+        },
+        {
+          "termino": "Esclerosis de la cáscara",
+          "definicion": "Endurecimiento anormal del huevo por estrés o infección."
+        },
+        {
+          "termino": "Pico corto (despicado)",
+          "definicion": "Recorte parcial del pico para reducir canibalismo en gallineros."
         }
       ]
     },
@@ -1099,6 +1443,86 @@
         {
           "termino": "Laminitis",
           "definicion": "Inflamación de la corona del casco en equinos; muy dolorosa."
+        },
+        {
+          "termino": "Alimentación restrictiva preparto",
+          "definicion": "Control de energía antes del parto para prevenir cetosis y hipocalcemia."
+        },
+        {
+          "termino": "Ordeño mecánico",
+          "definicion": "Extracción de leche con máquina; requiere higiene y calibración."
+        },
+        {
+          "termino": "CMT (California Mastitis Test)",
+          "definicion": "Prueba rápida en leche para detectar mastitis subclínica."
+        },
+        {
+          "termino": "Secado de vaca",
+          "definicion": "Periodo sin ordeño antes del parto para regenerar ubre y prevenir mastitis."
+        },
+        {
+          "termino": "Destete precoz",
+          "definicion": "Separación temprana de cría para manejo intensivo o venta."
+        },
+        {
+          "termino": "Suplementación con urea",
+          "definicion": "Fuente de nitrógeno no proteico en rumiantes; requiere adaptación gradual."
+        },
+        {
+          "termino": "Bloque mineral proteico",
+          "definicion": "Suplemento lick para pastoreo extensivo con proteína y minerales."
+        }
+      ]
+    },
+    {
+      "id": "clinica_especializada",
+      "nombre": "Clínica especializada",
+      "descripcion": "Procedimientos y técnicas avanzadas de medicina veterinaria.",
+      "icono": "🏥",
+      "terminos": [
+        {
+          "termino": "Anestesia balanceada",
+          "definicion": "Combinación de inductor, analgesia y mantenimiento para cirugía segura."
+        },
+        {
+          "termino": "Fluidoterapia de mantenimiento",
+          "definicion": "Líquidos IV para cubrir pérdidas basales y evitar deshidratación."
+        },
+        {
+          "termino": "Transfusión sanguínea",
+          "definicion": "Administración de sangre o componentes para anemia o coagulopatía."
+        },
+        {
+          "termino": "Oxigenoterapia",
+          "definicion": "Suministro de O₂ en cánula, mascarilla o cámara para hipoxemia."
+        },
+        {
+          "termino": "Ventilación mecánica",
+          "definicion": "Soporte respiratorio asistido en pacientes críticos bajo anestesia o UCI."
+        },
+        {
+          "termino": "Drenaje de tórax",
+          "definicion": "Tubo para evacuar aire o líquido del espacio pleural."
+        },
+        {
+          "termino": "Lavado peritoneal",
+          "definicion": "Irrigación de cavidad abdominal en sepsis o pancreatitis."
+        },
+        {
+          "termino": "Endoscopia digestiva",
+          "definicion": "Visualización de esófago, estómago o intestino con endoscopio flexible."
+        },
+        {
+          "termino": "Quimioterapia veterinaria",
+          "definicion": "Fármacos citotóxicos para neoplasias; protocolos adaptados por especie."
+        },
+        {
+          "termino": "Fisioterapia animal",
+          "definicion": "Ejercicios, masaje y electroterapia para rehabilitación musculoesquelética."
+        },
+        {
+          "termino": "Medicina del comportamiento",
+          "definicion": "Diagnóstico y tratamiento de trastornos conductuales y bienestar mental."
         }
       ]
     },
@@ -2312,5 +2736,5 @@
       ]
     }
   ],
-  "total_terminos": 527
+  "total_terminos": 631
 }

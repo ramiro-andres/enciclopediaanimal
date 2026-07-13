@@ -14,6 +14,11 @@ MIN_TERM_LENGTH = 5
 MIN_SCORE = 0.25
 MAX_SUGGESTIONS = 200
 
+GENERIC_TERMS = %w[
+  sintomas causas tratamiento diagnostico prevencion pronostico urgencia
+  gravedad factores de riesgo examenes complementarios
+].freeze
+
 def normalize(text)
   String(text).to_s
     .unicode_normalize(:nfd)
@@ -116,6 +121,8 @@ terms.each do |term|
     }
   end
 end
+
+suggestions.reject! { |s| GENERIC_TERMS.include?(normalize(s['termino'])) }
 
 suggestions.sort_by! { |s| -s['score'] }
 suggestions = suggestions.first(MAX_SUGGESTIONS)

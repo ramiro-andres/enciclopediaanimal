@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T04:33:33Z",
+  "generated_at": "2026-07-13T04:49:35Z",
   "total_sugerencias": 200,
   "nota": "Sugerencias para revisión manual; no se aplican automáticamente en la UI.",
   "sugerencias": [
@@ -15,1317 +15,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Alopecia X (enfermedad del pelaje negro)",
-      "enfermedad_norm": "alopecia x (enfermedad del pelaje negro)",
-      "animalId": "perros",
-      "breedId": "pomerania",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Síndrome de manchas lagrimales",
-      "enfermedad_norm": "sindrome de manchas lagrimales",
-      "animalId": "perros",
-      "breedId": "maltes",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Epilepsia idiopática",
-      "enfermedad_norm": "epilepsia idiopatica",
-      "animalId": "perros",
-      "breedId": "shih_tzu",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Discopatía intervertebral",
-      "enfermedad_norm": "discopatia intervertebral",
-      "animalId": "perros",
-      "breedId": "beagle",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Glaucoma",
-      "enfermedad_norm": "glaucoma",
-      "animalId": "perros",
-      "breedId": "beagle",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dermatitis por alergia",
-      "enfermedad_norm": "dermatitis por alergia",
-      "animalId": "perros",
-      "breedId": "cocker",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad de disco intervertebral",
-      "enfermedad_norm": "enfermedad de disco intervertebral",
-      "animalId": "perros",
-      "breedId": "cocker",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Anomalía del ojo del Collie (CEA)",
-      "enfermedad_norm": "anomalia del ojo del collie (cea)",
-      "animalId": "perros",
-      "breedId": "border_collie",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Anemia de estres eritrocitario (IMHA)",
-      "enfermedad_norm": "anemia de estres eritrocitario (imha)",
-      "animalId": "perros",
-      "breedId": "border_collie",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Osteocondrosis disecante",
-      "enfermedad_norm": "osteocondrosis disecante",
-      "animalId": "perros",
-      "breedId": "border_collie",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Hernia discal",
-      "enfermedad_norm": "hernia discal",
-      "animalId": "perros",
-      "breedId": "bulldog_frances",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dermatitis en pliegues",
-      "enfermedad_norm": "dermatitis en pliegues",
-      "animalId": "perros",
-      "breedId": "bulldog_frances",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Alergias cutáneas",
-      "enfermedad_norm": "alergias cutaneas",
-      "animalId": "perros",
-      "breedId": "bulldog_frances",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad del disco intervertebral",
-      "enfermedad_norm": "enfermedad del disco intervertebral",
-      "animalId": "perros",
-      "breedId": "bulldog_frances",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Lipoma múltiple",
-      "enfermedad_norm": "lipoma multiple",
-      "animalId": "perros",
-      "breedId": "labrador",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Mielopatía degenerativa",
-      "enfermedad_norm": "mielopatia degenerativa",
-      "animalId": "perros",
-      "breedId": "pastor_aleman",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Insuficiencia pancreática exocrina",
-      "enfermedad_norm": "insuficiencia pancreatica exocrina",
-      "animalId": "perros",
-      "breedId": "pastor_aleman",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pancreatitis",
-      "enfermedad_norm": "pancreatitis",
-      "animalId": "perros",
-      "breedId": "pastor_aleman",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Hemangiosarcoma esplénico",
-      "enfermedad_norm": "hemangiosarcoma esplenico",
-      "animalId": "perros",
-      "breedId": "pastor_aleman",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Lipoma y mastocitoma",
-      "enfermedad_norm": "lipoma y mastocitoma",
-      "animalId": "perros",
-      "breedId": "golden_retriever",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Osteosarcoma",
-      "enfermedad_norm": "osteosarcoma",
-      "animalId": "perros",
-      "breedId": "gran_danes",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Wobbler syndrome",
-      "enfermedad_norm": "wobbler syndrome",
-      "animalId": "perros",
-      "breedId": "gran_danes",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Deficiencia de piruvato quinasa",
-      "enfermedad_norm": "deficiencia de piruvato quinasa",
-      "animalId": "gatos",
-      "breedId": "singapura",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Estrabismo convergente",
-      "enfermedad_norm": "estrabismo convergente",
-      "animalId": "gatos",
-      "breedId": "siames",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Neoplasia mamaria",
-      "enfermedad_norm": "neoplasia mamaria",
-      "animalId": "gatos",
-      "breedId": "siames",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Problemas respiratorios braquicefálicos",
-      "enfermedad_norm": "problemas respiratorios braquicefalicos",
-      "animalId": "gatos",
-      "breedId": "persa",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Epífora y problemas oculares",
-      "enfermedad_norm": "epifora y problemas oculares",
-      "animalId": "gatos",
-      "breedId": "persa",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dermatofitosis (tiña)",
-      "enfermedad_norm": "dermatofitosis (tina)",
-      "animalId": "gatos",
-      "breedId": "persa",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Megacolon",
-      "enfermedad_norm": "megacolon",
-      "animalId": "gatos",
-      "breedId": "persa",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Poliquistosis renal",
-      "enfermedad_norm": "poliquistosis renal",
-      "animalId": "gatos",
-      "breedId": "british_shorthair",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Atrofia muscular espinal",
-      "enfermedad_norm": "atrofia muscular espinal",
-      "animalId": "gatos",
-      "breedId": "maine_coon",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Espondilosis deformante",
-      "enfermedad_norm": "espondilosis deformante",
-      "animalId": "gatos",
-      "breedId": "maine_coon",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Piodermia",
-      "enfermedad_norm": "piodermia",
-      "animalId": "gatos",
-      "breedId": "maine_coon",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ácaros de las vías respiratorias (traqueales)",
-      "enfermedad_norm": "acaros de las vias respiratorias (traqueales)",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ácaros de patas (Cnemidocoptes)",
-      "enfermedad_norm": "acaros de patas (cnemidocoptes)",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Muda anormal",
-      "enfermedad_norm": "muda anormal",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Candidiasis",
-      "enfermedad_norm": "candidiasis",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Tumores (lipomas y otros)",
-      "enfermedad_norm": "tumores (lipomas y otros)",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ácaros de patas",
-      "enfermedad_norm": "acaros de patas",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Aspergilosis",
-      "enfermedad_norm": "aspergilosis",
-      "animalId": "aves",
-      "breedId": "diamante_mandarin",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ácaros respiratorios",
-      "enfermedad_norm": "acaros respiratorios",
-      "animalId": "aves",
-      "breedId": "diamante_mandarin",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Egg binding",
-      "enfermedad_norm": "egg binding",
-      "animalId": "aves",
-      "breedId": "diamante_mandarin",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Picaje (arrancado de plumas)",
-      "enfermedad_norm": "picaje (arrancado de plumas)",
-      "animalId": "aves",
-      "breedId": "cacatua",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad del pico y las plumas (PBFD)",
-      "enfermedad_norm": "enfermedad del pico y las plumas (pbfd)",
-      "animalId": "aves",
-      "breedId": "cacatua",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Picaje por estrés",
-      "enfermedad_norm": "picaje por estres",
-      "animalId": "aves",
-      "breedId": "guacamayo",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Metalosis por intoxicación",
-      "enfermedad_norm": "metalosis por intoxicacion",
-      "animalId": "aves",
-      "breedId": "guacamayo",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Síndrome metabólico equino",
-      "enfermedad_norm": "sindrome metabolico equino",
-      "animalId": "equinos",
-      "breedId": "pony_shetland",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Parásitos internos resistentes",
-      "enfermedad_norm": "parasitos internos resistentes",
-      "animalId": "equinos",
-      "breedId": "pony_shetland",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Artritis degenerativa",
-      "enfermedad_norm": "artritis degenerativa",
-      "animalId": "equinos",
-      "breedId": "pony_connemara",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Úlcera gástrica",
-      "enfermedad_norm": "ulcera gastrica",
-      "animalId": "equinos",
-      "breedId": "pony_connemara",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Neumonía",
-      "enfermedad_norm": "neumonia",
-      "animalId": "equinos",
-      "breedId": "pony_connemara",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Tétanos",
-      "enfermedad_norm": "tetanos",
-      "animalId": "equinos",
-      "breedId": "pony_connemara",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Sarcoides cutáneos",
-      "enfermedad_norm": "sarcoides cutaneos",
-      "animalId": "equinos",
-      "breedId": "caballo_andaluz",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Melanoma en gris",
-      "enfermedad_norm": "melanoma en gris",
-      "animalId": "equinos",
-      "breedId": "caballo_andaluz",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Uveítis recurrente (moon blindness)",
-      "enfermedad_norm": "uveitis recurrente (moon blindness)",
-      "animalId": "equinos",
-      "breedId": "caballo_andaluz",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pododermatitis digital",
-      "enfermedad_norm": "pododermatitis digital",
-      "animalId": "bovinos",
-      "breedId": "hereford",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Anemia parasitaria",
-      "enfermedad_norm": "anemia parasitaria",
-      "animalId": "bovinos",
-      "breedId": "hereford",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Clostridiosis",
-      "enfermedad_norm": "clostridiosis",
-      "animalId": "bovinos",
-      "breedId": "dexter",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Metritis",
-      "enfermedad_norm": "metritis",
-      "animalId": "bovinos",
-      "breedId": "dexter",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Hipocalcemia posparto",
-      "enfermedad_norm": "hipocalcemia posparto",
-      "animalId": "bovinos",
-      "breedId": "dexter",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Distocia (parto difícil)",
-      "enfermedad_norm": "distocia (parto dificil)",
-      "animalId": "bovinos",
-      "breedId": "angus",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Anaplasmosis",
-      "enfermedad_norm": "anaplasmosis",
-      "animalId": "bovinos",
-      "breedId": "angus",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Retención de placenta",
-      "enfermedad_norm": "retencion de placenta",
-      "animalId": "bovinos",
-      "breedId": "angus",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Cetosis",
-      "enfermedad_norm": "cetosis",
-      "animalId": "bovinos",
-      "breedId": "holstein",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Desplazamiento de abomaso",
-      "enfermedad_norm": "desplazamiento de abomaso",
-      "animalId": "bovinos",
-      "breedId": "holstein",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Sarna sarcóptica",
-      "enfermedad_norm": "sarna sarcoptica",
-      "animalId": "porcinos",
-      "breedId": "cerdo_iberico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Neumonía enzoótica",
-      "enfermedad_norm": "neumonia enzootica",
-      "animalId": "porcinos",
-      "breedId": "cerdo_iberico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Aflatoxicosis",
-      "enfermedad_norm": "aflatoxicosis",
-      "animalId": "porcinos",
-      "breedId": "cerdo_iberico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Disentería porcina",
-      "enfermedad_norm": "disenteria porcina",
-      "animalId": "porcinos",
-      "breedId": "cerdo_iberico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Erisipela",
-      "enfermedad_norm": "erisipela",
-      "animalId": "porcinos",
-      "breedId": "mini_pig",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "PCV2 (circovirus)",
-      "enfermedad_norm": "pcv2 (circovirus)",
-      "animalId": "porcinos",
-      "breedId": "mini_pig",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Mycoplasma",
-      "enfermedad_norm": "mycoplasma",
-      "animalId": "porcinos",
-      "breedId": "mini_pig",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Prolapso (rectal o uterino)",
-      "enfermedad_norm": "prolapso (rectal o uterino)",
-      "animalId": "porcinos",
-      "breedId": "cerdo_landrace",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Fractura por caída",
-      "enfermedad_norm": "fractura por caida",
-      "animalId": "conejos",
-      "breedId": "conejo_mini",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pasteurelosis",
-      "enfermedad_norm": "pasteurelosis",
-      "animalId": "conejos",
-      "breedId": "conejo_mini",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pododermatitis",
-      "enfermedad_norm": "pododermatitis",
-      "animalId": "conejos",
-      "breedId": "holandes_enano",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Encefalitozoon cuniculi",
-      "enfermedad_norm": "encefalitozoon cuniculi",
-      "animalId": "conejos",
-      "breedId": "holandes_enano",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dermatitis y golpe de calor",
-      "enfermedad_norm": "dermatitis y golpe de calor",
-      "animalId": "conejos",
-      "breedId": "conejo_angora",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Problemas cardíacos",
-      "enfermedad_norm": "problemas cardiacos",
-      "animalId": "conejos",
-      "breedId": "conejo_gigante",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Artritis por peso",
-      "enfermedad_norm": "artritis por peso",
-      "animalId": "conejos",
-      "breedId": "conejo_gigante",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Muda incompleta (disecdisis)",
-      "enfermedad_norm": "muda incompleta (disecdisis)",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Estomatitis (boca podrida)",
-      "enfermedad_norm": "estomatitis (boca podrida)",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Parásitos internos",
-      "enfermedad_norm": "parasitos internos",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Quemaduras térmicas",
-      "enfermedad_norm": "quemaduras termicas",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Muda retenida",
-      "enfermedad_norm": "muda retenida",
-      "animalId": "reptiles",
-      "breedId": "gecko_leopardo",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Estomatitis",
-      "enfermedad_norm": "estomatitis",
-      "animalId": "reptiles",
-      "breedId": "gecko_leopardo",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Podredumbre del caparazón (shell rot)",
-      "enfermedad_norm": "podredumbre del caparazon (shell rot)",
-      "animalId": "reptiles",
-      "breedId": "tortuga",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Prolapso cloacal",
-      "enfermedad_norm": "prolapso cloacal",
-      "animalId": "reptiles",
-      "breedId": "tortuga",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Quemaduras por UV/lámpara",
-      "enfermedad_norm": "quemaduras por uv/lampara",
-      "animalId": "reptiles",
-      "breedId": "iguana",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Podredumbre de aletas",
-      "enfermedad_norm": "podredumbre de aletas",
-      "animalId": "peces",
-      "breedId": "betta",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ictioftiriasis (punto blanco)",
-      "enfermedad_norm": "ictioftiriasis (punto blanco)",
-      "animalId": "peces",
-      "breedId": "betta",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Hidropesía",
-      "enfermedad_norm": "hidropesia",
-      "animalId": "peces",
-      "breedId": "betta",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Velvet (Oodinium)",
-      "enfermedad_norm": "velvet (oodinium)",
-      "animalId": "peces",
-      "breedId": "betta",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Columnaris",
-      "enfermedad_norm": "columnaris",
-      "animalId": "peces",
-      "breedId": "betta",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Ich (punto blanco)",
-      "enfermedad_norm": "ich (punto blanco)",
-      "animalId": "peces",
-      "breedId": "neon_tetra",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dropsy (hidropesía)",
-      "enfermedad_norm": "dropsy (hidropesia)",
-      "animalId": "peces",
-      "breedId": "neon_tetra",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Intoxicación por amoniaco",
-      "enfermedad_norm": "intoxicacion por amoniaco",
-      "animalId": "peces",
-      "breedId": "neon_tetra",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Trastorno de la vejiga natatoria",
-      "enfermedad_norm": "trastorno de la vejiga natatoria",
-      "animalId": "peces",
-      "breedId": "goldfish",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Úlceras bacterianas",
-      "enfermedad_norm": "ulceras bacterianas",
-      "animalId": "peces",
-      "breedId": "carpa_koi",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad del Koi herpesvirus (KHV)",
-      "enfermedad_norm": "enfermedad del koi herpesvirus (khv)",
-      "animalId": "peces",
-      "breedId": "carpa_koi",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Costia (Ichthyobodo)",
-      "enfermedad_norm": "costia (ichthyobodo)",
-      "animalId": "peces",
-      "breedId": "carpa_koi",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Miasis",
-      "enfermedad_norm": "miasis",
-      "animalId": "ovinos",
-      "breedId": "ouessant",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pododermatitis (footrot)",
-      "enfermedad_norm": "pododermatitis (footrot)",
-      "animalId": "ovinos",
-      "breedId": "ouessant",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Pedero (pietín)",
-      "enfermedad_norm": "pedero (pietin)",
-      "animalId": "ovinos",
-      "breedId": "oveja_merino",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Listeriosis",
-      "enfermedad_norm": "listeriosis",
-      "animalId": "caprinos",
-      "breedId": "cabra_pigmea",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Parto distócico",
-      "enfermedad_norm": "parto distocico",
-      "animalId": "caprinos",
-      "breedId": "cabra_pigmea",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Meningeal worm",
-      "enfermedad_norm": "meningeal worm",
-      "animalId": "camelidos",
-      "breedId": "alpaca",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Meningeal worm (Parelaphostrongylus)",
-      "enfermedad_norm": "meningeal worm (parelaphostrongylus)",
-      "animalId": "camelidos",
-      "breedId": "llama",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad de la cola húmeda (proliferativa)",
-      "enfermedad_norm": "enfermedad de la cola humeda (proliferativa)",
-      "animalId": "roedores",
-      "breedId": "hamster",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Tumores",
-      "enfermedad_norm": "tumores",
-      "animalId": "roedores",
-      "breedId": "hamster",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Insuficiencia cardíaca",
-      "enfermedad_norm": "insuficiencia cardiaca",
-      "animalId": "roedores",
-      "breedId": "hamster",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Abscesos por mordeduras",
-      "enfermedad_norm": "abscesos por mordeduras",
-      "animalId": "roedores",
-      "breedId": "hamster",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Cálculos urinarios",
-      "enfermedad_norm": "calculos urinarios",
-      "animalId": "roedores",
-      "breedId": "cobaya",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Linfoma",
-      "enfermedad_norm": "linfoma",
-      "animalId": "roedores",
-      "breedId": "huron",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Moquillo (distemper)",
-      "enfermedad_norm": "moquillo (distemper)",
-      "animalId": "roedores",
-      "breedId": "huron",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Wet tail (proliferativa)",
-      "enfermedad_norm": "wet tail (proliferativa)",
-      "animalId": "roedores",
-      "breedId": "raton_domestico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Síntomas",
-      "termino_norm": "sintomas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Escorbuto",
-      "enfermedad_norm": "escorbuto",
-      "animalId": "roedores",
-      "breedId": "raton_domestico",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Hidrocefalia",
-      "enfermedad_norm": "hidrocefalia",
-      "animalId": "perros",
-      "breedId": "chihuahua",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Traumatismo por caída",
-      "enfermedad_norm": "traumatismo por caida",
-      "animalId": "perros",
-      "breedId": "chihuahua",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Shunt portosistémico",
       "enfermedad_norm": "shunt portosistemico",
@@ -1335,8 +26,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Atrofia progresiva de retina",
       "enfermedad_norm": "atrofia progresiva de retina",
@@ -1346,8 +37,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Alopecia X (enfermedad del pelaje negro)",
       "enfermedad_norm": "alopecia x (enfermedad del pelaje negro)",
@@ -1357,30 +48,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Síndrome de manchas lagrimales",
-      "enfermedad_norm": "sindrome de manchas lagrimales",
-      "animalId": "perros",
-      "breedId": "maltes",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Dermatitis atópica",
-      "enfermedad_norm": "dermatitis atopica",
+      "enfermedad": "Otitis externa",
+      "enfermedad_norm": "otitis externa",
       "animalId": "perros",
       "breedId": "shih_tzu",
       "score": 0.4,
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad",
       "enfermedad_norm": "obesidad",
@@ -1390,8 +70,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Epilepsia idiopática",
       "enfermedad_norm": "epilepsia idiopatica",
@@ -1401,8 +81,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hipotiroidismo",
       "enfermedad_norm": "hipotiroidismo",
@@ -1412,8 +92,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Discopatía intervertebral",
       "enfermedad_norm": "discopatia intervertebral",
@@ -1423,8 +103,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Glaucoma",
       "enfermedad_norm": "glaucoma",
@@ -1434,8 +114,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Otitis crónica",
+      "enfermedad_norm": "otitis cronica",
+      "animalId": "perros",
+      "breedId": "cocker",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatitis por alergia",
       "enfermedad_norm": "dermatitis por alergia",
@@ -1445,8 +136,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad de disco intervertebral",
       "enfermedad_norm": "enfermedad de disco intervertebral",
@@ -1456,8 +147,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anomalía del ojo del Collie (CEA)",
       "enfermedad_norm": "anomalia del ojo del collie (cea)",
@@ -1467,8 +158,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sensibilidad a fármacos (mutación MDR1)",
       "enfermedad_norm": "sensibilidad a farmacos (mutacion mdr1)",
@@ -1478,8 +169,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anemia de estres eritrocitario (IMHA)",
       "enfermedad_norm": "anemia de estres eritrocitario (imha)",
@@ -1489,8 +180,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Osteocondrosis disecante",
       "enfermedad_norm": "osteocondrosis disecante",
@@ -1500,8 +191,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Síndrome braquicefálico",
       "enfermedad_norm": "sindrome braquicefalico",
@@ -1511,8 +202,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hernia discal",
       "enfermedad_norm": "hernia discal",
@@ -1522,8 +213,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatitis en pliegues",
       "enfermedad_norm": "dermatitis en pliegues",
@@ -1533,8 +224,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Alergias cutáneas",
       "enfermedad_norm": "alergias cutaneas",
@@ -1544,8 +235,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del disco intervertebral",
       "enfermedad_norm": "enfermedad del disco intervertebral",
@@ -1555,8 +246,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Displasia de codo",
+      "enfermedad_norm": "displasia de codo",
+      "animalId": "perros",
+      "breedId": "labrador",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Lipoma múltiple",
       "enfermedad_norm": "lipoma multiple",
@@ -1566,8 +268,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Mielopatía degenerativa",
       "enfermedad_norm": "mielopatia degenerativa",
@@ -1577,8 +279,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Insuficiencia pancreática exocrina",
       "enfermedad_norm": "insuficiencia pancreatica exocrina",
@@ -1588,8 +290,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pancreatitis",
       "enfermedad_norm": "pancreatitis",
@@ -1599,8 +301,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hemangiosarcoma esplénico",
       "enfermedad_norm": "hemangiosarcoma esplenico",
@@ -1610,8 +312,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Cáncer (hemangiosarcoma y linfoma)",
       "enfermedad_norm": "cancer (hemangiosarcoma y linfoma)",
@@ -1621,8 +323,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Lipoma y mastocitoma",
       "enfermedad_norm": "lipoma y mastocitoma",
@@ -1632,8 +334,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Osteosarcoma",
       "enfermedad_norm": "osteosarcoma",
@@ -1643,8 +345,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Wobbler syndrome",
       "enfermedad_norm": "wobbler syndrome",
@@ -1654,30 +356,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Inercia uterina",
-      "enfermedad_norm": "inercia uterina",
-      "animalId": "gatos",
-      "breedId": "singapura",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Enfermedad renal crónica",
-      "enfermedad_norm": "enfermedad renal cronica",
-      "animalId": "gatos",
-      "breedId": "singapura",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Deficiencia de piruvato quinasa",
       "enfermedad_norm": "deficiencia de piruvato quinasa",
@@ -1687,41 +367,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Asma felino",
-      "enfermedad_norm": "asma felino",
-      "animalId": "gatos",
-      "breedId": "singapura",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Obstrucción urinaria",
-      "enfermedad_norm": "obstruccion urinaria",
-      "animalId": "gatos",
-      "breedId": "devon_rex",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Diabetes mellitus",
-      "enfermedad_norm": "diabetes mellitus",
-      "animalId": "gatos",
-      "breedId": "devon_rex",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Amiloidosis",
       "enfermedad_norm": "amiloidosis",
@@ -1731,8 +378,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Estrabismo convergente",
       "enfermedad_norm": "estrabismo convergente",
@@ -1742,8 +389,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Neoplasia mamaria",
       "enfermedad_norm": "neoplasia mamaria",
@@ -1753,8 +400,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Poliquistosis renal (PKD)",
       "enfermedad_norm": "poliquistosis renal (pkd)",
@@ -1764,8 +411,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Problemas respiratorios braquicefálicos",
       "enfermedad_norm": "problemas respiratorios braquicefalicos",
@@ -1775,8 +422,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Epífora y problemas oculares",
       "enfermedad_norm": "epifora y problemas oculares",
@@ -1786,8 +433,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatofitosis (tiña)",
       "enfermedad_norm": "dermatofitosis (tina)",
@@ -1797,8 +444,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Megacolon",
       "enfermedad_norm": "megacolon",
@@ -1808,8 +455,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Poliquistosis renal",
       "enfermedad_norm": "poliquistosis renal",
@@ -1819,8 +466,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Atrofia muscular espinal",
       "enfermedad_norm": "atrofia muscular espinal",
@@ -1830,8 +477,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Espondilosis deformante",
       "enfermedad_norm": "espondilosis deformante",
@@ -1841,8 +488,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Piodermia",
       "enfermedad_norm": "piodermia",
@@ -1852,8 +499,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Cálculos urinarios (urolitiasis)",
       "enfermedad_norm": "calculos urinarios (urolitiasis)",
@@ -1863,8 +510,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros de las vías respiratorias (traqueales)",
       "enfermedad_norm": "acaros de las vias respiratorias (traqueales)",
@@ -1874,8 +521,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros de patas (Cnemidocoptes)",
       "enfermedad_norm": "acaros de patas (cnemidocoptes)",
@@ -1885,8 +532,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Muda anormal",
       "enfermedad_norm": "muda anormal",
@@ -1896,8 +543,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Candidiasis",
       "enfermedad_norm": "candidiasis",
@@ -1907,19 +554,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Psitacosis",
-      "enfermedad_norm": "psitacosis",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Tumores (lipomas y otros)",
       "enfermedad_norm": "tumores (lipomas y otros)",
@@ -1929,8 +565,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Megabacteriosis (Macrorhabdus)",
       "enfermedad_norm": "megabacteriosis (macrorhabdus)",
@@ -1940,19 +576,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Psitacosis (clamidiosis)",
-      "enfermedad_norm": "psitacosis (clamidiosis)",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros de patas",
       "enfermedad_norm": "acaros de patas",
@@ -1962,8 +587,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Aspergilosis",
       "enfermedad_norm": "aspergilosis",
@@ -1973,8 +598,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros respiratorios",
       "enfermedad_norm": "acaros respiratorios",
@@ -1984,8 +609,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Egg binding",
       "enfermedad_norm": "egg binding",
@@ -1995,8 +620,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Picaje (arrancado de plumas)",
       "enfermedad_norm": "picaje (arrancado de plumas)",
@@ -2006,8 +631,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del pico y las plumas (PBFD)",
       "enfermedad_norm": "enfermedad del pico y las plumas (pbfd)",
@@ -2017,8 +642,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad y lipomas",
       "enfermedad_norm": "obesidad y lipomas",
@@ -2028,8 +653,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dilatación proventricular (PDD)",
       "enfermedad_norm": "dilatacion proventricular (pdd)",
@@ -2039,8 +664,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Picaje por estrés",
       "enfermedad_norm": "picaje por estres",
@@ -2050,8 +675,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Metalosis por intoxicación",
       "enfermedad_norm": "metalosis por intoxicacion",
@@ -2061,19 +686,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Laminitis",
-      "enfermedad_norm": "laminitis",
-      "animalId": "equinos",
-      "breedId": "pony_shetland",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Síndrome metabólico equino",
       "enfermedad_norm": "sindrome metabolico equino",
@@ -2083,8 +697,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad y resistencia a insulina",
       "enfermedad_norm": "obesidad y resistencia a insulina",
@@ -2094,8 +708,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parásitos internos resistentes",
       "enfermedad_norm": "parasitos internos resistentes",
@@ -2105,8 +719,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Artritis degenerativa",
       "enfermedad_norm": "artritis degenerativa",
@@ -2116,8 +730,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Úlcera gástrica",
       "enfermedad_norm": "ulcera gastrica",
@@ -2127,8 +741,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Neumonía",
       "enfermedad_norm": "neumonia",
@@ -2138,8 +752,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Tétanos",
       "enfermedad_norm": "tetanos",
@@ -2149,8 +763,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parálisis periódica hiperpotasémica (HYPP)",
       "enfermedad_norm": "paralisis periodica hiperpotasemica (hypp)",
@@ -2160,8 +774,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del músculo (PSSM)",
       "enfermedad_norm": "enfermedad del musculo (pssm)",
@@ -2171,8 +785,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sarcoides cutáneos",
       "enfermedad_norm": "sarcoides cutaneos",
@@ -2182,8 +796,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Melanoma en gris",
       "enfermedad_norm": "melanoma en gris",
@@ -2193,13 +807,1399 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Causas",
-      "termino_norm": "causas",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Uveítis recurrente (moon blindness)",
       "enfermedad_norm": "uveitis recurrente (moon blindness)",
       "animalId": "equinos",
       "breedId": "caballo_andaluz",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Queratoconjuntivitis infecciosa (ojo rosado)",
+      "enfermedad_norm": "queratoconjuntivitis infecciosa (ojo rosado)",
+      "animalId": "bovinos",
+      "breedId": "hereford",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Fiebre de embarque (complejo respiratorio bovino)",
+      "enfermedad_norm": "fiebre de embarque (complejo respiratorio bovino)",
+      "animalId": "bovinos",
+      "breedId": "hereford",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pododermatitis digital",
+      "enfermedad_norm": "pododermatitis digital",
+      "animalId": "bovinos",
+      "breedId": "hereford",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Anemia parasitaria",
+      "enfermedad_norm": "anemia parasitaria",
+      "animalId": "bovinos",
+      "breedId": "hereford",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Mastitis",
+      "enfermedad_norm": "mastitis",
+      "animalId": "bovinos",
+      "breedId": "dexter",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Clostridiosis",
+      "enfermedad_norm": "clostridiosis",
+      "animalId": "bovinos",
+      "breedId": "dexter",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Metritis",
+      "enfermedad_norm": "metritis",
+      "animalId": "bovinos",
+      "breedId": "dexter",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Hipocalcemia posparto",
+      "enfermedad_norm": "hipocalcemia posparto",
+      "animalId": "bovinos",
+      "breedId": "dexter",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Clostridiosis (mancha, gangrena gaseosa)",
+      "enfermedad_norm": "clostridiosis (mancha, gangrena gaseosa)",
+      "animalId": "bovinos",
+      "breedId": "angus",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Neumonía (complejo respiratorio bovino)",
+      "enfermedad_norm": "neumonia (complejo respiratorio bovino)",
+      "animalId": "bovinos",
+      "breedId": "angus",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Distocia (parto difícil)",
+      "enfermedad_norm": "distocia (parto dificil)",
+      "animalId": "bovinos",
+      "breedId": "angus",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Anaplasmosis",
+      "enfermedad_norm": "anaplasmosis",
+      "animalId": "bovinos",
+      "breedId": "angus",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Retención de placenta",
+      "enfermedad_norm": "retencion de placenta",
+      "animalId": "bovinos",
+      "breedId": "angus",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Cetosis",
+      "enfermedad_norm": "cetosis",
+      "animalId": "bovinos",
+      "breedId": "holstein",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Hipocalcemia (fiebre de leche)",
+      "enfermedad_norm": "hipocalcemia (fiebre de leche)",
+      "animalId": "bovinos",
+      "breedId": "holstein",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Desplazamiento de abomaso",
+      "enfermedad_norm": "desplazamiento de abomaso",
+      "animalId": "bovinos",
+      "breedId": "holstein",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Golpe de calor",
+      "enfermedad_norm": "golpe de calor",
+      "animalId": "porcinos",
+      "breedId": "cerdo_iberico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Sarna sarcóptica",
+      "enfermedad_norm": "sarna sarcoptica",
+      "animalId": "porcinos",
+      "breedId": "cerdo_iberico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Neumonía enzoótica",
+      "enfermedad_norm": "neumonia enzootica",
+      "animalId": "porcinos",
+      "breedId": "cerdo_iberico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Aflatoxicosis",
+      "enfermedad_norm": "aflatoxicosis",
+      "animalId": "porcinos",
+      "breedId": "cerdo_iberico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Disentería porcina",
+      "enfermedad_norm": "disenteria porcina",
+      "animalId": "porcinos",
+      "breedId": "cerdo_iberico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Erisipela",
+      "enfermedad_norm": "erisipela",
+      "animalId": "porcinos",
+      "breedId": "mini_pig",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "PCV2 (circovirus)",
+      "enfermedad_norm": "pcv2 (circovirus)",
+      "animalId": "porcinos",
+      "breedId": "mini_pig",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Mycoplasma",
+      "enfermedad_norm": "mycoplasma",
+      "animalId": "porcinos",
+      "breedId": "mini_pig",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "MMA (metritis-mastitis-agalactia)",
+      "enfermedad_norm": "mma (metritis-mastitis-agalactia)",
+      "animalId": "porcinos",
+      "breedId": "mini_pig",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Síndrome de estrés porcino (PSS)",
+      "enfermedad_norm": "sindrome de estres porcino (pss)",
+      "animalId": "porcinos",
+      "breedId": "cerdo_landrace",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Prolapso (rectal o uterino)",
+      "enfermedad_norm": "prolapso (rectal o uterino)",
+      "animalId": "porcinos",
+      "breedId": "cerdo_landrace",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Mastitis-metritis-agalactia (MMA)",
+      "enfermedad_norm": "mastitis-metritis-agalactia (mma)",
+      "animalId": "porcinos",
+      "breedId": "cerdo_landrace",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Osteocondrosis y cojeras",
+      "enfermedad_norm": "osteocondrosis y cojeras",
+      "animalId": "porcinos",
+      "breedId": "cerdo_duroc",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Circovirosis porcina (PCV2)",
+      "enfermedad_norm": "circovirosis porcina (pcv2)",
+      "animalId": "porcinos",
+      "breedId": "cerdo_duroc",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Maloclusión dental",
+      "enfermedad_norm": "maloclusion dental",
+      "animalId": "conejos",
+      "breedId": "conejo_mini",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enfermedad hemorrágica vírica (RHDV)",
+      "enfermedad_norm": "enfermedad hemorragica virica (rhdv)",
+      "animalId": "conejos",
+      "breedId": "conejo_mini",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Fractura por caída",
+      "enfermedad_norm": "fractura por caida",
+      "animalId": "conejos",
+      "breedId": "conejo_mini",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pasteurelosis",
+      "enfermedad_norm": "pasteurelosis",
+      "animalId": "conejos",
+      "breedId": "conejo_mini",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pododermatitis",
+      "enfermedad_norm": "pododermatitis",
+      "animalId": "conejos",
+      "breedId": "holandes_enano",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Encefalitozoon cuniculi",
+      "enfermedad_norm": "encefalitozoon cuniculi",
+      "animalId": "conejos",
+      "breedId": "holandes_enano",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Tricobezoar",
+      "enfermedad_norm": "tricobezoar",
+      "animalId": "conejos",
+      "breedId": "holandes_enano",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Tricobezoares (bolas de pelo)",
+      "enfermedad_norm": "tricobezoares (bolas de pelo)",
+      "animalId": "conejos",
+      "breedId": "conejo_angora",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Dermatitis y golpe de calor",
+      "enfermedad_norm": "dermatitis y golpe de calor",
+      "animalId": "conejos",
+      "breedId": "conejo_angora",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pododermatitis (llagas en corvejones)",
+      "enfermedad_norm": "pododermatitis (llagas en corvejones)",
+      "animalId": "conejos",
+      "breedId": "conejo_gigante",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Problemas cardíacos",
+      "enfermedad_norm": "problemas cardiacos",
+      "animalId": "conejos",
+      "breedId": "conejo_gigante",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Artritis por peso",
+      "enfermedad_norm": "artritis por peso",
+      "animalId": "conejos",
+      "breedId": "conejo_gigante",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Muda incompleta (disecdisis)",
+      "enfermedad_norm": "muda incompleta (disecdisis)",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Estomatitis (boca podrida)",
+      "enfermedad_norm": "estomatitis (boca podrida)",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Infección respiratoria",
+      "enfermedad_norm": "infeccion respiratoria",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Parásitos internos",
+      "enfermedad_norm": "parasitos internos",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Quemaduras térmicas",
+      "enfermedad_norm": "quemaduras termicas",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Muda retenida",
+      "enfermedad_norm": "muda retenida",
+      "animalId": "reptiles",
+      "breedId": "gecko_leopardo",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Estomatitis",
+      "enfermedad_norm": "estomatitis",
+      "animalId": "reptiles",
+      "breedId": "gecko_leopardo",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Podredumbre del caparazón (shell rot)",
+      "enfermedad_norm": "podredumbre del caparazon (shell rot)",
+      "animalId": "reptiles",
+      "breedId": "tortuga",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Prolapso cloacal",
+      "enfermedad_norm": "prolapso cloacal",
+      "animalId": "reptiles",
+      "breedId": "tortuga",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Gota",
+      "enfermedad_norm": "gota",
+      "animalId": "reptiles",
+      "breedId": "iguana",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Abscesos y parásitos",
+      "enfermedad_norm": "abscesos y parasitos",
+      "animalId": "reptiles",
+      "breedId": "iguana",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Quemaduras por UV/lámpara",
+      "enfermedad_norm": "quemaduras por uv/lampara",
+      "animalId": "reptiles",
+      "breedId": "iguana",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Podredumbre de aletas",
+      "enfermedad_norm": "podredumbre de aletas",
+      "animalId": "peces",
+      "breedId": "betta",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Ictioftiriasis (punto blanco)",
+      "enfermedad_norm": "ictioftiriasis (punto blanco)",
+      "animalId": "peces",
+      "breedId": "betta",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Hidropesía",
+      "enfermedad_norm": "hidropesia",
+      "animalId": "peces",
+      "breedId": "betta",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Velvet (Oodinium)",
+      "enfermedad_norm": "velvet (oodinium)",
+      "animalId": "peces",
+      "breedId": "betta",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Columnaris",
+      "enfermedad_norm": "columnaris",
+      "animalId": "peces",
+      "breedId": "betta",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Ich (punto blanco)",
+      "enfermedad_norm": "ich (punto blanco)",
+      "animalId": "peces",
+      "breedId": "neon_tetra",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Dropsy (hidropesía)",
+      "enfermedad_norm": "dropsy (hidropesia)",
+      "animalId": "peces",
+      "breedId": "neon_tetra",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Intoxicación por amoniaco",
+      "enfermedad_norm": "intoxicacion por amoniaco",
+      "animalId": "peces",
+      "breedId": "neon_tetra",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Trastorno de la vejiga natatoria",
+      "enfermedad_norm": "trastorno de la vejiga natatoria",
+      "animalId": "peces",
+      "breedId": "goldfish",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Intoxicación por amoniaco/nitritos",
+      "enfermedad_norm": "intoxicacion por amoniaco/nitritos",
+      "animalId": "peces",
+      "breedId": "goldfish",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enfermedad del herpesvirus koi (KHV)",
+      "enfermedad_norm": "enfermedad del herpesvirus koi (khv)",
+      "animalId": "peces",
+      "breedId": "carpa_koi",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Úlceras bacterianas",
+      "enfermedad_norm": "ulceras bacterianas",
+      "animalId": "peces",
+      "breedId": "carpa_koi",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Parásitos externos (anclas, piojos, gusanos)",
+      "enfermedad_norm": "parasitos externos (anclas, piojos, gusanos)",
+      "animalId": "peces",
+      "breedId": "carpa_koi",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enfermedad del Koi herpesvirus (KHV)",
+      "enfermedad_norm": "enfermedad del koi herpesvirus (khv)",
+      "animalId": "peces",
+      "breedId": "carpa_koi",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Costia (Ichthyobodo)",
+      "enfermedad_norm": "costia (ichthyobodo)",
+      "animalId": "peces",
+      "breedId": "carpa_koi",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Miasis",
+      "enfermedad_norm": "miasis",
+      "animalId": "ovinos",
+      "breedId": "ouessant",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pododermatitis (footrot)",
+      "enfermedad_norm": "pododermatitis (footrot)",
+      "animalId": "ovinos",
+      "breedId": "ouessant",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Miasis (bichera)",
+      "enfermedad_norm": "miasis (bichera)",
+      "animalId": "ovinos",
+      "breedId": "oveja_merino",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Pedero (pietín)",
+      "enfermedad_norm": "pedero (pietin)",
+      "animalId": "ovinos",
+      "breedId": "oveja_merino",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Parasitosis gastrointestinal",
+      "enfermedad_norm": "parasitosis gastrointestinal",
+      "animalId": "ovinos",
+      "breedId": "oveja_merino",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Listeriosis",
+      "enfermedad_norm": "listeriosis",
+      "animalId": "caprinos",
+      "breedId": "cabra_pigmea",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Parto distócico",
+      "enfermedad_norm": "parto distocico",
+      "animalId": "caprinos",
+      "breedId": "cabra_pigmea",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Artritis-encefalitis caprina (CAEV)",
+      "enfermedad_norm": "artritis-encefalitis caprina (caev)",
+      "animalId": "caprinos",
+      "breedId": "cabra_nubia",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Meningeal worm",
+      "enfermedad_norm": "meningeal worm",
+      "animalId": "camelidos",
+      "breedId": "alpaca",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Parásitos (incluida la barberpole)",
+      "enfermedad_norm": "parasitos (incluida la barberpole)",
+      "animalId": "camelidos",
+      "breedId": "llama",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Deficiencia de vitamina D (raquitismo)",
+      "enfermedad_norm": "deficiencia de vitamina d (raquitismo)",
+      "animalId": "camelidos",
+      "breedId": "llama",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Meningeal worm (Parelaphostrongylus)",
+      "enfermedad_norm": "meningeal worm (parelaphostrongylus)",
+      "animalId": "camelidos",
+      "breedId": "llama",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enfermedad de la cola húmeda (proliferativa)",
+      "enfermedad_norm": "enfermedad de la cola humeda (proliferativa)",
+      "animalId": "roedores",
+      "breedId": "hamster",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Tumores",
+      "enfermedad_norm": "tumores",
+      "animalId": "roedores",
+      "breedId": "hamster",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Sobrecrecimiento dental",
+      "enfermedad_norm": "sobrecrecimiento dental",
+      "animalId": "roedores",
+      "breedId": "hamster",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Insuficiencia cardíaca",
+      "enfermedad_norm": "insuficiencia cardiaca",
+      "animalId": "roedores",
+      "breedId": "hamster",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Abscesos por mordeduras",
+      "enfermedad_norm": "abscesos por mordeduras",
+      "animalId": "roedores",
+      "breedId": "hamster",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Escorbuto (deficiencia de vitamina C)",
+      "enfermedad_norm": "escorbuto (deficiencia de vitamina c)",
+      "animalId": "roedores",
+      "breedId": "cobaya",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Infección respiratoria (neumonía)",
+      "enfermedad_norm": "infeccion respiratoria (neumonia)",
+      "animalId": "roedores",
+      "breedId": "cobaya",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Cálculos urinarios",
+      "enfermedad_norm": "calculos urinarios",
+      "animalId": "roedores",
+      "breedId": "cobaya",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Insulinoma",
+      "enfermedad_norm": "insulinoma",
+      "animalId": "roedores",
+      "breedId": "huron",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enfermedad adrenal",
+      "enfermedad_norm": "enfermedad adrenal",
+      "animalId": "roedores",
+      "breedId": "huron",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Enteritis catarral epizoótica (gripe/virus)",
+      "enfermedad_norm": "enteritis catarral epizootica (gripe/virus)",
+      "animalId": "roedores",
+      "breedId": "huron",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Linfoma",
+      "enfermedad_norm": "linfoma",
+      "animalId": "roedores",
+      "breedId": "huron",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Moquillo (distemper)",
+      "enfermedad_norm": "moquillo (distemper)",
+      "animalId": "roedores",
+      "breedId": "huron",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Wet tail (proliferativa)",
+      "enfermedad_norm": "wet tail (proliferativa)",
+      "animalId": "roedores",
+      "breedId": "raton_domestico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Escorbuto",
+      "enfermedad_norm": "escorbuto",
+      "animalId": "roedores",
+      "breedId": "raton_domestico",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Traumatismo por caída",
+      "enfermedad_norm": "traumatismo por caida",
+      "animalId": "perros",
+      "breedId": "chihuahua",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Shunt portosistémico",
+      "enfermedad_norm": "shunt portosistemico",
+      "animalId": "perros",
+      "breedId": "yorkshire",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Atrofia progresiva de retina",
+      "enfermedad_norm": "atrofia progresiva de retina",
+      "animalId": "perros",
+      "breedId": "yorkshire",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Alopecia X (enfermedad del pelaje negro)",
+      "enfermedad_norm": "alopecia x (enfermedad del pelaje negro)",
+      "animalId": "perros",
+      "breedId": "pomerania",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Síndrome de manchas lagrimales",
+      "enfermedad_norm": "sindrome de manchas lagrimales",
+      "animalId": "perros",
+      "breedId": "maltes",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Otitis externa",
+      "enfermedad_norm": "otitis externa",
+      "animalId": "perros",
+      "breedId": "shih_tzu",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Obesidad",
+      "enfermedad_norm": "obesidad",
+      "animalId": "perros",
+      "breedId": "shih_tzu",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Epilepsia idiopática",
+      "enfermedad_norm": "epilepsia idiopatica",
+      "animalId": "perros",
+      "breedId": "shih_tzu",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Hipotiroidismo",
+      "enfermedad_norm": "hipotiroidismo",
+      "animalId": "perros",
+      "breedId": "beagle",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Discopatía intervertebral",
+      "enfermedad_norm": "discopatia intervertebral",
+      "animalId": "perros",
+      "breedId": "beagle",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Glaucoma",
+      "enfermedad_norm": "glaucoma",
+      "animalId": "perros",
+      "breedId": "beagle",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Otitis crónica",
+      "enfermedad_norm": "otitis cronica",
+      "animalId": "perros",
+      "breedId": "cocker",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Dermatitis por alergia",
+      "enfermedad_norm": "dermatitis por alergia",
+      "animalId": "perros",
+      "breedId": "cocker",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Enfermedad de disco intervertebral",
+      "enfermedad_norm": "enfermedad de disco intervertebral",
+      "animalId": "perros",
+      "breedId": "cocker",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Anomalía del ojo del Collie (CEA)",
+      "enfermedad_norm": "anomalia del ojo del collie (cea)",
+      "animalId": "perros",
+      "breedId": "border_collie",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Sensibilidad a fármacos (mutación MDR1)",
+      "enfermedad_norm": "sensibilidad a farmacos (mutacion mdr1)",
+      "animalId": "perros",
+      "breedId": "border_collie",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Anemia de estres eritrocitario (IMHA)",
+      "enfermedad_norm": "anemia de estres eritrocitario (imha)",
+      "animalId": "perros",
+      "breedId": "border_collie",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Osteocondrosis disecante",
+      "enfermedad_norm": "osteocondrosis disecante",
+      "animalId": "perros",
+      "breedId": "border_collie",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Hernia discal",
+      "enfermedad_norm": "hernia discal",
+      "animalId": "perros",
+      "breedId": "bulldog_frances",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Dermatitis en pliegues",
+      "enfermedad_norm": "dermatitis en pliegues",
+      "animalId": "perros",
+      "breedId": "bulldog_frances",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Alergias cutáneas",
+      "enfermedad_norm": "alergias cutaneas",
+      "animalId": "perros",
+      "breedId": "bulldog_frances",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Enfermedad del disco intervertebral",
+      "enfermedad_norm": "enfermedad del disco intervertebral",
+      "animalId": "perros",
+      "breedId": "bulldog_frances",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Displasia de codo",
+      "enfermedad_norm": "displasia de codo",
+      "animalId": "perros",
+      "breedId": "labrador",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Lipoma múltiple",
+      "enfermedad_norm": "lipoma multiple",
+      "animalId": "perros",
+      "breedId": "labrador",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Mielopatía degenerativa",
+      "enfermedad_norm": "mielopatia degenerativa",
+      "animalId": "perros",
+      "breedId": "pastor_aleman",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Insuficiencia pancreática exocrina",
+      "enfermedad_norm": "insuficiencia pancreatica exocrina",
+      "animalId": "perros",
+      "breedId": "pastor_aleman",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Pancreatitis",
+      "enfermedad_norm": "pancreatitis",
+      "animalId": "perros",
+      "breedId": "pastor_aleman",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Hemangiosarcoma esplénico",
+      "enfermedad_norm": "hemangiosarcoma esplenico",
+      "animalId": "perros",
+      "breedId": "pastor_aleman",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Cáncer (hemangiosarcoma y linfoma)",
+      "enfermedad_norm": "cancer (hemangiosarcoma y linfoma)",
+      "animalId": "perros",
+      "breedId": "golden_retriever",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Lipoma y mastocitoma",
+      "enfermedad_norm": "lipoma y mastocitoma",
+      "animalId": "perros",
+      "breedId": "golden_retriever",
       "score": 0.4,
       "motivo": "texto_clinico"
     }

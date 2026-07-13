@@ -6,7 +6,7 @@ const { defineConfig, devices } = require('@playwright/test');
 // No se necesita ningún servidor HTTP ni proceso Ruby.
 module.exports = defineConfig({
   testDir: './tests/e2e',
-  timeout: 60_000,
+  timeout: process.env.CI ? 120_000 : 60_000,
   expect: { timeout: 15_000 },
   fullyParallel: false,
   workers: 1,

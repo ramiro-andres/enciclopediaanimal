@@ -1,9 +1,9 @@
 {
-  "generado_por": "scripts/data/build_cross_links.rb",
+  "generado_por": "scripts/data/build_cross_links.rb + integrate_suggested_links_sprint13.rb",
   "descripcion": "Enlaces bidireccionales entre términos del glosario y enfermedades del atlas.",
   "umbral_generico": 0.3,
-  "total_terminos_enlazados": 234,
-  "total_enfermedades_enlazadas": 179,
+  "total_terminos_enlazados": 239,
+  "total_enfermedades_enlazadas": 181,
   "por_termino": {
     "pronostico": {
       "termino": "Pronóstico",
@@ -1227,6 +1227,28 @@
         }
       ]
     },
+    "ecocardiografia": {
+      "termino": "Ecocardiografía",
+      "categoriaId": "examenes",
+      "categoriaNombre": "Exámenes y pruebas diagnósticas",
+      "total": 2,
+      "ejemplos": [
+        {
+          "nombre": "Cardiomiopatía dilatada",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "gran_danes",
+          "breedNombre": "Gran Danés"
+        },
+        {
+          "nombre": "Cardiomiopatía hipertrófica",
+          "gravedad": "grave",
+          "animalId": "gatos",
+          "breedId": "bengala",
+          "breedNombre": "Bengala"
+        }
+      ]
+    },
     "anorexia": {
       "termino": "Anorexia",
       "categoriaId": "sintomas",
@@ -2369,6 +2391,43 @@
         }
       ]
     },
+    "bruxismo": {
+      "termino": "Bruxismo",
+      "categoriaId": "sintomas",
+      "categoriaNombre": "Síntomas y signos clínicos",
+      "total": 2,
+      "ejemplos": [
+        {
+          "nombre": "Estasis gastrointestinal",
+          "gravedad": "grave",
+          "animalId": "conejos",
+          "breedId": "conejo_mini",
+          "breedNombre": "Conejo Mini (Toy/Enano)"
+        },
+        {
+          "nombre": "Tricobezoar",
+          "gravedad": "grave",
+          "animalId": "conejos",
+          "breedId": "holandes_enano",
+          "breedNombre": "Holandés Enano"
+        }
+      ]
+    },
+    "estridor inspiratorio": {
+      "termino": "Estridor inspiratorio",
+      "categoriaId": "sintomas",
+      "categoriaNombre": "Síntomas y signos clínicos",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Colapso traqueal",
+          "gravedad": "moderada",
+          "animalId": "perros",
+          "breedId": "chihuahua",
+          "breedNombre": "Chihuahua"
+        }
+      ]
+    },
     "reticulo": {
       "termino": "Retículo",
       "categoriaId": "anatomia",
@@ -2705,6 +2764,28 @@
           "animalId": "aves",
           "breedId": "diamante_mandarin",
           "breedNombre": "Diamante Mandarín"
+        }
+      ]
+    },
+    "seroconversion": {
+      "termino": "Seroconversión",
+      "categoriaId": "infecciosas",
+      "categoriaNombre": "Enfermedades infecciosas y parasitarias",
+      "total": 2,
+      "ejemplos": [
+        {
+          "nombre": "Psitacosis",
+          "gravedad": "grave",
+          "animalId": "aves",
+          "breedId": "canario",
+          "breedNombre": "Canario"
+        },
+        {
+          "nombre": "Psitacosis (clamidiosis)",
+          "gravedad": "grave",
+          "animalId": "aves",
+          "breedId": "periquito",
+          "breedNombre": "Periquito"
         }
       ]
     },
@@ -5719,6 +5800,85 @@
           "breedNombre": "Cobaya (Cuy)"
         }
       ]
+    },
+    "anamnesis": {
+      "termino": "Anamnesis",
+      "categoriaId": "ficha_enfermedad",
+      "categoriaNombre": "Ficha clínica de enfermedad",
+      "total": 50,
+      "ejemplos": [
+        {
+          "nombre": "Trastorno de la vejiga natatoria",
+          "gravedad": "moderada",
+          "animalId": "peces",
+          "breedId": "goldfish",
+          "breedNombre": "Pez Dorado (Goldfish)"
+        },
+        {
+          "nombre": "Shunt portosistémico",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "yorkshire",
+          "breedNombre": "Yorkshire Terrier"
+        },
+        {
+          "nombre": "Atrofia progresiva de retina",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "yorkshire",
+          "breedNombre": "Yorkshire Terrier"
+        },
+        {
+          "nombre": "Alopecia X (enfermedad del pelaje negro)",
+          "gravedad": "leve",
+          "animalId": "perros",
+          "breedId": "pomerania",
+          "breedNombre": "Pomerania"
+        },
+        {
+          "nombre": "Otitis externa",
+          "gravedad": "moderada",
+          "animalId": "perros",
+          "breedId": "shih_tzu",
+          "breedNombre": "Shih Tzu"
+        },
+        {
+          "nombre": "Obesidad",
+          "gravedad": "moderada",
+          "animalId": "perros",
+          "breedId": "shih_tzu",
+          "breedNombre": "Shih Tzu"
+        },
+        {
+          "nombre": "Epilepsia idiopática",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "shih_tzu",
+          "breedNombre": "Shih Tzu"
+        },
+        {
+          "nombre": "Hipotiroidismo",
+          "gravedad": "moderada",
+          "animalId": "perros",
+          "breedId": "beagle",
+          "breedNombre": "Beagle"
+        },
+        {
+          "nombre": "Discopatía intervertebral",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "beagle",
+          "breedNombre": "Beagle"
+        },
+        {
+          "nombre": "Glaucoma",
+          "gravedad": "grave",
+          "animalId": "perros",
+          "breedId": "beagle",
+          "breedNombre": "Beagle"
+        }
+      ],
+      "origen": "sprint13_sugerencias"
     }
   },
   "por_enfermedad": {
@@ -6183,6 +6343,10 @@
           "categoriaId": "sintomas"
         },
         {
+          "termino": "Bruxismo",
+          "categoriaId": "sintomas"
+        },
+        {
           "termino": "Buprenorfina",
           "categoriaId": "farmacos_protocolo"
         },
@@ -6221,10 +6385,6 @@
         {
           "termino": "Metoclopramida",
           "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "mg/kg",
-          "categoriaId": "farmacia"
         }
       ]
     },
@@ -6247,6 +6407,10 @@
         },
         {
           "termino": "Estridor",
+          "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Estridor inspiratorio",
           "categoriaId": "sintomas"
         },
         {
@@ -6276,10 +6440,6 @@
         {
           "termino": "Síndrome",
           "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Síndrome braquicefálico",
-          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -6303,6 +6463,10 @@
       "animalId": "perros",
       "breedId": "bulldog_frances",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Síndrome",
           "categoriaId": "ficha_enfermedad"
@@ -6409,6 +6573,10 @@
           "categoriaId": "farmacos_protocolo"
         },
         {
+          "termino": "Ecocardiografía",
+          "categoriaId": "examenes"
+        },
+        {
           "termino": "Ecocardiografía Doppler",
           "categoriaId": "examenes"
         },
@@ -6427,10 +6595,6 @@
         {
           "termino": "Muerte súbita",
           "categoriaId": "sintomas"
-        },
-        {
-          "termino": "NT-proBNP",
-          "categoriaId": "examenes"
         }
       ]
     },
@@ -6526,6 +6690,10 @@
       "breedId": "labrador",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Artroscopia",
           "categoriaId": "examenes"
         },
@@ -6556,6 +6724,10 @@
       "animalId": "gatos",
       "breedId": "persa",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Crónico",
           "categoriaId": "ficha_enfermedad"
@@ -7139,6 +7311,10 @@
           "categoriaId": "enfermedades"
         },
         {
+          "termino": "Ecocardiografía",
+          "categoriaId": "examenes"
+        },
+        {
           "termino": "Ecocardiografía Doppler",
           "categoriaId": "examenes"
         },
@@ -7169,10 +7345,6 @@
         {
           "termino": "Pimobendan",
           "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "Presión arterial",
-          "categoriaId": "examenes"
         }
       ]
     },
@@ -7519,6 +7691,10 @@
           "categoriaId": "enfermedades"
         },
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Biopsia",
           "categoriaId": "examenes"
         },
@@ -7544,6 +7720,10 @@
         {
           "termino": "Alergias cutáneas",
           "categoriaId": "enfermedades"
+        },
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         },
         {
           "termino": "Biopsia",
@@ -7599,6 +7779,10 @@
       "breedId": "beagle",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Hipotiroidismo",
           "categoriaId": "enfermedades"
         },
@@ -7613,6 +7797,10 @@
       "animalId": "perros",
       "breedId": "border_collie",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Ictericia",
           "categoriaId": "sintomas"
@@ -7629,6 +7817,10 @@
       "breedId": "golden_retriever",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Letargo",
           "categoriaId": "sintomas"
         },
@@ -7643,6 +7835,10 @@
       "animalId": "gatos",
       "breedId": "singapura",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Deficiencia de piruvato quinasa",
           "categoriaId": "enfermedades"
@@ -7661,6 +7857,10 @@
         {
           "termino": "Amiloidosis",
           "categoriaId": "enfermedades"
+        },
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         },
         {
           "termino": "Ictericia",
@@ -7878,6 +8078,10 @@
       "breedId": "yorkshire",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Convulsiones",
           "categoriaId": "sintomas"
         },
@@ -7905,6 +8109,10 @@
       "breedId": "pastor_aleman",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Pancreatitis",
           "categoriaId": "enfermedades"
         },
@@ -7920,6 +8128,10 @@
       "breedId": "persa",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Poliquistosis renal",
           "categoriaId": "enfermedades"
         },
@@ -7934,6 +8146,10 @@
       "animalId": "gatos",
       "breedId": "british_shorthair",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Poliquistosis renal",
           "categoriaId": "enfermedades"
@@ -8059,6 +8275,10 @@
       "breedId": "border_collie",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Cojera",
           "categoriaId": "sintomas"
         },
@@ -8074,6 +8294,10 @@
       "breedId": "gran_danes",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Cojera",
           "categoriaId": "sintomas"
         },
@@ -8088,6 +8312,10 @@
       "animalId": "gatos",
       "breedId": "maine_coon",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Cojera",
           "categoriaId": "sintomas"
@@ -8216,6 +8444,10 @@
       "animalId": "perros",
       "breedId": "shih_tzu",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Jadeo",
           "categoriaId": "sintomas"
@@ -8454,6 +8686,10 @@
       "breedId": "golden_retriever",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Lipoma y mastocitoma",
           "categoriaId": "enfermedades"
         },
@@ -8471,6 +8707,10 @@
         {
           "termino": "Alopecia",
           "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         }
       ]
     },
@@ -8482,6 +8722,10 @@
         {
           "termino": "Alopecia",
           "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         }
       ]
     },
@@ -8490,6 +8734,10 @@
       "animalId": "perros",
       "breedId": "border_collie",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Ivermectina",
           "categoriaId": "farmacos_protocolo"
@@ -8506,12 +8754,31 @@
       "breedId": "maine_coon",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Atrofia muscular espinal",
           "categoriaId": "enfermedades"
         },
         {
           "termino": "Temblores",
           "categoriaId": "sintomas"
+        }
+      ]
+    },
+    "tricobezoar": {
+      "nombre": "Tricobezoar",
+      "animalId": "conejos",
+      "breedId": "holandes_enano",
+      "terminos": [
+        {
+          "termino": "Bruxismo",
+          "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Tricobezoar",
+          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -8535,6 +8802,10 @@
       "animalId": "peces",
       "breedId": "goldfish",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Trastorno de la vejiga natatoria",
           "categoriaId": "enfermedades"
@@ -8671,6 +8942,10 @@
         {
           "termino": "Alergias cutáneas",
           "categoriaId": "enfermedades"
+        },
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         }
       ]
     },
@@ -8691,6 +8966,10 @@
       "breedId": "yorkshire",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Atrofia progresiva de retina",
           "categoriaId": "enfermedades"
         }
@@ -8702,6 +8981,10 @@
       "breedId": "canario",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Candidiasis",
           "categoriaId": "enfermedades"
         }
@@ -8712,6 +8995,10 @@
       "animalId": "gatos",
       "breedId": "ragdoll",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Cálculos urinarios",
           "categoriaId": "enfermedades"
@@ -8735,6 +9022,10 @@
       "breedId": "bulldog_frances",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Dermatitis en pliegues",
           "categoriaId": "enfermedades"
         }
@@ -8746,6 +9037,10 @@
       "breedId": "cocker",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Dermatitis por alergia",
           "categoriaId": "enfermedades"
         }
@@ -8756,6 +9051,10 @@
       "animalId": "perros",
       "breedId": "beagle",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Discopatía intervertebral",
           "categoriaId": "enfermedades"
@@ -8790,6 +9089,10 @@
       "breedId": "cocker",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Enfermedad de disco intervertebral",
           "categoriaId": "enfermedades"
         }
@@ -8800,6 +9103,10 @@
       "animalId": "perros",
       "breedId": "bulldog_frances",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Enfermedad del disco intervertebral",
           "categoriaId": "enfermedades"
@@ -8812,6 +9119,10 @@
       "breedId": "shih_tzu",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Epilepsia idiopática",
           "categoriaId": "enfermedades"
         }
@@ -8822,6 +9133,10 @@
       "animalId": "gatos",
       "breedId": "persa",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Epífora y problemas oculares",
           "categoriaId": "enfermedades"
@@ -8878,6 +9193,10 @@
       "breedId": "siames",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Estrabismo convergente",
           "categoriaId": "enfermedades"
         }
@@ -8900,6 +9219,10 @@
       "breedId": "beagle",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Glaucoma",
           "categoriaId": "enfermedades"
         }
@@ -8911,6 +9234,10 @@
       "breedId": "pastor_aleman",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Hemangiosarcoma esplénico",
           "categoriaId": "enfermedades"
         }
@@ -8921,6 +9248,10 @@
       "animalId": "perros",
       "breedId": "bulldog_frances",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Hernia discal",
           "categoriaId": "enfermedades"
@@ -8970,6 +9301,10 @@
       "breedId": "pastor_aleman",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Insuficiencia pancreática exocrina",
           "categoriaId": "enfermedades"
         }
@@ -8991,6 +9326,10 @@
       "animalId": "perros",
       "breedId": "labrador",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Lipoma múltiple",
           "categoriaId": "enfermedades"
@@ -9069,6 +9408,10 @@
       "breedId": "pastor_aleman",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Mielopatía degenerativa",
           "categoriaId": "enfermedades"
         }
@@ -9079,6 +9422,10 @@
       "animalId": "aves",
       "breedId": "canario",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Muda anormal",
           "categoriaId": "enfermedades"
@@ -9113,6 +9460,10 @@
       "breedId": "siames",
       "terminos": [
         {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
           "termino": "Neoplasia mamaria",
           "categoriaId": "enfermedades"
         }
@@ -9134,6 +9485,10 @@
       "animalId": "gatos",
       "breedId": "maine_coon",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Piodermia",
           "categoriaId": "enfermedades"
@@ -9178,6 +9533,10 @@
       "animalId": "gatos",
       "breedId": "persa",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Problemas respiratorios braquicefálicos",
           "categoriaId": "enfermedades"
@@ -9228,22 +9587,15 @@
         }
       ]
     },
-    "tricobezoar": {
-      "nombre": "Tricobezoar",
-      "animalId": "conejos",
-      "breedId": "holandes_enano",
-      "terminos": [
-        {
-          "termino": "Tricobezoar",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "wobbler syndrome": {
       "nombre": "Wobbler syndrome",
       "animalId": "perros",
       "breedId": "gran_danes",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Wobbler syndrome",
           "categoriaId": "enfermedades"
@@ -9255,6 +9607,10 @@
       "animalId": "aves",
       "breedId": "canario",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Ácaros de patas",
           "categoriaId": "enfermedades"
@@ -9282,6 +9638,29 @@
           "categoriaId": "enfermedades"
         }
       ]
+    },
+    "anomalia del ojo del collie (cea)": {
+      "nombre": "Anomalía del ojo del Collie (CEA)",
+      "animalId": "perros",
+      "breedId": "border_collie",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        }
+      ]
+    },
+    "acaros de las vias respiratorias (traqueales)": {
+      "nombre": "Ácaros de las vías respiratorias (traqueales)",
+      "animalId": "aves",
+      "breedId": "canario",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        }
+      ]
     }
-  }
+  },
+  "sprint13_integrados": 50
 }

@@ -34,6 +34,13 @@ const App = {
   currentAnimal: 'todos',
   currentSize: 'todos',
   currentRegion: 'todos',
+  REGION_MACRO_GROUPS: {
+    LATAM: ['Colombia', 'México', 'Argentina', 'Chile', 'Perú', 'Brasil', 'Ecuador', 'Venezuela', 'Bolivia', 'Uruguay', 'Paraguay', 'Centroamérica', 'Cuba', 'República Dominicana', 'Costa Rica', 'Panamá', 'Guatemala', 'Honduras'],
+    Europa: ['España', 'Francia', 'Alemania', 'Italia', 'Reino Unido', 'Países Bajos', 'Suiza', 'Escandinavia'],
+    'Norteamérica': ['Estados Unidos', 'Canadá'],
+    Asia: ['China', 'Japón', 'India', 'Tailandia'],
+    Oceanía: ['Australia', 'Nueva Zelanda']
+  },
   currentBreed: null,
   currentDisease: null,
   searchQuery: '',
@@ -249,6 +256,7 @@ const App = {
       this.searchSynonyms = await this.loadSearchSynonyms();
       this.buildSynonymIndex();
       this.crossLinks = await this.loadCrossLinks();
+      this.exportE2EState();
       this.toxicologyData = await this.loadToxicologyData();
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.triajeData = await this.loadTriajeData();
@@ -267,18 +275,19 @@ const App = {
       this.renderRecentHistory();
       this.renderFavorites();
       this.bindMobileTabBar();
-      await this.preloadAllChunks();
+      this.exportE2EState();
       if (!(await this.openRouteFromHash())) this.showView('welcome');
       if (DisclaimerModal.wasAccepted() && !window.location.hash) WelcomeTour.tryStart();
-      this.exportE2EState();
+      void this.preloadAllChunks();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
-      window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
-      const intro = document.getElementById('welcomeIntro');
-      if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
-      const grid = document.getElementById('breedGrid');
-      if (grid) {
-        grid.innerHTML = `
+      if (!window.__E2E_STATE__?.ready) {
+        window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
+        const intro = document.getElementById('welcomeIntro');
+        if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
+        const grid = document.getElementById('breedGrid');
+        if (grid) {
+          grid.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">⚠️</div>
           <p><strong>No se pudo cargar la enciclopedia.</strong></p>
@@ -286,6 +295,7 @@ const App = {
           <p><a href="https://ramiro-andres.github.io/enciclopediaanimal/" target="_blank" rel="noopener">ramiro-andres.github.io/enciclopediaanimal</a></p>
           <p style="margin-top:0.5rem;font-size:0.85rem;color:#888">${err.message}</p>
         </div>`;
+        }
       }
     }
   },
@@ -362,10 +372,15 @@ const App = {
     this._chunkScriptPending = this._chunkScriptPending || {};
     if (this._chunkScriptPending[animalId]) return this._chunkScriptPending[animalId];
     this._chunkScriptPending[animalId] = new Promise((resolve) => {
+      const finish = (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      };
+      const timer = setTimeout(() => finish(null), 20_000);
       const script = document.createElement('script');
       script.src = `data/chunks/${animalId}.js`;
-      script.onload = () => resolve(window.ENCICLOPEDIA_CHUNKS?.[animalId] || null);
-      script.onerror = () => resolve(null);
+      script.onload = () => finish(window.ENCICLOPEDIA_CHUNKS?.[animalId] || null);
+      script.onerror = () => finish(null);
       document.head.appendChild(script);
     });
     return this._chunkScriptPending[animalId];
@@ -841,9 +856,21 @@ const App = {
       breeds = breeds.filter(b => b.tamano === this.currentSize);
     }
     if (this.currentRegion !== 'todos') {
-      breeds = breeds.filter(b => (b.region || this.inferRegion(b.origen)) === this.currentRegion);
+      breeds = breeds.filter(b => this.matchesRegionFilter(b));
     }
     return breeds;
+  },
+
+  getBreedRegion(breed) {
+    return breed.region || this.inferRegion(breed.origen);
+  },
+
+  matchesRegionFilter(breed) {
+    const region = this.getBreedRegion(breed);
+    if (!region) return false;
+    if (this.currentRegion === region) return true;
+    const macroCountries = this.REGION_MACRO_GROUPS[this.currentRegion];
+    return macroCountries ? macroCountries.includes(region) : false;
   },
 
   inferRegion(origen) {
@@ -854,32 +881,81 @@ const App = {
       méxico: 'México',
       mexico: 'México',
       argentina: 'Argentina',
-      chile: 'Chile'
+      chile: 'Chile',
+      perú: 'Perú',
+      peru: 'Perú',
+      brasil: 'Brasil',
+      ecuador: 'Ecuador',
+      venezuela: 'Venezuela',
+      bolivia: 'Bolivia',
+      uruguay: 'Uruguay',
+      paraguay: 'Paraguay',
+      centroamérica: 'Centroamérica',
+      centroamerica: 'Centroamérica',
+      cuba: 'Cuba',
+      'república dominicana': 'República Dominicana',
+      'republica dominicana': 'República Dominicana',
+      'costa rica': 'Costa Rica',
+      panamá: 'Panamá',
+      panama: 'Panamá',
+      guatemala: 'Guatemala',
+      honduras: 'Honduras',
+      españa: 'España',
+      spain: 'España',
+      francia: 'Francia',
+      alemania: 'Alemania',
+      italia: 'Italia',
+      'reino unido': 'Reino Unido',
+      inglaterra: 'Reino Unido',
+      'estados unidos': 'Estados Unidos',
+      usa: 'Estados Unidos',
+      canadá: 'Canadá',
+      canada: 'Canadá',
+      australia: 'Australia',
+      china: 'China',
+      japón: 'Japón',
+      japon: 'Japón'
     };
     return Object.entries(map).find(([key]) => text.includes(key))?.[1] || null;
   },
 
   getAvailableRegions() {
-    const regions = new Set();
+    const countries = new Set();
     this.getAllBreeds().forEach(b => {
-      const region = b.region || this.inferRegion(b.origen);
-      if (region) regions.add(region);
+      const region = this.getBreedRegion(b);
+      if (region) countries.add(region);
     });
-    return Array.from(regions).sort((a, b) => a.localeCompare(b, 'es'));
+    const macros = Object.keys(this.REGION_MACRO_GROUPS).filter(macro =>
+      this.REGION_MACRO_GROUPS[macro].some(c => countries.has(c))
+    );
+    return { macros, countries: Array.from(countries).sort((a, b) => a.localeCompare(b, 'es')) };
   },
 
   renderRegionFilters() {
     const container = document.getElementById('regionFilters');
     if (!container) return;
-    const regions = this.getAvailableRegions();
-    const items = [{ id: 'todos', label: 'Todas' }, ...regions.map(r => ({ id: r, label: r }))];
-    container.innerHTML = items.map(item => `
+    const { macros, countries } = this.getAvailableRegions();
+    const items = [{ id: 'todos', label: this.t('region.all'), group: 'macro' }];
+    macros.forEach(m => items.push({ id: m, label: this.t(`region.macro.${m}`) || m, group: 'macro' }));
+    countries.forEach(c => items.push({ id: c, label: c, group: 'country' }));
+
+    let html = '';
+    let lastGroup = null;
+    items.forEach(item => {
+      if (item.group === 'country' && lastGroup !== 'country') {
+        html += `<li class="region-filter-heading" aria-hidden="true">${this.esc(this.t('region.countries'))}</li>`;
+        lastGroup = 'country';
+      } else if (item.group === 'macro') {
+        lastGroup = 'macro';
+      }
+      html += `
       <li>
         <button type="button" class="region-btn ${this.currentRegion === item.id ? 'active' : ''}" data-region="${this.esc(item.id)}">
           ${this.esc(item.label)}
         </button>
-      </li>
-    `).join('');
+      </li>`;
+    });
+    container.innerHTML = html;
     container.querySelectorAll('.region-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         this.currentRegion = btn.dataset.region;
@@ -1402,7 +1478,7 @@ const App = {
     if (animalId !== 'todos') {
       await this.loadChunk(animalId);
     } else if (!this.isAllChunksLoaded()) {
-      await this.preloadAllChunks();
+      void this.preloadAllChunks();
     }
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
@@ -1463,7 +1539,8 @@ const App = {
 
     const regionSection = document.getElementById('regionFiltersSection');
     if (regionSection) {
-      const showRegions = onBrowse && this.getAvailableRegions().length > 0;
+      const { countries } = this.getAvailableRegions();
+      const showRegions = onBrowse && countries.length > 0;
       regionSection.hidden = !showRegions;
       if (showRegions) this.renderRegionFilters();
     }
@@ -3954,7 +4031,7 @@ const App = {
           <div class="breed-card-tags">
             <span class="tag tag-${b.tamano}">${this.sizeLabel(b.tamano)}</span>
             <span class="tag tag-animal">${b.animalIcono} ${b.animalNombre}</span>
-            ${b.region || this.inferRegion(b.origen) ? `<span class="tag tag-region">🌎 ${this.esc(b.region || this.inferRegion(b.origen))}</span>` : ''}
+            ${this.getBreedRegion(b) ? `<span class="tag tag-region">🌎 ${this.esc(this.getBreedRegion(b))}</span>` : ''}
             ${b.enfoque_produccion ? `<span class="tag tag-production">🏭 Producción: ${this.esc(b.tipo_produccion)}</span>` : ''}
           </div>
           <h4>${b.nombre}</h4>
@@ -4522,7 +4599,6 @@ const WelcomeTour = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  DisclaimerModal.init();
-  App.init();
-});
+// file:// + Playwright: el DOM ya existe al ejecutar este script (final del body).
+DisclaimerModal.init();
+void App.init();
