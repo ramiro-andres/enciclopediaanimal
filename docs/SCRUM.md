@@ -823,7 +823,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 6 — En progreso (rama `sprint-6/ep-11-seo-sharing`)
+## Sprint 6 — Completado (rama `sprint-6/ep-11-seo-sharing`, PR #27)
 
 ### EP-11 — SEO, sharing y descubrimiento
 
@@ -872,6 +872,64 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 7 — En progreso (rama `sprint-7/ep-13-ux-atlas`)
+
+### EP-13 — UX Atlas público
+
+**Objetivo:** Mejorar la experiencia móvil y de consulta del atlas educativo: navegación inferior, favoritos locales, impresión de fichas, disclaimer por sesión y fuentes bibliográficas visibles.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-UX-09 | Tab bar móvil (Inicio, Explorar, Glosario, Urgencias, Herramientas) | 5 | Hecho |
+| US-UX-10 | Favoritos en localStorage + panel en welcome | 3 | Hecho |
+| US-UX-11 | Vista `@media print` + botón «Imprimir ficha» | 3 | Hecho |
+| US-UX-12 | Disclaimer una vez por sesión (sessionStorage) | 2 | Hecho |
+| US-CON-08 | Fuentes bibliográficas en diseaseView | 2 | Hecho |
+| | | **15** | |
+
+#### US-UX-09 · Tab bar móvil
+
+**Tareas técnicas:**
+- [x] `<nav id="mobileTabBar">` con 5 pestañas y `aria-current="page"`.
+- [x] Visible solo ≤768px; `safe-area-inset-bottom` para notch/home indicator.
+- [x] `bindMobileTabBar` / `updateMobileTabBar` sincronizados con vista activa.
+- [x] i18n ES/EN (`tab.*`).
+
+#### US-UX-10 · Favoritos
+
+**Tareas técnicas:**
+- [x] `localStorage` clave `atlas_favorites` (máx. 50).
+- [x] Botón estrella en ficha de raza y enfermedad (`aria-pressed`).
+- [x] Panel «Mis favoritos» en welcome con enlace a hash guardado.
+- [x] i18n ES/EN (`favorites.*`).
+
+#### US-UX-11 · Impresión
+
+**Tareas técnicas:**
+- [x] `@media print` oculta chrome (header, sidebar, tab bar, botones).
+- [x] Botón «Imprimir ficha» en raza/enfermedad → `window.print()`.
+- [x] Disclaimer educativo al pie de la ficha impresa.
+
+#### US-UX-12 · Disclaimer por sesión
+
+**Tareas técnicas:**
+- [x] `sessionStorage` clave `atlas_disclaimer_accepted` al pulsar «Entendido».
+- [x] Modal no se muestra si ya fue aceptado en la sesión.
+
+#### US-CON-08 · Fuentes bibliográficas
+
+**Tareas técnicas:**
+- [x] `renderBibliographicSources()` en `diseaseView` con `fuentes_bibliograficas` o `referencias`.
+- [x] Soporta strings y objetos `{ titulo, autor, doi, url }`.
+- [x] i18n `sources.title`.
+
+**Entregables técnicos:**
+- Tab bar, favoritos, impresión y disclaimer en `index.html`, `css/styles.css`, `js/app.js`.
+- i18n en `js/i18n.js`.
+- `tests/test_sprint7.rb`.
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases
@@ -892,3 +950,4 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
+| 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

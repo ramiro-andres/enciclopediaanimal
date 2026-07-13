@@ -378,7 +378,8 @@ showDictionary renderDictionary loadDictionaryData openRouteFromHash updateHash 
   def test_app_js_tiene_aviso_educativo
     js = File.read(File.join(ROOT, 'js', 'app.js'))
     assert_includes js, 'DisclaimerModal'
-    refute_includes js, 'disclaimer_accepted'
+    assert_includes js, 'sessionStorage'
+    assert_includes js, 'atlas_disclaimer_accepted'
   end
 
   def test_app_js_routing_por_hash
