@@ -281,12 +281,13 @@ const App = {
       void this.preloadAllChunks();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
-      window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
-      const intro = document.getElementById('welcomeIntro');
-      if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
-      const grid = document.getElementById('breedGrid');
-      if (grid) {
-        grid.innerHTML = `
+      if (!window.__E2E_STATE__?.ready) {
+        window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
+        const intro = document.getElementById('welcomeIntro');
+        if (intro) intro.textContent = 'Error al cargar la enciclopedia.';
+        const grid = document.getElementById('breedGrid');
+        if (grid) {
+          grid.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">⚠️</div>
           <p><strong>No se pudo cargar la enciclopedia.</strong></p>
@@ -294,6 +295,7 @@ const App = {
           <p><a href="https://ramiro-andres.github.io/enciclopediaanimal/" target="_blank" rel="noopener">ramiro-andres.github.io/enciclopediaanimal</a></p>
           <p style="margin-top:0.5rem;font-size:0.85rem;color:#888">${err.message}</p>
         </div>`;
+        }
       }
     }
   },

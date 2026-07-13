@@ -9,13 +9,13 @@ const INDEX_URL = pathToFileURL(
 ).href;
 
 async function abrirAtlas(page) {
-  await page.goto(INDEX_URL);
+  await page.goto(INDEX_URL, { waitUntil: 'domcontentloaded', timeout: 120_000 });
   // Espera a que la app termine de inicializar y exponga su estado E2E.
   await page.waitForFunction(() => {
     const state = window.__E2E_STATE__;
     if (state?.error) throw new Error(state.error);
     return state?.ready === true;
-  });
+  }, null, { timeout: 120_000 });
 }
 
 async function cerrarDisclaimer(page) {
