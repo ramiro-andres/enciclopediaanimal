@@ -5094,10 +5094,10 @@ body.welcome-tour-open {
   --category-card-bg-4: linear-gradient(180deg, #1E293B 70%, #4A1942);
   --category-card-bg-5: linear-gradient(180deg, #1E293B 70%, #312E81);
   --category-card-bg-6: linear-gradient(180deg, #1E293B 70%, #164E63);
-  --feature-card-tools-bg: linear-gradient(135deg, #312E81 0%, #1E293B 100%);
+  --feature-card-tools-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
   --feature-card-tools-border: #475569;
-  --feature-card-predis-bg: linear-gradient(135deg, #14532D 0%, #1E293B 100%);
-  --feature-card-predis-border: #334155;
+  --feature-card-predis-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+  --feature-card-predis-border: #475569;
   --nutrition-stage-bg: rgba(51, 65, 85, 0.7);
   --disclaimer-icon-gradient-end: #334155;
   --clinical-note-bg: rgba(34, 211, 238, 0.1);
@@ -5122,6 +5122,8 @@ body.welcome-tour-open {
   --inverse-border-subtle: rgba(15, 23, 42, 0.2);
   --inverse-placeholder: rgba(15, 23, 42, 0.5);
   --nav-hover-overlay: rgba(34, 211, 238, 0.1);
+  --text-on-light: #0F172A;
+  --text-on-light-muted: #334155;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -5244,10 +5246,10 @@ body.welcome-tour-open {
     --category-card-bg-4: linear-gradient(180deg, #1E293B 70%, #4A1942);
     --category-card-bg-5: linear-gradient(180deg, #1E293B 70%, #312E81);
     --category-card-bg-6: linear-gradient(180deg, #1E293B 70%, #164E63);
-    --feature-card-tools-bg: linear-gradient(135deg, #312E81 0%, #1E293B 100%);
+    --feature-card-tools-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
     --feature-card-tools-border: #475569;
-    --feature-card-predis-bg: linear-gradient(135deg, #14532D 0%, #1E293B 100%);
-    --feature-card-predis-border: #334155;
+    --feature-card-predis-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    --feature-card-predis-border: #475569;
     --nutrition-stage-bg: rgba(51, 65, 85, 0.7);
     --disclaimer-icon-gradient-end: #334155;
     --clinical-note-bg: rgba(34, 211, 238, 0.1);
@@ -5272,6 +5274,8 @@ body.welcome-tour-open {
     --inverse-border-subtle: rgba(15, 23, 42, 0.2);
     --inverse-placeholder: rgba(15, 23, 42, 0.5);
     --nav-hover-overlay: rgba(34, 211, 238, 0.1);
+    --text-on-light: #0F172A;
+    --text-on-light-muted: #334155;
   }
 }
 
@@ -5810,15 +5814,12 @@ body.welcome-tour-open {
 }
 
 :root[data-theme="dark"] .welcome-search,
-:root[data-theme-mode="dark"] .welcome-search,
-:root[data-theme="dark"] .footer,
-:root[data-theme-mode="dark"] .footer {
+:root[data-theme-mode="dark"] .welcome-search {
   color: var(--inverse-text);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .welcome-search,
-  :root:not([data-theme-mode="light"]) .footer {
+  :root:not([data-theme-mode="light"]) .welcome-search {
     color: var(--inverse-text);
   }
 }
@@ -5980,5 +5981,313 @@ textarea::placeholder {
     background: var(--alert-danger-bg);
     border-color: var(--alert-danger-border);
     color: var(--severity-grave-text);
+  }
+}
+
+/* ── Dark mode: contraste global (fondos claros → texto oscuro) ── */
+
+.card-light-bg,
+[data-theme="dark"] .feature-card[style*="light"],
+[data-theme-mode="dark"] .feature-card[style*="light"] {
+  color: var(--text-on-light);
+}
+
+.card-light-bg h1,
+.card-light-bg h2,
+.card-light-bg h3,
+.card-light-bg h4,
+.card-light-bg strong,
+[data-theme="dark"] .feature-card[style*="light"] h3,
+[data-theme-mode="dark"] .feature-card[style*="light"] h3 {
+  color: var(--text-on-light);
+}
+
+.card-light-bg p,
+.card-light-bg span,
+.card-light-bg small,
+.card-light-bg label,
+[data-theme="dark"] .feature-card[style*="light"] p,
+[data-theme-mode="dark"] .feature-card[style*="light"] p {
+  color: var(--text-on-light-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] {
+    color: var(--text-on-light);
+  }
+
+  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] h3 {
+    color: var(--text-on-light);
+  }
+
+  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] p {
+    color: var(--text-on-light-muted);
+  }
+}
+
+/* Welcome — feature cards (fondo oscuro explícito + texto claro) */
+:root[data-theme="dark"] .welcome-features .feature-card,
+:root[data-theme-mode="dark"] .welcome-features .feature-card {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card h3,
+:root[data-theme-mode="dark"] .welcome-features .feature-card h3 {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card p,
+:root[data-theme-mode="dark"] .welcome-features .feature-card p,
+:root[data-theme="dark"] .welcome-features .feature-card .feature-number,
+:root[data-theme-mode="dark"] .welcome-features .feature-card .feature-number {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card--tools,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--tools,
+:root[data-theme="dark"] .welcome-features .feature-card--predis,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--predis,
+:root[data-theme="dark"] .welcome-features .feature-card--dictionary,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--dictionary {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card--dark,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--dark {
+  background: var(--primary-dark);
+  color: var(--on-primary);
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card--dark h3,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--dark h3,
+:root[data-theme="dark"] .welcome-features .feature-card--dark p,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--dark p,
+:root[data-theme="dark"] .welcome-features .feature-card--dark .feature-number,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--dark .feature-number {
+  color: inherit;
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .welcome-features .feature-card--sage,
+:root[data-theme-mode="dark"] .welcome-features .feature-card--sage {
+  background: var(--surface-alt);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card {
+    color: var(--text);
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card h3 {
+    color: var(--text);
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card p,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card .feature-number {
+    color: var(--text-muted);
+    opacity: 1;
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--tools,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--predis,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dictionary {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark {
+    background: var(--primary-dark);
+    color: var(--on-primary);
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark h3,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark p,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark .feature-number {
+    color: inherit;
+    opacity: 1;
+  }
+
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--sage {
+    background: var(--surface-alt);
+  }
+}
+
+/* Home — sidebar, stats, categorías */
+:root[data-theme="dark"] .stats-panel,
+:root[data-theme-mode="dark"] .stats-panel {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .category-card,
+:root[data-theme-mode="dark"] .category-card {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .category-card span,
+:root[data-theme-mode="dark"] .category-card span {
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .category-card:hover,
+:root[data-theme-mode="dark"] .category-card:hover {
+  color: var(--on-primary);
+}
+
+:root[data-theme="dark"] .category-card:hover span,
+:root[data-theme-mode="dark"] .category-card:hover span {
+  color: inherit;
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .stats-panel,
+  :root:not([data-theme-mode="light"]) .category-card {
+    color: var(--text);
+  }
+
+  :root:not([data-theme-mode="light"]) .category-card span {
+    color: var(--text-muted);
+  }
+}
+
+/* Badges y chips con fondo de color (texto acoplado a variable semántica) */
+:root[data-theme="dark"] .severity-leve,
+:root[data-theme-mode="dark"] .severity-leve,
+:root[data-theme="dark"] .severity-moderada,
+:root[data-theme-mode="dark"] .severity-moderada,
+:root[data-theme="dark"] .severity-grave,
+:root[data-theme-mode="dark"] .severity-grave,
+:root[data-theme="dark"] .tox-badge,
+:root[data-theme-mode="dark"] .tox-badge,
+:root[data-theme="dark"] .tag-pequena,
+:root[data-theme-mode="dark"] .tag-pequena,
+:root[data-theme="dark"] .tag-mediana,
+:root[data-theme-mode="dark"] .tag-mediana,
+:root[data-theme="dark"] .tag-grande,
+:root[data-theme-mode="dark"] .tag-grande,
+:root[data-theme="dark"] .tag-animal,
+:root[data-theme-mode="dark"] .tag-animal,
+:root[data-theme="dark"] .tag-production,
+:root[data-theme-mode="dark"] .tag-production,
+:root[data-theme="dark"] .zoonotic-badge,
+:root[data-theme-mode="dark"] .zoonotic-badge,
+:root[data-theme="dark"] .dosis-badge,
+:root[data-theme-mode="dark"] .dosis-badge {
+  color: inherit;
+}
+
+/* Herramientas, toxicología, triaje, BCS, flashcards */
+:root[data-theme="dark"] .tools-card,
+:root[data-theme-mode="dark"] .tools-card,
+:root[data-theme="dark"] .tox-card,
+:root[data-theme-mode="dark"] .tox-card,
+:root[data-theme="dark"] .triaje-card,
+:root[data-theme-mode="dark"] .triaje-card,
+:root[data-theme="dark"] .flashcard,
+:root[data-theme-mode="dark"] .flashcard,
+:root[data-theme="dark"] .dictionary-term-card,
+:root[data-theme-mode="dark"] .dictionary-term-card,
+:root[data-theme="dark"] .changelog-entry,
+:root[data-theme-mode="dark"] .changelog-entry,
+:root[data-theme="dark"] .welcome-tour-popover,
+:root[data-theme-mode="dark"] .welcome-tour-popover,
+:root[data-theme="dark"] .disclaimer-modal-inner,
+:root[data-theme-mode="dark"] .disclaimer-modal-inner {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .tools-card p,
+:root[data-theme-mode="dark"] .tools-card p,
+:root[data-theme="dark"] .tox-card p,
+:root[data-theme-mode="dark"] .tox-card p,
+:root[data-theme="dark"] .triaje-card p,
+:root[data-theme-mode="dark"] .triaje-card p,
+:root[data-theme="dark"] .flashcard-example,
+:root[data-theme-mode="dark"] .flashcard-example,
+:root[data-theme="dark"] .flashcard-hint,
+:root[data-theme-mode="dark"] .flashcard-hint,
+:root[data-theme="dark"] .welcome-tour-popover p,
+:root[data-theme-mode="dark"] .welcome-tour-popover p,
+:root[data-theme="dark"] .disclaimer-modal-inner p,
+:root[data-theme-mode="dark"] .disclaimer-modal-inner p {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .tools-card,
+  :root:not([data-theme-mode="light"]) .tox-card,
+  :root:not([data-theme-mode="light"]) .triaje-card,
+  :root:not([data-theme-mode="light"]) .flashcard,
+  :root:not([data-theme-mode="light"]) .dictionary-term-card,
+  :root:not([data-theme-mode="light"]) .changelog-entry,
+  :root:not([data-theme-mode="light"]) .welcome-tour-popover,
+  :root:not([data-theme-mode="light"]) .disclaimer-modal-inner {
+    color: var(--text);
+  }
+}
+
+/* Detalle raza / enfermedad — paneles y alertas */
+:root[data-theme="dark"] .detail-panel,
+:root[data-theme-mode="dark"] .detail-panel,
+:root[data-theme="dark"] .breed-hero,
+:root[data-theme-mode="dark"] .breed-hero,
+:root[data-theme="dark"] .disease-detail-card,
+:root[data-theme-mode="dark"] .disease-detail-card,
+:root[data-theme="dark"] .dose-calculator-panel,
+:root[data-theme-mode="dark"] .dose-calculator-panel,
+:root[data-theme="dark"] .clinical-note,
+:root[data-theme-mode="dark"] .clinical-note,
+:root[data-theme="dark"] .study-summary,
+:root[data-theme-mode="dark"] .study-summary,
+:root[data-theme="dark"] .fluid-shock-panel,
+:root[data-theme-mode="dark"] .fluid-shock-panel,
+:root[data-theme="dark"] .cross-link-block,
+:root[data-theme-mode="dark"] .cross-link-block,
+:root[data-theme="dark"] .protocol-accordion-item,
+:root[data-theme-mode="dark"] .protocol-accordion-item {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .visual-floating-card,
+:root[data-theme-mode="dark"] .visual-floating-card {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .visual-floating-card--bottom small,
+:root[data-theme-mode="dark"] .visual-floating-card--bottom small {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .detail-panel,
+  :root:not([data-theme-mode="light"]) .breed-hero,
+  :root:not([data-theme-mode="light"]) .disease-detail-card,
+  :root:not([data-theme-mode="light"]) .visual-floating-card {
+    color: var(--text);
+  }
+}
+
+/* Footer — texto claro sobre fondo oscuro/cian */
+:root[data-theme="dark"] .footer,
+:root[data-theme-mode="dark"] .footer {
+  color: var(--inverse-text-subtle);
+}
+
+:root[data-theme="dark"] .footer-contribute,
+:root[data-theme-mode="dark"] .footer-contribute {
+  color: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme-mode="light"]) .footer {
+    color: var(--inverse-text-subtle);
+  }
+
+  :root:not([data-theme-mode="light"]) .footer-contribute {
+    color: var(--text);
   }
 }
