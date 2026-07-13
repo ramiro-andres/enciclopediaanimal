@@ -97,6 +97,8 @@ class XssStaticSecurityTest < Minitest::Test
     assert_match(/\besc\s*\(/, @app, 'Falta método esc() para escape HTML')
     assert_includes @app, '&amp;', 'esc() debe escapar ampersands'
     assert_includes @app, '&lt;', 'esc() debe escapar <'
+    assert_includes @app, '&quot;', 'esc() debe escapar comillas dobles (atributos)'
+    assert_includes @app, '&#39;', "esc() debe escapar comillas simples (atributos)"
   end
 
   def test_innerhtml_sin_interpolacion_cruda_de_errores

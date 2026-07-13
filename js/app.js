@@ -1405,15 +1405,15 @@ const App = {
                 ${this.renderBreedImage(breed, 'breed-card-img')}
                 <div class="breed-card-body">
                   <div class="breed-card-tags">
-                    <span class="tag tag-${breed.tamano}">${this.sizeLabel(breed.tamano)}</span>
-                    <span class="tag tag-animal">${breed.animalIcono} ${breed.animalNombre}</span>
+                    <span class="tag tag-${this.esc(breed.tamano)}">${this.esc(this.sizeLabel(breed.tamano))}</span>
+                    <span class="tag tag-animal">${this.esc(breed.animalIcono)} ${this.esc(breed.animalNombre)}</span>
                   </div>
                   <h4>${this.esc(breed.nombre)}</h4>
                   ${this.renderSearchMatchHint(match)}
                   <p>${this.esc(breed.descripcion)}</p>
                   <div class="breed-card-footer">
                     <span>${this.esc(this.t('common.diseases_count').replace('{count}', breed.enfermedades?.length || 0))}</span>
-                    <span>Ver raza →</span>
+                    <span>${this.esc(this.t('common.view_detail'))}</span>
                   </div>
                 </div>
               </article>
@@ -1577,7 +1577,7 @@ const App = {
       if (showContext && chip) {
         const animal = this.data.animales.find(a => a.id === this.currentAnimal);
         if (animal) {
-          chip.innerHTML = `<span class="chip-icon">${animal.icono}</span><span>${animal.nombre}</span>`;
+          chip.innerHTML = `<span class="chip-icon">${this.esc(animal.icono)}</span><span>${this.esc(animal.nombre)}</span>`;
         }
       }
     }
@@ -1602,8 +1602,8 @@ const App = {
     if (!nav) return;
     const items = [{ id: 'todos', nombre: this.t('nav.all'), icono: '🌿' }, ...this.data.animales];
     nav.innerHTML = items.map(a => `
-      <li><button class="nav-btn ${a.id === this.currentAnimal ? 'active' : ''}" data-animal="${a.id}">
-        <span>${a.icono}</span> ${a.nombre}
+      <li><button class="nav-btn ${a.id === this.currentAnimal ? 'active' : ''}" data-animal="${this.esc(a.id)}">
+        <span>${this.esc(a.icono)}</span> ${this.esc(a.nombre)}
       </button></li>
     `).join('');
     nav.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1627,9 +1627,9 @@ const App = {
       const meta = this.manifest?.animales?.find(m => m.id === a.id);
       const count = meta?.total_breeds ?? ['pequena', 'mediana', 'grande'].reduce((n, s) => n + (a.razas[s]?.length || 0), 0);
       return `
-        <div class="category-card" data-animal="${a.id}">
-          <div class="cat-icon">${a.icono}</div>
-          <h4>${a.nombre}</h4>
+        <div class="category-card" data-animal="${this.esc(a.id)}">
+          <div class="cat-icon">${this.esc(a.icono)}</div>
+          <h4>${this.esc(a.nombre)}</h4>
           <span>${this.esc(this.t('common.breeds_count').replace('{count}', count))}</span>
         </div>`;
     }).join('');
@@ -1779,7 +1779,7 @@ const App = {
       : '';
     return `
       <div class="cross-link-block">
-        <span class="cross-link-label">🩺 Enfermedades relacionadas (${links.total})</span>
+        <span class="cross-link-label">🩺 ${this.esc(this.t('common.related_diseases').replace('{count}', links.total))}</span>
         <div class="cross-link-chips">${chips}${extra}</div>
       </div>`;
   },
@@ -3727,8 +3727,13 @@ const App = {
   },
 
   esc(text) {
-    if (!text) return '';
-    return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (text == null || text === false) return '';
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   },
 
   renderList(items) {
@@ -3739,7 +3744,7 @@ const App = {
   renderPanel(title, content, icon = '') {
     if (!content) return '';
     const body = Array.isArray(content) ? this.renderList(content) : `<p>${this.esc(content)}</p>`;
-    return `<div class="detail-panel"><h4>${icon} ${title}</h4>${body}</div>`;
+    return `<div class="detail-panel"><h4>${icon} ${this.esc(title)}</h4>${body}</div>`;
   },
 
   renderNutritionSection(nutricion) {
@@ -3773,19 +3778,22 @@ const App = {
 
   renderBreedImage(breed, className) {
     const src = breed.imagen.replace(/\.svg$/, '.jpg');
-    return `<img class="${className}" src="${src}"
+    const fallback = breed.imagen.replace(/\.jpg$/, '.svg');
+    return `<img class="${this.esc(className)}" src="${this.esc(src)}"
+      data-fallback="${this.esc(fallback)}"
       sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
       alt="${this.esc(breed.nombre)}" loading="lazy" decoding="async"
-      onerror="this.onerror=null;this.src=this.src.replace('.jpg','.svg')">`;
+      onerror="this.onerror=null;this.src=this.getAttribute('data-fallback')||''">`;
   },
 
   renderDiseaseImage(disease, className) {
     const base = disease.imagen || 'images/placeholder.svg';
     const src = base.replace(/\.svg$/, '.jpg');
     const fallback = base.replace(/\.jpg$/, '.svg');
-    return `<img class="${className}" src="${src}"
+    return `<img class="${this.esc(className)}" src="${this.esc(src)}"
+      data-fallback="${this.esc(fallback)}"
       alt="${this.esc(disease.nombre)}" loading="lazy" decoding="async"
-      onerror="this.onerror=null;this.src='${fallback}'">`;
+      onerror="this.onerror=null;this.src=this.getAttribute('data-fallback')||''">`;
   },
 
   renderExams(examenes) {
@@ -4387,8 +4395,8 @@ const App = {
     `).join('');
     return `
       <div class="detail-block cross-link-block cross-link-block--terms">
-        <h4>📚 Términos del glosario relacionados</h4>
-        <p class="cross-link-hint">Consulta la definición clínica de los conceptos que aparecen en esta ficha.</p>
+        <h4>📚 ${this.esc(this.t('common.related_glossary'))}</h4>
+        <p class="cross-link-hint">${this.esc(this.t('common.related_glossary_hint'))}</p>
         <div class="cross-link-chips">${chips}</div>
       </div>`;
   },
