@@ -1,6 +1,6 @@
 # Backlog Scrum — Enciclopedia Animal
 
-> **Última actualización:** 13 de julio de 2026 (Sprint 12 en progreso)  
+> **Última actualización:** 13 de julio de 2026 (Sprint 13 en progreso)  
 > **Sitio en producción:** https://ramiro-andres.github.io/enciclopediaanimal/  
 > **Repositorio:** [ramiro-andres/enciclopediaanimal](https://github.com/ramiro-andres/enciclopediaanimal)
 
@@ -472,17 +472,17 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 | Campo | Valor |
 |-------|-------|
-| Estado | Pendiente |
+| Estado | Hecho |
 | Prioridad | Media |
 | Story points | 1 |
 
 **Tareas técnicas:**
-- [ ] Borrar ramas remotas: `feature/disclaimer-modal`, `fix/mobile-responsive`, `fix/disclaimer-always-show`, `chore/*`
-- [ ] Prune local: `git fetch --prune`
+- [x] Borrar ramas remotas mergeadas vía `scripts/setup/prune_merged_branches.sh`
+- [x] Prune local: `git fetch --prune`
 
 **Criterios de aceptación:**
-- [ ] Solo `main` activa en remoto (salvo ramas de trabajo en curso)
-- [ ] Documentado en changelog o nota de mantenimiento
+- [x] Solo `main` activa en remoto (salvo ramas de trabajo en curso)
+- [x] Documentado en changelog o nota de mantenimiento
 
 ---
 
@@ -557,18 +557,18 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 | Campo | Valor |
 |-------|-------|
-| Estado | Backlog |
+| Estado | Hecho |
 | Prioridad | Media |
 | Story points | 5 |
 
 **Tareas técnicas:**
-- [ ] Ampliar fuentes en `build_medical_dictionary.rb`
-- [ ] Balancear 15 categorías existentes
-- [ ] Regenerar JS
+- [x] Ampliar fuentes en `build_medical_dictionary.rb`
+- [x] Balancear 15 categorías existentes
+- [x] Regenerar JS
 
 **Criterios de aceptación:**
-- [ ] ≥627 términos totales
-- [ ] Test de diccionario actualizado y pasando
+- [x] ≥627 términos totales
+- [x] Test de diccionario actualizado y pasando
 
 ---
 
@@ -578,18 +578,18 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 | Campo | Valor |
 |-------|-------|
-| Estado | Backlog |
+| Estado | Hecho |
 | Prioridad | Baja |
 | Story points | 8 |
 
 **Tareas técnicas:**
-- [ ] Scripts batch por país (≥10 razas c/u)
-- [ ] Metadato `region` o tag en JSON de raza
-- [ ] Filtro opcional por región en UI
+- [x] Scripts batch por país (≥10 razas c/u)
+- [x] Metadato `region` o tag en JSON de raza
+- [x] Filtro opcional por región en UI
 
 **Criterios de aceptación:**
-- [ ] ≥30 razas LATAM nuevas documentadas
-- [ ] Filtro por región funcional en explorador
+- [x] ≥30 razas LATAM nuevas documentadas
+- [x] Filtro por región funcional en explorador
 
 ---
 
@@ -1251,6 +1251,29 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 13 — EP-18: Contenido clínico y calidad
+
+**Objetivo:** Ampliar el glosario médico, integrar enlaces clínicos validados, habilitar filtro por región/país en el explorador de razas y reforzar la higiene del repositorio.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-CON-06 | Expandir diccionario +100 términos (527→627+) | 5 | Hecho |
+| US-UX-19 | Integrar ≥50 enlaces desde sugerencias_enlaces.json | 5 | Hecho |
+| US-CON-07 | Filtro región/país en explorador de razas | 5 | Hecho |
+| US-DEV-05 + F4-01 | Prune ramas mergeadas + Dependabot npm/actions | 3 | Hecho |
+| | **Total** | **18** | |
+
+**Métricas:** 631 términos glosario · 239 términos enlazados · 50 enlaces sprint13 · 482 razas · 119 con `region` · 281 tests verdes
+
+**Entregables técnicos:**
+- `scripts/data/expand_dictionary_sprint13.rb` + integración en `build_medical_dictionary.rb`
+- `scripts/data/integrate_suggested_links_sprint13.rb` (pipeline tras `build_cross_links.rb`)
+- Filtro macro-región (LATAM, Europa…) + país en `js/app.js`, i18n ES/EN, `css/styles.css`
+- `scripts/setup/prune_merged_branches.sh` · `.github/dependabot.yml` (github-actions + npm)
+- `tests/test_sprint13.rb` · E2E filtro región · `sw.js` atlas-v12
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases
@@ -1272,6 +1295,8 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
 | 2026-07-13 | Sprint 11 (EP-16): laboratorio, raza de la semana, lazy load chunks, inconsistencias CI (PR #34) |
+| 2026-07-13 | Sprint 12 (EP-17): changelog, batch 8 razas, footer Contribuye, sugerencias enlaces CI |
+| 2026-07-13 | Sprint 13 (EP-18): diccionario +100, enlaces clínicos, filtro región, higiene repo |
 | 2026-07-13 | Pre-Sprint 14: auditoría de cobertura, `tests/test_security.rb` + `tests/test_regression.rb`, 3 E2E nuevos (toxicología, región, favoritos) |
 | 2026-07-13 | Sprint 9 (EP-14): BCS visual, toxicología ampliada, directorio emergencias LATAM, flashcards glosario |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

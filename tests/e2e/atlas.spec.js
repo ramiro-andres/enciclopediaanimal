@@ -9,9 +9,13 @@ const INDEX_URL = pathToFileURL(
 ).href;
 
 async function abrirAtlas(page) {
-  await page.goto(INDEX_URL);
+  await page.goto(INDEX_URL, { waitUntil: 'domcontentloaded', timeout: 120_000 });
   // Espera a que la app termine de inicializar y exponga su estado E2E.
-  await page.waitForFunction(() => window.__E2E_STATE__ && window.__E2E_STATE__.ready === true);
+  await page.waitForFunction(() => {
+    const state = window.__E2E_STATE__;
+    if (state?.error) throw new Error(state.error);
+    return state?.ready === true && (state.navItems || 0) > 0;
+  }, null, { timeout: 120_000 });
 }
 
 async function cerrarDisclaimer(page) {
@@ -183,7 +187,12 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.lab-table').first()).toBeVisible();
     await expect(page.locator('.lab-disclaimer')).toBeVisible();
 
-    // Lazy load: manifest + chunks en estado E2E
+    // Lazy load: tras explorar razas, el estado E2E refleja manifest + chunks
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.waitForFunction(() => (window.__E2E_STATE__?.chunksLoaded || 0) > 0);
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     expect(estado.lazyLoad).toBe(true);
     expect(estado.razas).toBeGreaterThanOrEqual(481);
@@ -259,5 +268,35 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     expect(estado.view).toBe('changelog');
     expect(estado.razas).toBeGreaterThanOrEqual(481);
+  });
+
+  test('Sprint 13: filtro región/país y diccionario ampliado', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.waitForFunction(() => (window.__E2E_STATE__?.chunksLoaded || 0) > 0);
+
+    const regionSection = page.locator('#regionFiltersSection');
+    await expect(regionSection).toBeVisible();
+
+    const latamBtn = page.locator('.region-btn[data-region="LATAM"]');
+    await expect(latamBtn).toBeVisible();
+    await latamBtn.click();
+    await expect(latamBtn).toHaveClass(/active/);
+
+    const cards = page.locator('#breedGrid .breed-card');
+    await expect(cards.first()).toBeVisible();
+    const countLatam = await cards.count();
+    expect(countLatam).toBeGreaterThan(0);
+
+    await page.locator('.region-btn[data-region="todos"]').click();
+    const countAll = await cards.count();
+    expect(countAll).toBeGreaterThanOrEqual(countLatam);
+
+    const estado = await page.evaluate(() => window.__E2E_STATE__);
+    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(627);
+    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(235);
   });
 });

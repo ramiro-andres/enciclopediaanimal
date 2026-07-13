@@ -89,7 +89,7 @@
         </ul>
       </nav>
       <nav id="regionFiltersSection" class="nav-section" hidden>
-        <h3>Región LATAM</h3>
+        <h3 data-i18n="sidebar.region">Región / país</h3>
         <ul id="regionFilters" class="nav-list region-filters"></ul>
       </nav>
       <div class="stats-panel">
@@ -590,12 +590,29 @@
   <script src="data/triaje.js"></script>
   <script src="data/calendario_vacunacion.js"></script>
   <script src="data/search_synonyms.js"></script>
+  <script>
+    // Bootstrap E2E (file://): expone métricas mínimas antes de que App.init termine.
+    window.__E2E_STATE__ = {
+      ready: false,
+      navItems: 0,
+      view: 'boot',
+      animales: window.ENCICLOPEDIA_MANIFEST?.animales?.length || 0,
+      razas: window.ENCICLOPEDIA_MANIFEST?.total_breeds || 0,
+      enfermedades: window.ENCICLOPEDIA_MANIFEST?.total_diseases || 0,
+      dictionaryTerms: window.DICCIONARIO_MEDICOS?.total_terminos || 0,
+      crossLinkTerms: window.ENLACES_CLINICOS?.total_terminos_enlazados || 0,
+      crossLinkDiseases: window.ENLACES_CLINICOS?.total_enfermedades_enlazadas || 0,
+      lazyLoad: !!window.ENCICLOPEDIA_MANIFEST,
+      chunksLoaded: 0,
+      error: null
+    };
+  </script>
   <script src="js/i18n.js"></script>
   <script src="js/analytics-config.js"></script>
   <script src="js/analytics.js"></script>
   <script src="js/app.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(() => {});
       });

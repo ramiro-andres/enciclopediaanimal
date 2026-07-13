@@ -6,6 +6,7 @@
 require 'json'
 require_relative 'clinical_disease_library'
 require_relative 'pharma_protocols'
+require_relative 'expand_dictionary_sprint13'
 
 ROOT = File.expand_path('../..', __dir__)
 
@@ -365,9 +366,32 @@ def collect_drugs
   drugs.sort_by { |k, _| k }
 end
 
+def merge_sprint13_terms(categories)
+  existing = categories.each_with_object({}) do |cat, acc|
+    acc[cat['id']] = cat
+    (cat['terminos'] || []).each { |t| acc["_term_#{t['termino'].downcase}"] = true }
+  end
+
+  EXTRA_TERMS_SPRINT13.each do |cat_id, extra_terms|
+    cat = existing[cat_id]
+    unless cat
+      cat = category(cat_id, 'Clínica especializada', 'Procedimientos y técnicas avanzadas de medicina veterinaria.', '🏥', [])
+      categories << cat
+      existing[cat_id] = cat
+    end
+    extra_terms.each do |t|
+      next if existing["_term_#{t['termino'].downcase}"]
+
+      cat['terminos'] << t
+      existing["_term_#{t['termino'].downcase}"] = true
+    end
+  end
+  categories
+end
+
 def build
   data = JSON.parse(File.read(File.join(ROOT, 'data', 'enciclopedia.json')))
-  categories = BASE_CATEGORIES.map(&:dup)
+  categories = merge_sprint13_terms(BASE_CATEGORIES.map(&:dup))
 
   # Enfermedades documentadas
   disease_terms = collect_diseases(data).map do |name|
