@@ -1,7 +1,14 @@
 name: Desplegar en GitHub Pages
 
+# US-DEV-10 — Gate de deploy: solo se despliega si CI (test + e2e) está verde.
+# En lugar de disparar el deploy directamente en cada push a main (que permitía
+# publicar con `test` rojo o la app rota, ver PR #21), el deploy se dispara al
+# COMPLETARSE los workflows de calidad y verifica que AMBOS (test y e2e) hayan
+# terminado en éxito para el mismo commit antes de publicar.
 on:
-  push:
+  workflow_run:
+    workflows: ["test", "e2e"]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -9,16 +16,78 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  # Puerta de calidad: confirma que test y e2e están verdes para el commit.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_deploy }}
+      sha: ${{ steps.check.outputs.sha }}
+    steps:
+      - name: Verificar CI verde (test + e2e) para este commit
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Despliegue manual (workflow_dispatch): se permite siempre desde main.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Despliegue manual solicitado."
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Si el workflow que disparó este evento falló, no seguimos.
+          TRIGGER_NAME="${{ github.event.workflow_run.name }}"
+          TRIGGER_CONCL="${{ github.event.workflow_run.conclusion }}"
+          SHA="${{ github.event.workflow_run.head_sha }}"
+          echo "Disparado por '$TRIGGER_NAME' (conclusión: $TRIGGER_CONCL) para $SHA"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+          if [ "$TRIGGER_CONCL" != "success" ]; then
+            echo "El workflow '$TRIGGER_NAME' no fue exitoso; no se despliega."
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Conclusión del último run COMPLETADO de un workflow para este SHA.
+          conclusion_for() {
+            local name="$1"
+            gh api --paginate \
+              "repos/$REPO/actions/runs?head_sha=$SHA&branch=main&status=completed" \
+              --jq "[.workflow_runs[] | select(.name==\"$name\")] | sort_by(.run_started_at) | last | .conclusion // \"pending\""
+          }
+
+          TEST_CONCL="$(conclusion_for "test")"
+          E2E_CONCL="$(conclusion_for "e2e")"
+          echo "test=$TEST_CONCL · e2e=$E2E_CONCL"
+
+          if [ "$TEST_CONCL" = "success" ] && [ "$E2E_CONCL" = "success" ]; then
+            echo "Ambos workflows de calidad están verdes: se procede al despliegue."
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Aún no están verdes ambos workflows (test=$TEST_CONCL, e2e=$E2E_CONCL)."
+            echo "Se desplegará cuando el otro workflow termine en éxito para este commit."
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: gate
+    if: ${{ needs.gate.outputs.should_deploy == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.gate.outputs.sha }}
 
       - name: Configurar Pages
         uses: actions/configure-pages@v6

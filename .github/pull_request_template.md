@@ -20,7 +20,8 @@
 
 ## Checklist de contenido clínico (si tocaste `data/`)
 
-- [ ] Ejecuté `bash actualizar_datos.sh` tras modificar JSON
+- [ ] Ejecuté `bash actualizar_datos.sh` tras modificar JSON (o tengo instalado el hook `bash scripts/setup/instalar_hooks.sh`)
+- [ ] `git diff -- data/*.js` no muestra cambios pendientes tras regenerar
 - [ ] Las dosis en protocolos son **orientativas** y el disclaimer educativo sigue visible
 - [ ] Cada enfermedad nueva tiene `urgencia`, `pronostico` y `protocolo_farmacologico` (≥3 entradas)
 - [ ] Las rutas de imagen existen (JPG >8 KB o SVG de respaldo)

@@ -1,0 +1,36 @@
+name: lighthouse
+
+# US-DEV-13 — Lighthouse CI en las PRs con umbral de accesibilidad >= 90.
+# Construye el sitio estático y lo audita con Lighthouse sobre el artefacto
+# (staticDistDir). La aserción de accesibilidad bloquea si baja de 0.90.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Construir sitio estático (_site)
+        run: |
+          mkdir -p _site
+          cp index.html .nojekyll manifest.webmanifest sw.js _site/ 2>/dev/null || cp index.html _site/
+          cp -r css js data images _site/
+          echo "Archivos en _site: $(find _site -type f | wc -l)"
+
+      - name: Ejecutar Lighthouse CI (accesibilidad >= 90)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

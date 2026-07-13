@@ -1,0 +1,45 @@
+#!/bin/bash
+# US-DEV-12 — Hook pre-commit: si se modifican data/*.json, garantiza que los
+# .js derivados (enciclopedia, diccionario, enlaces clínicos) se regeneren con
+# actualizar_datos.sh y estén sincronizados antes de permitir el commit.
+#
+# Instálalo con: bash scripts/setup/instalar_hooks.sh
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+# ¿Hay algún data/*.json entre los cambios en el índice (staged)?
+STAGED_JSON="$(git diff --cached --name-only --diff-filter=ACM -- 'data/*.json' || true)"
+if [ -z "$STAGED_JSON" ]; then
+  exit 0
+fi
+
+echo "🔁 [pre-commit] Detectados cambios en data/*.json:"
+echo "$STAGED_JSON" | sed 's/^/   - /'
+echo "   Regenerando .js derivados con actualizar_datos.sh…"
+
+if ! bash actualizar_datos.sh >/tmp/actualizar_datos.log 2>&1; then
+  echo "❌ [pre-commit] actualizar_datos.sh falló. Revisa /tmp/actualizar_datos.log" >&2
+  cat /tmp/actualizar_datos.log >&2
+  exit 1
+fi
+
+# Si tras regenerar hay .js con cambios que no están en el índice, el commit
+# habría dejado JSON y JS desincronizados (el mismo fallo que bloquea CI, PR #23).
+DIRTY_JS="$(git status --porcelain -- 'data/*.js' | awk '{print $2}')"
+if [ -n "$DIRTY_JS" ]; then
+  echo "" >&2
+  echo "❌ [pre-commit] Los .js derivados quedaron desactualizados respecto al JSON." >&2
+  echo "   Archivos regenerados con cambios pendientes:" >&2
+  echo "$DIRTY_JS" | sed 's/^/     - /' >&2
+  echo "" >&2
+  echo "   Ejecuta y añade los .js al commit:" >&2
+  echo "     bash actualizar_datos.sh" >&2
+  echo "     git add data/*.js" >&2
+  echo "" >&2
+  exit 1
+fi
+
+echo "✅ [pre-commit] JSON → JS sincronizado."
+exit 0

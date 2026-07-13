@@ -47,6 +47,7 @@ Cada raza requiere: `id`, `nombre`, `descripcion`, `imagen`, `origen`, campos cl
 ## Checklist antes del PR
 
 - [ ] `bash ejecutar_pruebas.sh` pasa en local
+- [ ] Hook pre-commit instalado (`bash scripts/setup/instalar_hooks.sh`) para regenerar/validar JSON → JS
 - [ ] Si tocaste JSON, ejecutaste `bash actualizar_datos.sh`
 - [ ] Si cambiaste datos derivados, `git diff -- data/*.js` no muestra cambios pendientes tras regenerar
 - [ ] No commitear logs, `_site/`, `.env`
