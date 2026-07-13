@@ -256,6 +256,7 @@ const App = {
       this.searchSynonyms = await this.loadSearchSynonyms();
       this.buildSynonymIndex();
       this.crossLinks = await this.loadCrossLinks();
+      this.exportE2EState();
       this.toxicologyData = await this.loadToxicologyData();
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.triajeData = await this.loadTriajeData();
