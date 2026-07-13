@@ -18,8 +18,20 @@ def disease_image_path(animal_id, name)
   "images/enfermedades/#{animal_id}_#{slug}.jpg"
 end
 
+def generic_template_disease?(disease)
+  (disease['sintomas'] || []).any? { |s| s.match?(/signo clínico principal/i) } ||
+    disease['diagnostico'].to_s.include?('El veterinario realizará anamnesis detallada')
+end
+
 def ensure_disease_fields(disease, animal_id, breed_id)
-  d = expand_disease(disease, animal_id, breed_id)
+  d = disease.dup
+  if generic_template_disease?(d)
+    %w[sintomas diagnostico tratamiento prevencion causas factores_riesgo examenes
+       diagnostico_diferencial criterios_diagnostico referencias notas_clinicas].each do |key|
+      d.delete(key)
+    end
+  end
+  d = expand_disease(d, animal_id, breed_id)
   d['imagen'] ||= disease_image_path(animal_id, d['nombre'])
   d['diagnostico_diferencial'] ||= ['Diagnósticos alternativos según presentación clínica', 'Enfermedades infecciosas con signos superpuestos', 'Procesos metabólicos o nutricionales']
   d['criterios_diagnostico'] ||= "Criterios clínicos y de laboratorio para confirmar #{d['nombre'].downcase} en #{animal_id}."
@@ -37,7 +49,8 @@ data['animales'].each do |animal|
     animal['razas'][size] = (animal.dig('razas', size) || []).map do |breed|
       needs = breed['nutricion_detallada'].nil? ||
               breed['predisposiciones_geneticas'].nil? ||
-              (breed['enfermedades'] || []).any? { |d| d['imagen'].nil? }
+              (breed['enfermedades'] || []).any? { |d| d['imagen'].nil? } ||
+              (breed['enfermedades'] || []).any? { |d| generic_template_disease?(d) }
       next breed unless needs
 
       enriched = BreedClinicalProfiles.enrich_breed(breed, animal['id'], size)

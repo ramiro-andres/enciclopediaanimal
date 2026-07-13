@@ -11,6 +11,8 @@ ruby "$DIR/scripts/data/expand_bibliografia_sprint10.rb"
 ruby "$DIR/scripts/data/build_resumen_estudio_sprint10.rb"
 ruby "$DIR/scripts/data/build_chunks.rb"
 ruby "$DIR/scripts/data/build_lab_reference.rb"
+ruby "$DIR/scripts/data/build_changelog.rb"
+ruby "$DIR/scripts/data/suggest_glossary_links.rb"
 ruby "$DIR/scripts/data/build_sitemap.rb"
 ruby -rjson -e '
   base = ARGV[0]
@@ -38,5 +40,12 @@ ruby -rjson -e '
     cal = JSON.parse(File.read(cal_path))
     File.write(base + "/data/calendario_vacunacion.js", "window.CALENDARIO_VACUNACION = " + cal.to_json + ";\n")
     puts "calendario_vacunacion.js actualizado (#{cal["especies"].length} especies)"
+  end
+
+  changelog_path = base + "/data/changelog.json"
+  if File.exist?(changelog_path)
+    changelog = JSON.parse(File.read(changelog_path))
+    File.write(base + "/data/changelog.js", "window.ATLAS_CHANGELOG = " + changelog.to_json + ";\n")
+    puts "changelog.js actualizado (#{changelog["entries"].length} entradas)"
   end
 ' "$DIR"

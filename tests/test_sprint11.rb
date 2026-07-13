@@ -128,7 +128,7 @@ class ChunksLazyLoadTest < Minitest::Test
   end
 
   def test_manifest_totales
-    assert_operator @manifest['total_breeds'], :>=, 405
+    assert_operator @manifest['total_breeds'], :>=, 481
     assert_operator @manifest['total_diseases'], :>=, 2000
     assert_equal @manifest['animales'].length, 13
   end
@@ -152,7 +152,7 @@ class ChunksLazyLoadTest < Minitest::Test
   def test_sw_precache_manifest
     assert_includes @sw, 'data/chunks/manifest.js'
     assert_includes @sw, 'data/search_index.js'
-    assert_includes @sw, 'atlas-v10'
+    assert_includes @sw, 'atlas-v11'
   end
 end
 

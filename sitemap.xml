@@ -97,6 +97,12 @@
   <priority>0.6</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#changelog</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#animal/perros</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>weekly</changefreq>
@@ -5491,6 +5497,174 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/aves/gallina_inka</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/psitacosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/aspergilosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/candidiasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/acaros-respiratorios</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/obesidad</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_inka/egg-binding</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/aves/gallina_criolla_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/psitacosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/aspergilosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/candidiasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/acaros-respiratorios</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/obesidad</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_ecuador/egg-binding</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/aves/gallina_criolla_centroamerica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/psitacosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/aspergilosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/candidiasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/acaros-respiratorios</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/obesidad</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_centroamerica/egg-binding</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/aves/gallina_criolla_cuba</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/psitacosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/aspergilosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/candidiasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/acaros-respiratorios</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/obesidad</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/aves/gallina_criolla_cuba/egg-binding</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/aves/guacamayo</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -7075,6 +7249,300 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/criollo_argentino</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/criollo_argentino/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_paso_peruano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paso_peruano/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_criollo_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_ecuador/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_criollo_llanero</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_llanero/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_criollo_uruguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_uruguayo/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_paraguayo_criollo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_paraguayo_criollo/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_criollo_centroamerica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/laminitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/artritis-degenerativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/ulcera-gastrica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/equinos/caballo_criollo_centroamerica/tetanos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/equinos/caballo_andaluz</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -8617,6 +9085,342 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_peruano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_peruano/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/montubio_ecuatoriano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/montubio_ecuatoriano/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_boliviano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_boliviano/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_venezolano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_venezolano/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_paraguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_paraguayo/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_costarricense</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_costarricense/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/ceb%C3%BA_paname%C3%B1o</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/ceb%C3%BA_paname%C3%B1o/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/criollo_cubano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/criollo_cubano/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/holstein</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -9457,6 +10261,174 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/hereford_uruguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/hereford_uruguayo/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/angus_uruguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/angus_uruguayo/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/brahman_paraguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/brahman_paraguayo/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/bovinos/nelore_brasileiro</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/metritis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/bovinos/nelore_brasileiro/hipocalcemia-posparto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#animal/porcinos</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>weekly</changefreq>
@@ -10244,6 +11216,258 @@
 </url>
 <url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/landrace_intl/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_criollo_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_ecuador/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_llanero_venezuela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_llanero_venezuela/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_duroc_uruguay</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_duroc_uruguay/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_criollo_guatemala</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_guatemala/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_criollo_cuba</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_criollo_cuba/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/porcinos/cerdo_piau_brasil</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/disenteria-porcina</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/erisipela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/pcv2-circovirus</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/mycoplasma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/mma-metritis-mastitis-agalactia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/porcinos/cerdo_piau_brasil/golpe-de-calor</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -11282,6 +12506,48 @@
 </url>
 <url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/angora_frances/tricobezoar</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/conejos/conejo_criollo_centroamerica</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/estasis-gastrointestinal</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/maloclusion-dental</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/pododermatitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/pasteurelosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/encefalitozoon-cuniculi</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/conejos/conejo_criollo_centroamerica/tricobezoar</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -13615,6 +14881,174 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/trucha_andina_peru</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/ich-punto-blanco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/columnaris</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/velvet-oodinium</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/dropsy-hidropesia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/podredumbre-de-aletas</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/trucha_andina_peru/intoxicacion-por-amoniaco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/tilapia_roja_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/ich-punto-blanco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/columnaris</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/velvet-oodinium</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/dropsy-hidropesia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/podredumbre-de-aletas</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_roja_ecuador/intoxicacion-por-amoniaco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/cachama_venezuela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/ich-punto-blanco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/columnaris</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/velvet-oodinium</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/dropsy-hidropesia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/podredumbre-de-aletas</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/cachama_venezuela/intoxicacion-por-amoniaco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/tilapia_centroamericana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/ich-punto-blanco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/columnaris</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/velvet-oodinium</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/dropsy-hidropesia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/podredumbre-de-aletas</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tilapia_centroamericana/intoxicacion-por-amoniaco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/carpa_koi</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -14486,6 +15920,48 @@
 </url>
 <url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/pacu_cultivo/intoxicacion-por-amoniaco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/peces/tambaqui_brasil</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/ich-punto-blanco</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/columnaris</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/velvet-oodinium</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/dropsy-hidropesia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/podredumbre-de-aletas</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/peces/tambaqui_brasil/intoxicacion-por-amoniaco</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -15583,6 +17059,174 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/ovinos/oveja_criolla_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/miasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/pododermatitis-footrot</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/oveja_criolla_ecuador/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/ovinos/borrego_altiplano_bolivia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/miasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/pododermatitis-footrot</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_altiplano_bolivia/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/ovinos/corriedale_uruguayo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/miasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/pododermatitis-footrot</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/corriedale_uruguayo/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/ovinos/borrego_criollo_paraguay</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/clostridiosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/miasis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/pododermatitis-footrot</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/ovinos/borrego_criollo_paraguay/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/ovinos/texel</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -16675,6 +18319,300 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_andina_peru</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_andina_peru/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_nubia_ecuador</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_nubia_ecuador/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_criolla_bolivia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_bolivia/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_saanen_venezuela</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_saanen_venezuela/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_criolla_paraguay</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_paraguay/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_criolla_honduras</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_honduras/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/cabra_criolla_republica_dominicana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/timpanismo</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/mastitis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/listeriosis</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/bloqueo-urinario</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/caprinos/cabra_criolla_republica_dominicana/parto-distocico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/caprinos/boer</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
@@ -17096,6 +19034,174 @@
 </url>
 <url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_chilena/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/camelidos/alpaca_peruana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/meningeal-worm</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_peruana/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/camelidos/llama_peruana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/meningeal-worm</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_peruana/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/camelidos/llama_boliviana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/meningeal-worm</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/llama_boliviana/parasitos-internos</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/camelidos/alpaca_boliviana</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/colico</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/anemia-parasitaria</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/meningeal-worm</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/golpe-de-calor</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/camelidos/alpaca_boliviana/parasitos-internos</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -17750,6 +19856,48 @@
 </url>
 <url>
   <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/gerbil_mongol/insulinoma</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#raza/roedores/cuy_peruano</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/wet-tail-proliferativa</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/maloclusion-dental</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/neumonia</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/escorbuto</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/tumores</loc>
+  <lastmod>2026-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://ramiro-andres.github.io/enciclopediaanimal/#enfermedad/roedores/cuy_peruano/insulinoma</loc>
   <lastmod>2026-07-13</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>

@@ -155,8 +155,8 @@ class AppLogicTest < Minitest::Test
   end
 
   def test_get_all_breeds_total
-    assert_operator @breeds.length, :>=, 405
-    assert_equal 431, @breeds.length
+    assert_operator @breeds.length, :>=, 481
+    assert_equal 482, @breeds.length
   end
 
   def test_filtro_por_animal_perros
@@ -195,12 +195,12 @@ class AppLogicTest < Minitest::Test
   def test_contar_enfermedades
     total = @breeds.sum { |b| b['enfermedades'].length }
     assert_operator total, :>=, 2500
-    assert_equal 2555, total
+    assert_equal 2861, total
   end
 
   def test_razas_productivas_tienen_datos_zootecnicos
     productivas = @breeds.select { |b| b['enfoque_produccion'] }
-    assert_equal 181, productivas.length
+    assert_equal 231, productivas.length
 
     required = %w[
       tipo_produccion sistema_productivo rendimiento_productivo
@@ -521,6 +521,7 @@ class Sprint4BacklogTest < Minitest::Test
   def test_scripts_latam_y_perfiles
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'production_breeds_batch7_latam.rb'))
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'production_breeds_batch7_international.rb'))
+    assert File.exist?(File.join(ROOT, 'scripts', 'data', 'production_breeds_batch8.rb'))
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'apply_region_tags.rb'))
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'apply_clinical_profiles.rb'))
     assert File.exist?(File.join(ROOT, 'scripts', 'setup', 'setup_github_labels.sh'))

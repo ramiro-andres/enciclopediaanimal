@@ -108,6 +108,7 @@
             <div class="hero-actions">
               <button type="button" id="btnExploreAll" class="btn-explore-all">Explorar todas las razas</button>
               <button type="button" class="btn-text-link" data-focus-welcome-search>Buscar una especie <span>→</span></button>
+              <button type="button" id="welcomeChangelogBtn" class="btn-text-link" data-i18n="changelog.link">Ver changelog</button>
             </div>
             <div id="welcomeStats" class="welcome-stats"></div>
             <div id="recentHistory" class="recent-history" hidden>
@@ -456,6 +457,18 @@
         </div>
       </section>
 
+      <section id="changelogView" class="view">
+        <button id="backChangelogBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="changelog-page">
+          <div class="changelog-hero">
+            <span class="eyebrow" data-i18n="changelog.eyebrow">COMUNIDAD</span>
+            <h2 data-i18n="changelog.title">Changelog público</h2>
+            <p data-i18n="changelog.intro">Historial de entregas del atlas generado desde CHANGELOG.md o commits del repositorio.</p>
+          </div>
+          <div id="changelogContent" class="changelog-content"></div>
+        </div>
+      </section>
+
       <section id="compareView" class="view">
         <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="compare-page">
@@ -489,6 +502,10 @@
 
   <footer class="footer">
     <p data-i18n="footer.text">🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
+    <nav id="footerContribute" class="footer-contribute" aria-label="Contribuir al atlas"></nav>
+    <p class="footer-links">
+      <button type="button" id="footerChangelogBtn" class="footer-link-btn" data-i18n="changelog.link">Ver changelog</button>
+    </p>
     <p class="footer-privacy"><small data-i18n="privacy.analytics">Este sitio puede usar analítica sin cookies. Ver docs/PRIVACIDAD.md.</small></p>
   </footer>
 
@@ -565,6 +582,7 @@
   <script src="data/chunks/manifest.js"></script>
   <script src="data/search_index.js"></script>
   <script src="data/lab_reference.js"></script>
+  <script src="data/changelog.js"></script>
   <script src="data/diccionario_medicos.js"></script>
   <script src="data/enlaces_clinicos.js"></script>
   <script src="data/toxicologia.js"></script>

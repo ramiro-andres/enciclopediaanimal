@@ -186,7 +186,27 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     // Lazy load: manifest + chunks en estado E2E
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     expect(estado.lazyLoad).toBe(true);
-    expect(estado.razas).toBeGreaterThanOrEqual(400);
+    expect(estado.razas).toBeGreaterThanOrEqual(481);
     expect(estado.breedOfWeek).toBe(true);
+  });
+
+  test('Sprint 12: changelog y footer Contribuye (US-UX-18, US-GOV-04)', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    // Footer Contribuye con stats dinámicos
+    const footerContribute = page.locator('#footerContribute');
+    await expect(footerContribute).toBeVisible();
+    await expect(footerContribute).toContainText(/contribu|contribute/i);
+    await expect(footerContribute.locator('.footer-contribute-stats dd').first()).toBeVisible();
+
+    // Changelog desde footer
+    await page.locator('#footerChangelogBtn').click();
+    await expect(page.locator('#changelogView')).toHaveClass(/active/);
+    await expect(page.locator('.changelog-list .changelog-entry').first()).toBeVisible();
+
+    const estado = await page.evaluate(() => window.__E2E_STATE__);
+    expect(estado.view).toBe('changelog');
+    expect(estado.razas).toBeGreaterThanOrEqual(481);
   });
 });
