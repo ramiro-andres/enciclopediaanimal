@@ -154,6 +154,8 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.triaje-severity')).toBeVisible();
 
     // Resumen modo estudio en ficha de enfermedad (navegación UI sin window.App)
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
     await page.locator('#btnExploreAll').click();
     await expect(page.locator('#homeView')).toHaveClass(/active/);
     await page.locator('#breedGrid .breed-card').first().click();
