@@ -34,7 +34,15 @@ Esto:
 
 **Importante:** Si modificas cualquier `data/*.json`, debes ejecutar este script y commitear **tanto el JSON como los `.js` generados**. CI ejecuta `actualizar_datos.sh` y falla si los `.js` no están sincronizados con los JSON.
 
-**Importante:** Si modificas cualquier `data/*.json`, debes ejecutar este script y commitear **tanto el JSON como los `.js` generados**. CI ejecuta `actualizar_datos.sh` y falla si los `.js` no están sincronizados con los JSON.
+### Hook pre-commit (recomendado)
+
+Para no olvidar regenerar los `.js` (el fallo del PR #23), instala el hook `pre-commit` que regenera y valida la sincronización automáticamente cuando el commit toca `data/*.json`:
+
+```bash
+bash scripts/setup/instalar_hooks.sh
+```
+
+A partir de entonces, si haces commit con cambios en `data/*.json` y los `.js` derivados quedan desactualizados, el commit se **bloquea** con un mensaje claro indicando ejecutar `bash actualizar_datos.sh` y `git add data/*.js`. Es el mismo criterio que aplica el workflow `test` en CI, pero verificado antes de commitear.
 
 ### Pipeline completo de enciclopedia
 

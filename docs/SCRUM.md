@@ -731,6 +731,82 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 4 — En progreso (rama `sprint-4/ep-12-produccion-confiable`)
+
+### EP-12 — Producción confiable y offline real
+
+**Objetivo:** cerrar las brechas detectadas en [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md): evitar despliegues con CI rojo (caso PR #21), lograr offline real en la PWA, prevenir desincronización JSON→JS y auditar accesibilidad de forma automática.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-DEV-10 | Gate de deploy: publicar solo con `test` + `e2e` verdes | 3 | Hecho |
+| US-DEV-11 | Service Worker completo (precache datos JS + imágenes SWR) | 5 | Hecho |
+| US-DEV-12 | Hook pre-commit que regenera/valida JSON→JS | 2 | Hecho |
+| US-DEV-13 | Lighthouse CI en PR con umbral A11y ≥ 90 | 3 | Hecho |
+| | | **13** | |
+
+#### US-DEV-10 · Gate de deploy
+
+**Como** mantenedor, **quiero** que el despliegue a Pages solo ocurra si `test` y `e2e` están verdes, **para** no publicar una app rota (caso PR #21: deploy verde con app rota).
+
+**Tareas técnicas:**
+- [x] `deploy-pages.yml` deja de dispararse en `push` a `main`; usa `workflow_run` sobre `["test", "e2e"]`.
+- [x] Job `gate` verifica vía API (`actions: read`) que el último run completado de `test` **y** `e2e` para el `head_sha` sea `success`.
+- [x] `build`/`deploy` condicionados a `should_deploy == 'true'`; `workflow_dispatch` permite deploy manual.
+
+**Criterios de aceptación:**
+- [x] Un `main` con `test` o `e2e` rojo no despliega.
+- [x] Cuando ambos terminan en éxito, el segundo en completar dispara el deploy.
+
+#### US-DEV-11 · Service Worker completo
+
+**Como** usuario en campo, **quiero** que la app funcione offline tras la primera visita, **para** consultar razas y enfermedades sin conexión.
+
+**Tareas técnicas:**
+- [x] Precache de `data/enlaces_clinicos.js` (además de enciclopedia y diccionario) y app shell.
+- [x] Estrategia stale-while-revalidate para imágenes en caché aparte (`IMAGE_CACHE`).
+- [x] `CACHE_VERSION` → `atlas-v3`; limpieza de cachés `atlas-*` obsoletas en `activate`.
+- [x] `docs/PWA.md` actualizado.
+
+**Criterios de aceptación:**
+- [x] Los tres `data/*.js` críticos quedan disponibles offline.
+- [x] Bump de versión invalida cachés previas.
+
+#### US-DEV-12 · Hook pre-commit JSON→JS
+
+**Como** mantenedor, **quiero** que un commit que toca `data/*.json` regenere y valide los `.js`, **para** evitar la desincronización del PR #23 antes de llegar a CI.
+
+**Tareas técnicas:**
+- [x] `scripts/setup/pre-commit` regenera con `actualizar_datos.sh` y bloquea si los `.js` quedan desactualizados.
+- [x] `scripts/setup/instalar_hooks.sh` instala el hook.
+- [x] Documentado en `docs/DESARROLLO.md`, `docs/CONTRIBUIR.md` y plantilla de PR.
+
+**Criterios de aceptación:**
+- [x] Commit con JSON modificado y JS viejo se bloquea con mensaje claro.
+- [x] Commit con ambos sincronizados pasa.
+
+#### US-DEV-13 · Lighthouse CI
+
+**Como** equipo, **quiero** auditar accesibilidad en cada PR, **para** mantener A11y ≥ 90.
+
+**Tareas técnicas:**
+- [x] Workflow `.github/workflows/lighthouse.yml` construye `_site` y corre Lighthouse CI.
+- [x] `lighthouserc.json` con aserción `categories:accessibility` como `error`, `minScore` 0.90.
+- [x] Auditoría sobre artefacto estático (`staticDistDir`), sin servidor persistente.
+
+**Criterios de aceptación:**
+- [x] PR con accesibilidad < 90 falla el check `lighthouse`.
+- [x] Reporte disponible como artefacto / almacenamiento temporal público.
+
+**Entregables técnicos:**
+- `.github/workflows/deploy-pages.yml` (gate `workflow_run` + verificación de conclusiones).
+- `sw.js` (`atlas-v3`, precache ampliado, SWR de imágenes), `docs/PWA.md`.
+- `scripts/setup/pre-commit`, `scripts/setup/instalar_hooks.sh`.
+- `.github/workflows/lighthouse.yml`, `lighthouserc.json`.
+- `tests/test_sprint4.rb` (SW, gate, hook, Lighthouse).
+
+---
+
 ## Referencias
 
 - [TRAZADO_RUTA.md](TRAZADO_RUTA.md) — Roadmap por fases
@@ -748,3 +824,4 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 3 entregado: PWA, i18n, comparador, contenido y comunidad |
 | 2026-07-12 | [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md): análisis de fallos CI/CD (Pages, E2E, JSON→JS, PR #21–#23) |
 | 2026-07-12 | Sprint 2 entregado: US-UX-04 (enlaces cruzados), US-DEV-04 (E2E sin servidor), US-DEV-09 (preview + validaciones) |
+| 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |

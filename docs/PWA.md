@@ -19,9 +19,18 @@ El atlas es 100 % estático (GitHub Pages). Los usuarios frecuentes — estudian
 ## Implementación
 
 - `manifest.webmanifest` con iconos SVG 192/512
-- `sw.js` — estrategia **cache-first con actualización en red** para mismo origen
-- Precaché: HTML, CSS, JS, `data/*.js`, iconos base
-- Imágenes de razas: se cachean bajo demanda al visitarlas (no en install)
+- `sw.js` — dos estrategias por tipo de recurso (mismo origen):
+  - **App shell y datos JS**: cache-first con actualización en red (`STATIC_CACHE`).
+  - **Imágenes** (`*.png|jpg|svg|webp|gif|avif`): **stale-while-revalidate** en caché aparte (`IMAGE_CACHE`), para servir al instante y renovar en segundo plano.
+- Precaché en `install` (app shell + datos críticos para offline real):
+  - `index.html`, `css/styles.css`, `js/app.js`, `js/i18n.js`, `js/analytics*.js`
+  - `data/enciclopedia.js`, `data/diccionario_medicos.js`, **`data/enlaces_clinicos.js`**
+  - `manifest.webmanifest`, iconos SVG base
+- Imágenes de razas/enfermedades: se cachean bajo demanda (stale-while-revalidate), no en install.
+
+### Versionado de caché (US-DEV-11)
+
+`CACHE_VERSION` es `atlas-v3`. En `activate`, el SW borra cualquier caché `atlas-*` que no esté en `CURRENT_CACHES` (`STATIC_CACHE` + `IMAGE_CACHE`), evitando datos obsoletos tras un despliegue.
 
 ## Criterios Lighthouse
 
@@ -31,4 +40,4 @@ El atlas es 100 % estático (GitHub Pages). Los usuarios frecuentes — estudian
 
 ## Mantenimiento
 
-Tras cambios mayores en assets, incrementar `CACHE_VERSION` en `sw.js`.
+Tras cambios mayores en assets, incrementar `CACHE_VERSION` en `sw.js` (p. ej. `atlas-v3` → `atlas-v4`). El bump invalida las cachés previas en la siguiente activación.
