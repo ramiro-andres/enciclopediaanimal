@@ -15,6 +15,7 @@ ROOT = File.expand_path('..', __dir__) unless defined?(ROOT)
 class FluidoterapiaTest < Minitest::Test
   def setup
     @app = File.read(File.join(ROOT, 'js', 'app.js'))
+    @tools = File.read(File.join(ROOT, 'js', 'tools.js'))
     @html = File.read(File.join(ROOT, 'index.html'))
     @i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
     @css = File.read(File.join(ROOT, 'css', 'styles.css'))
@@ -26,14 +27,14 @@ class FluidoterapiaTest < Minitest::Test
     assert_includes @app, "parts[0] === 'fluidoterapia'"
     assert_includes @app, 'renderFluidoterapia'
     assert_includes @app, 'FLUID_PROFILES'
-    assert_includes @app, 'mlKgDay'
+    assert_includes @tools, 'mlKgDay'
   end
 
   def test_perfiles_especies_clave
-    assert_includes @app, "perros: { mlKgDay: 60"
-    assert_includes @app, "gatos: { mlKgDay: 50"
-    assert_includes @app, 'shockMin'
-    assert_includes @app, 'shockMax'
+    assert_includes @tools, "perros: { mlKgDay: 60"
+    assert_includes @tools, "gatos: { mlKgDay: 50"
+    assert_includes @tools, 'shockMin'
+    assert_includes @tools, 'shockMax'
   end
 
   def test_peso_kg_lb_y_disclaimer

@@ -58,6 +58,7 @@ end
 class RerMerCalculatorTest < Minitest::Test
   def setup
     @app = File.read(File.join(ROOT, 'js', 'app.js'))
+    @tools = File.read(File.join(ROOT, 'js', 'tools.js'))
     @html = File.read(File.join(ROOT, 'index.html'))
     @i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
   end
@@ -70,8 +71,9 @@ class RerMerCalculatorTest < Minitest::Test
   end
 
   def test_formula_rer_y_factores_mer
-    assert_match(/70 \* Math\.pow\(kg, 0\.75\)/, @app)
+    assert_match(/70 \* Math\.pow\(kg, 0\.75\)/, @tools)
     assert_includes @app, 'MER_FACTORS'
+    assert_includes @tools, 'MER_FACTORS'
     assert_includes @app, 'kgToLb'
     assert_includes @app, 'lbToKg'
     assert_includes @app, 'rerMerUnit'

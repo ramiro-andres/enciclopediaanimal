@@ -102,9 +102,10 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     const terminoGlosario = page.locator('.disease-term-link').first();
     // Puede o no haber términos según la enfermedad; si los hay, deben navegar al glosario.
     if (await terminoGlosario.count()) {
-      // showView hace scroll al inicio; luego llevamos el chip al viewport y
-      // disparamos el clic en el DOM (evita interceptación por layout 3D/sticky).
-      await page.waitForFunction(() => window.scrollY === 0);
+      // showView ya salta a top con behavior:'auto'; forzar tope por si el layout
+      // refloweó y no depender de animaciones suaves (flake en CI/file://).
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForFunction(() => window.scrollY < 1, null, { timeout: 5_000 });
       await terminoGlosario.scrollIntoViewIfNeeded();
       await terminoGlosario.evaluate((el) => el.click());
       await expect(page.locator('#dictionaryView')).toHaveClass(/active/);

@@ -82,21 +82,27 @@ class SecretsSecurityTest < Minitest::Test
   end
 end
 
-# ── XSS estático en app.js ───────────────────────────────────────────────────
+# ── XSS estático en app.js / utils.js ────────────────────────────────────────
 class XssStaticSecurityTest < Minitest::Test
   def setup
     @app = read_repo('js/app.js')
+    @utils = read_repo('js/utils.js')
   end
 
   def test_sin_eval_ni_document_write
     refute_match(/\beval\s*\(/, @app, 'eval() detectado en app.js')
     refute_match(/\bdocument\.write\s*\(/, @app, 'document.write() detectado en app.js')
+    refute_match(/\beval\s*\(/, @utils, 'eval() detectado en utils.js')
   end
 
   def test_metodo_esc_existe
-    assert_match(/\besc\s*\(/, @app, 'Falta método esc() para escape HTML')
-    assert_includes @app, '&amp;', 'esc() debe escapar ampersands'
-    assert_includes @app, '&lt;', 'esc() debe escapar <'
+    assert_match(/\besc\s*\(/, @app, 'Falta método esc() en App')
+    assert_includes @app, 'AtlasUtils.esc', 'App.esc debe delegar a AtlasUtils.esc'
+    assert_match(/\besc\s*\(/, @utils, 'Falta AtlasUtils.esc en utils.js')
+    assert_includes @utils, '&amp;', 'esc() debe escapar ampersands'
+    assert_includes @utils, '&lt;', 'esc() debe escapar <'
+    assert_includes @utils, '&quot;', 'esc() debe escapar comillas dobles (atributos)'
+    assert_includes @utils, '&#39;', "esc() debe escapar comillas simples (atributos)"
   end
 
   def test_innerhtml_sin_interpolacion_cruda_de_errores

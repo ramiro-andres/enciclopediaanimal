@@ -1,13 +1,13 @@
 function prefersReducedMotion() {
-  try {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch (_) {
-    return false;
-  }
+  return window.AtlasUtils
+    ? AtlasUtils.prefersReducedMotion()
+    : false;
 }
 
 function scrollBehaviorPref() {
-  return prefersReducedMotion() ? 'auto' : 'smooth';
+  return window.AtlasUtils
+    ? AtlasUtils.scrollBehaviorPref()
+    : 'auto';
 }
 
 const App = {
@@ -619,21 +619,18 @@ const App = {
     this.themeMode = mode;
     try { localStorage.setItem(this.THEME_KEY, mode); } catch (_) { /* noop */ }
     document.documentElement.setAttribute('data-theme-mode', mode);
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = mode === 'dark' || (mode === 'auto' && prefersDark);
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    const resolved = AtlasUtils.resolveTheme(mode);
+    document.documentElement.setAttribute('data-theme', resolved.dataTheme);
     const btn = document.getElementById('themeToggleBtn');
     if (btn) {
-      const label = isDark ? this.t('theme.light') : this.t('theme.dark');
+      const label = resolved.isDark ? this.t('theme.light') : this.t('theme.dark');
       btn.setAttribute('aria-label', label);
       btn.title = label;
     }
   },
 
   toggleTheme() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const currentlyDark = this.themeMode === 'dark'
-      || (this.themeMode === 'auto' && prefersDark);
+    const currentlyDark = AtlasUtils.resolveTheme(this.themeMode).isDark;
     this.applyTheme(currentlyDark ? 'light' : 'dark');
   },
 
@@ -1066,10 +1063,6 @@ const App = {
     return { matched: false };
   },
 
-  nameMatches(value, query) {
-    return this.matchesSearch(value, query).matched;
-  },
-
   formatSearchHint(key, term) {
     return this.t(key).replace('{term}', term || '');
   },
@@ -1405,15 +1398,15 @@ const App = {
                 ${this.renderBreedImage(breed, 'breed-card-img')}
                 <div class="breed-card-body">
                   <div class="breed-card-tags">
-                    <span class="tag tag-${breed.tamano}">${this.sizeLabel(breed.tamano)}</span>
-                    <span class="tag tag-animal">${breed.animalIcono} ${breed.animalNombre}</span>
+                    <span class="tag tag-${this.esc(breed.tamano)}">${this.esc(this.sizeLabel(breed.tamano))}</span>
+                    <span class="tag tag-animal">${this.esc(breed.animalIcono)} ${this.esc(breed.animalNombre)}</span>
                   </div>
                   <h4>${this.esc(breed.nombre)}</h4>
                   ${this.renderSearchMatchHint(match)}
                   <p>${this.esc(breed.descripcion)}</p>
                   <div class="breed-card-footer">
                     <span>${this.esc(this.t('common.diseases_count').replace('{count}', breed.enfermedades?.length || 0))}</span>
-                    <span>Ver raza →</span>
+                    <span>${this.esc(this.t('common.view_detail'))}</span>
                   </div>
                 </div>
               </article>
@@ -1577,7 +1570,7 @@ const App = {
       if (showContext && chip) {
         const animal = this.data.animales.find(a => a.id === this.currentAnimal);
         if (animal) {
-          chip.innerHTML = `<span class="chip-icon">${animal.icono}</span><span>${animal.nombre}</span>`;
+          chip.innerHTML = `<span class="chip-icon">${this.esc(animal.icono)}</span><span>${this.esc(animal.nombre)}</span>`;
         }
       }
     }
@@ -1602,8 +1595,8 @@ const App = {
     if (!nav) return;
     const items = [{ id: 'todos', nombre: this.t('nav.all'), icono: '🌿' }, ...this.data.animales];
     nav.innerHTML = items.map(a => `
-      <li><button class="nav-btn ${a.id === this.currentAnimal ? 'active' : ''}" data-animal="${a.id}">
-        <span>${a.icono}</span> ${a.nombre}
+      <li><button class="nav-btn ${a.id === this.currentAnimal ? 'active' : ''}" data-animal="${this.esc(a.id)}">
+        <span>${this.esc(a.icono)}</span> ${this.esc(a.nombre)}
       </button></li>
     `).join('');
     nav.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1627,9 +1620,9 @@ const App = {
       const meta = this.manifest?.animales?.find(m => m.id === a.id);
       const count = meta?.total_breeds ?? ['pequena', 'mediana', 'grande'].reduce((n, s) => n + (a.razas[s]?.length || 0), 0);
       return `
-        <div class="category-card" data-animal="${a.id}">
-          <div class="cat-icon">${a.icono}</div>
-          <h4>${a.nombre}</h4>
+        <div class="category-card" data-animal="${this.esc(a.id)}">
+          <div class="cat-icon">${this.esc(a.icono)}</div>
+          <h4>${this.esc(a.nombre)}</h4>
           <span>${this.esc(this.t('common.breeds_count').replace('{count}', count))}</span>
         </div>`;
     }).join('');
@@ -1779,7 +1772,7 @@ const App = {
       : '';
     return `
       <div class="cross-link-block">
-        <span class="cross-link-label">🩺 Enfermedades relacionadas (${links.total})</span>
+        <span class="cross-link-label">🩺 ${this.esc(this.t('common.related_diseases').replace('{count}', links.total))}</span>
         <div class="cross-link-chips">${chips}${extra}</div>
       </div>`;
   },
@@ -2087,21 +2080,12 @@ const App = {
     return '—';
   },
 
-  BCS_DOG_CAT_SCORES: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  BCS_EQUINE_SCORES: [1, 2, 3, 4, 5],
-
-  FLUID_PROFILES: {
-    perros: { mlKgDay: 60, shockMin: 10, shockMax: 20 },
-    gatos: { mlKgDay: 50, shockMin: 10, shockMax: 15 },
-    equinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
-    bovinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
-    aves: { mlKgDay: 80, shockMin: 5, shockMax: 10 },
-    conejos: { mlKgDay: 100, shockMin: 5, shockMax: 10 },
-    _default: { mlKgDay: 50, shockMin: 10, shockMax: 20 }
-  },
+  get BCS_DOG_CAT_SCORES() { return AtlasTools.BCS_DOG_CAT_SCORES; },
+  get BCS_EQUINE_SCORES() { return AtlasTools.BCS_EQUINE_SCORES; },
+  get FLUID_PROFILES() { return AtlasTools.FLUID_PROFILES; },
 
   getFluidProfile(speciesId) {
-    return this.FLUID_PROFILES[speciesId] || this.FLUID_PROFILES._default;
+    return AtlasTools.getFluidProfile(speciesId);
   },
 
   renderTools() {
@@ -2172,30 +2156,18 @@ const App = {
     });
   },
 
-  MER_FACTORS: [
-    { id: 'castrado', labelKey: 'rer.factor.neutered', factor: 1.6 },
-    { id: 'intacto', labelKey: 'rer.factor.intact', factor: 1.8 },
-    { id: 'perdida', labelKey: 'rer.factor.weight_loss', factor: 1.0 },
-    { id: 'trabajo_ligero', labelKey: 'rer.factor.light_work', factor: 2.0 },
-    { id: 'trabajo_moderado', labelKey: 'rer.factor.moderate_work', factor: 3.0 },
-    { id: 'trabajo_pesado', labelKey: 'rer.factor.heavy_work', factor: 4.0 },
-    { id: 'cachorro_joven', labelKey: 'rer.factor.puppy_young', factor: 3.0 },
-    { id: 'cachorro_mayor', labelKey: 'rer.factor.puppy_older', factor: 2.0 },
-    { id: 'gestacion', labelKey: 'rer.factor.gestation', factor: 3.0 },
-    { id: 'lactancia', labelKey: 'rer.factor.lactation', factor: 4.0 }
-  ],
+  get MER_FACTORS() { return AtlasTools.MER_FACTORS; },
 
   kgToLb(kg) {
-    return kg * 2.2046226218;
+    return AtlasTools.kgToLb(kg);
   },
 
   lbToKg(lb) {
-    return lb / 2.2046226218;
+    return AtlasTools.lbToKg(lb);
   },
 
   calculateRer(kg) {
-    if (!kg || kg <= 0) return null;
-    return 70 * Math.pow(kg, 0.75);
+    return AtlasTools.calculateRer(kg);
   },
 
   formatEnergy(kcal) {
@@ -3727,8 +3699,7 @@ const App = {
   },
 
   esc(text) {
-    if (!text) return '';
-    return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return AtlasUtils.esc(text);
   },
 
   renderList(items) {
@@ -3739,7 +3710,7 @@ const App = {
   renderPanel(title, content, icon = '') {
     if (!content) return '';
     const body = Array.isArray(content) ? this.renderList(content) : `<p>${this.esc(content)}</p>`;
-    return `<div class="detail-panel"><h4>${icon} ${title}</h4>${body}</div>`;
+    return `<div class="detail-panel"><h4>${icon} ${this.esc(title)}</h4>${body}</div>`;
   },
 
   renderNutritionSection(nutricion) {
@@ -3773,19 +3744,22 @@ const App = {
 
   renderBreedImage(breed, className) {
     const src = breed.imagen.replace(/\.svg$/, '.jpg');
-    return `<img class="${className}" src="${src}"
+    const fallback = breed.imagen.replace(/\.jpg$/, '.svg');
+    return `<img class="${this.esc(className)}" src="${this.esc(src)}"
+      data-fallback="${this.esc(fallback)}"
       sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px"
       alt="${this.esc(breed.nombre)}" loading="lazy" decoding="async"
-      onerror="this.onerror=null;this.src=this.src.replace('.jpg','.svg')">`;
+      onerror="this.onerror=null;this.src=this.getAttribute('data-fallback')||''">`;
   },
 
   renderDiseaseImage(disease, className) {
     const base = disease.imagen || 'images/placeholder.svg';
     const src = base.replace(/\.svg$/, '.jpg');
     const fallback = base.replace(/\.jpg$/, '.svg');
-    return `<img class="${className}" src="${src}"
+    return `<img class="${this.esc(className)}" src="${this.esc(src)}"
+      data-fallback="${this.esc(fallback)}"
       alt="${this.esc(disease.nombre)}" loading="lazy" decoding="async"
-      onerror="this.onerror=null;this.src='${fallback}'">`;
+      onerror="this.onerror=null;this.src=this.getAttribute('data-fallback')||''">`;
   },
 
   renderExams(examenes) {
@@ -3876,62 +3850,26 @@ const App = {
   },
 
   parseTypicalWeightKg(pesoTexto) {
-    if (!pesoTexto) return 10;
-    const range = String(pesoTexto).match(/(\d[\d.,]*)\s*-\s*(\d[\d.,]*)\s*kg/i);
-    if (range) {
-      const min = parseFloat(range[1].replace(',', '.'));
-      const max = parseFloat(range[2].replace(',', '.'));
-      return Math.round(((min + max) / 2) * 100) / 100;
-    }
-    const single = String(pesoTexto).match(/(\d[\d.,]*)\s*kg/i);
-    if (single) return parseFloat(single[1].replace(',', '.'));
-    return 10;
+    return AtlasTools.parseTypicalWeightKg(pesoTexto);
   },
 
   calculateDoseForDrug(weightKg, drug) {
-    if (!drug?.calculable || !weightKg || weightKg <= 0) {
+    const result = AtlasTools.calculateDoseTotals(weightKg, drug);
+    if (!result.calculable) {
       return {
         calculable: false,
         message: this.t('dose.noncalc')
       };
     }
-
-    const minTotal = Math.round(drug.min_por_kg * weightKg * 1000) / 1000;
-    const maxTotal = Math.round(drug.max_por_kg * weightKg * 1000) / 1000;
-    const unit = (drug.unidad || '').split('/')[0] || 'mg';
-    const rangeText = minTotal === maxTotal
-      ? `${this.formatDoseNumber(minTotal)} ${unit}`
-      : `${this.formatDoseNumber(minTotal)} – ${this.formatDoseNumber(maxTotal)} ${unit}`;
-
-    const result = {
-      calculable: true,
-      unit,
-      minTotal,
-      maxTotal,
-      rangeText,
-      perKgText: drug.dosis_texto,
-      via: drug.via,
-      frecuencia: drug.frecuencia
-    };
-
-    if (unit === 'mg' && drug.concentracion_mg_ml) {
-      const minVol = Math.round((minTotal / drug.concentracion_mg_ml) * 100) / 100;
-      const maxVol = Math.round((maxTotal / drug.concentracion_mg_ml) * 100) / 100;
-      result.volumeText = minVol === maxVol
-        ? `${this.formatDoseNumber(minVol)} ml`
-        : `${this.formatDoseNumber(minVol)} – ${this.formatDoseNumber(maxVol)} ml`;
-      result.concentracionText = this.t('dose.conc_note').replace('{value}', drug.concentracion_mg_ml);
-    } else if (unit === 'ml') {
-      result.volumeText = rangeText;
+    if (result.concentracionMgMl != null) {
+      result.concentracionText = this.t('dose.conc_note').replace('{value}', result.concentracionMgMl);
+      delete result.concentracionMgMl;
     }
-
     return result;
   },
 
   formatDoseNumber(value) {
-    if (value >= 100) return Math.round(value).toString();
-    if (value >= 10) return (Math.round(value * 10) / 10).toString();
-    return (Math.round(value * 100) / 100).toString().replace('.', ',');
+    return AtlasTools.formatDoseNumber(value);
   },
 
   renderDoseCalculator(breed) {
@@ -4387,8 +4325,8 @@ const App = {
     `).join('');
     return `
       <div class="detail-block cross-link-block cross-link-block--terms">
-        <h4>📚 Términos del glosario relacionados</h4>
-        <p class="cross-link-hint">Consulta la definición clínica de los conceptos que aparecen en esta ficha.</p>
+        <h4>📚 ${this.esc(this.t('common.related_glossary'))}</h4>
+        <p class="cross-link-hint">${this.esc(this.t('common.related_glossary_hint'))}</p>
         <div class="cross-link-chips">${chips}</div>
       </div>`;
   },
@@ -4424,7 +4362,8 @@ const App = {
     this.updateSidebar();
     this.updateMobileTabBar(view);
     this.updateDocumentTitle();
-    window.scrollTo({ top: 0, behavior: scrollBehaviorPref() });
+    // Salto de vista: siempre instantáneo (el smooth pelea con scrollIntoView y flaquea E2E).
+    window.scrollTo({ top: 0, behavior: 'auto' });
   },
 
   exportE2EState() {

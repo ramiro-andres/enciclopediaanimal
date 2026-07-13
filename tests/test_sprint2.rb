@@ -118,8 +118,8 @@ class EnlacesUiTest < Minitest::Test
   def test_app_renderiza_chips_bidireccionales
     assert_includes @app, 'dictionary-term-link'
     assert_includes @app, 'disease-term-link'
-    assert_includes @app, 'Enfermedades relacionadas'
-    assert_includes @app, 'Términos del glosario relacionados'
+    assert_includes @app, "t('common.related_diseases')"
+    assert_includes @app, "t('common.related_glossary')"
   end
 
   def test_css_tiene_estilos_de_enlaces
