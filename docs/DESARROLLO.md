@@ -76,7 +76,25 @@ Los logs de descarga (`*.log`) se escriben en la raíz o cwd y están en `.gitig
 bash ejecutar_pruebas.sh
 ```
 
-Ejecuta todos los archivos `tests/test_*.rb` (integridad de JSON, HTML, JS y enlaces clínicos) y la validación de integridad `scripts/setup/validar_integridad.rb`. Es el mismo check que corre en el workflow `test`.
+Ejecuta todos los archivos `tests/test_*.rb` (integridad de JSON, HTML, JS, enlaces clínicos, regresión y **auditoría de seguridad** en `tests/test_security.rb`) y la validación de integridad `scripts/setup/validar_integridad.rb`. Es el mismo check que corre en el workflow `test`.
+
+### Suite de seguridad (`tests/test_security.rb`)
+
+Complementa las pruebas funcionales con checks estáticos adaptados a un sitio sin backend:
+
+- **Secretos:** no archivos `.env` trackeados ni patrones de API keys en `data/` y `js/`.
+- **XSS:** sin `eval()` ni `document.write()`; método `esc()` presente; datos JSON sin `<script` ni handlers inline.
+- **Enlaces externos:** `target="_blank"` siempre con `rel="noopener noreferrer"`.
+- **Service Worker:** solo cachea mismo origen; precache sin URLs externas.
+- **Workflows:** permisos mínimos explícitos en GitHub Actions.
+- **CSP:** si no hay meta CSP en `index.html`, el test documenta la recomendación (ver sección siguiente).
+
+```bash
+ruby tests/test_security.rb   # solo seguridad
+bash ejecutar_pruebas.sh      # suite completa (incluye seguridad al final)
+```
+
+**Recomendación CSP (opcional):** en GitHub Pages se puede añadir una política restrictiva vía meta tag o cabecera del hosting. Hoy no está forzada para no romper `file://` en E2E ni analytics locales; evaluar `default-src 'self'` cuando se migre a cabeceras en Pages.
 
 ### Pruebas E2E de navegador (sin servidor)
 
