@@ -11,7 +11,11 @@ const INDEX_URL = pathToFileURL(
 async function abrirAtlas(page) {
   await page.goto(INDEX_URL);
   // Espera a que la app termine de inicializar y exponga su estado E2E.
-  await page.waitForFunction(() => window.__E2E_STATE__ && window.__E2E_STATE__.ready === true);
+  await page.waitForFunction(() => {
+    const state = window.__E2E_STATE__;
+    if (state?.error) throw new Error(state.error);
+    return state?.ready === true;
+  });
 }
 
 async function cerrarDisclaimer(page) {
@@ -183,7 +187,10 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.lab-table').first()).toBeVisible();
     await expect(page.locator('.lab-disclaimer')).toBeVisible();
 
-    // Lazy load: manifest + chunks en estado E2E
+    // Lazy load: tras explorar razas, el estado E2E refleja manifest + chunks
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.waitForFunction(() => (window.__E2E_STATE__?.chunksLoaded || 0) > 0);
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     expect(estado.lazyLoad).toBe(true);
     expect(estado.razas).toBeGreaterThanOrEqual(481);
@@ -216,6 +223,7 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
 
     await page.locator('#btnExploreAll').click();
     await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.waitForFunction(() => (window.__E2E_STATE__?.chunksLoaded || 0) > 0);
 
     const regionSection = page.locator('#regionFiltersSection');
     await expect(regionSection).toBeVisible();

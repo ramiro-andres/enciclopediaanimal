@@ -274,10 +274,10 @@ const App = {
       this.renderRecentHistory();
       this.renderFavorites();
       this.bindMobileTabBar();
-      await this.preloadAllChunks();
+      this.exportE2EState();
       if (!(await this.openRouteFromHash())) this.showView('welcome');
       if (DisclaimerModal.wasAccepted() && !window.location.hash) WelcomeTour.tryStart();
-      this.exportE2EState();
+      void this.preloadAllChunks();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
       window.__E2E_STATE__ = { ready: false, error: err?.message || String(err) };
@@ -369,10 +369,15 @@ const App = {
     this._chunkScriptPending = this._chunkScriptPending || {};
     if (this._chunkScriptPending[animalId]) return this._chunkScriptPending[animalId];
     this._chunkScriptPending[animalId] = new Promise((resolve) => {
+      const finish = (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      };
+      const timer = setTimeout(() => finish(null), 20_000);
       const script = document.createElement('script');
       script.src = `data/chunks/${animalId}.js`;
-      script.onload = () => resolve(window.ENCICLOPEDIA_CHUNKS?.[animalId] || null);
-      script.onerror = () => resolve(null);
+      script.onload = () => finish(window.ENCICLOPEDIA_CHUNKS?.[animalId] || null);
+      script.onerror = () => finish(null);
       document.head.appendChild(script);
     });
     return this._chunkScriptPending[animalId];
