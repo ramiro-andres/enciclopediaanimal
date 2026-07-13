@@ -133,4 +133,36 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#flashcardsView')).toHaveClass(/active/);
     await expect(page.locator('.flashcard-term')).toBeVisible();
   });
+
+  test('Sprint 10: triaje educativo, modo nocturno y resumen estudio', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    // Modo nocturno
+    await page.locator('#themeToggleBtn').click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+    // Triaje desde urgencias
+    await page.locator('#goUrgencyBtn').click();
+    await expect(page.locator('#urgencyView')).toHaveClass(/active/);
+    await page.locator('.urgency-triaje-btn').click();
+    await expect(page.locator('#triajeView')).toHaveClass(/active/);
+    await page.locator('[data-triaje-category]').first().click();
+    await page.locator('[data-triaje-symptom]').first().click();
+    await page.locator('[data-triaje-cause]').first().click();
+    await expect(page.locator('.triaje-result')).toBeVisible();
+    await expect(page.locator('.triaje-severity')).toBeVisible();
+
+    // Resumen modo estudio en ficha de enfermedad (navegación UI sin window.App)
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.locator('#breedGrid .breed-card').first().click();
+    await expect(page.locator('#detailView')).toHaveClass(/active/);
+    await page.locator('#breedDetail .disease-card').first().click();
+    await expect(page.locator('#diseaseView')).toHaveClass(/active/);
+    await expect(page.locator('.study-summary')).toBeVisible();
+    await expect(page.locator('.study-summary-text')).not.toBeEmpty();
+  });
 });
