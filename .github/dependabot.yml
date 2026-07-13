@@ -8,3 +8,15 @@ updates:
     labels:
       - dependencies
       - ci
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - e2e
+    groups:
+      playwright:
+        patterns:
+          - '@playwright/*'

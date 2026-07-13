@@ -209,4 +209,33 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     expect(estado.view).toBe('changelog');
     expect(estado.razas).toBeGreaterThanOrEqual(481);
   });
+
+  test('Sprint 13: filtro región/país y diccionario ampliado', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+
+    const regionSection = page.locator('#regionFiltersSection');
+    await expect(regionSection).toBeVisible();
+
+    const latamBtn = page.locator('.region-btn[data-region="LATAM"]');
+    await expect(latamBtn).toBeVisible();
+    await latamBtn.click();
+    await expect(latamBtn).toHaveClass(/active/);
+
+    const cards = page.locator('#breedGrid .breed-card');
+    await expect(cards.first()).toBeVisible();
+    const countLatam = await cards.count();
+    expect(countLatam).toBeGreaterThan(0);
+
+    await page.locator('.region-btn[data-region="todos"]').click();
+    const countAll = await cards.count();
+    expect(countAll).toBeGreaterThanOrEqual(countLatam);
+
+    const estado = await page.evaluate(() => window.__E2E_STATE__);
+    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(627);
+    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(235);
+  });
 });
