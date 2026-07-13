@@ -1,0 +1,252 @@
+{
+  "titulo": "Calendarios de vacunación orientativos",
+  "disclaimer": "Los calendarios varían según país, normativa local, estilo de vida, riesgo epidemiológico y criterio del veterinario. Esta guía es educativa y no sustituye el plan sanitario individualizado.",
+  "especies": {
+    "perros": {
+      "nombre": "Perros",
+      "icono": "🐕",
+      "referencia": "WSAVA / guías nacionales",
+      "cachorro": [
+        "6–8 semanas: primovacunación múltiple (moquillo, parvovirus, adenovirus, parainfluenza)",
+        "10–12 semanas: refuerzo de la serie básica",
+        "14–16 semanas: última dosis de primovacunación",
+        "≥12–16 semanas: rabia según normativa local",
+        "Desparasitación interna cada 2–4 semanas hasta los 6 meses"
+      ],
+      "adulto": [
+        "Refuerzo anual o trienal según vacuna y legislación (rabia, leptospira en zonas endémicas)",
+        "Bordetella / tos de las perreras si hay exposición a residencias o peluquerías",
+        "Desparasitación externa e interna según riesgo y estación",
+        "Revisión anual con examen físico completo"
+      ],
+      "senior": [
+        "Mantener vacunas esenciales según riesgo (rabia obligatoria donde aplique)",
+        "Analítica anual o semestral (hemograma, bioquímica, orina)",
+        "Evaluación dental, articular y cognitiva",
+        "Ajustar frecuencia de refuerzos con el veterinario"
+      ]
+    },
+    "gatos": {
+      "nombre": "Gatos",
+      "icono": "🐈",
+      "referencia": "AAFP / WSAVA",
+      "cachorro": [
+        "6–8 semanas: trivalente felina (panleucopenia, herpesvirus, calicivirus)",
+        "10–12 y 14–16 semanas: refuerzos de la serie",
+        "≥12–16 semanas: rabia según normativa (especialmente en gatos con acceso exterior)",
+        "Desparasitación y control de pulgas desde las primeras semanas"
+      ],
+      "adulto": [
+        "Refuerzos cada 1–3 años según estilo de vida (interior vs exterior)",
+        "FeLV en gatos jóvenes con riesgo de exposición",
+        "Control antiparasitario continuo en gatos de exterior",
+        "Revisión anual con peso, dentición y palpación abdominal"
+      ],
+      "senior": [
+        "Vacunación basada en riesgo individual",
+        "Analítica semestral (T4, función renal, SDMA en gatos geriátricos)",
+        "Control de presión arterial y estado cognitivo",
+        "Vacuna antirrábica si hay exposición legal o de riesgo"
+      ]
+    },
+    "aves": {
+      "nombre": "Aves",
+      "icono": "🦜",
+      "referencia": "Especie y sistema productivo",
+      "cachorro": [
+        "Pollitos de corral: vacunas contra enfermedad de Newcastle, Gumboro (IBD) según programa del país",
+        "Aves ornamentales: cuarentena 30–45 días antes de integrar",
+        "Evaluación parasitaria y ambiental del nido"
+      ],
+      "adulto": [
+        "Programa de recría según especie (psitácidas, gallinas, patos)",
+        "Refuerzos según presión de campo y normativa avícola",
+        "Bioseguridad: control de roedores y visitantes"
+      ],
+      "senior": [
+        "Revisión de plumaje, pico y uñas",
+        "Ajuste nutricional y suplementación cálcica según especie",
+        "Vacunación según riesgo en aves de producción"
+      ]
+    },
+    "equinos": {
+      "nombre": "Equinos",
+      "icono": "🐴",
+      "referencia": "AAEP / normativa nacional",
+      "cachorro": [
+        "Potros: inmunoglobulina anti-tetánica si la yegua no vacunada",
+        "6 meses: inicio de serie tetanos–encefalitis equinas (según zona)",
+        "Desparasitación estratégica según conteo de huevos en heces"
+      ],
+      "adulto": [
+        "Tétanos anual; encefalitis equinas en zonas endémicas",
+        "Influenza equina y rinoneumonitis según uso (competición, cría)",
+        "Desparasitación y odontología equina cada 6–12 meses"
+      ],
+      "senior": [
+        "Mantener tétanos y vacunas según exposición",
+        "Control de artrosis, dentición y condición corporal",
+        "Analítica si hay cambios de rendimiento o apetito"
+      ]
+    },
+    "bovinos": {
+      "nombre": "Bovinos",
+      "icono": "🐄",
+      "referencia": "Programa sanitario del hato",
+      "cachorro": [
+        "Terneros: calostro en las primeras 6 h de vida",
+        "2–4 meses: clostridiales y respiratorias según región",
+        "Desparasitación y vitaminación según sistema (leche, carne)"
+      ],
+      "adulto": [
+        "Vacunas reproductivas (IBR, BVD, leptospira) en hatos de cría",
+        "Brucelosis según programa oficial del país",
+        "Control de mastitis y vacunas contra clostridiales"
+      ],
+      "senior": [
+        "Revisión de movilidad y condición corporal",
+        "Vacunación según categoría del animal (seca, pre-parto)",
+        "Manejo de artrosis y nutrición geriátrica"
+      ]
+    },
+    "porcinos": {
+      "nombre": "Porcinos",
+      "icono": "🐷",
+      "referencia": "Programa del granja",
+      "cachorro": [
+        "Lechones: hierro dextrán, maternización y vacunas según flujo (Mycoplasma, circovirus)",
+        "Destete: refuerzos según plan de la granja"
+      ],
+      "adulto": [
+        "Vacunas reproductivas en cerdas (parvovirus, erisipela, leptospira)",
+        "Bioseguridad estricta y cuarentena de reemplazos"
+      ],
+      "senior": [
+        "Evaluación de prolificidad y condición corporal",
+        "Ajuste del programa según historial del lote"
+      ]
+    },
+    "conejos": {
+      "nombre": "Conejos",
+      "icono": "🐰",
+      "referencia": "Médico veterinario especialista",
+      "cachorro": [
+        "8–12 semanas: mixomatosis y enfermedad hemorrágica viral (RHD) donde esté autorizada",
+        "No vacunar con enfermedad activa o inmunosupresión"
+      ],
+      "adulto": [
+        "Refuerzos anuales de mixomatosis y RHD según normativa",
+        "Control de coccidiosis y encefalitozoonosis en cría"
+      ],
+      "senior": [
+        "Vacunación según riesgo de exposición a vectores",
+        "Control dental y articular frecuente"
+      ]
+    },
+    "reptiles": {
+      "nombre": "Reptiles",
+      "icono": "🦎",
+      "referencia": "Medicina de animales exóticos",
+      "cachorro": [
+        "No hay calendario universal de vacunas; cuarentena y coproparasitoscopía",
+        "Evaluación de parámetros ambientales (temperatura, UVB, humedad)"
+      ],
+      "adulto": [
+        "Revisiones semestrales con peso y coprología",
+        "Bioseguridad ante otros reptiles nuevos"
+      ],
+      "senior": [
+        "Control de artrosis, riñón y metabolismo del calcio",
+        "Ajuste ambiental para geriatría"
+      ]
+    },
+    "peces": {
+      "nombre": "Peces",
+      "icono": "🐟",
+      "referencia": "Acuicultura / ornamentales",
+      "cachorro": [
+        "Alevines: vacunas inmersión según especie en acuicultura (p. ej. estreptococosis en tilapia)",
+        "Acuarismo: cuarentena 2–4 semanas, sin vacunas comerciales habituales"
+      ],
+      "adulto": [
+        "Programa sanitario del estanque o sistema RAS",
+        "Monitorización de amonio, nitritos y O₂ disuelto"
+      ],
+      "senior": [
+        "Ajuste de densidad y calidad de agua",
+        "Detección precoz de neoplasias y infecciones crónicas"
+      ]
+    },
+    "ovinos": {
+      "nombre": "Ovinos",
+      "icono": "🐑",
+      "referencia": "Programa del rebaño",
+      "cachorro": [
+        "Corderos: clostridiales (CDT) a las 6–8 semanas con refuerzo",
+        "Desparasitación estratégica según estación y FAMACHA"
+      ],
+      "adulto": [
+        "Refuerzo anual de clostridiales",
+        "Campylobacter y Toxoplasma en reproductoras según región",
+        "Esquilado y pies según manejo"
+      ],
+      "senior": [
+        "Condición corporal pre y post parto",
+        "Vacunación según categoría del animal"
+      ]
+    },
+    "caprinos": {
+      "nombre": "Caprinos",
+      "icono": "🐐",
+      "referencia": "Programa del rebaño",
+      "cachorro": [
+        "Cabritos: CDT a las 6–8 semanas",
+        "Desparasitación y selenio según deficiencias regionales"
+      ],
+      "adulto": [
+        "Refuerzo anual CDT",
+        "Vacunas reproductivas según región (campylobacteriosis)",
+        "Control de mastitis y podal"
+      ],
+      "senior": [
+        "Revisión dental (maloclusiones frecuentes)",
+        "Ajuste nutricional en animales de desecho"
+      ]
+    },
+    "camelidos": {
+      "nombre": "Camélidos",
+      "icono": "🦙",
+      "referencia": "Manejo andino / programa local",
+      "cachorro": [
+        "Crias: calostro en las primeras 4 h",
+        "Clostridiales según recomendación regional",
+        "Desparasitación y vitaminación"
+      ],
+      "adulto": [
+        "Refuerzo de clostridiales anual",
+        "Control de ectoparásitos y micoplasma en zonas endémicas"
+      ],
+      "senior": [
+        "Control de BCS y movilidad",
+        "Ajuste del programa según altitud y sistema extensivo"
+      ]
+    },
+    "roedores": {
+      "nombre": "Roedores",
+      "icono": "🐹",
+      "referencia": "Animales de compañía / laboratorio",
+      "cachorro": [
+        "No hay vacunas comerciales rutinarias para la mayoría de roedores domésticos",
+        "Cuarentena y examen físico al ingresar"
+      ],
+      "adulto": [
+        "Revisiones anuales con peso y dentición",
+        "Bioseguridad ante roedores silvestres"
+      ],
+      "senior": [
+        "Control de tumores mamarios y neoplasias",
+        "Ajuste ambiental y nutricional"
+      ]
+    }
+  }
+}

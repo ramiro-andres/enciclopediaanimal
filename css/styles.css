@@ -3416,3 +3416,417 @@ body.disclaimer-open {
   .lang-switcher {
     order: -1;
   }
+}
+
+/* Sprint 5: herramientas clínicas, toxicología, compartir, zoonóticas, vacunación */
+.feature-card--tools {
+  cursor: pointer;
+  border-color: #c4b5fd;
+  background: linear-gradient(135deg, #faf5ff 0%, #fff 100%);
+}
+
+.feature-card--tools:hover,
+.feature-card--tools:focus-visible {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.tools-page,
+.rer-mer-page,
+.toxicologia-page {
+  max-width: 960px;
+}
+
+.tools-hero,
+.rer-mer-hero,
+.toxicologia-hero {
+  margin-bottom: 1.5rem;
+}
+
+.tools-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.tools-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.tools-card:hover,
+.tools-card:focus-visible {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+}
+
+.tools-card-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tools-card-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.88rem;
+}
+
+.rer-mer-form {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.rer-mer-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.rer-field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.rer-field input[type="number"],
+.rer-field select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.rer-unit-toggle {
+  border: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.rer-unit-toggle legend {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.rer-unit-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.rer-result-card {
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rer-metrics {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.rer-metrics div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rer-metrics dt {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.rer-metrics dd {
+  margin: 0;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.rer-formula,
+.rer-disclaimer {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+}
+
+.rer-result-warn {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.toxicologia-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.toxicologia-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tox-filter-btn {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  background: white;
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.tox-filter-btn.active,
+.tox-filter-btn[aria-pressed="true"] {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.toxicologia-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.tox-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  border-left: 4px solid #94a3b8;
+}
+
+.tox-card--alta { border-left-color: #e11d48; }
+.tox-card--moderada { border-left-color: #f59e0b; }
+.tox-card--leve { border-left-color: #22c55e; }
+
+.tox-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.tox-card-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.tox-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.tox-badge--alta { background: #ffe4e6; color: #be123c; }
+.tox-badge--moderada { background: #fef3c7; color: #b45309; }
+.tox-badge--leve { background: #dcfce7; color: #15803d; }
+
+.tox-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.tox-threshold {
+  font-size: 0.88rem;
+  margin: 0 0 0.75rem;
+}
+
+.tox-block h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+}
+
+.tox-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.tox-block--action {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.urgency-tools-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+}
+
+.urgency-tools-banner p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.btn-share {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  background: white;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--primary-dark);
+}
+
+.btn-share:hover,
+.btn-share:focus-visible {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  outline: none;
+}
+
+.breed-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.disease-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.disease-share-row {
+  margin-top: 0.75rem;
+}
+
+.zoonotic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: #fce7f3;
+  color: #9d174d;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.vax-calendar-section {
+  margin: 1.25rem 0;
+}
+
+.vax-calendar-panel h4 {
+  margin: 0 0 0.35rem;
+}
+
+.vax-ref {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.vax-calendar-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 0.75rem;
+}
+
+.vax-phase h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  color: var(--primary-dark);
+}
+
+.vax-phase ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+}
+
+.vax-disclaimer {
+  font-size: 0.82rem;
+  color: #92400e;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  background: #fffbeb;
+  border-radius: var(--radius-sm);
+}
+
+.toast-container {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  background: #1e293b;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.25s, transform 0.25s;
+  box-shadow: var(--shadow-md);
+}
+
+.toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .urgency-tools-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vax-calendar-grid {
+    grid-template-columns: 1fr;
+  }
+}

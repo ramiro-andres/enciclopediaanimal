@@ -51,6 +51,7 @@
         </div>
         <button type="button" id="goHomeBtn" class="header-home-btn" data-i18n="nav.home" data-i18n-aria="nav.home">Inicio</button>
         <button type="button" id="goDictionaryBtn" class="header-home-btn" data-i18n="nav.glossary" data-i18n-aria="nav.glossary">Glosario</button>
+        <button type="button" id="goToolsBtn" class="header-home-btn" data-i18n="nav.tools" data-i18n-aria="nav.tools">Herramientas</button>
         <button type="button" id="goUrgencyBtn" class="header-home-btn" data-i18n="nav.urgency" data-i18n-aria="nav.urgency">Urgencias</button>
         <button type="button" id="goCompareBtn" class="header-home-btn header-compare-btn" data-i18n="nav.compare" data-i18n-aria="nav.compare">
           Comparar <span id="compareBadge" class="compare-badge" hidden>0</span>
@@ -166,6 +167,13 @@
               <p>Más de 500 términos: enfermedades, exámenes, fármacos, síntomas y conceptos de cada ficha clínica.</p>
             </div>
           </article>
+          <article class="feature-card feature-card--tools" id="openToolsCard" role="button" tabindex="0" aria-label="Abrir herramientas clínicas">
+            <span class="feature-number">05</span>
+            <div>
+              <h3>Herramientas clínicas</h3>
+              <p>Calculadora RER/MER, índice de toxicología y calendarios de vacunación para consulta rápida en campo.</p>
+            </div>
+          </article>
         </div>
 
         <div class="welcome-picker">
@@ -277,6 +285,51 @@
         </div>
       </section>
 
+      <section id="toolsView" class="view">
+        <button id="backToolsBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="tools-page">
+          <div class="tools-hero">
+            <span class="eyebrow">HERRAMIENTAS</span>
+            <h2 data-i18n="tools.title">Herramientas clínicas de bolsillo</h2>
+            <p data-i18n="tools.intro">Calculadoras y referencias rápidas para estudiantes y profesionales. Uso educativo exclusivamente.</p>
+          </div>
+          <div class="tools-grid" id="toolsGrid"></div>
+        </div>
+      </section>
+
+      <section id="rerMerView" class="view">
+        <button id="backRerMerBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="rer-mer-page">
+          <div class="rer-mer-hero">
+            <span class="eyebrow">NUTRICIÓN</span>
+            <h2 data-i18n="rer.title">Calculadora RER / MER</h2>
+            <p data-i18n="rer.intro">Estima el requerimiento energético en reposo (RER) y el mantenimiento (MER) según el estado fisiológico del animal.</p>
+          </div>
+          <div id="rerMerContent" class="rer-mer-content"></div>
+        </div>
+      </section>
+
+      <section id="toxicologiaView" class="view">
+        <button id="backToxicologiaBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="toxicologia-page">
+          <div class="toxicologia-hero">
+            <span class="eyebrow">TOXICOLOGÍA</span>
+            <h2 id="toxicologiaTitle">Índice de toxicología</h2>
+            <p id="toxicologiaIntro">Cargando...</p>
+          </div>
+          <div class="toxicologia-toolbar">
+            <div class="search-box search-box--dictionary">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input type="search" id="toxicologiaSearchInput" data-i18n-placeholder="tox.search" placeholder="Buscar sustancia..." autocomplete="off" aria-label="Buscar sustancia tóxica">
+            </div>
+            <div id="toxicologiaSpeciesFilters" class="toxicologia-filters" role="group" aria-label="Filtrar por especie"></div>
+          </div>
+          <div id="toxicologiaList" class="toxicologia-list"></div>
+        </div>
+      </section>
+
       <section id="compareView" class="view">
         <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="compare-page">
@@ -313,6 +366,8 @@
     <p class="footer-privacy"><small data-i18n="privacy.analytics">Este sitio puede usar analítica sin cookies. Ver docs/PRIVACIDAD.md.</small></p>
   </footer>
 
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
   <div id="disclaimerOverlay" class="disclaimer-overlay" hidden aria-hidden="true">
     <div
       id="disclaimerModal"
@@ -340,6 +395,8 @@
   <script src="data/enciclopedia.js"></script>
   <script src="data/diccionario_medicos.js"></script>
   <script src="data/enlaces_clinicos.js"></script>
+  <script src="data/toxicologia.js"></script>
+  <script src="data/calendario_vacunacion.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/analytics-config.js"></script>
   <script src="js/analytics.js"></script>
