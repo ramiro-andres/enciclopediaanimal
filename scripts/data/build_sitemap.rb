@@ -54,7 +54,8 @@ static_routes = [
   ['predisposiciones', 'weekly', '0.7'],
   ['bcs', 'monthly', '0.6'],
   ['flashcards', 'monthly', '0.6'],
-  ['emergencias-latam', 'monthly', '0.6']
+  ['emergencias-latam', 'monthly', '0.6'],
+  ['triaje', 'monthly', '0.6']
 ]
 
 static_routes.each do |fragment, freq, priority|

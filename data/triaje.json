@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "disclaimer_es": "Herramienta educativa de orientación. No realiza diagnóstico automático ni sustituye la valoración de un veterinario colegiado.",
+  "disclaimer_en": "Educational guidance tool. Does not provide automatic diagnosis or replace assessment by a licensed veterinarian.",
+  "categorias": [
+    {
+      "id": "digestivo",
+      "nombre_es": "Síntomas digestivos",
+      "nombre_en": "Digestive symptoms",
+      "sintomas": [
+        {
+          "id": "vomito",
+          "nombre_es": "Vómito",
+          "nombre_en": "Vomiting",
+          "causas": [
+            {
+              "id": "ingesta_inadecuada",
+              "nombre_es": "Ingesta de alimento inadecuado o basura",
+              "nombre_en": "Ingestion of inappropriate food or garbage",
+              "gravedad": "leve",
+              "accion_es": "Ayuno breve (4–6 h en adultos) y reintroducción gradual de dieta blanda. Consultar si persiste más de 24 h o hay sangre.",
+              "accion_en": "Brief fast (4–6 h in adults) and gradual bland diet reintroduction. Seek care if it lasts over 24 h or blood is present."
+            },
+            {
+              "id": "cuerpo_extrano",
+              "nombre_es": "Posible cuerpo extraño gastrointestinal",
+              "nombre_en": "Possible gastrointestinal foreign body",
+              "gravedad": "grave",
+              "accion_es": "Urgencia veterinaria si hay vómitos repetidos, dolor abdominal, letargo o incapacidad de retener líquidos.",
+              "accion_en": "Veterinary emergency if repeated vomiting, abdominal pain, lethargy, or inability to keep fluids down."
+            },
+            {
+              "id": "intoxicacion",
+              "nombre_es": "Intoxicación o planta tóxica",
+              "nombre_en": "Poisoning or toxic plant ingestion",
+              "gravedad": "grave",
+              "accion_es": "Acudir de inmediato al veterinario. Llevar el producto o planta si es posible. No inducir vómito sin indicación profesional.",
+              "accion_en": "Go to the veterinarian immediately. Bring the product or plant if possible. Do not induce vomiting without professional guidance."
+            }
+          ]
+        },
+        {
+          "id": "diarrea",
+          "nombre_es": "Diarrea",
+          "nombre_en": "Diarrhea",
+          "causas": [
+            {
+              "id": "cambio_dieta",
+              "nombre_es": "Cambio brusco de dieta o estrés leve",
+              "nombre_en": "Sudden diet change or mild stress",
+              "gravedad": "leve",
+              "accion_es": "Dieta blanda, hidratación y observación 24–48 h. Consultar si empeora o hay sangre/mucosidad abundante.",
+              "accion_en": "Bland diet, hydration, and 24–48 h observation. Seek care if it worsens or blood/mucus is abundant."
+            },
+            {
+              "id": "parasitos",
+              "nombre_es": "Parásitos intestinales",
+              "nombre_en": "Intestinal parasites",
+              "gravedad": "moderada",
+              "accion_es": "Programar consulta veterinaria para coproparasitoscópico y tratamiento antiparasitario adecuado.",
+              "accion_en": "Schedule a veterinary visit for fecal exam and appropriate antiparasitic treatment."
+            },
+            {
+              "id": "hemorragia_digestiva",
+              "nombre_es": "Diarrea con sangre o melena",
+              "nombre_en": "Bloody diarrhea or melena",
+              "gravedad": "grave",
+              "accion_es": "Urgencia veterinaria. Puede indicar hemorragia digestiva, parvovirosis u otras causas graves.",
+              "accion_en": "Veterinary emergency. May indicate GI bleeding, parvovirus, or other serious causes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "respiratorio",
+      "nombre_es": "Síntomas respiratorios",
+      "nombre_en": "Respiratory symptoms",
+      "sintomas": [
+        {
+          "id": "tos",
+          "nombre_es": "Tos",
+          "nombre_en": "Cough",
+          "causas": [
+            {
+              "id": "traqueobronquitis",
+              "nombre_es": "Traqueobronquitis infecciosa leve",
+              "nombre_en": "Mild infectious tracheobronchitis",
+              "gravedad": "leve",
+              "accion_es": "Observar 48 h si el animal come, bebe y está activo. Consultar si la tos es productiva, fiebre o empeora.",
+              "accion_en": "Observe 48 h if the animal eats, drinks, and is active. Seek care if productive cough, fever, or worsening."
+            },
+            {
+              "id": "enfermedad_cardiaca",
+              "nombre_es": "Enfermedad cardíaca con tos nocturna",
+              "nombre_en": "Heart disease with nocturnal cough",
+              "gravedad": "moderada",
+              "accion_es": "Consulta veterinaria para auscultación cardíaca y radiografía torácica si la tos es crónica o nocturna.",
+              "accion_en": "Veterinary visit for cardiac auscultation and chest radiographs if cough is chronic or nocturnal."
+            }
+          ]
+        },
+        {
+          "id": "disnea",
+          "nombre_es": "Dificultad respiratoria",
+          "nombre_en": "Labored breathing",
+          "causas": [
+            {
+              "id": "calor_estres",
+              "nombre_es": "Estrés por calor o ejercicio excesivo",
+              "nombre_en": "Heat stress or excessive exercise",
+              "gravedad": "moderada",
+              "accion_es": "Reposo en ambiente fresco y agua. Si no mejora en 15–30 min o hay encías pálidas/azuladas, urgencia inmediata.",
+              "accion_en": "Rest in a cool place with water. If no improvement in 15–30 min or pale/blue gums, seek emergency care."
+            },
+            {
+              "id": "insuficiencia_respiratoria",
+              "nombre_es": "Insuficiencia respiratoria aguda",
+              "nombre_en": "Acute respiratory failure",
+              "gravedad": "grave",
+              "accion_es": "Emergencia veterinaria. Mantener al animal tranquilo, evitar manipulación excesiva y acudir sin demora.",
+              "accion_en": "Veterinary emergency. Keep the animal calm, minimize handling, and go without delay."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "neurologico",
+      "nombre_es": "Síntomas neurológicos",
+      "nombre_en": "Neurological symptoms",
+      "sintomas": [
+        {
+          "id": "convulsiones",
+          "nombre_es": "Convulsiones o temblores",
+          "nombre_en": "Seizures or tremors",
+          "causas": [
+            {
+              "id": "epilepsia",
+              "nombre_es": "Crisis epiléptica en animal conocido epiléptico",
+              "nombre_en": "Seizure in a known epileptic animal",
+              "gravedad": "moderada",
+              "accion_es": "Proteger de traumatismos, no introducir objetos en la boca. Si dura >5 min o hay crisis en racimo, urgencia.",
+              "accion_en": "Prevent injury; do not put objects in the mouth. If >5 min or cluster seizures, seek emergency care."
+            },
+            {
+              "id": "intoxicacion_neuro",
+              "nombre_es": "Intoxicación (organofosforados, xilitol, metales)",
+              "nombre_en": "Poisoning (organophosphates, xylitol, metals)",
+              "gravedad": "grave",
+              "accion_es": "Urgencia veterinaria inmediata. Identificar posible tóxico y no administrar medicamentos caseros.",
+              "accion_en": "Immediate veterinary emergency. Identify possible toxin and do not give home remedies."
+            },
+            {
+              "id": "hipoglucemia",
+              "nombre_es": "Hipoglucemia (común en razas toy)",
+              "nombre_en": "Hypoglycemia (common in toy breeds)",
+              "gravedad": "grave",
+              "accion_es": "Si está consciente, ofrecer miel o glucosa oral y acudir al veterinario de inmediato para medir glucemia.",
+              "accion_en": "If conscious, offer honey or oral glucose and go to the veterinarian immediately for blood glucose."
+            }
+          ]
+        },
+        {
+          "id": "letargo",
+          "nombre_es": "Letargo o debilidad",
+          "nombre_en": "Lethargy or weakness",
+          "causas": [
+            {
+              "id": "deshidratacion",
+              "nombre_es": "Deshidratación o ayuno prolongado",
+              "nombre_en": "Dehydration or prolonged fasting",
+              "gravedad": "moderada",
+              "accion_es": "Ofrecer agua en pequeñas cantidades. Consultar si no mejora en pocas horas o hay vómito al beber.",
+              "accion_en": "Offer small amounts of water. Seek care if no improvement in a few hours or vomiting when drinking."
+            },
+            {
+              "id": "shock_sepsis",
+              "nombre_es": "Shock, sepsis o hemorragia interna",
+              "nombre_en": "Shock, sepsis, or internal bleeding",
+              "gravedad": "grave",
+              "accion_es": "Emergencia veterinaria. Encías pálidas, pulso débil y abdomen distendido son signos de alarma.",
+              "accion_en": "Veterinary emergency. Pale gums, weak pulse, and distended abdomen are warning signs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traumatismo",
+      "nombre_es": "Traumatismos y dolor",
+      "nombre_en": "Trauma and pain",
+      "sintomas": [
+        {
+          "id": "cojera",
+          "nombre_es": "Cojera o no apoya la pata",
+          "nombre_en": "Lameness or non-weight-bearing",
+          "causas": [
+            {
+              "id": "esguince",
+              "nombre_es": "Esguince o contusión leve",
+              "nombre_en": "Mild sprain or contusion",
+              "gravedad": "leve",
+              "accion_es": "Reposo relativo 24–48 h. Consultar si no mejora, hay hinchazón marcada o el animal vocaliza al tocar.",
+              "accion_en": "Relative rest 24–48 h. Seek care if no improvement, marked swelling, or vocalization on touch."
+            },
+            {
+              "id": "fractura",
+              "nombre_es": "Posible fractura o luxación",
+              "nombre_en": "Possible fracture or luxation",
+              "gravedad": "grave",
+              "accion_es": "Urgencia veterinaria. Inmovilizar lo mínimo posible y evitar AINE sin prescripción.",
+              "accion_en": "Veterinary emergency. Minimize movement and avoid NSAIDs without prescription."
+            }
+          ]
+        },
+        {
+          "id": "herida",
+          "nombre_es": "Herida o sangrado",
+          "nombre_en": "Wound or bleeding",
+          "causas": [
+            {
+              "id": "corte_superficial",
+              "nombre_es": "Corte superficial",
+              "nombre_en": "Superficial cut",
+              "gravedad": "leve",
+              "accion_es": "Presión limpia 5–10 min. Consultar si el sangrado no cede o la herida es profunda/ sucia.",
+              "accion_en": "Clean pressure 5–10 min. Seek care if bleeding does not stop or wound is deep/dirty."
+            },
+            {
+              "id": "hemorragia_arterial",
+              "nombre_es": "Hemorragia abundante o arterial",
+              "nombre_en": "Heavy or arterial bleeding",
+              "gravedad": "grave",
+              "accion_es": "Urgencia veterinaria. Compresión directa continua mientras se traslada.",
+              "accion_en": "Veterinary emergency. Continuous direct compression while transporting."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

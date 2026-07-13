@@ -934,7 +934,70 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 9 — En progreso (EP-14: Contenido y herramientas atlas)
+## Sprint 9 — Completado (EP-14: Contenido y herramientas atlas)
+
+**Objetivo:** Ampliar contenido clínico de referencia (BCS, toxicología, emergencias LATAM) y modo estudio del glosario con flashcards.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-TOOL-07 | Guía visual condición corporal BCS (1–9 perro/gato, 1–5 equino) | 5 | Hecho |
+| US-TOOL-08 | Ampliar toxicología (+30 sustancias) | 3 | Hecho |
+| US-CON-10 | Directorio emergencias LATAM (sin geolocalización) | 5 | Hecho |
+| US-UX-15 | Flashcards modo estudio del glosario | 5 | Hecho |
+| | | **18** | |
+
+---
+
+## Sprint 10 — En progreso (EP-15: Atlas clínico avanzado)
+
+**Objetivo:** Triaje educativo por síntomas, bibliografía ampliada, modo lectura nocturno y resúmenes modo estudio pregenerados.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-TOOL-09 | Asistente triaje educativo por síntomas (`#triaje`) | 5 | En progreso |
+| US-CON-11 | Ampliar fuentes bibliográficas (≥30 % enfermedades con referencia) | 3 | En progreso |
+| US-UX-16 | Modo lectura nocturno (toggle + `prefers-color-scheme`) | 3 | En progreso |
+| US-CON-12 | Resúmenes modo estudio (`resumen_1min` en build script) | 3 | En progreso |
+| | | **14** | |
+
+#### US-TOOL-09 · Triaje educativo
+
+**Tareas técnicas:**
+- [x] Vista `#triaje` con árbol estático 3–4 niveles (síntoma → causas → gravedad → acción)
+- [x] `data/triaje.json` + `build_triaje.rb`; sin diagnóstico automático
+- [x] Enlace desde hub `#herramientas` y `#urgencias`
+- [x] i18n ES/EN
+
+#### US-CON-11 · Bibliografía ampliada
+
+**Tareas técnicas:**
+- [x] `scripts/data/expand_bibliografia_sprint10.rb` valida y enriquece referencias
+- [x] Referencias objeto `{ titulo, url }` en enfermedades comunes
+- [x] Cobertura ≥30 % enfermedades con al menos 1 referencia
+- [x] Visualización en `diseaseView` vía `renderBibliographicSources`
+
+#### US-UX-16 · Modo lectura nocturno
+
+**Tareas técnicas:**
+- [x] Toggle `#themeToggleBtn` en cabecera
+- [x] Variables CSS en `:root[data-theme="dark"]` y `@media (prefers-color-scheme: dark)`
+- [x] Persistencia `localStorage` clave `atlas_theme`
+
+#### US-CON-12 · Resúmenes modo estudio
+
+**Tareas técnicas:**
+- [x] `scripts/data/build_resumen_estudio_sprint10.rb` genera `resumen_1min`
+- [x] Plantilla: síntomas + gravedad + acción
+- [x] Bloque `.study-summary` en ficha de enfermedad
+
+**Entregables técnicos:**
+- Vista triaje en `index.html`, `css/styles.css`, `js/app.js`
+- `data/triaje.json`, scripts sprint10 en `scripts/data/`
+- `tests/test_sprint10.rb`; ruta `#triaje` en `build_sitemap.rb`; `sw.js` atlas-v9
+
+---
+
+## Sprint 9 (histórico detalle EP-14)
 
 **Objetivo:** Ampliar contenido clínico de referencia (BCS, toxicología, emergencias LATAM) y modo estudio del glosario con flashcards.
 

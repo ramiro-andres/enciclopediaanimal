@@ -6,6 +6,12 @@ const App = {
   crossLinks: null,
   toxicologyData: null,
   emergenciasLatamData: null,
+  triajeData: null,
+  triajeCategoryId: null,
+  triajeSymptomId: null,
+  triajeCauseId: null,
+  themeMode: 'auto',
+  THEME_KEY: 'atlas_theme',
   vaccinationCalendars: null,
   toxicologyQuery: '',
   toxicologySpecies: 'todos',
@@ -200,6 +206,7 @@ const App = {
         I18n.init();
         I18n.apply();
         this.bindLangSwitcher();
+        this.bindThemeToggle();
         document.addEventListener('atlas:langchange', () => {
           I18n.apply();
           this.updateCompareBadge();
@@ -214,6 +221,7 @@ const App = {
           if (this.currentView === 'bcs') this.renderBcs();
           if (this.currentView === 'flashcards') this.renderFlashcards();
           if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
+          if (this.currentView === 'triaje') this.renderTriaje();
           if (this.currentView === 'dictionary') this.renderDictionary();
           this.renderFavorites();
           this.updateMobileTabBar();
@@ -229,6 +237,8 @@ const App = {
       this.crossLinks = await this.loadCrossLinks();
       this.toxicologyData = await this.loadToxicologyData();
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
+      this.triajeData = await this.loadTriajeData();
+      this.initTheme();
       this.vaccinationCalendars = await this.loadVaccinationCalendars();
       this.renderNav();
       this.renderStats();
@@ -333,6 +343,55 @@ const App = {
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
+  },
+
+  async loadTriajeData() {
+    if (window.TRIAJE_DATA?.categorias?.length) {
+      return window.TRIAJE_DATA;
+    }
+    try {
+      const res = await fetch('data/triaje.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  initTheme() {
+    let mode = 'auto';
+    try {
+      const saved = localStorage.getItem(this.THEME_KEY);
+      if (saved === 'light' || saved === 'dark' || saved === 'auto') mode = saved;
+    } catch (_) { /* sin localStorage */ }
+    this.applyTheme(mode);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (this.themeMode === 'auto') this.applyTheme('auto');
+    });
+  },
+
+  applyTheme(mode) {
+    this.themeMode = mode;
+    try { localStorage.setItem(this.THEME_KEY, mode); } catch (_) { /* noop */ }
+    document.documentElement.setAttribute('data-theme-mode', mode);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = mode === 'dark' || (mode === 'auto' && prefersDark);
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) {
+      const label = isDark ? this.t('theme.light') : this.t('theme.dark');
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+    }
+  },
+
+  toggleTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentlyDark = this.themeMode === 'dark'
+      || (this.themeMode === 'auto' && prefersDark);
+    this.applyTheme(currentlyDark ? 'light' : 'dark');
+  },
+
+  bindThemeToggle() {
+    document.getElementById('themeToggleBtn')?.addEventListener('click', () => this.toggleTheme());
   },
 
   async loadVaccinationCalendars() {
@@ -451,6 +510,7 @@ const App = {
     document.getElementById('backBcsBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.showDictionary());
     document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
+    document.getElementById('backTriajeBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
@@ -807,6 +867,11 @@ const App = {
 
       if (parts[0] === 'emergencias-latam') {
         this.showEmergenciasLatam({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'triaje') {
+        this.showTriaje({ updateHash: false });
         return true;
       }
 
@@ -1470,6 +1535,13 @@ const App = {
     this.exportE2EState();
   },
 
+  showTriaje(options = {}) {
+    this.renderTriaje();
+    this.showView('triaje');
+    if (options.updateHash !== false) this.updateHash('#triaje');
+    this.exportE2EState();
+  },
+
   BCS_DOG_CAT_SCORES: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   BCS_EQUINE_SCORES: [1, 2, 3, 4, 5],
 
@@ -1520,6 +1592,12 @@ const App = {
         title: this.t('bcs.title'),
         desc: this.t('bcs.card_desc'),
         action: () => this.showBcs()
+      },
+      {
+        icon: '🩺',
+        title: this.t('triaje.title'),
+        desc: this.t('triaje.card_desc'),
+        action: () => this.showTriaje()
       }
     ];
     grid.innerHTML = cards.map((c, i) => `
@@ -2389,6 +2467,137 @@ const App = {
       `).join('')}`;
   },
 
+  triajeLabel(item, field) {
+    if (!item) return '';
+    const lang = window.I18n?.lang || 'es';
+    const key = lang === 'en' ? `${field}_en` : `${field}_es`;
+    return item[key] || item[`${field}_es`] || item.nombre || '';
+  },
+
+  resetTriajeFlow() {
+    this.triajeCategoryId = null;
+    this.triajeSymptomId = null;
+    this.triajeCauseId = null;
+  },
+
+  renderTriaje() {
+    const container = document.getElementById('triajeContent');
+    if (!container) return;
+    const data = this.triajeData;
+    const disclaimer = data
+      ? (window.I18n?.lang === 'en' ? data.disclaimer_en : data.disclaimer_es)
+      : this.t('triaje.disclaimer');
+
+    if (!data?.categorias?.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('triaje.empty'))}</p></div>`;
+      return;
+    }
+
+    const category = data.categorias.find(c => c.id === this.triajeCategoryId);
+    const symptom = category?.sintomas?.find(s => s.id === this.triajeSymptomId);
+    const cause = symptom?.causas?.find(c => c.id === this.triajeCauseId);
+
+    const steps = [
+      { id: 'category', label: this.t('triaje.step_category'), active: !category },
+      { id: 'symptom', label: this.t('triaje.step_symptom'), active: category && !symptom },
+      { id: 'cause', label: this.t('triaje.step_cause'), active: symptom && !cause },
+      { id: 'result', label: this.t('triaje.step_result'), active: !!cause }
+    ];
+
+    const breadcrumb = steps.map((s, i) => {
+      const sep = i > 0 ? ' › ' : '';
+      return `${sep}<span class="${s.active ? 'active' : ''}">${this.esc(s.label)}</span>`;
+    }).join('');
+
+    let body = '';
+
+    if (!category) {
+      body = `
+        <h3>${this.esc(this.t('triaje.select_category'))}</h3>
+        <div class="triaje-grid">
+          ${data.categorias.map(cat => `
+            <button type="button" class="triaje-card" data-triaje-category="${this.esc(cat.id)}">
+              <h3>${this.esc(this.triajeLabel(cat, 'nombre'))}</h3>
+              <p>${(cat.sintomas || []).length} ${this.esc(this.t('triaje.step_symptom').toLowerCase())}(s)</p>
+            </button>
+          `).join('')}
+        </div>`;
+    } else if (!symptom) {
+      body = `
+        <h3>${this.esc(this.t('triaje.select_symptom'))}</h3>
+        <div class="triaje-grid">
+          ${(category.sintomas || []).map(sym => `
+            <button type="button" class="triaje-card" data-triaje-symptom="${this.esc(sym.id)}">
+              <h3>${this.esc(this.triajeLabel(sym, 'nombre'))}</h3>
+            </button>
+          `).join('')}
+        </div>`;
+    } else if (!cause) {
+      body = `
+        <h3>${this.esc(this.t('triaje.select_cause'))}</h3>
+        <div class="triaje-grid">
+          ${(symptom.causas || []).map(c => `
+            <button type="button" class="triaje-card" data-triaje-cause="${this.esc(c.id)}">
+              <h3>${this.esc(this.triajeLabel(c, 'nombre'))}</h3>
+            </button>
+          `).join('')}
+        </div>`;
+    } else {
+      const severityKey = `triaje.severity.${cause.gravedad || 'moderada'}`;
+      const action = this.triajeLabel(cause, 'accion');
+      body = `
+        <div class="triaje-result">
+          <span class="triaje-severity triaje-severity--${this.esc(cause.gravedad || 'moderada')}">
+            ${this.esc(this.t('triaje.severity'))}: ${this.esc(this.t(severityKey))}
+          </span>
+          <h3>${this.esc(this.triajeLabel(cause, 'nombre'))}</h3>
+          <p><strong>${this.esc(this.t('triaje.action'))}:</strong> ${this.esc(action)}</p>
+          <p class="triaje-disclaimer" role="note">⚕️ ${this.esc(this.t('triaje.consult_vet'))}: ${this.esc(disclaimer)}</p>
+        </div>`;
+    }
+
+    container.innerHTML = `
+      <p class="triaje-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
+      <nav class="triaje-breadcrumb" aria-label="Pasos de triaje">${breadcrumb}</nav>
+      ${body}
+      <div class="triaje-actions">
+        ${category ? `<button type="button" id="triajeBackBtn">${this.esc(this.t('triaje.back_step'))}</button>` : ''}
+        <button type="button" id="triajeRestartBtn">${this.esc(this.t('triaje.restart'))}</button>
+      </div>`;
+
+    container.querySelectorAll('[data-triaje-category]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.triajeCategoryId = btn.dataset.triajeCategory;
+        this.triajeSymptomId = null;
+        this.triajeCauseId = null;
+        this.renderTriaje();
+      });
+    });
+    container.querySelectorAll('[data-triaje-symptom]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.triajeSymptomId = btn.dataset.triajeSymptom;
+        this.triajeCauseId = null;
+        this.renderTriaje();
+      });
+    });
+    container.querySelectorAll('[data-triaje-cause]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.triajeCauseId = btn.dataset.triajeCause;
+        this.renderTriaje();
+      });
+    });
+    container.querySelector('#triajeBackBtn')?.addEventListener('click', () => {
+      if (cause) this.triajeCauseId = null;
+      else if (symptom) this.triajeSymptomId = null;
+      else if (category) this.triajeCategoryId = null;
+      this.renderTriaje();
+    });
+    container.querySelector('#triajeRestartBtn')?.addEventListener('click', () => {
+      this.resetTriajeFlow();
+      this.renderTriaje();
+    });
+  },
+
   showToast(message) {
     const container = document.getElementById('toastContainer');
     if (!container) return;
@@ -2630,7 +2839,12 @@ const App = {
         <p>${this.esc(this.t('emerg.urgency_link'))}</p>
         <button type="button" class="btn-text-link urgency-emerg-latam-btn">${this.esc(this.t('emerg.open'))} →</button>
       </div>`;
-    container.innerHTML = toxLink + emergLink + this.data.animales.map(animal => {
+    const triajeLink = `
+      <div class="urgency-tools-banner urgency-tools-banner--triaje">
+        <p>${this.esc(this.t('triaje.urgency_link'))}</p>
+        <button type="button" class="btn-text-link urgency-triaje-btn">${this.esc(this.t('triaje.open'))} →</button>
+      </div>`;
+    container.innerHTML = toxLink + emergLink + triajeLink + this.data.animales.map(animal => {
       const breeds = ['pequena', 'mediana', 'grande'].flatMap(size => animal.razas?.[size] || []);
       const alerts = breeds
         .flatMap(b => (Array.isArray(b.senales_alerta) ? b.senales_alerta : [b.senales_alerta]).filter(Boolean))
@@ -2662,6 +2876,7 @@ const App = {
     }).join('');
     container.querySelector('.urgency-tox-btn')?.addEventListener('click', () => this.showToxicologia());
     container.querySelector('.urgency-emerg-latam-btn')?.addEventListener('click', () => this.showEmergenciasLatam());
+    container.querySelector('.urgency-triaje-btn')?.addEventListener('click', () => this.showTriaje());
   },
 
   getRecentHistory() {
@@ -2887,6 +3102,7 @@ const App = {
       unidades: 'tools',
       predisposiciones: 'explore',
       bcs: 'tools',
+      triaje: 'tools',
       flashcards: 'glossary',
       emergenciasLatam: 'urgency',
       compare: 'explore'
@@ -3469,6 +3685,12 @@ const App = {
           </div>
         </div>
         <div class="disease-detail-body">
+          ${disease.resumen_1min ? `
+          <div class="detail-block study-summary">
+            <h4>📖 ${this.esc(this.t('study.summary_title'))}</h4>
+            <p class="study-summary-text">${this.esc(disease.resumen_1min)}</p>
+            <p class="study-summary-hint">${this.esc(this.t('study.summary_hint'))}</p>
+          </div>` : ''}
           <div class="detail-block">
             <h4>🩺 Síntomas</h4>
             ${this.renderList(disease.sintomas)}
@@ -3591,6 +3813,10 @@ const App = {
       document.title = `${this.t('emerg.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'triaje') {
+      document.title = `${this.t('triaje.title')} — ${suffix}`;
+      return;
+    }
     document.title = 'Enciclopedia Animal — Salud Veterinaria';
   },
 
@@ -3634,6 +3860,7 @@ const App = {
     document.getElementById('bcsView').classList.toggle('active', view === 'bcs');
     document.getElementById('flashcardsView').classList.toggle('active', view === 'flashcards');
     document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');
+    document.getElementById('triajeView').classList.toggle('active', view === 'triaje');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();

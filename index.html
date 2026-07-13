@@ -50,6 +50,10 @@
           <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
           <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
+        <button type="button" id="themeToggleBtn" class="theme-toggle-btn" data-i18n-aria="theme.toggle" aria-label="Modo lectura nocturno" title="Modo lectura nocturno">
+          <span class="theme-toggle-icon theme-toggle-icon--light" aria-hidden="true">☀️</span>
+          <span class="theme-toggle-icon theme-toggle-icon--dark" aria-hidden="true">🌙</span>
+        </button>
         <button type="button" id="goHomeBtn" class="header-home-btn" data-i18n="nav.home" data-i18n-aria="nav.home">Inicio</button>
         <button type="button" id="goDictionaryBtn" class="header-home-btn" data-i18n="nav.glossary" data-i18n-aria="nav.glossary">Glosario</button>
         <button type="button" id="goToolsBtn" class="header-home-btn" data-i18n="nav.tools" data-i18n-aria="nav.tools">Herramientas</button>
@@ -427,6 +431,18 @@
         </div>
       </section>
 
+      <section id="triajeView" class="view">
+        <button id="backTriajeBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="triaje-page">
+          <div class="triaje-hero">
+            <span class="eyebrow" data-i18n="triaje.eyebrow">ORIENTACIÓN</span>
+            <h2 data-i18n="triaje.title">Asistente de triaje educativo</h2>
+            <p data-i18n="triaje.intro">Selecciona un síntoma para ver posibles causas educativas, nivel de gravedad orientativo y cuándo consultar a un veterinario. No es un diagnóstico automático.</p>
+          </div>
+          <div id="triajeContent" class="triaje-content"></div>
+        </div>
+      </section>
+
       <section id="compareView" class="view">
         <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="compare-page">
@@ -538,6 +554,7 @@
   <script src="data/enlaces_clinicos.js"></script>
   <script src="data/toxicologia.js"></script>
   <script src="data/emergencias_latam.js"></script>
+  <script src="data/triaje.js"></script>
   <script src="data/calendario_vacunacion.js"></script>
   <script src="data/search_synonyms.js"></script>
   <script src="js/i18n.js"></script>
