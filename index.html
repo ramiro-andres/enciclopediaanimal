@@ -113,6 +113,13 @@
               </div>
               <div id="recentHistoryList" class="recent-history-list"></div>
             </div>
+            <div id="favoritesPanel" class="favorites-panel" hidden>
+              <div class="favorites-header">
+                <span class="eyebrow" data-i18n="favorites.title">MIS FAVORITOS</span>
+                <button type="button" id="clearFavoritesBtn" class="btn-text-link" data-i18n="favorites.clear">Limpiar favoritos</button>
+              </div>
+              <div id="favoritesList" class="favorites-list"></div>
+            </div>
           </div>
           <div class="welcome-visual" aria-label="Muestra visual del contenido de la enciclopedia">
             <div class="visual-main-card">
@@ -366,6 +373,29 @@
     <p data-i18n="footer.text">🐾 Enciclopedia Animal — Aprende, explora y cuida mejor. Siempre consulta a un veterinario.</p>
     <p class="footer-privacy"><small data-i18n="privacy.analytics">Este sitio puede usar analítica sin cookies. Ver docs/PRIVACIDAD.md.</small></p>
   </footer>
+
+  <nav id="mobileTabBar" class="mobile-tab-bar" role="navigation" aria-label="Navegación principal" data-i18n-aria="tab.nav">
+    <button type="button" class="mobile-tab" data-tab="welcome" aria-current="page">
+      <span class="mobile-tab-icon" aria-hidden="true">🏠</span>
+      <span class="mobile-tab-label" data-i18n="tab.home">Inicio</span>
+    </button>
+    <button type="button" class="mobile-tab" data-tab="explore">
+      <span class="mobile-tab-icon" aria-hidden="true">🔍</span>
+      <span class="mobile-tab-label" data-i18n="tab.explore">Explorar</span>
+    </button>
+    <button type="button" class="mobile-tab" data-tab="glossary">
+      <span class="mobile-tab-icon" aria-hidden="true">📖</span>
+      <span class="mobile-tab-label" data-i18n="tab.glossary">Glosario</span>
+    </button>
+    <button type="button" class="mobile-tab" data-tab="urgency">
+      <span class="mobile-tab-icon" aria-hidden="true">🚨</span>
+      <span class="mobile-tab-label" data-i18n="tab.urgency">Urgencias</span>
+    </button>
+    <button type="button" class="mobile-tab" data-tab="tools">
+      <span class="mobile-tab-icon" aria-hidden="true">🧰</span>
+      <span class="mobile-tab-label" data-i18n="tab.tools">Herramientas</span>
+    </button>
+  </nav>
 
   <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 

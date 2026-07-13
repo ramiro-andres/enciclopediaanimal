@@ -19,6 +19,7 @@ const App = {
   isRoutingFromHash: false,
   compareList: [],
   COMPARE_KEY: 'atlas_compare',
+  FAVORITES_KEY: 'atlas_favorites',
   COMPARE_MAX: 3,
   SITE_URL: 'https://ramiro-andres.github.io/enciclopediaanimal/',
   GITHUB_ISSUES_REPO: 'ramiro-andres/enciclopediaanimal',
@@ -191,6 +192,8 @@ const App = {
           if (this.currentView === 'rerMer') this.renderRerMer();
           if (this.currentView === 'toxicologia') this.renderToxicologia();
           if (this.currentView === 'urgency') this.renderUrgency();
+          this.renderFavorites();
+          this.updateMobileTabBar();
           this.updateResultsTitle();
         });
       }
@@ -208,6 +211,8 @@ const App = {
       this.bindEvents();
       this.showLoadStatus();
       this.renderRecentHistory();
+      this.renderFavorites();
+      this.bindMobileTabBar();
       if (!this.openRouteFromHash()) this.showView('welcome');
       this.exportE2EState();
     } catch (err) {
@@ -384,6 +389,7 @@ const App = {
     document.getElementById('backRerMerBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backToxicologiaBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
+    document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('btnExploreAll')?.addEventListener('click', () => this.enterBrowse('todos'));
     document.querySelector('.logo')?.addEventListener('click', () => this.goWelcome());
@@ -1740,6 +1746,208 @@ const App = {
     this.renderRecentHistory();
   },
 
+  getFavorites() {
+    try {
+      const raw = localStorage.getItem(this.FAVORITES_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (_) {
+      return [];
+    }
+  },
+
+  saveFavorites(items) {
+    try {
+      localStorage.setItem(this.FAVORITES_KEY, JSON.stringify(items));
+    } catch (_) { /* sin almacenamiento */ }
+  },
+
+  isFavorite(hash) {
+    return this.getFavorites().some(item => item.hash === hash);
+  },
+
+  toggleFavorite(entry) {
+    const wasFavorite = this.isFavorite(entry.hash);
+    let favorites = this.getFavorites().filter(item => item.hash !== entry.hash);
+    if (!wasFavorite) {
+      favorites.unshift({
+        type: entry.type,
+        id: entry.id,
+        nombre: entry.nombre,
+        hash: entry.hash,
+        savedAt: Date.now()
+      });
+      this.showToast(this.t('favorites.added'));
+    } else {
+      this.showToast(this.t('favorites.removed'));
+    }
+    this.saveFavorites(favorites.slice(0, 50));
+    this.renderFavorites();
+    return !wasFavorite;
+  },
+
+  clearFavorites() {
+    try { localStorage.removeItem(this.FAVORITES_KEY); } catch (_) { /* noop */ }
+    this.renderFavorites();
+  },
+
+  renderFavorites() {
+    const wrapper = document.getElementById('favoritesPanel');
+    const list = document.getElementById('favoritesList');
+    if (!wrapper || !list) return;
+    const favorites = this.getFavorites();
+    wrapper.hidden = favorites.length === 0;
+    if (!favorites.length) {
+      list.innerHTML = '';
+      return;
+    }
+    list.innerHTML = favorites.map(item => `
+      <button type="button" class="favorite-item" data-hash="${this.esc(item.hash)}">
+        <span class="favorite-item-icon" aria-hidden="true">${item.type === 'disease' ? '🩺' : '🐾'}</span>
+        <span class="favorite-item-label">${this.esc(item.nombre)}</span>
+      </button>
+    `).join('');
+    list.querySelectorAll('.favorite-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const hash = btn.dataset.hash;
+        if (!hash) return;
+        window.location.hash = hash;
+        this.openRouteFromHash();
+      });
+    });
+  },
+
+  renderFavoriteButton(entry) {
+    const isFav = this.isFavorite(entry.hash);
+    return `
+      <button type="button" class="btn-favorite${isFav ? ' btn-favorite--active' : ''}"
+        data-favorite-type="${this.esc(entry.type)}"
+        data-favorite-id="${this.esc(entry.id)}"
+        data-favorite-nombre="${this.esc(entry.nombre)}"
+        data-favorite-hash="${this.esc(entry.hash)}"
+        aria-pressed="${isFav}"
+        aria-label="${this.esc(this.t(isFav ? 'favorites.remove' : 'favorites.add'))}">
+        <span aria-hidden="true">${isFav ? '★' : '☆'}</span>
+      </button>`;
+  },
+
+  bindFavoriteButtons(root) {
+    if (!root) return;
+    root.querySelectorAll('.btn-favorite').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const entry = {
+          type: btn.dataset.favoriteType,
+          id: btn.dataset.favoriteId,
+          nombre: btn.dataset.favoriteNombre,
+          hash: btn.dataset.favoriteHash
+        };
+        const isFav = this.toggleFavorite(entry);
+        btn.classList.toggle('btn-favorite--active', isFav);
+        btn.setAttribute('aria-pressed', String(isFav));
+        btn.setAttribute('aria-label', this.t(isFav ? 'favorites.remove' : 'favorites.add'));
+        btn.querySelector('span')?.replaceChildren(document.createTextNode(isFav ? '★' : '☆'));
+      });
+    });
+  },
+
+  renderPrintButton() {
+    return `
+      <button type="button" class="btn-print" aria-label="${this.esc(this.t('print.label'))}">
+        <span aria-hidden="true">🖨</span> ${this.esc(this.t('print.button'))}
+      </button>`;
+  },
+
+  renderPrintDisclaimer() {
+    return `<footer class="print-disclaimer" role="note">${this.esc(this.t('print.disclaimer'))}</footer>`;
+  },
+
+  bindPrintButtons(root) {
+    if (!root) return;
+    root.querySelectorAll('.btn-print').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.print();
+      });
+    });
+  },
+
+  renderBibliographicSources(sources) {
+    if (!sources?.length) return '';
+    const items = sources.map(src => {
+      if (typeof src === 'string') {
+        return `<li>${this.esc(src)}</li>`;
+      }
+      const parts = [];
+      if (src.titulo) parts.push(`<strong>${this.esc(src.titulo)}</strong>`);
+      if (src.autor) parts.push(this.esc(src.autor));
+      const meta = [];
+      if (src.doi) meta.push(`DOI: ${this.esc(src.doi)}`);
+      let body = parts.join(' — ');
+      if (src.url) {
+        body = `<a href="${this.esc(src.url)}" target="_blank" rel="noopener noreferrer">${body || this.esc(src.url)}</a>`;
+      }
+      if (meta.length) body += ` <span class="source-meta">(${meta.join(' · ')})</span>`;
+      return `<li>${body}</li>`;
+    }).join('');
+    return `
+      <div class="detail-block bibliographic-sources">
+        <h4>📚 ${this.esc(this.t('sources.title'))}</h4>
+        <ul class="bibliographic-list">${items}</ul>
+      </div>`;
+  },
+
+  mobileTabForView(view) {
+    const map = {
+      welcome: 'welcome',
+      home: 'explore',
+      detail: 'explore',
+      disease: 'explore',
+      dictionary: 'glossary',
+      urgency: 'urgency',
+      tools: 'tools',
+      rerMer: 'tools',
+      toxicologia: 'tools',
+      compare: 'explore'
+    };
+    return map[view] || 'welcome';
+  },
+
+  updateMobileTabBar(view = this.currentView) {
+    const tab = this.mobileTabForView(view);
+    document.querySelectorAll('#mobileTabBar .mobile-tab').forEach(btn => {
+      const active = btn.dataset.tab === tab;
+      btn.classList.toggle('mobile-tab--active', active);
+      if (active) btn.setAttribute('aria-current', 'page');
+      else btn.removeAttribute('aria-current');
+    });
+  },
+
+  bindMobileTabBar() {
+    const bar = document.getElementById('mobileTabBar');
+    if (!bar) return;
+    const mq = window.matchMedia('(max-width: 768px)');
+    const syncBodyClass = () => {
+      document.body.classList.toggle('has-mobile-tab', mq.matches);
+    };
+    syncBodyClass();
+    mq.addEventListener('change', syncBodyClass);
+
+    const actions = {
+      welcome: () => this.goWelcome(),
+      explore: () => this.enterBrowse('todos'),
+      glossary: () => this.showDictionary(),
+      urgency: () => this.showUrgency(),
+      tools: () => this.showTools()
+    };
+    bar.querySelectorAll('.mobile-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = actions[btn.dataset.tab];
+        if (action) action();
+      });
+    });
+    this.updateMobileTabBar();
+  },
+
   updateResultsTitle() {
     const title = document.getElementById('resultsTitle');
     const hint = document.getElementById('searchHint');
@@ -2136,6 +2344,13 @@ const App = {
             <button type="button" class="btn-compare-add" data-compare-key="${breed.animalId}:${breed.id}">
               ${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.esc(this.t('compare.add'))}
             </button>
+            ${this.renderFavoriteButton({
+              type: 'breed',
+              id: `${breed.animalId}:${breed.id}`,
+              nombre: breed.nombre,
+              hash: this.breedRoute(breed)
+            })}
+            ${this.renderPrintButton()}
             ${this.renderShareButton(this.breedRoute(breed), breed.nombre)}
             ${this.renderReportErrorButton({ kind: 'Raza', name: breed.nombre, animalCategory: breed.animalNombre, hash: this.breedRoute(breed) })}
           </div>
@@ -2191,6 +2406,7 @@ const App = {
           `).join('')}
         </div>
       </section>
+      ${this.renderPrintDisclaimer()}
     `;
 
     el.querySelectorAll('.disease-card').forEach(card => {
@@ -2207,6 +2423,8 @@ const App = {
       btn.textContent = `${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.t('compare.add')}`;
     });
     this.bindShareButtons(el);
+    this.bindFavoriteButtons(el);
+    this.bindPrintButtons(el);
     this.bindDoseCalculator(el, breed);
 
     this.showView('detail');
@@ -2247,6 +2465,13 @@ const App = {
                 ${this.renderZoonoticBadge(disease)}
               </div>
               <div class="disease-share-row">
+                ${this.renderFavoriteButton({
+                  type: 'disease',
+                  id: `${breed.animalId}:${breed.id}:${this.diseaseSlug(disease)}`,
+                  nombre: `${disease.nombre} — ${breed.nombre}`,
+                  hash: this.diseaseRoute(breed, disease)
+                })}
+                ${this.renderPrintButton()}
                 ${this.renderShareButton(this.diseaseRoute(breed, disease), `${disease.nombre} — ${breed.nombre}`)}
                 ${this.renderReportErrorButton({ kind: 'Enfermedad', name: disease.nombre, animalCategory: breed.animalNombre, hash: this.diseaseRoute(breed, disease) })}
               </div>
@@ -2286,15 +2511,19 @@ const App = {
           ${disease.notas ? `<div class="detail-block"><h4>📋 Notas adicionales</h4><p>${this.esc(disease.notas)}</p></div>` : ''}
           ${disease.urgencia ? `<div class="alert-panel urgent"><strong>🚨 Cuándo acudir de urgencia:</strong> ${this.esc(disease.urgencia)}</div>` : ''}
           ${this.renderDiseaseTermLinks(disease)}
+          ${this.renderBibliographicSources(disease.fuentes_bibliograficas || disease.referencias)}
           <div class="alert-box">
             ⚠️ Información educativa. No sustituye el criterio clínico de un veterinario colegiado. Las dosis requieren prescripción profesional individualizada.
           </div>
         </div>
+        ${this.renderPrintDisclaimer()}
       </div>
     `;
 
     this.bindDiseaseTermLinks(el);
     this.bindShareButtons(el);
+    this.bindFavoriteButtons(el);
+    this.bindPrintButtons(el);
     this.showView('disease');
     if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
     this.updatePageMeta({
@@ -2388,6 +2617,7 @@ const App = {
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
+    this.updateMobileTabBar(view);
     this.updateDocumentTitle();
     window.scrollTo({ top: 0, behavior: 'auto' });
   },
@@ -2416,11 +2646,22 @@ const App = {
 };
 
 const DisclaimerModal = {
+  SESSION_KEY: 'atlas_disclaimer_accepted',
+
+  wasAccepted() {
+    try {
+      return sessionStorage.getItem(this.SESSION_KEY) === '1';
+    } catch (_) {
+      return false;
+    }
+  },
+
   init() {
     this.overlay = document.getElementById('disclaimerOverlay');
     this.modal = document.getElementById('disclaimerModal');
     this.acceptBtn = document.getElementById('disclaimerAcceptBtn');
     if (!this.overlay || !this.modal || !this.acceptBtn) return;
+    if (this.wasAccepted()) return;
 
     this.isOpen = false;
     this.previousFocus = document.activeElement;
@@ -2452,6 +2693,7 @@ const DisclaimerModal = {
 
   dismiss() {
     this.isOpen = false;
+    try { sessionStorage.setItem(this.SESSION_KEY, '1'); } catch (_) { /* noop */ }
     this.overlay.hidden = true;
     this.overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('disclaimer-open');

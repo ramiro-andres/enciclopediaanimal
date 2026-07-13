@@ -3873,4 +3873,285 @@ body.disclaimer-open {
   .vax-calendar-grid {
     grid-template-columns: 1fr;
   }
+
+  /* US-UX-09: simplificar header — la tab bar cubre navegación principal */
+  #goDictionaryBtn,
+  #goToolsBtn,
+  #goUrgencyBtn,
+  #goCompareBtn,
+  #focusSearchBtn {
+    display: none;
+  }
+
+  body.has-mobile-tab {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.has-mobile-tab .main-content {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.has-mobile-tab .footer {
+    margin-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── US-UX-09: Tab bar móvil ── */
+.mobile-tab-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  padding: 0.35rem 0.25rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -4px 20px rgba(30, 27, 75, 0.08);
+}
+
+@media (max-width: 768px) {
+  .mobile-tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 0.15rem;
+  }
+}
+
+.mobile-tab {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: 52px;
+  padding: 0.35rem 0.2rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.1;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.mobile-tab-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.mobile-tab[aria-current="page"],
+.mobile-tab--active {
+  color: var(--primary-dark);
+  background: rgba(91, 94, 247, 0.1);
+}
+
+.mobile-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ── US-UX-10: Favoritos ── */
+.favorites-panel {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.favorites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.favorite-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.favorite-item:hover {
+  border-color: var(--accent);
+  background: #fff5f8;
+}
+
+.favorites-empty {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.btn-favorite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-favorite:hover {
+  border-color: var(--accent);
+}
+
+.btn-favorite.is-favorite,
+.btn-favorite--active {
+  border-color: var(--accent);
+  background: #fff0f6;
+  color: #be185d;
+}
+
+.btn-favorite-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-print:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+}
+
+.breed-hero-actions,
+.disease-share-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bibliographic-sources .bibliographic-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.bibliographic-sources .bibliographic-list li {
+  margin-bottom: 0.45rem;
+  line-height: 1.45;
+}
+
+.bibliographic-sources .source-meta {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.print-disclaimer {
+  display: none;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #333;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* ── US-UX-11: Vista de impresión ── */
+@media print {
+  .skip-link,
+  .iso-scene,
+  .header,
+  .sidebar,
+  .footer,
+  .mobile-tab-bar,
+  .toast-container,
+  .disclaimer-overlay,
+  .back-btn,
+  .btn-compare-add,
+  .btn-share,
+  .btn-report-error,
+  .btn-favorite,
+  .btn-print,
+  .lang-switcher,
+  .header-actions,
+  .disease-card,
+  .dose-calculator,
+  .vax-calendar,
+  .cross-link-block,
+  .protocol-desktop-only,
+  .protocol-mobile-only details:not([open]) {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #000 !important;
+    font-size: 11pt;
+    padding: 0 !important;
+  }
+
+  .layout,
+  .main-content,
+  .view.active {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .breed-hero,
+  .disease-detail-card,
+  .detail-sections,
+  .disease-detail-body {
+    break-inside: avoid;
+  }
+
+  .breed-hero-img,
+  .disease-hero-img {
+    max-height: 180px;
+    object-fit: cover;
+  }
+
+  .print-disclaimer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-top: 1px solid #999;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
 }
