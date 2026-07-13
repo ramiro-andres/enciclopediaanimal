@@ -14,7 +14,7 @@ async function abrirAtlas(page) {
   await page.waitForFunction(() => {
     const state = window.__E2E_STATE__;
     if (state?.error) throw new Error(state.error);
-    return state?.ready === true && state?.view !== 'boot';
+    return state?.ready === true && (state.navItems || 0) > 0;
   }, null, { timeout: 120_000 });
 }
 

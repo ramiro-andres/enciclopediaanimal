@@ -4599,12 +4599,6 @@ const WelcomeTour = {
   }
 };
 
-function bootAtlasApp() {
-  DisclaimerModal.init();
-  void App.init();
-}
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bootAtlasApp);
-} else {
-  bootAtlasApp();
-}
+// file:// + Playwright: el DOM ya existe al ejecutar este script (final del body).
+DisclaimerModal.init();
+void App.init();
