@@ -173,6 +173,8 @@ class ModoNocturnoTest < Minitest::Test
     cross-link-chip dose-calculator-panel tools-card
     mobile-tab-bar zoonotic-badge study-summary-text
     protocol-accordion-item urgency-species-card tox-card
+    meta-chip info-item detail-panel breed-hero
+    disease-detail-card disease-card alert-panel
   ].freeze
 
   def test_variables_semanticas_en_modo_oscuro
