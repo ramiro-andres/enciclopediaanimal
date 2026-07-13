@@ -1109,7 +1109,7 @@ body {
 }
 .back-btn svg { width: 18px; height: 18px; }
 .back-btn:hover {
-  background: #ede9fe;
+  background: var(--chip-hover-bg);
   border-color: var(--primary);
   transform: translateX(-3px);
 }
@@ -1119,7 +1119,7 @@ body {
   grid-template-columns: minmax(280px, 420px) 1fr;
   gap: 2rem;
   background: var(--surface);
-  border: 2px solid #e0e7ff;
+  border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: 2rem;
@@ -1165,8 +1165,9 @@ body {
   margin-bottom: 1rem;
 }
 .meta-chip {
-  background: #f5f3ff;
-  border: 1px solid #ddd6fe;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  color: var(--chip-text);
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   font-size: 0.8rem;
@@ -1184,8 +1185,8 @@ body {
   gap: 0.75rem;
 }
 .info-item {
-  background: linear-gradient(180deg, #fafafa, #f5f3ff);
-  border: 1px solid #e9d5ff;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
   padding: 0.75rem 1rem;
   border-radius: 12px;
 }
@@ -1193,10 +1194,14 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
+  color: var(--primary);
   display: block;
 }
-.info-item span { font-size: 0.9rem; font-weight: 500; }
+.info-item span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
 
 .detail-sections {
   display: flex;
@@ -1206,7 +1211,7 @@ body {
 }
 .detail-panel {
   background: var(--surface);
-  border: 2px solid #e0e7ff;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem 1.5rem;
 }
@@ -1241,14 +1246,16 @@ body {
   font-weight: bold;
 }
 .alert-panel {
-  background: #fff3cd;
-  border: 1px solid #ffe082;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
+  color: var(--warn-text);
 }
 .alert-panel.urgent {
-  background: #fde8e8;
-  border-color: #f5c6cb;
+  background: var(--alert-danger-bg);
+  border-color: var(--alert-danger-border);
+  color: var(--severity-grave-text);
 }
 .exam-tags {
   display: flex;
@@ -1443,7 +1450,7 @@ body {
   gap: 0.9rem;
   align-items: start;
   background: var(--surface);
-  border: 2px solid #e0e7ff;
+  border: 2px solid var(--border);
   border-left: 6px solid var(--accent);
   border-radius: var(--radius);
   padding: 0.9rem;
@@ -1496,7 +1503,7 @@ body {
 /* Disease detail */
 .disease-detail-card {
   background: var(--surface);
-  border: 2px solid #e0e7ff;
+  border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow:
@@ -1550,7 +1557,7 @@ body {
   color: var(--primary-dark);
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #ede9fe;
+  border-bottom: 2px solid var(--border);
 }
 .detail-block ul {
   list-style: none;
@@ -5699,9 +5706,96 @@ textarea::placeholder {
   background: var(--surface-alt);
 }
 
+/* Ficha raza / enfermedad — contraste en modo oscuro */
+:root[data-theme="dark"] .breed-hero,
+:root[data-theme-mode="dark"] .breed-hero,
+:root[data-theme="dark"] .detail-panel,
+:root[data-theme-mode="dark"] .detail-panel,
+:root[data-theme="dark"] .disease-detail-card,
+:root[data-theme-mode="dark"] .disease-detail-card,
+:root[data-theme="dark"] .disease-card,
+:root[data-theme-mode="dark"] .disease-card {
+  box-shadow: var(--shadow);
+}
+
+:root[data-theme="dark"] .info-item,
+:root[data-theme-mode="dark"] .info-item {
+  background: var(--surface-elevated);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .info-item label,
+:root[data-theme-mode="dark"] .info-item label {
+  color: var(--primary);
+}
+
+:root[data-theme="dark"] .info-item span,
+:root[data-theme-mode="dark"] .info-item span {
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .meta-chip,
+:root[data-theme-mode="dark"] .meta-chip {
+  background: var(--chip-bg);
+  border-color: var(--chip-border);
+  color: var(--chip-text);
+}
+
+:root[data-theme="dark"] .alert-panel,
+:root[data-theme-mode="dark"] .alert-panel {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-text);
+}
+
+:root[data-theme="dark"] .alert-panel.urgent,
+:root[data-theme-mode="dark"] .alert-panel.urgent {
+  background: var(--alert-danger-bg);
+  border-color: var(--alert-danger-border);
+  color: var(--severity-grave-text);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme-mode="light"]) .breed-card-img,
   :root:not([data-theme-mode="light"]) .disease-card-img {
     background: var(--surface-alt);
+  }
+
+  :root:not([data-theme-mode="light"]) .breed-hero,
+  :root:not([data-theme-mode="light"]) .detail-panel,
+  :root:not([data-theme-mode="light"]) .disease-detail-card,
+  :root:not([data-theme-mode="light"]) .disease-card {
+    box-shadow: var(--shadow);
+  }
+
+  :root:not([data-theme-mode="light"]) .info-item {
+    background: var(--surface-elevated);
+    border-color: var(--border);
+  }
+
+  :root:not([data-theme-mode="light"]) .info-item label {
+    color: var(--primary);
+  }
+
+  :root:not([data-theme-mode="light"]) .info-item span {
+    color: var(--text);
+  }
+
+  :root:not([data-theme-mode="light"]) .meta-chip {
+    background: var(--chip-bg);
+    border-color: var(--chip-border);
+    color: var(--chip-text);
+  }
+
+  :root:not([data-theme-mode="light"]) .alert-panel {
+    background: var(--warn-bg);
+    border-color: var(--warn-border);
+    color: var(--warn-text);
+  }
+
+  :root:not([data-theme-mode="light"]) .alert-panel.urgent {
+    background: var(--alert-danger-bg);
+    border-color: var(--alert-danger-border);
+    color: var(--severity-grave-text);
   }
 }
