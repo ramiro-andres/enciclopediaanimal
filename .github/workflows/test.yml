@@ -48,7 +48,7 @@ jobs:
 
       - name: Validar sincronización JSON → JS (incluye enlaces clínicos)
         run: |
-          bash actualizar_datos.sh
+          SOLO_JS=1 bash actualizar_datos.sh
           git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js data/enlaces_clinicos.js
 
       - name: Validar integridad de datos y enlaces

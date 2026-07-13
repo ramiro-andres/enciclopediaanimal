@@ -1,20 +1,25 @@
 #!/bin/bash
-# Regenera los .js derivados (enciclopedia, diccionario y enlaces clínicos) desde JSON
+# Regenera los .js derivados (enciclopedia, diccionario y enlaces clínicos) desde JSON.
+# SOLO_JS=1 omite la regeneración de JSON (CI: validar sincronización sin reintegrar enlaces).
 DIR="$(cd "$(dirname "$0")" && pwd)"
-ruby "$DIR/scripts/data/build_medical_dictionary.rb"
-ruby "$DIR/scripts/data/build_search_index.rb"
-ruby "$DIR/scripts/data/build_cross_links.rb"
-ruby "$DIR/scripts/data/suggest_glossary_links.rb"
-ruby "$DIR/scripts/data/integrate_suggested_links_sprint13.rb"
-ruby "$DIR/scripts/data/build_toxicologia.rb"
-ruby "$DIR/scripts/data/build_emergencias_latam.rb"
-ruby "$DIR/scripts/data/build_triaje.rb"
-ruby "$DIR/scripts/data/expand_bibliografia_sprint10.rb"
-ruby "$DIR/scripts/data/build_resumen_estudio_sprint10.rb"
-ruby "$DIR/scripts/data/build_chunks.rb"
-ruby "$DIR/scripts/data/build_lab_reference.rb"
-ruby "$DIR/scripts/data/build_changelog.rb"
-ruby "$DIR/scripts/data/build_sitemap.rb"
+
+if [ "${SOLO_JS:-}" != "1" ]; then
+  ruby "$DIR/scripts/data/build_medical_dictionary.rb"
+  ruby "$DIR/scripts/data/build_search_index.rb"
+  ruby "$DIR/scripts/data/build_cross_links.rb"
+  ruby "$DIR/scripts/data/suggest_glossary_links.rb"
+  ruby "$DIR/scripts/data/integrate_suggested_links_sprint13.rb"
+  ruby "$DIR/scripts/data/build_toxicologia.rb"
+  ruby "$DIR/scripts/data/build_emergencias_latam.rb"
+  ruby "$DIR/scripts/data/build_triaje.rb"
+  ruby "$DIR/scripts/data/expand_bibliografia_sprint10.rb"
+  ruby "$DIR/scripts/data/build_resumen_estudio_sprint10.rb"
+  ruby "$DIR/scripts/data/build_chunks.rb"
+  ruby "$DIR/scripts/data/build_lab_reference.rb"
+  ruby "$DIR/scripts/data/build_changelog.rb"
+  ruby "$DIR/scripts/data/build_sitemap.rb"
+fi
+
 ruby -rjson -e '
   def deep_sort(obj)
     case obj
