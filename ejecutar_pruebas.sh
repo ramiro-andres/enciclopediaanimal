@@ -20,4 +20,10 @@ echo "-----------------------------------"
 ruby scripts/data/validate_clinical_content.rb
 CLIN=$?
 
-exit $(( INT + CLIN ))
+echo ""
+echo "🔍 Detección de inconsistencias (Sprint 11)"
+echo "--------------------------------------------"
+ruby scripts/data/detect_inconsistencies.rb
+INC=$?
+
+exit $(( INT + CLIN + INC ))

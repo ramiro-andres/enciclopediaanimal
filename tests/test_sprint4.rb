@@ -28,7 +28,8 @@ class ServiceWorkerTest < Minitest::Test
 
   def test_precache_incluye_datos_criticos
     %w[
-      ./data/enciclopedia.js
+      ./data/chunks/manifest.js
+      ./data/search_index.js
       ./data/diccionario_medicos.js
       ./data/enlaces_clinicos.js
     ].each do |asset|

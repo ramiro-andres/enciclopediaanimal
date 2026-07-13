@@ -3,7 +3,7 @@
 // enlaces clínicos) para que la app funcione sin red tras la primera visita.
 // Las imágenes de razas/enfermedades usan stale-while-revalidate en una caché
 // aparte para no invalidar el shell al renovar versión.
-const CACHE_VERSION = 'atlas-v9';
+const CACHE_VERSION = 'atlas-v10';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
 const CURRENT_CACHES = [STATIC_CACHE, IMAGE_CACHE];
@@ -17,7 +17,9 @@ const PRECACHE_URLS = [
   './js/i18n.js',
   './js/analytics.js',
   './js/analytics-config.js',
-  './data/enciclopedia.js',
+  './data/chunks/manifest.js',
+  './data/search_index.js',
+  './data/lab_reference.js',
   './data/diccionario_medicos.js',
   './data/enlaces_clinicos.js',
   './data/toxicologia.js',

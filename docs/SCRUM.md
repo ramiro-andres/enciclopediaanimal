@@ -1,6 +1,6 @@
 # Backlog Scrum — Enciclopedia Animal
 
-> **Última actualización:** 13 de julio de 2026  
+> **Última actualización:** 13 de julio de 2026 (Sprint 11 en progreso)  
 > **Sitio en producción:** https://ramiro-andres.github.io/enciclopediaanimal/  
 > **Repositorio:** [ramiro-andres/enciclopediaanimal](https://github.com/ramiro-andres/enciclopediaanimal)
 
@@ -948,16 +948,89 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 10 — En progreso (EP-15: Atlas clínico avanzado)
+## Sprint 10 — Completado (EP-15: Atlas clínico avanzado)
 
 **Objetivo:** Triaje educativo por síntomas, bibliografía ampliada, modo lectura nocturno y resúmenes modo estudio pregenerados.
 
 | ID | Historia | Puntos | Estado |
 |----|----------|--------|--------|
-| US-TOOL-09 | Asistente triaje educativo por síntomas (`#triaje`) | 5 | En progreso |
-| US-CON-11 | Ampliar fuentes bibliográficas (≥30 % enfermedades con referencia) | 3 | En progreso |
-| US-UX-16 | Modo lectura nocturno (toggle + `prefers-color-scheme`) | 3 | En progreso |
-| US-CON-12 | Resúmenes modo estudio (`resumen_1min` en build script) | 3 | En progreso |
+| US-TOOL-09 | Asistente triaje educativo por síntomas (`#triaje`) | 5 | Hecho |
+| US-CON-11 | Ampliar fuentes bibliográficas (≥30 % enfermedades con referencia) | 3 | Hecho |
+| US-UX-16 | Modo lectura nocturno (toggle + `prefers-color-scheme`) | 3 | Hecho |
+| US-CON-12 | Resúmenes modo estudio (`resumen_1min` en build script) | 3 | Hecho |
+| | | **14** | |
+
+**Entregables:** PR #33 mergeado 13 jul 2026.
+
+---
+
+## Sprint 11 — En progreso (EP-16: Contenido clínico y rendimiento atlas)
+
+**Objetivo:** Rangos de laboratorio consultables, destacado semanal de razas, carga diferida de la enciclopedia (431 razas) y detección de inconsistencias en CI.
+
+**Rama:** `sprint-11/lab-rendimiento`
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-CON-13 | Rangos de referencia de laboratorio por especie (`#laboratorio`) | 5 | En progreso |
+| US-UX-17 | «Raza de la semana» en welcomeView (rotación por semana del año) | 3 | En progreso |
+| US-DEV-14 | Carga diferida: chunks por `animalId` + manifest + índice búsqueda | 8 | En progreso |
+| US-DEV-15 | Script CI: dosis fuera de rango, campos vacíos, descripciones duplicadas | 3 | En progreso |
+| | | **19** | |
+
+#### US-CON-13 · Rangos de laboratorio
+
+**Tareas técnicas:**
+- [x] `data/lab_reference.json` + `build_lab_reference.rb` (hemograma y bioquímica básica)
+- [x] Vista `#laboratorio` con tablas responsive e imprimibles
+- [x] Enlace desde hub `#herramientas` y botón en glosario
+- [x] Disclaimer educativo (valores varían por laboratorio)
+- [x] i18n ES/EN
+
+#### US-UX-17 · Raza de la semana
+
+**Tareas técnicas:**
+- [x] Panel `#breedOfWeekPanel` en `welcomeView`
+- [x] Selección determinística: `(año × 53 + semana) % total_razas` sobre `search_index`
+- [x] Enlace a ficha de raza; carga chunk bajo demanda
+- [x] i18n ES/EN
+
+#### US-DEV-14 · Carga diferida (lazy load)
+
+**Tareas técnicas:**
+- [x] `scripts/data/build_chunks.rb` → `data/chunks/{animalId}.json` + `manifest.json`
+- [x] `data/search_index.json` para búsqueda global sin cargar todos los chunks
+- [x] `app.js`: `loadChunk` al seleccionar categoría; `preloadAllChunks` en background
+- [x] `index.html` carga `manifest.js` + `search_index.js` (no `enciclopedia.js` en arranque)
+- [x] `actualizar_datos.sh` integra `build_chunks.rb`
+- [x] `sw.js` atlas-v10 precache manifest + search_index + lab_reference
+- [x] Tests verifican chunks y manifest coherentes
+
+#### US-DEV-15 · Detección inconsistencias CI
+
+**Tareas técnicas:**
+- [x] `scripts/data/detect_inconsistencies.rb`
+- [x] Integrado en `ejecutar_pruebas.sh` y `.github/workflows/test.yml`
+- [x] Alerta dosis mg/kg fuera de rango, campos clínicos vacíos, descripciones duplicadas (≥3 razas)
+
+**Entregables técnicos:**
+- Vista laboratorio en `index.html`, `css/styles.css`, `js/app.js`
+- `data/lab_reference.json`, `data/chunks/*`, `data/search_index.json`
+- `tests/test_sprint11.rb`; ruta `#laboratorio` en `build_sitemap.rb`
+- Test E2E Sprint 11 en `tests/e2e/atlas.spec.js`
+
+---
+
+## Sprint 10 (histórico detalle EP-15)
+
+**Objetivo:** Triaje educativo por síntomas, bibliografía ampliada, modo lectura nocturno y resúmenes modo estudio pregenerados.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-TOOL-09 | Asistente triaje educativo por síntomas (`#triaje`) | 5 | Hecho |
+| US-CON-11 | Ampliar fuentes bibliográficas (≥30 % enfermedades con referencia) | 3 | Hecho |
+| US-UX-16 | Modo lectura nocturno (toggle + `prefers-color-scheme`) | 3 | Hecho |
+| US-CON-12 | Resúmenes modo estudio (`resumen_1min` en build script) | 3 | Hecho |
 | | | **14** | |
 
 #### US-TOOL-09 · Triaje educativo

@@ -165,4 +165,28 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.study-summary')).toBeVisible();
     await expect(page.locator('.study-summary-text')).not.toBeEmpty();
   });
+
+  test('Sprint 11: laboratorio, raza de la semana y lazy load', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    // Raza de la semana visible en welcome
+    const breedWeek = page.locator('#breedOfWeekPanel');
+    await expect(breedWeek).toBeVisible();
+    await expect(breedWeek).toContainText(/semana|week/i);
+
+    // Laboratorio desde herramientas (sin window.App)
+    await page.locator('#goToolsBtn').click();
+    await expect(page.locator('#toolsView')).toHaveClass(/active/);
+    await page.locator('.tools-card').filter({ hasText: /laboratorio|laboratory/i }).click();
+    await expect(page.locator('#laboratorioView')).toHaveClass(/active/);
+    await expect(page.locator('.lab-table').first()).toBeVisible();
+    await expect(page.locator('.lab-disclaimer')).toBeVisible();
+
+    // Lazy load: manifest + chunks en estado E2E
+    const estado = await page.evaluate(() => window.__E2E_STATE__);
+    expect(estado.lazyLoad).toBe(true);
+    expect(estado.razas).toBeGreaterThanOrEqual(400);
+    expect(estado.breedOfWeek).toBe(true);
+  });
 });

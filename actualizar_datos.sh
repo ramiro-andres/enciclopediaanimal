@@ -9,6 +9,8 @@ ruby "$DIR/scripts/data/build_emergencias_latam.rb"
 ruby "$DIR/scripts/data/build_triaje.rb"
 ruby "$DIR/scripts/data/expand_bibliografia_sprint10.rb"
 ruby "$DIR/scripts/data/build_resumen_estudio_sprint10.rb"
+ruby "$DIR/scripts/data/build_chunks.rb"
+ruby "$DIR/scripts/data/build_lab_reference.rb"
 ruby "$DIR/scripts/data/build_sitemap.rb"
 ruby -rjson -e '
   base = ARGV[0]

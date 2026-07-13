@@ -273,7 +273,8 @@ class HtmlStructureTest < Minitest::Test
   end
 
   def test_scripts_requeridos
-    assert_match(/src="data\/enciclopedia\.js"/, @html)
+    assert_match(/src="data\/chunks\/manifest\.js"/, @html)
+    assert_match(/src="data\/search_index\.js"/, @html)
     assert_match(/src="data\/diccionario_medicos\.js"/, @html)
     assert_match(/src="js\/app\.js"/, @html)
   end
