@@ -153,10 +153,13 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('.triaje-result')).toBeVisible();
     await expect(page.locator('.triaje-severity')).toBeVisible();
 
-    // Resumen modo estudio en ficha de enfermedad
-    await page.locator('#focusSearchBtn').click();
-    await page.locator('#searchInput').fill('hipoglucemia');
-    await page.locator('#searchResults .search-result-item').first().click();
+    // Resumen modo estudio en ficha de enfermedad (navegación UI sin window.App)
+    await page.locator('#btnExploreAll').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.locator('#breedGrid .breed-card').first().click();
+    await expect(page.locator('#detailView')).toHaveClass(/active/);
+    await page.locator('#breedDetail .disease-card').first().click();
+    await expect(page.locator('#diseaseView')).toHaveClass(/active/);
     await expect(page.locator('.study-summary')).toBeVisible();
     await expect(page.locator('.study-summary-text')).not.toBeEmpty();
   });
