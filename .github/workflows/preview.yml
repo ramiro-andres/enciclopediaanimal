@@ -25,8 +25,9 @@ jobs:
 
       - name: Construir vista previa estática (_site)
         run: |
+          ruby scripts/data/build_sitemap.rb
           mkdir -p _site
-          cp index.html .nojekyll _site/ 2>/dev/null || cp index.html _site/
+          cp index.html .nojekyll sitemap.xml robots.txt _site/ 2>/dev/null || cp index.html _site/
           cp -r css js data images _site/
           echo "Archivos en _site: $(find _site -type f | wc -l)" >> "$GITHUB_STEP_SUMMARY"
           echo "Tamaño: $(du -sh _site | cut -f1)" >> "$GITHUB_STEP_SUMMARY"

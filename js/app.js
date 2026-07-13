@@ -20,9 +20,161 @@ const App = {
   compareList: [],
   COMPARE_KEY: 'atlas_compare',
   COMPARE_MAX: 3,
+  SITE_URL: 'https://ramiro-andres.github.io/enciclopediaanimal/',
+  GITHUB_ISSUES_REPO: 'ramiro-andres/enciclopediaanimal',
+  DEFAULT_META: {
+    title: 'Enciclopedia Animal — Salud Veterinaria',
+    description: 'Atlas Animal: enciclopedia veterinaria educativa con más de 350 razas, 2.000 enfermedades y glosario médico. Información de referencia que no sustituye la consulta con un veterinario colegiado.',
+    image: 'https://ramiro-andres.github.io/enciclopediaanimal/images/og-image.svg',
+    imageAlt: 'Atlas Animal, enciclopedia veterinaria educativa',
+    url: 'https://ramiro-andres.github.io/enciclopediaanimal/',
+    type: 'website'
+  },
+  currentDictionaryTerm: null,
 
   t(key) {
     return window.I18n ? I18n.t(key) : key;
+  },
+
+  absoluteUrl(path) {
+    if (!path) return this.DEFAULT_META.url;
+    if (/^https?:\/\//i.test(path)) return path;
+    const origin = !window.location.origin || window.location.origin === 'null'
+      ? 'https://ramiro-andres.github.io'
+      : window.location.origin;
+    const basePath = window.location.pathname.replace(/\/$/, '') || '/enciclopediaanimal';
+    const clean = path.replace(/^\.\//, '');
+    return clean.startsWith('/') ? `${origin}${clean}` : `${origin}${basePath}/${clean}`;
+  },
+
+  pageUrl(hash) {
+    const base = `${window.location.origin}${window.location.pathname}`;
+    if (!hash) return base;
+    return `${base}${hash.startsWith('#') ? hash : `#${hash}`}`;
+  },
+
+  setMetaTag(attr, key, value) {
+    let el = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!el) {
+      el = document.createElement('meta');
+      el.setAttribute(attr, key);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', value || '');
+  },
+
+  updatePageMeta(overrides = {}) {
+    const meta = { ...this.DEFAULT_META, ...overrides };
+    document.title = meta.title;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', meta.description);
+    this.setMetaTag('property', 'og:type', meta.type);
+    this.setMetaTag('property', 'og:site_name', 'Atlas Animal');
+    this.setMetaTag('property', 'og:title', meta.title);
+    this.setMetaTag('property', 'og:description', meta.description);
+    this.setMetaTag('property', 'og:url', meta.url);
+    this.setMetaTag('property', 'og:image', this.absoluteUrl(meta.image));
+    this.setMetaTag('property', 'og:image:alt', meta.imageAlt || meta.title);
+    this.setMetaTag('property', 'og:locale', 'es_ES');
+    this.setMetaTag('name', 'twitter:card', 'summary_large_image');
+    this.setMetaTag('name', 'twitter:title', meta.title);
+    this.setMetaTag('name', 'twitter:description', meta.description);
+    this.setMetaTag('name', 'twitter:image', this.absoluteUrl(meta.image));
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', meta.url);
+  },
+
+  resetPageMeta() {
+    this.clearJsonLd();
+    this.currentDictionaryTerm = null;
+    this.updatePageMeta(this.DEFAULT_META);
+  },
+
+  setJsonLd(data) {
+    this.clearJsonLd();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'atlas-jsonld';
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  },
+
+  clearJsonLd() {
+    document.getElementById('atlas-jsonld')?.remove();
+  },
+
+  jsonLdForDisease(breed, disease) {
+    const symptoms = disease.sintomas || [];
+    const payload = {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      name: disease.nombre,
+      description: disease.diagnostico || disease.prevencion || `${disease.nombre} en ${breed.nombre}`,
+      url: this.pageUrl(this.diseaseRoute(breed, disease)),
+      about: {
+        '@type': 'MedicalCondition',
+        name: disease.nombre,
+        description: disease.causas || disease.diagnostico || disease.nombre,
+        signOrSymptom: symptoms.map(s => ({ '@type': 'MedicalSignOrSymptom', name: s }))
+      },
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Atlas Animal',
+        url: this.DEFAULT_META.url
+      }
+    };
+    if (disease.tratamiento) {
+      payload.about.possibleTreatment = { '@type': 'MedicalTherapy', name: disease.tratamiento };
+    }
+    return payload;
+  },
+
+  jsonLdForTerm(term) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'DefinedTerm',
+      name: term.termino,
+      description: term.definicion,
+      url: this.pageUrl(this.termRoute(term)),
+      inDefinedTermSet: {
+        '@type': 'DefinedTermSet',
+        name: this.dictionaryData?.titulo || 'Diccionario de términos médicos',
+        url: this.pageUrl('#glosario')
+      }
+    };
+  },
+
+  termSlug(termino) {
+    return this.diseaseSlug({ nombre: termino });
+  },
+
+  termRoute(term) {
+    const name = typeof term === 'string' ? term : term?.termino;
+    return `#glosario/${this.routePart(this.termSlug(name))}`;
+  },
+
+  findDictionaryTerm(slug) {
+    const decoded = decodeURIComponent(slug || '');
+    const target = this.normalizeSearch(decoded.replace(/-/g, ' '));
+    return this.getDictionaryTerms().find(
+      t => this.termSlug(t.termino) === decoded || this.normalizeSearch(t.termino) === target
+    );
+  },
+
+  renderReportErrorButton({ kind, name, animalCategory, hash }) {
+    const url = this.pageUrl(hash);
+    const params = new URLSearchParams({
+      template: 'content_request.yml',
+      title: `[Contenido]: Error en ficha — ${name}`,
+      content_type: 'Ampliación de ficha existente',
+      title_name: name,
+      description: `**Reporte de error de contenido**\n\n**Tipo de ficha:** ${kind}\n**Nombre:** ${name}\n` +
+        (animalCategory ? `**Categoría animal:** ${animalCategory}\n` : '') +
+        `**URL:** ${url}\n\nDescriba el error detectado (dato incorrecto, imagen, ortografía, etc.):`
+    });
+    if (animalCategory) params.set('animal_category', animalCategory);
+    const href = `https://github.com/${this.GITHUB_ISSUES_REPO}/issues/new?${params.toString()}`;
+    return `<a class="btn-report-error" href="${this.esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${this.esc(this.t('report.error_label'))}">${this.esc(this.t('report.error'))}</a>`;
   },
 
   async init() {
@@ -159,6 +311,11 @@ const App = {
   },
 
   openDictionaryWithTerm(termino) {
+    const term = this.getDictionaryTerms().find(t => this.normalizeSearch(t.termino) === this.normalizeSearch(termino));
+    if (term) {
+      this.showDictionaryTerm(term);
+      return;
+    }
     this.dictionaryCategory = 'todos';
     this.dictionaryQuery = this.normalizeSearch(termino);
     this.showDictionary();
@@ -264,7 +421,17 @@ const App = {
     document.getElementById('backDictionaryBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('dictionarySearchInput')?.addEventListener('input', (e) => {
       this.dictionaryQuery = e.target.value.toLowerCase().trim();
+      this.currentDictionaryTerm = null;
       this.renderDictionary();
+      if (!this.isRoutingFromHash) this.updateHash('#glosario');
+      this.updatePageMeta({
+        title: 'Glosario médico — Atlas Animal',
+        description: this.dictionaryData?.introduccion || this.DEFAULT_META.description,
+        image: 'images/og-image.svg',
+        url: this.pageUrl('#glosario'),
+        type: 'website'
+      });
+      this.clearJsonLd();
     });
 
     document.addEventListener('keydown', (e) => {
@@ -455,6 +622,13 @@ const App = {
       }
 
       if (parts[0] === 'glosario') {
+        if (parts[1]) {
+          const term = this.findDictionaryTerm(parts[1]);
+          if (term) {
+            this.showDictionaryTerm(term, { updateHash: false });
+            return true;
+          }
+        }
         this.showDictionary({ updateHash: false, focus: false });
         return true;
       }
@@ -674,6 +848,7 @@ const App = {
     });
     this.showView('welcome');
     if (options.updateHash !== false) this.clearHash();
+    this.resetPageMeta();
     this.exportE2EState();
   },
 
@@ -871,7 +1046,9 @@ const App = {
         </header>
         <div class="dictionary-term-grid">
           ${cat.terminos.map(term => `
-            <article class="dictionary-term-card">
+            <article class="dictionary-term-card${this.currentDictionaryTerm?.termino === term.termino ? ' dictionary-term-card--active' : ''}"
+              data-term-slug="${this.esc(this.termSlug(term.termino))}" role="button" tabindex="0"
+              aria-label="${this.esc(term.termino)}">
               <h4>${this.esc(term.termino)}</h4>
               <p class="dictionary-definition">${this.esc(term.definicion)}</p>
               ${term.ejemplo ? `<p class="dictionary-example"><span>Ejemplo:</span> ${this.esc(term.ejemplo)}</p>` : ''}
@@ -883,6 +1060,7 @@ const App = {
     `).join('');
 
     this.bindTermDiseaseLinks(list);
+    this.bindDictionaryTermCards(list);
   },
 
   renderTermDiseaseLinks(term) {
@@ -916,13 +1094,69 @@ const App = {
     });
   },
 
+  bindDictionaryTermCards(container) {
+    if (!container) return;
+    container.querySelectorAll('.dictionary-term-card[data-term-slug]').forEach(card => {
+      const open = () => {
+        const term = this.findDictionaryTerm(card.dataset.termSlug);
+        if (term) this.showDictionaryTerm(term);
+      };
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.dictionary-term-link')) return;
+        open();
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+  },
+
   showDictionary(options = {}) {
+    if (!options.keepTerm) this.currentDictionaryTerm = null;
     if (this.searchQuery) this.clearSearch(false);
     this.renderDictionary();
     this.showView('dictionary');
     if (options.updateHash !== false) this.updateHash('#glosario');
+    if (!this.currentDictionaryTerm) {
+      this.updatePageMeta({
+        title: 'Glosario médico — Atlas Animal',
+        description: this.dictionaryData?.introduccion || this.DEFAULT_META.description,
+        image: 'images/og-image.svg',
+        url: this.pageUrl('#glosario'),
+        type: 'website'
+      });
+      this.clearJsonLd();
+    }
     this.exportE2EState();
     if (options.focus !== false) document.getElementById('dictionarySearchInput')?.focus();
+  },
+
+  showDictionaryTerm(term, options = {}) {
+    this.currentDictionaryTerm = term;
+    this.dictionaryCategory = 'todos';
+    this.dictionaryQuery = this.normalizeSearch(term.termino);
+    const input = document.getElementById('dictionarySearchInput');
+    if (input) input.value = term.termino;
+    if (this.searchQuery) this.clearSearch(false);
+    this.renderDictionary();
+    this.showView('dictionary');
+    if (options.updateHash !== false) this.updateHash(this.termRoute(term));
+    this.updatePageMeta({
+      title: `${term.termino} — Glosario — Atlas Animal`,
+      description: term.definicion,
+      image: 'images/og-image.svg',
+      imageAlt: `Término del glosario: ${term.termino}`,
+      url: this.pageUrl(this.termRoute(term)),
+      type: 'article'
+    });
+    this.setJsonLd(this.jsonLdForTerm(term));
+    this.exportE2EState();
+    requestAnimationFrame(() => {
+      document.querySelector('.dictionary-term-card--active')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
   },
 
   showUrgency(options = {}) {
@@ -1903,6 +2137,7 @@ const App = {
               ${this.isInCompare(breed.animalId, breed.id) ? '✓ ' : '+ '}${this.esc(this.t('compare.add'))}
             </button>
             ${this.renderShareButton(this.breedRoute(breed), breed.nombre)}
+            ${this.renderReportErrorButton({ kind: 'Raza', name: breed.nombre, animalCategory: breed.animalNombre, hash: this.breedRoute(breed) })}
           </div>
           <div class="info-grid">
             <div class="info-item"><label>Peso promedio</label><span>${this.esc(breed.peso || 'N/D')}</span></div>
@@ -1976,6 +2211,15 @@ const App = {
 
     this.showView('detail');
     if (options.updateHash !== false) this.updateHash(this.breedRoute(breed));
+    this.updatePageMeta({
+      title: `${breed.nombre} — Atlas Animal`,
+      description: breed.descripcion || this.DEFAULT_META.description,
+      image: breed.imagen,
+      imageAlt: `${breed.nombre} — ${breed.animalNombre}`,
+      url: this.pageUrl(this.breedRoute(breed)),
+      type: 'article'
+    });
+    this.clearJsonLd();
     this.trackVisit({
       key: `${breed.animalId}:${breed.id}`,
       type: 'breed',
@@ -2004,6 +2248,7 @@ const App = {
               </div>
               <div class="disease-share-row">
                 ${this.renderShareButton(this.diseaseRoute(breed, disease), `${disease.nombre} — ${breed.nombre}`)}
+                ${this.renderReportErrorButton({ kind: 'Enfermedad', name: disease.nombre, animalCategory: breed.animalNombre, hash: this.diseaseRoute(breed, disease) })}
               </div>
             </div>
           </div>
@@ -2052,6 +2297,15 @@ const App = {
     this.bindShareButtons(el);
     this.showView('disease');
     if (options.updateHash !== false) this.updateHash(this.diseaseRoute(breed, disease));
+    this.updatePageMeta({
+      title: `${disease.nombre} — Atlas Animal`,
+      description: disease.diagnostico || disease.prevencion || `${disease.nombre} en ${breed.nombre}`,
+      image: disease.imagen || breed.imagen,
+      imageAlt: `${disease.nombre} — ${breed.nombre}`,
+      url: this.pageUrl(this.diseaseRoute(breed, disease)),
+      type: 'article'
+    });
+    this.setJsonLd(this.jsonLdForDisease(breed, disease));
     this.trackVisit({
       key: `${breed.animalId}:${breed.id}:${this.diseaseSlug(disease)}`,
       type: 'disease',

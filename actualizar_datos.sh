@@ -4,6 +4,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 ruby "$DIR/scripts/data/build_medical_dictionary.rb"
 ruby "$DIR/scripts/data/build_cross_links.rb"
 ruby "$DIR/scripts/data/build_toxicologia.rb"
+ruby "$DIR/scripts/data/build_sitemap.rb"
 ruby -rjson -e '
   base = ARGV[0]
   d = JSON.parse(File.read(base + "/data/enciclopedia.json"))

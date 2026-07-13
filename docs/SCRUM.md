@@ -807,11 +807,9 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 5 — En progreso (rama `sprint-5/ep-10-herramientas-clinicas`)
+## Sprint 5 — Completado (rama `sprint-5/ep-10-herramientas-clinicas`, PR #26)
 
 ### EP-10 — Herramientas clínicas de bolsillo
-
-**Objetivo:** Añadir calculadoras y referencias rápidas (RER/MER, toxicología), compartir fichas por URL y visibilidad de enfermedades zoonóticas con calendarios de vacunación orientativos por especie.
 
 | ID | Historia | Puntos | Estado |
 |----|----------|--------|--------|
@@ -821,66 +819,56 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | US-TOOL-04 | Badges zoonóticos + calendario vacunación | 5 | Hecho |
 | | | **15** | |
 
-#### US-TOOL-01 · Calculadora RER/MER
+**Entregables:** `data/toxicologia.json`, `data/calendario_vacunacion.json`, vistas herramientas, `tests/test_sprint5.rb`.
 
-**Como** estudiante o clínico, **quiero** calcular RER y MER con toggle kg/lb, **para** estimar necesidades energéticas en consulta.
+---
 
-**Tareas técnicas:**
-- [x] Vista `#rer-mer` y hub `#herramientas` en `js/app.js` / `index.html`.
-- [x] Fórmula RER = 70 × kg^0,75; factores MER (castrado, activo, cachorro, etc.).
-- [x] Toggle kg/lb, disclaimer educativo, i18n ES/EN.
-- [x] Enlace desde cabecera y tarjeta en welcome.
+## Sprint 6 — En progreso (rama `sprint-6/ep-11-seo-sharing`)
 
-**Criterios de aceptación:**
-- [x] Cálculo en tiempo real al cambiar peso o factor.
-- [x] Hash `#rer-mer` restaura la vista al recargar.
+### EP-11 — SEO, sharing y descubrimiento
 
-#### US-TOOL-02 · Índice de toxicología
+**Objetivo:** Mejorar el descubrimiento del atlas (sitemap, metadatos dinámicos, datos estructurados) y facilitar el reporte de errores de contenido hacia GitHub.
 
-**Como** profesional en urgencias, **quiero** consultar sustancias tóxicas por especie, **para** orientar la actuación inicial ante intoxicaciones.
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-SEO-01 | sitemap.xml con rutas del atlas | 3 | Hecho |
+| US-SEO-02 | OG dinámicos (título, descripción, imagen de raza) | 5 | Hecho |
+| US-SEO-03 | JSON-LD (Schema.org) en enfermedad/glosario | 3 | Hecho |
+| US-SEO-04 | Reportar error con un clic hacia GitHub | 2 | Hecho |
+| | | **13** | |
 
-**Tareas técnicas:**
-- [x] `data/toxicologia.json` (20 sustancias: chocolate, xilitol, uvas, etc.).
-- [x] `scripts/data/build_toxicologia.rb` + `data/toxicologia.js` vía `actualizar_datos.sh`.
-- [x] Vista `#toxicologia` con búsqueda y filtro por especie.
-- [x] Enlace desde vista de urgencias.
-
-**Criterios de aceptación:**
-- [x] ≥15 sustancias documentadas para perros y/o gatos.
-- [x] Precache offline en `sw.js` (`atlas-v4`).
-
-#### US-TOOL-03 · Compartir ficha
-
-**Como** usuario, **quiero** compartir o copiar el enlace de una ficha de raza o enfermedad, **para** enviarla a colegas o clientes.
+#### US-SEO-01 · sitemap.xml
 
 **Tareas técnicas:**
-- [x] Botón en `showBreedDetail` y `showDiseaseDetail`.
-- [x] `navigator.share` con fallback `clipboard.writeText`.
-- [x] Toast visual (`#toastContainer`).
+- [x] `scripts/data/build_sitemap.rb` → `sitemap.xml` (home + hash routes).
+- [x] Integrado en `actualizar_datos.sh` y workflows de build/deploy.
+- [x] `robots.txt` + `<link rel="sitemap">` en `index.html`.
 
-**Criterios de aceptación:**
-- [x] URL incluye hash de ruta (`#raza/...`, `#enfermedad/...`).
-- [x] Feedback accesible (`aria-live` en toast).
-
-#### US-TOOL-04 · Zoonóticas y vacunación
-
-**Como** consultor de salud pública veterinaria, **quiero** ver badges zoonóticos y calendarios de vacunación por etapa de vida, **para** educar sobre riesgos compartidos humano-animal.
+#### US-SEO-02 · OG dinámicos por ruta
 
 **Tareas técnicas:**
-- [x] `scripts/data/mark_zoonotic_diseases.rb` → campo `zoonotica` en enfermedades.
-- [x] Badge en `diseaseView` para `zoonotica: true`.
-- [x] `data/calendario_vacunacion.json` (13 especies: cachorro/adulto/senior).
-- [x] Bloque `renderVaccinationCalendar` en ficha de raza; disclaimer por país.
+- [x] `updatePageMeta` / `resetPageMeta` (og:*, twitter:*, canonical).
+- [x] Actualización en fichas de raza/enfermedad y glosario; reset en `goWelcome`.
+- [x] Limitación documentada en `docs/SEO.md` (crawlers sin JS).
 
-**Criterios de aceptación:**
-- [x] ≥20 enfermedades marcadas como zoonóticas.
-- [x] Calendario visible en fichas de perros y gatos (y resto de especies con datos).
+#### US-SEO-03 · JSON-LD
+
+**Tareas técnicas:**
+- [x] `MedicalWebPage` + `MedicalCondition` en enfermedades.
+- [x] `DefinedTerm` en términos del glosario (`#glosario/{slug}`).
+- [x] Bloque `#atlas-jsonld` reemplazado al cambiar de vista.
+
+#### US-SEO-04 · Reportar error
+
+**Tareas técnicas:**
+- [x] Botón en ficha de raza y enfermedad → issue con `content_request.yml`.
+- [x] Campos prellenados: nombre, URL con hash, categoría animal.
+- [x] i18n ES/EN y estilos accesibles.
 
 **Entregables técnicos:**
-- `data/toxicologia.json`, `data/calendario_vacunacion.json`, scripts Ruby asociados.
-- Vistas herramientas en `index.html`, lógica en `js/app.js`, estilos en `css/styles.css`.
-- `sw.js` `atlas-v4` con precache de nuevos datos JS.
-- `tests/test_sprint5.rb`.
+- `scripts/data/build_sitemap.rb`, `sitemap.xml`, `robots.txt`.
+- Metadatos dinámicos y JSON-LD en `js/app.js`; `docs/SEO.md`.
+- `tests/test_sprint6.rb`.
 
 ---
 
@@ -902,4 +890,5 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md): análisis de fallos CI/CD (Pages, E2E, JSON→JS, PR #21–#23) |
 | 2026-07-12 | Sprint 2 entregado: US-UX-04 (enlaces cruzados), US-DEV-04 (E2E sin servidor), US-DEV-09 (preview + validaciones) |
 | 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |
-| 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación |
+| 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
+| 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |

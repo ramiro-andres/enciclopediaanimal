@@ -23,8 +23,9 @@ jobs:
 
       - name: Construir sitio estático (_site)
         run: |
+          ruby scripts/data/build_sitemap.rb
           mkdir -p _site
-          cp index.html .nojekyll manifest.webmanifest sw.js _site/ 2>/dev/null || cp index.html _site/
+          cp index.html .nojekyll manifest.webmanifest sw.js sitemap.xml robots.txt _site/ 2>/dev/null || cp index.html _site/
           cp -r css js data images _site/
           echo "Archivos en _site: $(find _site -type f | wc -l)"
 
