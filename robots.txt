@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ramiro-andres.github.io/enciclopediaanimal/sitemap.xml
