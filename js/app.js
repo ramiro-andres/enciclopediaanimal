@@ -4599,7 +4599,12 @@ const WelcomeTour = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootAtlasApp() {
   DisclaimerModal.init();
-  App.init();
-});
+  void App.init();
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootAtlasApp);
+} else {
+  bootAtlasApp();
+}
