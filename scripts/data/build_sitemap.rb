@@ -51,7 +51,10 @@ static_routes = [
   ['toxicologia', 'monthly', '0.6'],
   ['fluidoterapia', 'monthly', '0.6'],
   ['unidades', 'monthly', '0.6'],
-  ['predisposiciones', 'weekly', '0.7']
+  ['predisposiciones', 'weekly', '0.7'],
+  ['bcs', 'monthly', '0.6'],
+  ['flashcards', 'monthly', '0.6'],
+  ['emergencias-latam', 'monthly', '0.6']
 ]
 
 static_routes.each do |fragment, freq, priority|

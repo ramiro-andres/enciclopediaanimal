@@ -934,6 +934,53 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
+## Sprint 9 — En progreso (EP-14: Contenido y herramientas atlas)
+
+**Objetivo:** Ampliar contenido clínico de referencia (BCS, toxicología, emergencias LATAM) y modo estudio del glosario con flashcards.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-TOOL-07 | Guía visual condición corporal BCS (1–9 perro/gato, 1–5 equino) | 5 | En progreso |
+| US-TOOL-08 | Ampliar toxicología (+30 sustancias) | 3 | En progreso |
+| US-CON-10 | Directorio emergencias LATAM (sin geolocalización) | 5 | En progreso |
+| US-UX-15 | Flashcards modo estudio del glosario | 5 | En progreso |
+| | | **18** | |
+
+#### US-TOOL-07 · Guía visual BCS
+
+**Tareas técnicas:**
+- [x] Vista `#bcs` con siluetas SVG y selector de especie (perro, gato, equino)
+- [x] Escalas 1–9 (perro/gato) y 1–5 (equino) con descripciones i18n ES/EN
+- [x] Enlace desde hub `#herramientas`
+
+#### US-TOOL-08 · Toxicología ampliada
+
+**Tareas técnicas:**
+- [x] `scripts/data/expand_toxicologia_sprint9.rb` → ≥50 sustancias en `data/toxicologia.json`
+- [x] Plantas, alimentos y medicamentos humanos adicionales
+- [x] Regeneración vía `build_toxicologia.rb`
+
+#### US-CON-10 · Directorio emergencias LATAM
+
+**Tareas técnicas:**
+- [x] `data/emergencias_latam.json` + `build_emergencias_latam.rb`
+- [x] Vista `#emergencias-latam` y enlace desde `#urgencias`
+- [x] ≥8 países con colegios/asociaciones y líneas de referencia
+
+#### US-UX-15 · Flashcards del glosario
+
+**Tareas técnicas:**
+- [x] Vista `#flashcards` con revelar definición, barajar y progreso `localStorage`
+- [x] Acceso desde glosario (`#glosario`) y ruta hash dedicada
+- [x] i18n ES/EN
+
+**Entregables técnicos:**
+- Vistas BCS, flashcards y emergencias LATAM en `index.html`, `css/styles.css`, `js/app.js`
+- `data/emergencias_latam.json`, `scripts/data/expand_toxicologia_sprint9.rb`
+- `tests/test_sprint9.rb`; rutas en `build_sitemap.rb`; `sw.js` atlas-v8
+
+---
+
 ## Sprint 8 (histórico US-UX-13) — Búsqueda con sinónimos
 
 **Objetivo:** Mejorar la descubribilidad del contenido clínico con búsqueda tolerante a sinónimos y errores tipográficos.
@@ -1036,4 +1083,5 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
 | 2026-07-13 | Sprint 8 (EP-13): fluidoterapia, mapa predisposiciones, conversor unidades, tour bienvenida; US-UX-13 mergeada |
+| 2026-07-13 | Sprint 9 (EP-14): BCS visual, toxicología ampliada, directorio emergencias LATAM, flashcards glosario |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

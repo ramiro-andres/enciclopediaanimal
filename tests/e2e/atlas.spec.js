@@ -115,4 +115,22 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#homeView')).toHaveClass(/active/);
     await expect(page.locator('#searchResults')).toContainText(/chihuahua/i);
   });
+
+  test('Sprint 9: herramientas BCS y flashcards del glosario', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    // BCS: navegar por la UI (App no se expone en window).
+    await page.locator('#openToolsCard').click();
+    await expect(page.locator('#toolsView')).toHaveClass(/active/);
+    await page.locator('.tools-card').filter({ hasText: /BCS/i }).click();
+    await expect(page.locator('#bcsView')).toHaveClass(/active/);
+    await expect(page.locator('.bcs-silhouette-svg')).toBeVisible();
+
+    await page.locator('#goDictionaryBtn').click();
+    await expect(page.locator('#dictionaryView')).toHaveClass(/active/);
+    await page.locator('#openFlashcardsFromDict').click();
+    await expect(page.locator('#flashcardsView')).toHaveClass(/active/);
+    await expect(page.locator('.flashcard-term')).toBeVisible();
+  });
 });

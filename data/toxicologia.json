@@ -6,11 +6,21 @@
     {
       "id": "chocolate",
       "nombre": "Chocolate (teobromina)",
-      "especies": ["perros"],
+      "especies": [
+        "perros"
+      ],
       "categoria": "alimento",
       "toxicidad": "alta",
       "umbral_orientativo": "≥20 mg teobromina/kg (síntomas leves); ≥40–60 mg/kg (riesgo grave)",
-      "sintomas": ["Vómito", "Diarrea", "Polidipsia", "Taquicardia", "Temblores", "Convulsiones", "Arritmias"],
+      "sintomas": [
+        "Vómito",
+        "Diarrea",
+        "Polidipsia",
+        "Taquicardia",
+        "Temblores",
+        "Convulsiones",
+        "Arritmias"
+      ],
       "mecanismo": "La teobromina inhibe receptores de adenosina y aumenta liberación de catecolaminas; metabolismo lento en perros.",
       "accion": "No inducir vómito sin criterio veterinario. Acudir de urgencia con el envase (tipo y cantidad). El chocolate negro y de repostería es más peligroso que el con leche.",
       "antidoto": "No hay antídoto específico; tratamiento de soporte y descontaminación guiada."
@@ -18,11 +28,20 @@
     {
       "id": "xilitol",
       "nombre": "Xilitol (edulcorante)",
-      "especies": ["perros"],
+      "especies": [
+        "perros"
+      ],
       "categoria": "alimento",
       "toxicidad": "alta",
       "umbral_orientativo": "≥0,1 g/kg (hipoglucemia); ≥0,5 g/kg (hepatotoxicidad)",
-      "sintomas": ["Vómito", "Hipoglucemia", "Debilidad", "Ataxia", "Convulsiones", "Insuficiencia hepática"],
+      "sintomas": [
+        "Vómito",
+        "Hipoglucemia",
+        "Debilidad",
+        "Ataxia",
+        "Convulsiones",
+        "Insuficiencia hepática"
+      ],
       "mecanismo": "Estimula liberación masiva de insulina en perros, provocando hipoglucemia aguda y posible necrosis hepática.",
       "accion": "Emergencia inmediata. Guardar el producto (chicles, pastas dentales, edulcorantes). Monitorizar glucemia y función hepática.",
       "antidoto": "Soporte con dextrosa IV y hepatoprotectores según criterio clínico."
@@ -30,11 +49,20 @@
     {
       "id": "uvas_pasas",
       "nombre": "Uvas y pasas",
-      "especies": ["perros"],
+      "especies": [
+        "perros"
+      ],
       "categoria": "alimento",
       "toxicidad": "alta",
       "umbral_orientativo": "Variable; incluso pequeñas cantidades pueden causar daño renal",
-      "sintomas": ["Vómito", "Diarrea", "Letargia", "Anorexia", "Oliguria", "Insuficiencia renal aguda"],
+      "sintomas": [
+        "Vómito",
+        "Diarrea",
+        "Letargia",
+        "Anorexia",
+        "Oliguria",
+        "Insuficiencia renal aguda"
+      ],
       "mecanismo": "Mecanismo no totalmente elucidado; posible daño tubular renal idiosincrásico.",
       "accion": "Tratar como emergencia aunque el animal parezca asintomático. No esperar a que aparezcan signos renales.",
       "antidoto": "Fluidoterapia agresiva y monitorización renal; sin antídoto específico."
@@ -42,11 +70,21 @@
     {
       "id": "cebolla_ajo",
       "nombre": "Cebolla, ajo y aliáceas",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "alimento",
       "toxicidad": "moderada",
       "umbral_orientativo": "≥5 g/kg cebolla (perros); gatos más sensibles",
-      "sintomas": ["Hemólisis", "Anemia", "Ictericia", "Orina oscura", "Debilidad", "Taquicardia"],
+      "sintomas": [
+        "Hemólisis",
+        "Anemia",
+        "Ictericia",
+        "Orina oscura",
+        "Debilidad",
+        "Taquicardia"
+      ],
       "mecanismo": "Compuestos de azufre (tiopropanal S-óxido) oxidan la hemoglobina y dañan eritrocitos.",
       "accion": "Evitar sopas, caldos y alimentos condimentados. Analítica sanguínea si hay ingestión significativa.",
       "antidoto": "Soporte transfusional en casos graves; sin antídoto específico."
@@ -54,11 +92,20 @@
     {
       "id": "paracetamol",
       "nombre": "Paracetamol (acetaminofén)",
-      "especies": ["gatos", "perros"],
+      "especies": [
+        "gatos",
+        "perros"
+      ],
       "categoria": "farmaco",
       "toxicidad": "alta",
       "umbral_orientativo": "Gatos: ≥10 mg/kg; perros: dosis terapéuticas mal calculadas",
-      "sintomas": ["Cianosis", "Edema facial (gatos)", "Hepatotoxicidad", "Methemoglobinemia", "Anorexia"],
+      "sintomas": [
+        "Cianosis",
+        "Edema facial (gatos)",
+        "Hepatotoxicidad",
+        "Methemoglobinemia",
+        "Anorexia"
+      ],
       "mecanismo": "Gatos carecen de glucuronidación eficiente; metabolitos tóxicos dañan hepatocitos y hemoglobina.",
       "accion": "Nunca administrar sin prescripción veterinaria. Emergencia si hay ingestión en gatos.",
       "antidoto": "N-acetilcisteína (NAC) en las primeras horas bajo supervisión veterinaria."
@@ -66,11 +113,20 @@
     {
       "id": "ibuprofeno_aines",
       "nombre": "Ibuprofeno y AINEs humanos",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "farmaco",
       "toxicidad": "alta",
       "umbral_orientativo": "Gatos muy sensibles; perros: ≥5–8 mg/kg ibuprofeno puede ser tóxico",
-      "sintomas": ["Vómito", "Úlceras GI", "Anorexia", "Insuficiencia renal", "Hepatotoxicidad"],
+      "sintomas": [
+        "Vómito",
+        "Úlceras GI",
+        "Anorexia",
+        "Insuficiencia renal",
+        "Hepatotoxicidad"
+      ],
       "mecanismo": "Inhibición de COX y daño gastrointestinal/renal; gatos metabolizan lentamente.",
       "accion": "No usar medicamentos humanos sin receta veterinaria. Llevar el envase y la hora de ingestión.",
       "antidoto": "Carbón activado precoz, gastroprotectores, fluidoterapia; sin antídoto específico."
@@ -78,11 +134,21 @@
     {
       "id": "rodenticidas_anticoagulantes",
       "nombre": "Rodenticidas anticoagulantes",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "plaguicida",
       "toxicidad": "alta",
       "umbral_orientativo": "Dosis bajas pueden ser letales; efecto retardado 3–7 días",
-      "sintomas": ["Hemorragias", "Epistaxis", "Hematuria", "Hematomas", "Letargia", "Dificultad respiratoria"],
+      "sintomas": [
+        "Hemorragias",
+        "Epistaxis",
+        "Hematuria",
+        "Hematomas",
+        "Letargia",
+        "Dificultad respiratoria"
+      ],
       "mecanismo": "Inhiben la vitamina K epóxido reductasa, impidiendo síntesis de factores de coagulación.",
       "accion": "Urgencia aunque no haya sangrado visible aún. Llevar el cebo o envase del producto.",
       "antidoto": "Vitamina K1 oral o parenteral durante semanas según tipo de rodenticida."
@@ -90,11 +156,21 @@
     {
       "id": "metaldehido",
       "nombre": "Metaldehído (caracolicidas)",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "plaguicida",
       "toxicidad": "alta",
       "umbral_orientativo": "≥1 g/kg puede ser letal en perros",
-      "sintomas": ["Temblores", "Convulsiones", "Hipertermia", "Taquicardia", "Salivación", "Coma"],
+      "sintomas": [
+        "Temblores",
+        "Convulsiones",
+        "Hipertermia",
+        "Taquicardia",
+        "Salivación",
+        "Coma"
+      ],
       "mecanismo": "Estimulación del SNC y deshidratación por hipertermía.",
       "accion": "Emergencia neurológica. Enfriamiento activo y control de convulsiones en clínica.",
       "antidoto": "Sin antídoto específico; tratamiento de soporte intensivo."
@@ -102,11 +178,18 @@
     {
       "id": "lilium",
       "nombre": "Lirios (Lilium / Hemerocallis)",
-      "especies": ["gatos"],
+      "especies": [
+        "gatos"
+      ],
       "categoria": "planta",
       "toxicidad": "alta",
       "umbral_orientativo": "Cualquier parte de la planta, incluso polen o agua del florero",
-      "sintomas": ["Vómito", "Anorexia", "Letargia", "Insuficiencia renal aguda"],
+      "sintomas": [
+        "Vómito",
+        "Anorexia",
+        "Letargia",
+        "Insuficiencia renal aguda"
+      ],
       "mecanismo": "Daño tubular renal en gatos; mecanismo exacto en estudio.",
       "accion": "Emergencia inmediata. No tener lirios en hogares con gatos.",
       "antidoto": "Fluidoterapia IV agresiva precoz; diálisis en casos graves."
@@ -114,11 +197,21 @@
     {
       "id": "filodendro_pothos",
       "nombre": "Filodendro / Poto (calcio oxalato)",
-      "especies": ["gatos", "perros", "conejos"],
+      "especies": [
+        "gatos",
+        "perros",
+        "conejos"
+      ],
       "categoria": "planta",
       "toxicidad": "moderada",
       "umbral_orientativo": "Mordedura o ingestión de hojas",
-      "sintomas": ["Irritación oral", "Hipersalivación", "Vómito", "Dificultad para tragar", "Edema faríngeo"],
+      "sintomas": [
+        "Irritación oral",
+        "Hipersalivación",
+        "Vómito",
+        "Dificultad para tragar",
+        "Edema faríngeo"
+      ],
       "mecanismo": "Cristales de oxalato de calcio irritan mucosas.",
       "accion": "Enjuague oral y observación. Urgencia si hay edema respiratorio.",
       "antidoto": "Analgésicos y antiinflamatorios según criterio; sin antídoto específico."
@@ -126,11 +219,20 @@
     {
       "id": "etilenglicol",
       "nombre": "Etilenglicol (anticongelante)",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "quimico",
       "toxicidad": "alta",
       "umbral_orientativo": "≥1,4 ml/kg puede ser letal en gatos; perros algo más resistentes",
-      "sintomas": ["Ataxia", "Depresión", "Poliuria/polidipsia", "Insuficiencia renal", "Cristales de oxalato en orina"],
+      "sintomas": [
+        "Ataxia",
+        "Depresión",
+        "Poliuria/polidipsia",
+        "Insuficiencia renal",
+        "Cristales de oxalato en orina"
+      ],
       "mecanismo": "Metabolizado a ácido glicólico y oxálico, causando acidosis y daño renal.",
       "accion": "Emergencia en las primeras horas. El sabor dulce atrae a mascotas.",
       "antidoto": "Fomepizol o etanol IV como antídoto; fluidoterapia y alcalinización."
@@ -138,11 +240,25 @@
     {
       "id": "organofosforados",
       "nombre": "Organofosforados / carbamatos",
-      "especies": ["perros", "gatos", "aves", "equinos", "bovinos"],
+      "especies": [
+        "perros",
+        "gatos",
+        "aves",
+        "equinos",
+        "bovinos"
+      ],
       "categoria": "plaguicida",
       "toxicidad": "alta",
       "umbral_orientativo": "Depende del compuesto; exposición cutánea o ingestión",
-      "sintomas": ["Salivación", "Lagrimeo", "Miosis", "Diarrea", "Fasciculaciones", "Bradicardia", "Convulsiones"],
+      "sintomas": [
+        "Salivación",
+        "Lagrimeo",
+        "Miosis",
+        "Diarrea",
+        "Fasciculaciones",
+        "Bradicardia",
+        "Convulsiones"
+      ],
       "mecanismo": "Inhibición de la acetilcolinesterasa → síndrome colinérgico.",
       "accion": "Descontaminación cutánea, oxígeno, atropina y pralidoxima bajo supervisión veterinaria.",
       "antidoto": "Atropina + pralidoxima (2-PAM) en intoxicaciones por organofosforados."
@@ -150,11 +266,22 @@
     {
       "id": "plomo",
       "nombre": "Plomo (pinturas, munición, pesas)",
-      "especies": ["perros", "gatos", "aves", "equinos"],
+      "especies": [
+        "perros",
+        "gatos",
+        "aves",
+        "equinos"
+      ],
       "categoria": "metal",
       "toxicidad": "moderada",
       "umbral_orientativo": "Ingestión crónica o aguda de fragmentos",
-      "sintomas": ["Vómito", "Anorexia", "Convulsiones", "Anemia", "Neurología alterada"],
+      "sintomas": [
+        "Vómito",
+        "Anorexia",
+        "Convulsiones",
+        "Anemia",
+        "Neurología alterada"
+      ],
       "mecanismo": "Sustituye calcio y zinc en enzimas; daño neurológico y GI.",
       "accion": "Radiografía si se sospecha ingestión de objetos. Analítica con plomo sérico.",
       "antidoto": "Quelantes (EDTA cálcico disódico, D-penicilamina) en casos confirmados."
@@ -162,11 +289,19 @@
     {
       "id": "macadamia",
       "nombre": "Nueces de macadamia",
-      "especies": ["perros"],
+      "especies": [
+        "perros"
+      ],
       "categoria": "alimento",
       "toxicidad": "moderada",
       "umbral_orientativo": "≥2,2 g/kg",
-      "sintomas": ["Debilidad posterior", "Vómito", "Temblores", "Hipertermia", "Ataxia"],
+      "sintomas": [
+        "Debilidad posterior",
+        "Vómito",
+        "Temblores",
+        "Hipertermia",
+        "Ataxia"
+      ],
       "mecanismo": "Desconocido; efecto neuromuscular reversible en la mayoría de casos.",
       "accion": "Generalmente autolimitado en 24–48 h, pero consultar si hay signos neurológicos marcados.",
       "antidoto": "Soporte sintomático; sin antídoto específico."
@@ -174,11 +309,21 @@
     {
       "id": "alcohol_etanol",
       "nombre": "Alcohol (etanol)",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "quimico",
       "toxicidad": "alta",
       "umbral_orientativo": "≥1 ml etanol puro/kg",
-      "sintomas": ["Depresión del SNC", "Ataxia", "Vómito", "Hipoglucemia", "Coma", "Depresión respiratoria"],
+      "sintomas": [
+        "Depresión del SNC",
+        "Ataxia",
+        "Vómito",
+        "Hipoglucemia",
+        "Coma",
+        "Depresión respiratoria"
+      ],
       "mecanismo": "Depresión del sistema nervioso central; hipoglucemia en animales pequeños.",
       "accion": "Emergencia si hay ingestión de bebidas, fermentados o productos con alcohol.",
       "antidoto": "Soporte respiratorio y fluidoterapia; sin antídoto específico."
@@ -186,11 +331,21 @@
     {
       "id": "cafeina",
       "nombre": "Caféina / guaraná / bebidas energéticas",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "alimento",
       "toxicidad": "alta",
       "umbral_orientativo": "≥63 mg/kg (perros)",
-      "sintomas": ["Agitación", "Taquicardia", "Temblores", "Convulsiones", "Vómito", "Hipertensión"],
+      "sintomas": [
+        "Agitación",
+        "Taquicardia",
+        "Temblores",
+        "Convulsiones",
+        "Vómito",
+        "Hipertensión"
+      ],
       "mecanismo": "Antagonismo de adenosina y estimulación simpática.",
       "accion": "Urgencia con convulsiones o arritmias. Informar cantidad ingerida.",
       "antidoto": "Soporte cardiovascular y anticonvulsivantes según necesidad."
@@ -198,11 +353,20 @@
     {
       "id": "uva_espina",
       "nombre": "Uva espina / higo (ficus)",
-      "especies": ["perros", "gatos", "conejos"],
+      "especies": [
+        "perros",
+        "gatos",
+        "conejos"
+      ],
       "categoria": "planta",
       "toxicidad": "moderada",
       "umbral_orientativo": "Ingestión de hojas o látex",
-      "sintomas": ["Irritación oral y GI", "Vómito", "Diarrea", "Dermatitis de contacto"],
+      "sintomas": [
+        "Irritación oral y GI",
+        "Vómito",
+        "Diarrea",
+        "Dermatitis de contacto"
+      ],
       "mecanismo": "Proteasas y irritantes en el látex de la planta.",
       "accion": "Lavado oral y observación. Consultar si hay vómito persistente.",
       "antidoto": "Soporte sintomático."
@@ -210,11 +374,19 @@
     {
       "id": "zinc_monedas",
       "nombre": "Monedas de zinc (EE.UU. prev. 1982)",
-      "especies": ["perros"],
+      "especies": [
+        "perros"
+      ],
       "categoria": "metal",
       "toxicidad": "alta",
       "umbral_orientativo": "Una moneda puede causar hemólisis en perros pequeños",
-      "sintomas": ["Vómito", "Hemólisis", "Ictericia", "Insuficiencia renal", "Pancreatitis"],
+      "sintomas": [
+        "Vómito",
+        "Hemólisis",
+        "Ictericia",
+        "Insuficiencia renal",
+        "Pancreatitis"
+      ],
       "mecanismo": "El zinc disuelto en ácido gástrico daña eritrocitos y órganos.",
       "accion": "Radiografía abdominal urgente si se sospecha ingestión de monedas.",
       "antidoto": "Extracción endoscópica o quirúrgica; quelación en casos sistémicos."
@@ -222,11 +394,20 @@
     {
       "id": "pitaya_tuna",
       "nombre": "Aguacate (persina)",
-      "especies": ["aves", "conejos", "roedores"],
+      "especies": [
+        "aves",
+        "conejos",
+        "roedores"
+      ],
       "categoria": "alimento",
       "toxicidad": "moderada",
       "umbral_orientativo": "Hojas, corteza y hueso más tóxicos que la pulpa",
-      "sintomas": ["Dificultad respiratoria", "Edema pulmonar", "Miocardiopatía (aves)", "Mastitis (rumiantes)"],
+      "sintomas": [
+        "Dificultad respiratoria",
+        "Edema pulmonar",
+        "Miocardiopatía (aves)",
+        "Mastitis (rumiantes)"
+      ],
       "mecanismo": "Persina y otros compuestos tóxicos para especies no adaptadas.",
       "accion": "Evitar en aves y roedores. Perros y gatos: pulpa en pequeñas cantidades suele ser bien tolerada, pero no recomendable.",
       "antidoto": "Soporte respiratorio en aves; sin antídoto específico."
@@ -234,14 +415,693 @@
     {
       "id": "amapola_opioides",
       "nombre": "Opioides humanos (tramadol, morfina, fentanilo parches)",
-      "especies": ["perros", "gatos"],
+      "especies": [
+        "perros",
+        "gatos"
+      ],
       "categoria": "farmaco",
       "toxicidad": "alta",
       "umbral_orientativo": "Masticar parches de fentanilo es especialmente peligroso",
-      "sintomas": ["Depresión respiratoria", "Sedación", "Miosis", "Bradicardia", "Coma"],
+      "sintomas": [
+        "Depresión respiratoria",
+        "Sedación",
+        "Miosis",
+        "Bradicardia",
+        "Coma"
+      ],
       "mecanismo": "Agonismo de receptores μ-opioides en el SNC.",
       "accion": "Emergencia respiratoria. Naloxona puede revertir efectos bajo supervisión veterinaria.",
       "antidoto": "Naloxona IV/IM/IN según protocolo veterinario."
+    },
+    {
+      "id": "difenhidramina",
+      "nombre": "Difenhidramina y antihistamínicos H1",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Perros: >4 mg/kg puede causar excitación; gatos muy sensibles",
+      "sintomas": [
+        "Sedación",
+        "Ataxia",
+        "Agitación paradójica",
+        "Midriasis",
+        "Taquicardia",
+        "Convulsiones"
+      ],
+      "mecanismo": "Antagonismo de receptores H1 con efectos anticolinérgicos y depresión del SNC.",
+      "accion": "No administrar productos humanos sin criterio veterinario. Urgencia si hay convulsiones o depresión respiratoria.",
+      "antidoto": "Soporte sintomático; sin antídoto específico."
+    },
+    {
+      "id": "pseudoefedrina",
+      "nombre": "Pseudoefedrina / descongestionantes",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "alta",
+      "umbral_orientativo": "≥5 mg/kg puede ser tóxico en perros pequeños",
+      "sintomas": [
+        "Hiperactividad",
+        "Taquicardia",
+        "Hipertensión",
+        "Temblores",
+        "Convulsiones",
+        "Hipertermia"
+      ],
+      "mecanismo": "Estimulación simpática por liberación de noradrenalina y vasoconstricción.",
+      "accion": "Emergencia cardiovascular. Llevar el medicamento ingerido (jarabe, pastillas).",
+      "antidoto": "Sedantes y control de presión arterial bajo supervisión veterinaria."
+    },
+    {
+      "id": "metformina",
+      "nombre": "Metformina (antidiabéticos orales)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Ingestión de varias tabletas en animales pequeños",
+      "sintomas": [
+        "Vómito",
+        "Letargia",
+        "Acidosis láctica",
+        "Hipoglucemia",
+        "Diarrea"
+      ],
+      "mecanismo": "Inhibición de la gluconeogénesis y posible acidosis láctica en sobredosis.",
+      "accion": "Consultar de inmediato con cantidad ingerida y peso del animal.",
+      "antidoto": "Fluidoterapia, corrección de acidosis y monitorización de glucemia."
+    },
+    {
+      "id": "ssri_antidepresivos",
+      "nombre": "ISRS (fluoxetina, sertralina, paroxetina)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Sobredosis de comprimidos humanos; riesgo de síndrome serotoninérgico",
+      "sintomas": [
+        "Agitación",
+        "Temblores",
+        "Hipertermia",
+        "Midriasis",
+        "Taquicardia",
+        "Diarrea"
+      ],
+      "mecanismo": "Exceso de serotonina sináptica por inhibición de recaptación.",
+      "accion": "Urgencia si hay signos neurológicos o hipertermia. Informar medicamento y dosis.",
+      "antidoto": "Soporte y sedación; antagonistas específicos solo en casos graves bajo criterio especializado."
+    },
+    {
+      "id": "triciclicos_antidepresivos",
+      "nombre": "Antidepresivos tricíclicos (amitriptilina, clomipramina)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "alta",
+      "umbral_orientativo": "≥5 mg/kg amitriptilina puede ser grave",
+      "sintomas": [
+        "Sedación",
+        "Arritmias",
+        "Convulsiones",
+        "Hipotensión",
+        "Retención urinaria",
+        "Midriasis"
+      ],
+      "mecanismo": "Bloqueo de recaptación de monoaminas y efectos anticolinérgicos/cardíacos.",
+      "accion": "Emergencia cardíaca y neurológica. ECG recomendado.",
+      "antidoto": "Lípidos IV en casos seleccionados; soporte cardiovascular intensivo."
+    },
+    {
+      "id": "benzodiacepinas",
+      "nombre": "Benzodiacepinas (diazepam, alprazolam, lorazepam)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Depende de dosis y tamaño; gatos sensibles a ciertos excipientes",
+      "sintomas": [
+        "Sedación profunda",
+        "Ataxia",
+        "Depresión respiratoria",
+        "Hipotensión",
+        "Coma"
+      ],
+      "mecanismo": "Potenciación del GABA en el SNC.",
+      "accion": "Vigilar vía aérea. No inducir vómito si hay sedación marcada.",
+      "antidoto": "Flumazenilo en casos graves bajo supervisión veterinaria."
+    },
+    {
+      "id": "anticonceptivos_hormonales",
+      "nombre": "Anticonceptivos hormonales humanos",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Ingestión de blíster completo en animales pequeños",
+      "sintomas": [
+        "Anorexia",
+        "Letargia",
+        "Anemia",
+        "Piel eritematosa",
+        "Alopecia (perros)",
+        "Infecciones uterinas"
+      ],
+      "mecanismo": "Supresión de médula ósea y alteración endocrina por estrógenos sintéticos.",
+      "accion": "Consultar aunque el animal parezca bien; analítica recomendada.",
+      "antidoto": "Soporte transfusional y tratamiento de infecciones secundarias si aplica."
+    },
+    {
+      "id": "vitamina_d_rodenticida",
+      "nombre": "Rodenticidas con vitamina D3 (colecalciferol)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "plaguicida",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Dosis bajas; hipercalcemia retardada 24–72 h",
+      "sintomas": [
+        "Anorexia",
+        "Vómito",
+        "Polidipsia",
+        "Hipercalcemia",
+        "Insuficiencia renal",
+        "Arritmias"
+      ],
+      "mecanismo": "Hipervitaminosis D → absorción excesiva de calcio y mineralización tisular.",
+      "accion": "Urgencia aunque esté asintomático. Llevar el cebo ingerido.",
+      "antidoto": "Fluidoterapia, diuréticos, bifosfonatos o calcitonina según protocolo veterinario."
+    },
+    {
+      "id": "sago_cycas",
+      "nombre": "Palma sago (Cycas revoluta)",
+      "especies": [
+        "perros",
+        "gatos",
+        "equinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Cualquier parte de la planta, especialmente semillas",
+      "sintomas": [
+        "Vómito",
+        "Ictericia",
+        "Hemorragias",
+        "Insuficiencia hepática",
+        "Coagulopatía"
+      ],
+      "mecanismo": "Cicasina y otros compuestos hepatotóxicos que dañan hepatocitos.",
+      "accion": "Emergencia hepática inmediata. No retrasar atención.",
+      "antidoto": "Soporte hepático intensivo; sin antídoto específico."
+    },
+    {
+      "id": "azalea_rododendro",
+      "nombre": "Azalea / rododendro",
+      "especies": [
+        "perros",
+        "gatos",
+        "equinos",
+        "bovinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Pocas hojas pueden ser letales en rumiantes y equinos",
+      "sintomas": [
+        "Salivación",
+        "Vómito",
+        "Diarrea",
+        "Bradicardia",
+        "Hipotensión",
+        "Convulsiones",
+        "Coma"
+      ],
+      "mecanismo": "Grayanotoxinas bloquean canales de sodio en membranas celulares.",
+      "accion": "Emergencia cardiovascular. Evitar acceso a jardines con estas plantas.",
+      "antidoto": "Atropina y fluidoterapia según criterio clínico."
+    },
+    {
+      "id": "oleandro",
+      "nombre": "Adelfa / oleandro (Nerium oleander)",
+      "especies": [
+        "perros",
+        "gatos",
+        "equinos",
+        "bovinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Ingestión de hojas o ramas; agua de florero contaminada",
+      "sintomas": [
+        "Vómito",
+        "Diarrea",
+        "Arritmias",
+        "Bradicardia",
+        "Hipotensión",
+        "Muerte súbita"
+      ],
+      "mecanismo": "Glicósidos cardíacos inhiben la bomba Na⁺/K⁺-ATPasa.",
+      "accion": "Emergencia cardíaca. Llevar muestra de la planta si es posible.",
+      "antidoto": "Anticuerpos anti-digoxina (Fragmin) en casos graves si está disponible."
+    },
+    {
+      "id": "cicuta_hemlock",
+      "nombre": "Cicuta / hemlock (Conium, Cicuta)",
+      "especies": [
+        "perros",
+        "equinos",
+        "bovinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Raíces y semillas muy tóxicas",
+      "sintomas": [
+        "Salivación",
+        "Temblores",
+        "Convulsiones",
+        "Parálisis respiratoria",
+        "Muerte rápida"
+      ],
+      "mecanismo": "Alcaloides neurotóxicos que actúan como agonistas del receptor GABA.",
+      "accion": "Emergencia neurológica inmediata. Proteger vía aérea.",
+      "antidoto": "Soporte respiratorio; sin antídoto específico."
+    },
+    {
+      "id": "ricino",
+      "nombre": "Ricino (Ricinus communis)",
+      "especies": [
+        "perros",
+        "gatos",
+        "equinos",
+        "bovinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Semillas masticadas; la ricina se libera al romper la cáscara",
+      "sintomas": [
+        "Vómito severo",
+        "Dolor abdominal",
+        "Diarrea sanguinolenta",
+        "Deshidratación",
+        "Shock"
+      ],
+      "mecanismo": "Ricina inhibe la síntesis proteica en células del tracto GI.",
+      "accion": "Urgencia por vómito profuso y deshidratación. Estimar número de semillas.",
+      "antidoto": "Fluidoterapia agresiva y antieméticos; sin antídoto específico."
+    },
+    {
+      "id": "nuez_moscada",
+      "nombre": "Nuez moscada",
+      "especies": [
+        "perros"
+      ],
+      "categoria": "alimento",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "≥5 g en perros medianos",
+      "sintomas": [
+        "Alucinaciones",
+        "Temblores",
+        "Taquicardia",
+        "Deshidratación",
+        "Dolor abdominal"
+      ],
+      "mecanismo": "Miristicina con efectos psicoactivos y estimulación del SNC.",
+      "accion": "Consultar si hay signos neurológicos. Evitar repostería condimentada.",
+      "antidoto": "Soporte sintomático."
+    },
+    {
+      "id": "hongo_silvestre",
+      "nombre": "Hongos silvestres (Amanita, Galerina)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Cualquier ingestión de hongo no identificado",
+      "sintomas": [
+        "Vómito",
+        "Hepatotoxicidad",
+        "Neurotoxicidad",
+        "Insuficiencia renal",
+        "Coma"
+      ],
+      "mecanismo": "Amanitinas y otros alcaloides según especie de hongo.",
+      "accion": "Emergencia. Recoger restos del hongo y vómito para identificación.",
+      "antidoto": "Silibinina/NAC en Amanita phalloides bajo protocolo especializado."
+    },
+    {
+      "id": "tomate_verde_solano",
+      "nombre": "Tomate verde / plantas Solanaceae",
+      "especies": [
+        "perros",
+        "gatos",
+        "equinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Hojas y tallos verdes; fruto maduro generalmente seguro en pequeñas cantidades",
+      "sintomas": [
+        "Salivación",
+        "Vómito",
+        "Diarrea",
+        "Letargia",
+        "Dilatación pupilar",
+        "Bradicardia"
+      ],
+      "mecanismo": "Solanina y tomatina irritan el tracto GI y afectan el SNC.",
+      "accion": "Observar si la cantidad fue pequeña; urgencia con signos neurológicos.",
+      "antidoto": "Soporte sintomático."
+    },
+    {
+      "id": "nuez_negra_juglona",
+      "nombre": "Nogal negro (juglona)",
+      "especies": [
+        "perros",
+        "equinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Cáscaras, hojas y nueces en descomposición",
+      "sintomas": [
+        "Vómito",
+        "Letargia",
+        "Convulsiones",
+        "Insuficiencia hepática"
+      ],
+      "mecanismo": "Juglona daña hepatocitos y puede causar edema laminar en equinos.",
+      "accion": "Evitar pastoreo bajo nogales. Urgencia en equinos con cojera o edema.",
+      "antidoto": "Soporte hepático y fluidoterapia."
+    },
+    {
+      "id": "eucalipto_aceite",
+      "nombre": "Aceite esencial de eucalipto",
+      "especies": [
+        "perros",
+        "gatos",
+        "aves"
+      ],
+      "categoria": "quimico",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Pequeñas cantidades de aceite concentrado",
+      "sintomas": [
+        "Salivación",
+        "Vómito",
+        "Depresión respiratoria",
+        "Ataxia",
+        "Hipotermia"
+      ],
+      "mecanismo": "Eucalyptol irrita mucosas y deprime el SNC en altas concentraciones.",
+      "accion": "No usar difusores de aceites esenciales cerca de mascotas sin ventilación.",
+      "antidoto": "Soporte respiratorio; sin antídoto específico."
+    },
+    {
+      "id": "limpiador_cloro",
+      "nombre": "Lejía / hipoclorito de sodio",
+      "especies": [
+        "perros",
+        "gatos",
+        "aves"
+      ],
+      "categoria": "quimico",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Ingestión o contacto con concentrados domésticos",
+      "sintomas": [
+        "Irritación oral y GI",
+        "Vómito",
+        "Esofagitis",
+        "Tos",
+        "Edema laríngeo"
+      ],
+      "mecanismo": "Corrosión alcalina de mucosas y liberación de cloro gaseoso.",
+      "accion": "No inducir vómito. Enjuague oral con agua. Urgencia si hay dificultad respiratoria.",
+      "antidoto": "Soporte respiratorio y gastroprotectores."
+    },
+    {
+      "id": "detergente_lavavajillas",
+      "nombre": "Detergente / lavavajillas",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "quimico",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Ingestión de cápsulas o líquido concentrado",
+      "sintomas": [
+        "Espuma oral",
+        "Vómito",
+        "Diarrea",
+        "Irritación oral",
+        "Dolor abdominal"
+      ],
+      "mecanismo": "Surfactantes aniónicos irritan mucosas y pueden causar aspiración.",
+      "accion": "Enjuague oral. Vigilar tos o dificultad respiratoria por aspiración.",
+      "antidoto": "Soporte sintomático."
+    },
+    {
+      "id": "baterias",
+      "nombre": "Pilas y baterías (alcalinas, botón)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "metal",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Cualquier batería ingerida; las de botón son especialmente peligrosas",
+      "sintomas": [
+        "Salivación",
+        "Úlceras orales/esofágicas",
+        "Vómito",
+        "Fiebre",
+        "Obstrucción GI"
+      ],
+      "mecanismo": "Descarga eléctrica local, perforación y liberación de metales pesados.",
+      "accion": "Radiografía urgente. No dar comida ni inducir vómito sin criterio veterinario.",
+      "antidoto": "Extracción endoscópica o quirúrgica; tratamiento de úlceras."
+    },
+    {
+      "id": "propilenglicol_anticongelante",
+      "nombre": "Propilenglicol (anticongelante «pet-safe»)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "quimico",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Menos tóxico que etilenglicol pero dosis altas pueden afectar riñón y SNC",
+      "sintomas": [
+        "Ataxia",
+        "Depresión",
+        "Poliuria",
+        "Acidosis metabólica"
+      ],
+      "mecanismo": "Metabolismo hepático a ácido láctico y otros metabolitos.",
+      "accion": "No asumir que es inofensivo. Tratar como intoxicación si la cantidad fue significativa.",
+      "antidoto": "Fluidoterapia y monitorización renal."
+    },
+    {
+      "id": "lantana",
+      "nombre": "Lantana (Lantana camara)",
+      "especies": [
+        "bovinos",
+        "equinos",
+        "ovinos",
+        "caprinos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Pastoreo de hojas y frutos verdes",
+      "sintomas": [
+        "Fotosensibilización",
+        "Ictericia",
+        "Coluria",
+        "Anorexia",
+        "Muerte en rumiantes"
+      ],
+      "mecanismo": "Lantadeno A causa colestasis y fotosensibilización.",
+      "accion": "Retirar del pasto. Proteger de la luz solar directa en rumiantes afectados.",
+      "antidoto": "Soporte hepático; sin antídoto específico."
+    },
+    {
+      "id": "aloe_vera",
+      "nombre": "Aloe vera (ingesta de hoja)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Látex y corteza de la hoja; gel interno menos tóxico",
+      "sintomas": [
+        "Vómito",
+        "Diarrea",
+        "Letargia",
+        "Cambio color orina",
+        "Tremor"
+      ],
+      "mecanismo": "Antraquinonas (aloina) irritan el tracto GI y afectan riñón.",
+      "accion": "Consultar si ingirió la parte verde de la hoja. Productos tópicos: evitar que se laman.",
+      "antidoto": "Soporte sintomático y fluidoterapia."
+    },
+    {
+      "id": "aspirina_salicilatos",
+      "nombre": "Aspirina y salicilatos",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "alta",
+      "umbral_orientativo": "Gatos: extremadamente sensibles; perros: ≥50 mg/kg/día crónico",
+      "sintomas": [
+        "Vómito",
+        "Úlceras GI",
+        "Acidosis metabólica",
+        "Insuficiencia renal",
+        "Coagulopatía"
+      ],
+      "mecanismo": "Inhibición de COX y acumulación de ácido salicílico.",
+      "accion": "Nunca administrar aspirina humana a gatos. Emergencia con vómito o letargia.",
+      "antidoto": "Fluidoterapia alcalina, gastroprotectores; diálisis en casos graves."
+    },
+    {
+      "id": "glucocorticoides_humanos",
+      "nombre": "Corticosteroides humanos (prednisona, dexametasona)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Ingestión aguda de dosis altas o exposición crónica accidental",
+      "sintomas": [
+        "Polidipsia",
+        "Poliuria",
+        "Vómito",
+        "Úlceras GI",
+        "Inmunosupresión"
+      ],
+      "mecanismo": "Efectos glucocorticoides sistémicos: antiinflamatorio e inmunosupresor.",
+      "accion": "Informar medicamento y dosis. No suspender bruscamente si hay uso crónico.",
+      "antidoto": "Reducción gradual bajo supervisión veterinaria si fue crónico."
+    },
+    {
+      "id": "laminita_marihuana",
+      "nombre": "Marihuana / THC (comestibles, aceites)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "farmaco",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Comestibles con chocolate aumentan riesgo; perros muy sensibles",
+      "sintomas": [
+        "Ataxia",
+        "Incontinencia urinaria",
+        "Bradycardia",
+        "Hipotermia",
+        "Temblores",
+        "Coma"
+      ],
+      "mecanismo": "Agonismo de receptores cannabinoides CB1 en el SNC.",
+      "accion": "Ser honesto con el veterinario sobre exposición a cannabis. Urgencia si hay coma.",
+      "antidoto": "Soporte sintomático; lipídicos IV en casos seleccionados."
+    },
+    {
+      "id": "cebo_molusquicida",
+      "nombre": "Cebo molusquicida (metaldehído alternativo: fosfato férrico)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "plaguicida",
+      "toxicidad": "leve",
+      "umbral_orientativo": "Fosfato férrico: generalmente baja toxicidad; verificar otros ingredientes",
+      "sintomas": [
+        "Vómito",
+        "Diarrea",
+        "Anorexia leve"
+      ],
+      "mecanismo": "Depende de la formulación; el fosfato férrico irrita el GI.",
+      "accion": "Llevar el envase completo: algunos cebos mezclan metaldehído u otros tóxicos.",
+      "antidoto": "Soporte sintomático; confirmar ingredientes activos."
+    },
+    {
+      "id": "pimienta_cayena",
+      "nombre": "Pimienta de cayena / capsicum",
+      "especies": [
+        "perros",
+        "gatos",
+        "aves"
+      ],
+      "categoria": "alimento",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Comida picante o aceite de chile",
+      "sintomas": [
+        "Irritación oral",
+        "Vómito",
+        "Diarrea",
+        "Estornudos",
+        "Lagrimeo",
+        "Dolor ocular"
+      ],
+      "mecanismo": "Capsaicina irrita mucosas y puede causar gastroenteritis.",
+      "accion": "Leche o agua para enjuague oral (no en aves). Consultar si hay dificultad respiratoria.",
+      "antidoto": "Soporte sintomático."
+    },
+    {
+      "id": "uva_ursi",
+      "nombre": "Uva ursi / gayuba (Arctostaphylos)",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "planta",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Suplementos herbales con arbutina",
+      "sintomas": [
+        "Náuseas",
+        "Vómito",
+        "Irritación renal",
+        "Discoloración orina"
+      ],
+      "mecanismo": "Hidroquinona liberada por arbutina puede dañar riñón en sobredosis.",
+      "accion": "Evitar suplementos humanos en mascotas sin prescripción.",
+      "antidoto": "Fluidoterapia y monitorización renal."
+    },
+    {
+      "id": "te_verde_concentrado",
+      "nombre": "Extracto concentrado de té verde",
+      "especies": [
+        "perros",
+        "gatos"
+      ],
+      "categoria": "alimento",
+      "toxicidad": "moderada",
+      "umbral_orientativo": "Cápsulas de suplemento humano con EGCG concentrado",
+      "sintomas": [
+        "Vómito",
+        "Hepatotoxicidad",
+        "Letargia",
+        "Ictericia"
+      ],
+      "mecanismo": "Catequinas en alta concentración pueden dañar hepatocitos en perros.",
+      "accion": "Urgencia hepática si ingirió suplementos de té verde concentrado.",
+      "antidoto": "Soporte hepático; sin antídoto específico."
     }
   ]
 }

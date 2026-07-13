@@ -391,6 +391,42 @@
         </div>
       </section>
 
+      <section id="bcsView" class="view">
+        <button id="backBcsBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="bcs-page">
+          <div class="bcs-hero">
+            <span class="eyebrow">NUTRICIÓN</span>
+            <h2 data-i18n="bcs.title">Guía visual de condición corporal (BCS)</h2>
+            <p data-i18n="bcs.intro">Escala de condición corporal para evaluar grasa y masa muscular. Perros y gatos: 1–9; equinos: 1–5. Referencia educativa WSAVA / Henneke.</p>
+          </div>
+          <div id="bcsContent" class="bcs-content"></div>
+        </div>
+      </section>
+
+      <section id="flashcardsView" class="view">
+        <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.glossary">Volver al glosario</button>
+        <div class="flashcards-page">
+          <div class="flashcards-hero">
+            <span class="eyebrow">ESTUDIO</span>
+            <h2 data-i18n="flash.title">Modo estudio — flashcards del glosario</h2>
+            <p data-i18n="flash.intro">Repasa términos médicos: muestra el término, revela la definición y marca tu progreso. El avance se guarda en este dispositivo.</p>
+          </div>
+          <div id="flashcardsContent" class="flashcards-content"></div>
+        </div>
+      </section>
+
+      <section id="emergenciasLatamView" class="view">
+        <button id="backEmergenciasLatamBtn" class="back-btn" data-i18n="back.urgency">Volver a urgencias</button>
+        <div class="emergencias-latam-page">
+          <div class="emergencias-latam-hero">
+            <span class="eyebrow">LATAM</span>
+            <h2 id="emergenciasLatamTitle">Directorio de emergencias LATAM</h2>
+            <p id="emergenciasLatamIntro">Cargando...</p>
+          </div>
+          <div id="emergenciasLatamList" class="emergencias-latam-list"></div>
+        </div>
+      </section>
+
       <section id="compareView" class="view">
         <button id="backCompareBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="compare-page">
@@ -501,6 +537,7 @@
   <script src="data/diccionario_medicos.js"></script>
   <script src="data/enlaces_clinicos.js"></script>
   <script src="data/toxicologia.js"></script>
+  <script src="data/emergencias_latam.js"></script>
   <script src="data/calendario_vacunacion.js"></script>
   <script src="data/search_synonyms.js"></script>
   <script src="js/i18n.js"></script>
