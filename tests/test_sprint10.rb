@@ -167,6 +167,8 @@ class ModoNocturnoTest < Minitest::Test
     --chip-bg --chip-text --warn-bg --warn-text
     --dose-panel-bg --tab-bar-bg --zoonotic-bg --zoonotic-text
     --severity-leve-bg --tox-alta-bg --input-bg --header-bg
+    --border-accent --sidebar-bg-solid --welcome-hero-bg
+    --card-img-bg --inverse-text --footer-contribute-bg
   ].freeze
 
   CRITICAL_DARK_SELECTORS = %w[
@@ -175,6 +177,10 @@ class ModoNocturnoTest < Minitest::Test
     protocol-accordion-item urgency-species-card tox-card
     meta-chip info-item detail-panel breed-hero
     disease-detail-card disease-card alert-panel
+    welcome-hero sidebar main-search-panel breed-card
+    search-disease-item dictionary-term-card footer-contribute
+    feature-card--tools feature-card--predis flashcard
+    lab-table triaje-card changelog-entry
   ].freeze
 
   def test_variables_semanticas_en_modo_oscuro
@@ -195,6 +201,23 @@ class ModoNocturnoTest < Minitest::Test
     assert_includes @css, 'input::placeholder'
     assert_includes @css, '--chip-bg'
     assert_includes @css, '--dose-panel-bg'
+  end
+
+  LIGHT_HEX = /#(?:fff(?:fff)?|f8fafc|f5f3ff|f1f5f9|e0e7ff|ede9fe|fffbeb|fef2f2|fff7ed)\b/i
+
+  def test_sin_hex_claro_hardcoded_fuera_de_root
+    css = @css.dup
+    css.gsub!(/:root[^{]*\{.*?\}/m, '')
+    css.gsub!(/@media\s+print\s*\{.*?\n\}/m, '')
+    offenders = []
+    css.each_line.with_index(1) do |line, num|
+      next if line.include?('white-space')
+      next if line.match?(/^\s*--/)
+      offenders << "#{num}: #{line.strip}" if line.match?(LIGHT_HEX)
+      offenders << "#{num}: #{line.strip}" if line.match?(/background:\s*white\b/i)
+    end
+    assert_empty offenders.first(15),
+                 "Hex/fondos claros fuera de :root (#{offenders.size}): #{offenders.first(5).join(' | ')}"
   end
 end
 
