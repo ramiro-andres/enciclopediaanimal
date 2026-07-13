@@ -887,13 +887,60 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 ---
 
-## Sprint 8 — En progreso (EP-13: UX Atlas público, continuación)
+## Sprint 8 — Completado (EP-13: UX Atlas público, continuación)
+
+**Objetivo:** Ampliar herramientas clínicas educativas, mapa de predisposiciones genéticas, búsqueda tolerante y tour de bienvenida.
+
+| ID | Historia | Puntos | Estado |
+|----|----------|--------|--------|
+| US-UX-13 | Búsqueda con sinónimos y typos | 5 | Hecho |
+| US-TOOL-05 | Calculadora fluidoterapia de mantenimiento | 3 | Hecho |
+| US-CON-09 | Mapa de predisposiciones genéticas | 5 | Hecho |
+| US-TOOL-06 | Conversor de unidades clínicas | 3 | Hecho |
+| US-UX-14 | Tour de bienvenida (primera visita / sesión) | 2 | Hecho |
+| | | **18** | |
+
+#### US-TOOL-05 · Calculadora fluidoterapia
+
+**Tareas técnicas:**
+- [x] Vista `#fluidoterapia` con peso kg/lb y especie
+- [x] ml/kg/día de mantenimiento y bolos de shock educativos documentados
+- [x] Disclaimer veterinario e i18n ES/EN
+- [x] Enlace desde hub `#herramientas`
+
+#### US-CON-09 · Mapa de predisposiciones genéticas
+
+**Tareas técnicas:**
+- [x] Vista `#predisposiciones` cruzando `predisposiciones_geneticas` de 431 razas
+- [x] Filtro por categoría animal y búsqueda por condición
+- [x] Enlaces a fichas de raza y tarjeta en welcome
+
+#### US-TOOL-06 · Conversor de unidades clínicas
+
+**Tareas técnicas:**
+- [x] mg↔g, mg/kg→mg total, °C↔°F, ml↔gotas (factores 20/60 documentados)
+- [x] Panel en hub herramientas y enlace desde calculadora de dosis
+
+#### US-UX-14 · Tour de bienvenida
+
+**Tareas técnicas:**
+- [x] 5 pasos en primera visita de la sesión (`sessionStorage` `atlas_welcome_tour_done`)
+- [x] Destaca categorías, búsqueda, glosario, herramientas y favoritos
+
+**Entregables técnicos:**
+- Vistas fluidoterapia, unidades y predisposiciones en `index.html`, `css/styles.css`, `js/app.js`
+- i18n en `js/i18n.js`; tour `WelcomeTour` en `js/app.js`
+- `tests/test_sprint8.rb`; rutas en `scripts/data/build_sitemap.rb`; `sw.js` atlas-v7
+
+---
+
+## Sprint 8 (histórico US-UX-13) — Búsqueda con sinónimos
 
 **Objetivo:** Mejorar la descubribilidad del contenido clínico con búsqueda tolerante a sinónimos y errores tipográficos.
 
 | ID | Historia | Puntos | Estado |
 |----|----------|--------|--------|
-| US-UX-13 | Búsqueda con sinónimos y typos (razas, enfermedades, glosario) | 5 | En progreso |
+| US-UX-13 | Búsqueda con sinónimos y typos (razas, enfermedades, glosario) | 5 | Hecho |
 
 #### US-UX-13 · Búsqueda con sinónimos y typos
 
@@ -901,7 +948,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 
 | Campo | Valor |
 |-------|-------|
-| Estado | En progreso |
+| Estado | Hecho |
 | Prioridad | Alta |
 | Story points | 5 |
 
@@ -988,4 +1035,5 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 | 2026-07-12 | Sprint 4 (EP-12): gate de deploy (US-DEV-10), SW offline real (US-DEV-11), hook pre-commit JSON→JS (US-DEV-12), Lighthouse CI A11y≥90 (US-DEV-13) |
 | 2026-07-12 | Sprint 5 (EP-10): RER/MER, toxicología, compartir fichas, zoonóticas y calendario vacunación (PR #26) |
 | 2026-07-12 | Sprint 6 (EP-11): sitemap, OG dinámicos, JSON-LD y reporte de errores vía GitHub |
+| 2026-07-13 | Sprint 8 (EP-13): fluidoterapia, mapa predisposiciones, conversor unidades, tour bienvenida; US-UX-13 mergeada |
 | 2026-07-12 | Sprint 7 (EP-13): tab bar móvil, favoritos, impresión, disclaimer por sesión y fuentes bibliográficas |

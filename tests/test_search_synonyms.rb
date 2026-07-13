@@ -59,7 +59,9 @@ class SearchSynonymsUiTest < Minitest::Test
 
   def test_service_worker_precachea_sinonimos
     assert_includes @sw, 'search_synonyms.js'
-    assert_match(/atlas-v6/, @sw)
+    m = @sw.match(/CACHE_VERSION\s*=\s*'atlas-v(\d+)'/)
+    assert m, 'CACHE_VERSION no encontrado'
+    assert_operator m[1].to_i, :>=, 6
   end
 
   def test_logica_busqueda_en_app

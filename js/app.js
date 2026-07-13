@@ -9,6 +9,12 @@ const App = {
   toxicologyQuery: '',
   toxicologySpecies: 'todos',
   rerMerUnit: 'kg',
+  fluidUnit: 'kg',
+  fluidSpecies: 'perros',
+  unitsDropsFactor: 20,
+  predisposicionesQuery: '',
+  predisposicionesAnimal: 'todos',
+  predisposicionesIndex: null,
   dictionaryQuery: '',
   dictionaryCategory: 'todos',
   currentView: 'welcome',
@@ -193,6 +199,9 @@ const App = {
           if (this.currentView === 'tools') this.renderTools();
           if (this.currentView === 'rerMer') this.renderRerMer();
           if (this.currentView === 'toxicologia') this.renderToxicologia();
+          if (this.currentView === 'fluidoterapia') this.renderFluidoterapia();
+          if (this.currentView === 'unidades') this.renderUnidades();
+          if (this.currentView === 'predisposiciones') this.renderPredisposiciones();
           if (this.currentView === 'urgency') this.renderUrgency();
           this.renderFavorites();
           this.updateMobileTabBar();
@@ -218,6 +227,7 @@ const App = {
       this.renderFavorites();
       this.bindMobileTabBar();
       if (!this.openRouteFromHash()) this.showView('welcome');
+      if (DisclaimerModal.wasAccepted() && !window.location.hash) WelcomeTour.tryStart();
       this.exportE2EState();
     } catch (err) {
       console.error('Error cargando enciclopedia:', err);
@@ -411,6 +421,9 @@ const App = {
     document.getElementById('backToolsBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backRerMerBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backToxicologiaBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backFluidoterapiaBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backUnidadesBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backPredisposicionesBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
@@ -442,6 +455,18 @@ const App = {
         e.preventDefault();
         openTools();
       }
+    });
+    const openPredisposiciones = () => this.showPredisposiciones();
+    document.getElementById('openPredisposicionesCard')?.addEventListener('click', openPredisposiciones);
+    document.getElementById('openPredisposicionesCard')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPredisposiciones();
+      }
+    });
+    document.getElementById('predisSearchInput')?.addEventListener('input', (e) => {
+      this.predisposicionesQuery = e.target.value.toLowerCase().trim();
+      this.renderPredisposiciones();
     });
     document.getElementById('toxicologiaSearchInput')?.addEventListener('input', (e) => {
       this.toxicologyQuery = e.target.value.toLowerCase().trim();
@@ -725,6 +750,21 @@ const App = {
 
       if (parts[0] === 'toxicologia') {
         this.showToxicologia({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'fluidoterapia') {
+        this.showFluidoterapia({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'unidades') {
+        this.showUnidades({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'predisposiciones') {
+        this.showPredisposiciones({ updateHash: false });
         return true;
       }
 
@@ -1343,6 +1383,41 @@ const App = {
     this.exportE2EState();
   },
 
+  showFluidoterapia(options = {}) {
+    this.renderFluidoterapia();
+    this.showView('fluidoterapia');
+    if (options.updateHash !== false) this.updateHash('#fluidoterapia');
+    this.exportE2EState();
+  },
+
+  showUnidades(options = {}) {
+    this.renderUnidades();
+    this.showView('unidades');
+    if (options.updateHash !== false) this.updateHash('#unidades');
+    this.exportE2EState();
+  },
+
+  showPredisposiciones(options = {}) {
+    this.renderPredisposiciones();
+    this.showView('predisposiciones');
+    if (options.updateHash !== false) this.updateHash('#predisposiciones');
+    this.exportE2EState();
+  },
+
+  FLUID_PROFILES: {
+    perros: { mlKgDay: 60, shockMin: 10, shockMax: 20 },
+    gatos: { mlKgDay: 50, shockMin: 10, shockMax: 15 },
+    equinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
+    bovinos: { mlKgDay: 50, shockMin: 10, shockMax: 20 },
+    aves: { mlKgDay: 80, shockMin: 5, shockMax: 10 },
+    conejos: { mlKgDay: 100, shockMin: 5, shockMax: 10 },
+    _default: { mlKgDay: 50, shockMin: 10, shockMax: 20 }
+  },
+
+  getFluidProfile(speciesId) {
+    return this.FLUID_PROFILES[speciesId] || this.FLUID_PROFILES._default;
+  },
+
   renderTools() {
     const grid = document.getElementById('toolsGrid');
     if (!grid) return;
@@ -1352,6 +1427,18 @@ const App = {
         title: this.t('rer.title'),
         desc: this.t('rer.card_desc'),
         action: () => this.showRerMer()
+      },
+      {
+        icon: '💧',
+        title: this.t('fluid.title'),
+        desc: this.t('fluid.card_desc'),
+        action: () => this.showFluidoterapia()
+      },
+      {
+        icon: '⚖️',
+        title: this.t('units.title'),
+        desc: this.t('units.card_desc'),
+        action: () => this.showUnidades()
       },
       {
         icon: '☠️',
@@ -1490,6 +1577,325 @@ const App = {
     form.addEventListener('input', update);
     form.addEventListener('change', update);
     update();
+  },
+
+  renderFluidoterapia() {
+    const container = document.getElementById('fluidoterapiaContent');
+    if (!container) return;
+    const speciesOptions = (this.data?.animales || []).map(a => `
+      <option value="${this.esc(a.id)}" ${this.fluidSpecies === a.id ? 'selected' : ''}>
+        ${this.esc(a.icono || '')} ${this.esc(a.nombre)}
+      </option>
+    `).join('');
+    const unitKg = this.fluidUnit === 'kg';
+    container.innerHTML = `
+      <form class="fluidoterapia-form" id="fluidoterapiaForm" novalidate>
+        <div class="fluidoterapia-grid">
+          <div class="fluid-field">
+            <fieldset class="fluid-unit-toggle">
+              <legend>${this.esc(this.t('fluid.weight'))}</legend>
+              <label class="fluid-unit-label">
+                <input type="radio" name="fluid_unit" value="kg" ${unitKg ? 'checked' : ''}> kg
+              </label>
+              <label class="fluid-unit-label">
+                <input type="radio" name="fluid_unit" value="lb" ${!unitKg ? 'checked' : ''}> lb
+              </label>
+            </fieldset>
+            <label for="fluidWeightInput">${this.esc(this.t('fluid.weight_value'))}</label>
+            <input type="number" id="fluidWeightInput" min="0.01" step="0.01" value="10" inputmode="decimal" required aria-describedby="fluidResult fluidDisclaimer">
+          </div>
+          <div class="fluid-field">
+            <label for="fluidSpeciesSelect">${this.esc(this.t('fluid.species'))}</label>
+            <select id="fluidSpeciesSelect" aria-describedby="fluidResult">${speciesOptions}</select>
+          </div>
+        </div>
+        <div class="fluid-result" id="fluidResult" role="status" aria-live="polite" aria-atomic="true"></div>
+        <div class="fluid-shock-panel" id="fluidShockPanel" aria-labelledby="fluidShockTitle"></div>
+        <p id="fluidDisclaimer" class="fluid-disclaimer" role="note">
+          ⚕️ ${this.esc(this.t('fluid.disclaimer'))}
+        </p>
+      </form>
+    `;
+    this.bindFluidoterapiaCalculator(container);
+  },
+
+  bindFluidoterapiaCalculator(root) {
+    const weightInput = root.querySelector('#fluidWeightInput');
+    const speciesSelect = root.querySelector('#fluidSpeciesSelect');
+    const resultEl = root.querySelector('#fluidResult');
+    const shockEl = root.querySelector('#fluidShockPanel');
+    if (!weightInput || !speciesSelect || !resultEl || !shockEl) return;
+
+    const update = () => {
+      const unit = root.querySelector('input[name="fluid_unit"]:checked')?.value || 'kg';
+      this.fluidUnit = unit;
+      this.fluidSpecies = speciesSelect.value;
+      let weight = parseFloat(String(weightInput.value).replace(',', '.'));
+      if (!weight || weight <= 0) {
+        resultEl.innerHTML = `<p class="fluid-result-warn">${this.esc(this.t('fluid.invalid_weight'))}</p>`;
+        shockEl.innerHTML = '';
+        return;
+      }
+      const kg = unit === 'lb' ? this.lbToKg(weight) : weight;
+      const profile = this.getFluidProfile(this.fluidSpecies);
+      const mlPerDay = Math.round(profile.mlKgDay * kg);
+      const mlPerHour = Math.round((mlPerDay / 24) * 10) / 10;
+      const shockMinVol = Math.round(profile.shockMin * kg);
+      const shockMaxVol = Math.round(profile.shockMax * kg);
+      const altWeight = unit === 'kg'
+        ? `${this.formatDoseNumber(this.kgToLb(kg))} lb`
+        : `${this.formatDoseNumber(kg)} kg`;
+      resultEl.innerHTML = `
+        <div class="fluid-result-card">
+          <h3>${this.esc(this.t('fluid.maintenance'))}</h3>
+          <dl class="fluid-metrics">
+            <div><dt>${this.esc(this.t('fluid.rate'))}</dt><dd>${profile.mlKgDay} ml/kg/día</dd></div>
+            <div><dt>${this.esc(this.t('fluid.per_day'))}</dt><dd><strong>${this.formatDoseNumber(mlPerDay)} ml</strong></dd></div>
+            <div><dt>${this.esc(this.t('fluid.per_hour'))}</dt><dd>${this.formatDoseNumber(mlPerHour)} ml/h</dd></div>
+            <div><dt>${this.esc(this.t('fluid.equivalent'))}</dt><dd>${this.esc(altWeight)}</dd></div>
+          </dl>
+        </div>`;
+      shockEl.innerHTML = `
+        <h3 id="fluidShockTitle">${this.esc(this.t('fluid.shock_title'))}</h3>
+        <p class="fluid-shock-desc">${this.esc(this.t('fluid.shock_desc'))}</p>
+        <dl class="fluid-metrics fluid-metrics--shock">
+          <div><dt>${this.esc(this.t('fluid.shock_bolus'))}</dt>
+            <dd><strong>${shockMinVol === shockMaxVol ? `${shockMinVol} ml` : `${shockMinVol}–${shockMaxVol} ml`}</strong>
+            <span class="fluid-shock-detail">(${profile.shockMin}–${profile.shockMax} ml/kg)</span></dd></div>
+        </dl>
+        <p class="fluid-shock-repeat">${this.esc(this.t('fluid.shock_repeat'))}</p>`;
+    };
+
+    root.querySelector('#fluidoterapiaForm')?.addEventListener('input', update);
+    root.querySelector('#fluidoterapiaForm')?.addEventListener('change', update);
+    update();
+  },
+
+  celsiusToFahrenheit(c) {
+    return (c * 9 / 5) + 32;
+  },
+
+  fahrenheitToCelsius(f) {
+    return (f - 32) * 5 / 9;
+  },
+
+  renderUnidades() {
+    const container = document.getElementById('unidadesContent');
+    if (!container) return;
+    container.innerHTML = `
+      <div class="unidades-panels">
+        <section class="units-panel" aria-labelledby="unitsMgGTitle">
+          <h3 id="unitsMgGTitle">${this.esc(this.t('units.mg_g'))}</h3>
+          <div class="units-row">
+            <label for="unitsMgInput">${this.esc(this.t('units.mg_value'))}</label>
+            <input type="number" id="unitsMgInput" min="0" step="any" value="500" inputmode="decimal">
+            <span class="units-equals">=</span>
+            <output id="unitsGOutput" for="unitsMgInput">0,5 g</output>
+          </div>
+        </section>
+        <section class="units-panel" aria-labelledby="unitsDoseTitle">
+          <h3 id="unitsDoseTitle">${this.esc(this.t('units.dose'))}</h3>
+          <div class="units-grid">
+            <div>
+              <label for="unitsDoseMgKg">${this.esc(this.t('units.dose_mg_kg'))}</label>
+              <input type="number" id="unitsDoseMgKg" min="0" step="any" value="10" inputmode="decimal">
+            </div>
+            <div>
+              <label for="unitsDoseWeight">${this.esc(this.t('units.dose_weight'))}</label>
+              <input type="number" id="unitsDoseWeight" min="0.01" step="any" value="5" inputmode="decimal">
+            </div>
+          </div>
+          <p class="units-result-line"><strong>${this.esc(this.t('units.dose_total'))}:</strong> <output id="unitsDoseTotal">50 mg</output></p>
+        </section>
+        <section class="units-panel" aria-labelledby="unitsTempTitle">
+          <h3 id="unitsTempTitle">${this.esc(this.t('units.temp'))}</h3>
+          <div class="units-row">
+            <label for="unitsCelsiusInput">${this.esc(this.t('units.celsius'))}</label>
+            <input type="number" id="unitsCelsiusInput" step="any" value="38.5" inputmode="decimal">
+            <span class="units-equals">↔</span>
+            <label for="unitsFahrenheitInput" class="visually-hidden">${this.esc(this.t('units.fahrenheit'))}</label>
+            <input type="number" id="unitsFahrenheitInput" step="any" value="101.3" inputmode="decimal">
+            <span class="units-unit">°F</span>
+          </div>
+        </section>
+        <section class="units-panel" aria-labelledby="unitsDropsTitle">
+          <h3 id="unitsDropsTitle">${this.esc(this.t('units.drops'))}</h3>
+          <div class="units-grid">
+            <div>
+              <label for="unitsMlInput">${this.esc(this.t('units.ml'))}</label>
+              <input type="number" id="unitsMlInput" min="0" step="any" value="1" inputmode="decimal">
+            </div>
+            <div>
+              <label for="unitsDropsFactor">${this.esc(this.t('units.drops_factor'))}</label>
+              <select id="unitsDropsFactor">
+                <option value="20" ${this.unitsDropsFactor === 20 ? 'selected' : ''}>${this.esc(this.t('units.drops_macro'))}</option>
+                <option value="60" ${this.unitsDropsFactor === 60 ? 'selected' : ''}>${this.esc(this.t('units.drops_micro'))}</option>
+              </select>
+            </div>
+          </div>
+          <p class="units-result-line"><strong>${this.esc(this.t('units.drops_value'))}:</strong> <output id="unitsDropsOutput">20</output></p>
+          <p class="units-note">${this.esc(this.t('units.drops_note'))}</p>
+        </section>
+      </div>
+    `;
+    this.bindUnidadesConverter(container);
+  },
+
+  bindUnidadesConverter(root) {
+    const mgInput = root.querySelector('#unitsMgInput');
+    const gOutput = root.querySelector('#unitsGOutput');
+    const doseMgKg = root.querySelector('#unitsDoseMgKg');
+    const doseWeight = root.querySelector('#unitsDoseWeight');
+    const doseTotal = root.querySelector('#unitsDoseTotal');
+    const celsiusInput = root.querySelector('#unitsCelsiusInput');
+    const fahrenheitInput = root.querySelector('#unitsFahrenheitInput');
+    const mlInput = root.querySelector('#unitsMlInput');
+    const dropsFactor = root.querySelector('#unitsDropsFactor');
+    const dropsOutput = root.querySelector('#unitsDropsOutput');
+    let syncingTemp = false;
+
+    const updateMgG = () => {
+      const mg = parseFloat(String(mgInput?.value || '').replace(',', '.'));
+      if (!mgInput || !gOutput || Number.isNaN(mg)) return;
+      gOutput.textContent = `${this.formatDoseNumber(mg / 1000)} g`;
+    };
+
+    const updateDose = () => {
+      const mgKg = parseFloat(String(doseMgKg?.value || '').replace(',', '.'));
+      const kg = parseFloat(String(doseWeight?.value || '').replace(',', '.'));
+      if (!doseTotal || Number.isNaN(mgKg) || !kg || kg <= 0) return;
+      doseTotal.textContent = `${this.formatDoseNumber(mgKg * kg)} mg`;
+    };
+
+    const updateDrops = () => {
+      const ml = parseFloat(String(mlInput?.value || '').replace(',', '.'));
+      const factor = parseInt(dropsFactor?.value || '20', 10);
+      this.unitsDropsFactor = factor;
+      if (!dropsOutput || Number.isNaN(ml)) return;
+      dropsOutput.textContent = this.formatDoseNumber(ml * factor);
+    };
+
+    celsiusInput?.addEventListener('input', () => {
+      if (syncingTemp) return;
+      syncingTemp = true;
+      const c = parseFloat(String(celsiusInput.value).replace(',', '.'));
+      if (!Number.isNaN(c) && fahrenheitInput) {
+        fahrenheitInput.value = (Math.round(this.celsiusToFahrenheit(c) * 10) / 10).toString();
+      }
+      syncingTemp = false;
+    });
+
+    fahrenheitInput?.addEventListener('input', () => {
+      if (syncingTemp) return;
+      syncingTemp = true;
+      const f = parseFloat(String(fahrenheitInput.value).replace(',', '.'));
+      if (!Number.isNaN(f) && celsiusInput) {
+        celsiusInput.value = (Math.round(this.fahrenheitToCelsius(f) * 10) / 10).toString();
+      }
+      syncingTemp = false;
+    });
+
+    mgInput?.addEventListener('input', updateMgG);
+    doseMgKg?.addEventListener('input', updateDose);
+    doseWeight?.addEventListener('input', updateDose);
+    mlInput?.addEventListener('input', updateDrops);
+    dropsFactor?.addEventListener('change', updateDrops);
+    updateMgG();
+    updateDose();
+    updateDrops();
+  },
+
+  getPredisposicionesIndex() {
+    if (this.predisposicionesIndex) return this.predisposicionesIndex;
+    const map = new Map();
+    this.getAllBreeds().forEach(breed => {
+      (breed.predisposiciones_geneticas || []).forEach(raw => {
+        const name = String(raw).trim();
+        if (!name) return;
+        const key = this.normalizeSearch(name);
+        if (!map.has(key)) map.set(key, { name, breeds: [] });
+        map.get(key).breeds.push(breed);
+      });
+    });
+    this.predisposicionesIndex = Array.from(map.values()).sort((a, b) => {
+      if (b.breeds.length !== a.breeds.length) return b.breeds.length - a.breeds.length;
+      return a.name.localeCompare(b.name, 'es');
+    });
+    return this.predisposicionesIndex;
+  },
+
+  getFilteredPredisposiciones() {
+    const query = this.predisposicionesQuery;
+    const animal = this.predisposicionesAnimal;
+    return this.getPredisposicionesIndex().filter(entry => {
+      if (query && !this.normalizeSearch(entry.name).includes(this.normalizeSearch(query))) return false;
+      if (animal !== 'todos' && !entry.breeds.some(b => b.animalId === animal)) return false;
+      return true;
+    }).map(entry => ({
+      ...entry,
+      breeds: animal === 'todos' ? entry.breeds : entry.breeds.filter(b => b.animalId === animal)
+    }));
+  },
+
+  renderPredisposiciones() {
+    const filters = document.getElementById('predisAnimalFilters');
+    const summary = document.getElementById('predisSummary');
+    const list = document.getElementById('predisList');
+    if (!list) return;
+
+    if (filters) {
+      const items = [
+        { id: 'todos', label: this.t('predis.all_animals') },
+        ...(this.data?.animales || []).map(a => ({ id: a.id, label: `${a.icono || ''} ${a.nombre}`.trim() }))
+      ];
+      filters.innerHTML = items.map(item => `
+        <button type="button" class="predis-filter-btn ${this.predisposicionesAnimal === item.id ? 'active' : ''}"
+          data-animal="${this.esc(item.id)}">${this.esc(item.label)}</button>
+      `).join('');
+      filters.querySelectorAll('.predis-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.predisposicionesAnimal = btn.dataset.animal;
+          this.renderPredisposiciones();
+        });
+      });
+    }
+
+    const entries = this.getFilteredPredisposiciones();
+    const breedMentions = entries.reduce((n, e) => n + e.breeds.length, 0);
+    if (summary) {
+      summary.textContent = this.t('predis.summary')
+        .replace('{conditions}', String(entries.length))
+        .replace('{breeds}', String(breedMentions));
+    }
+
+    if (!entries.length) {
+      list.innerHTML = `<p class="predis-empty">${this.esc(this.t('predis.empty'))}</p>`;
+      return;
+    }
+
+    list.innerHTML = entries.map(entry => {
+      const breedLinks = entry.breeds.map(b => `
+        <button type="button" class="predis-breed-link" data-animal="${this.esc(b.animalId)}" data-breed="${this.esc(b.id)}"
+          aria-label="${this.esc(this.t('predis.view_breed'))}: ${this.esc(b.nombre)}">
+          ${this.esc(b.animalIcono || '')} ${this.esc(b.nombre)}
+        </button>
+      `).join('');
+      return `
+        <article class="predis-card">
+          <header class="predis-card-header">
+            <h3>🧬 ${this.esc(entry.name)}</h3>
+            <span class="predis-count">${this.esc(this.t('predis.breeds_count').replace('{count}', String(entry.breeds.length)))}</span>
+          </header>
+          <div class="predis-breed-chips">${breedLinks}</div>
+        </article>`;
+    }).join('');
+
+    list.querySelectorAll('.predis-breed-link').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const breed = this.findBreed(btn.dataset.animal, btn.dataset.breed);
+        if (breed) this.showBreedDetail(breed);
+      });
+    });
   },
 
   getFilteredToxicology() {
@@ -2057,6 +2463,9 @@ const App = {
       tools: 'tools',
       rerMer: 'tools',
       toxicologia: 'tools',
+      fluidoterapia: 'tools',
+      unidades: 'tools',
+      predisposiciones: 'explore',
       compare: 'explore'
     };
     return map[view] || 'welcome';
@@ -2374,6 +2783,11 @@ const App = {
               </div>
             </div>
             <div class="dose-result" id="doseCalcResult" role="status" aria-live="polite" aria-atomic="true"></div>
+            <p class="dose-units-link-wrap">
+              <button type="button" class="btn-text-link dose-units-link" data-action="open-units">
+                ${this.esc(this.t('units.open_from_dose'))} →
+              </button>
+            </p>
             <p id="doseCalcDisclaimer" class="dose-calculator-disclaimer" role="note">
               ⚕️ <strong>Aviso educativo:</strong> esta calculadora no sustituye el diagnóstico ni la prescripción de un veterinario colegiado.
               Las dosis deben individualizarse según edad, comorbilidades, vía, formulación y normativa local.
@@ -2432,6 +2846,7 @@ const App = {
 
     weightInput.addEventListener('input', update);
     drugSelect.addEventListener('change', update);
+    root.querySelector('.dose-units-link')?.addEventListener('click', () => this.showUnidades());
     update();
   },
 
@@ -2531,7 +2946,7 @@ const App = {
         ${this.renderPanel('Vacunación recomendada', breed.vacunacion, '💉')}
         ${breed.vacunacion_detallada ? this.renderPanel('Calendario de vacunación', breed.vacunacion_detallada, '📆') : ''}
         ${this.renderPanel('Desparasitación', breed.desparasitacion, '🐛')}
-        ${breed.predisposiciones_geneticas ? this.renderPanel('Predisposiciones genéticas', breed.predisposiciones_geneticas, '🧬') : ''}
+        ${breed.predisposiciones_geneticas ? `${this.renderPanel('Predisposiciones genéticas', breed.predisposiciones_geneticas, '🧬')}<p class="predis-map-link-wrap"><button type="button" class="btn-text-link predis-map-link">${this.esc(this.t('predis.map_link'))} →</button></p>` : ''}
         ${breed.cribado_salud_recomendado ? this.renderPanel('Cribado de salud recomendado', breed.cribado_salud_recomendado, '🔍') : ''}
         ${breed.nutricion_clinica ? this.renderPanel('Nutrición clínica', breed.nutricion_clinica, '🥗') : ''}
         ${breed.manejo_clinico ? this.renderPanel('Manejo clínico', breed.manejo_clinico, '🏥') : ''}
@@ -2576,6 +2991,7 @@ const App = {
     this.bindShareButtons(el);
     this.bindFavoriteButtons(el);
     this.bindPrintButtons(el);
+    el.querySelector('.predis-map-link')?.addEventListener('click', () => this.showPredisposiciones());
     this.bindDoseCalculator(el, breed);
 
     this.showView('detail');
@@ -2728,6 +3144,18 @@ const App = {
       document.title = `${this.t('tox.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'fluidoterapia') {
+      document.title = `${this.t('fluid.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'unidades') {
+      document.title = `${this.t('units.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'predisposiciones') {
+      document.title = `${this.t('predis.title')} — ${suffix}`;
+      return;
+    }
     document.title = 'Enciclopedia Animal — Salud Veterinaria';
   },
 
@@ -2765,6 +3193,9 @@ const App = {
     document.getElementById('toolsView').classList.toggle('active', view === 'tools');
     document.getElementById('rerMerView').classList.toggle('active', view === 'rerMer');
     document.getElementById('toxicologiaView').classList.toggle('active', view === 'toxicologia');
+    document.getElementById('fluidoterapiaView').classList.toggle('active', view === 'fluidoterapia');
+    document.getElementById('unidadesView').classList.toggle('active', view === 'unidades');
+    document.getElementById('predisposicionesView').classList.toggle('active', view === 'predisposiciones');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
@@ -2850,6 +3281,7 @@ const DisclaimerModal = {
     document.body.classList.remove('disclaimer-open');
     document.removeEventListener('keydown', this.onKeydown);
     (this.previousFocus || document.getElementById('goHomeBtn'))?.focus();
+    WelcomeTour.tryStart();
   },
 
   trapFocus(e) {
@@ -2867,6 +3299,107 @@ const DisclaimerModal = {
       e.preventDefault();
       first.focus();
     }
+  }
+};
+
+const WelcomeTour = {
+  SESSION_KEY: 'atlas_welcome_tour_done',
+
+  steps() {
+    return [
+      { target: '#welcomeCategoryCards', titleKey: 'tour.step1.title', bodyKey: 'tour.step1.body' },
+      { target: '.welcome-search', titleKey: 'tour.step2.title', bodyKey: 'tour.step2.body' },
+      { target: '#openDictionaryCard', titleKey: 'tour.step3.title', bodyKey: 'tour.step3.body' },
+      { target: '#openToolsCard', titleKey: 'tour.step4.title', bodyKey: 'tour.step4.body' },
+      { target: '#favoritesPanel', titleKey: 'tour.step5.title', bodyKey: 'tour.step5.body' }
+    ];
+  },
+
+  wasDone() {
+    try {
+      return sessionStorage.getItem(this.SESSION_KEY) === '1';
+    } catch (_) {
+      return false;
+    }
+  },
+
+  t(key) {
+    return window.I18n ? I18n.t(key) : key;
+  },
+
+  tryStart() {
+    if (this.wasDone() || window.location.hash) return;
+    const overlay = document.getElementById('welcomeTourOverlay');
+    if (!overlay) return;
+    this.overlay = overlay;
+    this.popover = document.getElementById('welcomeTourPopover');
+    this.stepLabel = document.getElementById('welcomeTourStepLabel');
+    this.titleEl = document.getElementById('welcomeTourTitle');
+    this.bodyEl = document.getElementById('welcomeTourBody');
+    this.skipBtn = document.getElementById('welcomeTourSkipBtn');
+    this.nextBtn = document.getElementById('welcomeTourNextBtn');
+    if (!this.popover || !this.nextBtn) return;
+    this.currentStep = 0;
+    this.highlightEl = null;
+    this.skipBtn?.addEventListener('click', () => this.finish());
+    this.nextBtn.addEventListener('click', () => this.next());
+    this.onKeydown = (e) => {
+      if (e.key === 'Escape') this.finish();
+    };
+    document.addEventListener('keydown', this.onKeydown);
+    this.showStep(0);
+  },
+
+  showStep(index) {
+    const steps = this.steps();
+    const step = steps[index];
+    if (!step) {
+      this.finish();
+      return;
+    }
+    this.clearHighlight();
+    const target = document.querySelector(step.target);
+    if (target) {
+      target.classList.add('welcome-tour-highlight');
+      this.highlightEl = target;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    const total = steps.length;
+    this.stepLabel.textContent = this.t('tour.step_label')
+      .replace('{current}', String(index + 1))
+      .replace('{total}', String(total));
+    this.titleEl.textContent = this.t(step.titleKey);
+    this.bodyEl.textContent = this.t(step.bodyKey);
+    this.nextBtn.textContent = index === total - 1 ? this.t('tour.finish') : this.t('tour.next');
+    this.overlay.hidden = false;
+    this.overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('welcome-tour-open');
+    requestAnimationFrame(() => this.nextBtn.focus());
+    this.currentStep = index;
+  },
+
+  next() {
+    const nextIndex = this.currentStep + 1;
+    if (nextIndex >= this.steps().length) this.finish();
+    else this.showStep(nextIndex);
+  },
+
+  clearHighlight() {
+    if (this.highlightEl) {
+      this.highlightEl.classList.remove('welcome-tour-highlight');
+      this.highlightEl = null;
+    }
+  },
+
+  finish() {
+    try { sessionStorage.setItem(this.SESSION_KEY, '1'); } catch (_) { /* noop */ }
+    this.clearHighlight();
+    if (this.overlay) {
+      this.overlay.hidden = true;
+      this.overlay.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.remove('welcome-tour-open');
+    document.removeEventListener('keydown', this.onKeydown);
   }
 };
 
