@@ -162,6 +162,38 @@ class ModoNocturnoTest < Minitest::Test
     assert_includes @i18n, "'theme.toggle'"
     assert_includes @i18n, "'theme.dark'"
   end
+
+  CRITICAL_DARK_VARS = %w[
+    --chip-bg --chip-text --warn-bg --warn-text
+    --dose-panel-bg --tab-bar-bg --zoonotic-bg --zoonotic-text
+    --severity-leve-bg --tox-alta-bg --input-bg --header-bg
+  ].freeze
+
+  CRITICAL_DARK_SELECTORS = %w[
+    cross-link-chip dose-calculator-panel tools-card
+    mobile-tab-bar zoonotic-badge study-summary-text
+    protocol-accordion-item urgency-species-card tox-card
+  ].freeze
+
+  def test_variables_semanticas_en_modo_oscuro
+    dark_block = @css[/:root\[data-theme="dark"\]\s*\{[^}]+\}/m]
+    assert dark_block, 'Falta bloque :root[data-theme="dark"]'
+    CRITICAL_DARK_VARS.each do |var|
+      assert_includes dark_block, var, "Falta variable dark #{var}"
+    end
+  end
+
+  def test_clases_criticas_usan_variables_o_overrides_dark
+    CRITICAL_DARK_SELECTORS.each do |cls|
+      uses_var = @css.match?(/\.#{cls}[^{]*\{[^}]*var\(--/)
+      has_dark_override = @css.match?(/\[data-theme="dark"\][^}]*\.#{cls}/)
+      assert uses_var || has_dark_override,
+             ".#{cls} debe usar variables CSS o tener override en dark mode"
+    end
+    assert_includes @css, 'input::placeholder'
+    assert_includes @css, '--chip-bg'
+    assert_includes @css, '--dose-panel-bg'
+  end
 end
 
 # US-CON-12 — Resúmenes modo estudio
