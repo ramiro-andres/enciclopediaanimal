@@ -182,6 +182,13 @@
               <p>Calculadora RER/MER, índice de toxicología y calendarios de vacunación para consulta rápida en campo.</p>
             </div>
           </article>
+          <article class="feature-card feature-card--predis" id="openPredisposicionesCard" role="button" tabindex="0" aria-label="Abrir mapa de predisposiciones genéticas">
+            <span class="feature-number">06</span>
+            <div>
+              <h3 data-i18n="predis.card_title">Predisposiciones genéticas</h3>
+              <p data-i18n="predis.card_desc">Mapa cruzado de condiciones hereditarias por raza: filtra por especie o enfermedad y accede a cada ficha.</p>
+            </div>
+          </article>
         </div>
 
         <div class="welcome-picker">
@@ -317,6 +324,52 @@
         </div>
       </section>
 
+      <section id="fluidoterapiaView" class="view">
+        <button id="backFluidoterapiaBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="fluidoterapia-page">
+          <div class="fluidoterapia-hero">
+            <span class="eyebrow">FLUIDOTERAPIA</span>
+            <h2 data-i18n="fluid.title">Calculadora de fluidoterapia de mantenimiento</h2>
+            <p data-i18n="fluid.intro">Estima volúmenes de mantenimiento diario y bolos de reanimación orientativos según especie. Referencia educativa basada en guías clínicas veterinarias.</p>
+          </div>
+          <div id="fluidoterapiaContent" class="fluidoterapia-content"></div>
+        </div>
+      </section>
+
+      <section id="unidadesView" class="view">
+        <button id="backUnidadesBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
+        <div class="unidades-page">
+          <div class="unidades-hero">
+            <span class="eyebrow">CONVERSIÓN</span>
+            <h2 data-i18n="units.title">Conversor de unidades clínicas</h2>
+            <p data-i18n="units.intro">Conversiones frecuentes en consulta: masas, dosis por peso, temperatura y gotas por mililitro.</p>
+          </div>
+          <div id="unidadesContent" class="unidades-content"></div>
+        </div>
+      </section>
+
+      <section id="predisposicionesView" class="view">
+        <button id="backPredisposicionesBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="predisposiciones-page">
+          <div class="predisposiciones-hero">
+            <span class="eyebrow">GENÉTICA</span>
+            <h2 data-i18n="predis.title">Mapa de predisposiciones genéticas</h2>
+            <p data-i18n="predis.intro">Cruza las predisposiciones documentadas en las 431 razas del atlas. Filtra por categoría animal o por condición genética.</p>
+          </div>
+          <div class="predisposiciones-toolbar">
+            <div class="search-box search-box--dictionary">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input type="search" id="predisSearchInput" data-i18n-placeholder="predis.search" placeholder="Buscar predisposición..." autocomplete="off" aria-label="Buscar predisposición genética">
+            </div>
+            <div id="predisAnimalFilters" class="predisposiciones-filters" role="group" aria-label="Filtrar por categoría animal"></div>
+          </div>
+          <div id="predisSummary" class="predisposiciones-summary" role="status" aria-live="polite"></div>
+          <div id="predisList" class="predisposiciones-list"></div>
+        </div>
+      </section>
+
       <section id="toxicologiaView" class="view">
         <button id="backToxicologiaBtn" class="back-btn" data-i18n="tools.back">Volver a herramientas</button>
         <div class="toxicologia-page">
@@ -419,6 +472,27 @@
           <button type="button" id="disclaimerUrgencyLink" class="disclaimer-link-btn" data-i18n="disclaimer.urgency">Ver urgencias por especie →</button>
         </p>
         <button type="button" id="disclaimerAcceptBtn" class="disclaimer-accept-btn" data-i18n="disclaimer.accept">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="welcomeTourOverlay" class="welcome-tour-overlay" hidden aria-hidden="true">
+    <div class="welcome-tour-backdrop" aria-hidden="true"></div>
+    <div
+      id="welcomeTourPopover"
+      class="welcome-tour-popover"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="welcomeTourTitle"
+      aria-describedby="welcomeTourBody"
+      tabindex="-1"
+    >
+      <p class="welcome-tour-step" id="welcomeTourStepLabel"></p>
+      <h2 id="welcomeTourTitle"></h2>
+      <p id="welcomeTourBody"></p>
+      <div class="welcome-tour-actions">
+        <button type="button" id="welcomeTourSkipBtn" class="btn-text-link" data-i18n="tour.skip">Omitir tour</button>
+        <button type="button" id="welcomeTourNextBtn" class="disclaimer-accept-btn" data-i18n="tour.next">Siguiente</button>
       </div>
     </div>
   </div>
