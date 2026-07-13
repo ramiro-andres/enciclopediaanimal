@@ -5,6 +5,7 @@ ruby "$DIR/scripts/data/build_medical_dictionary.rb"
 ruby "$DIR/scripts/data/build_search_index.rb"
 ruby "$DIR/scripts/data/build_cross_links.rb"
 ruby "$DIR/scripts/data/build_toxicologia.rb"
+ruby "$DIR/scripts/data/build_emergencias_latam.rb"
 ruby "$DIR/scripts/data/build_sitemap.rb"
 ruby -rjson -e '
   base = ARGV[0]

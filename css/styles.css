@@ -4537,3 +4537,314 @@ body.welcome-tour-open {
     display: none !important;
   }
 }
+
+/* Sprint 9 — BCS, flashcards, emergencias LATAM */
+.bcs-page,
+.flashcards-page,
+.emergencias-latam-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bcs-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.bcs-species-toggle {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bcs-species-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-right: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.bcs-scale-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.bcs-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.bcs-visual {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--surface-elevated, #f8f9fb);
+  border-radius: var(--radius);
+  border: 1px solid var(--border, #e2e6ea);
+}
+
+.bcs-silhouette-svg {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  color: var(--text, #2d3436);
+  --bcs-fill: #dfe6e9;
+  --bcs-stroke: #636e72;
+}
+
+.bcs-svg-score {
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--primary, #5b5ef7);
+}
+
+.bcs-controls label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.bcs-controls input[type="range"] {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.bcs-score-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.bcs-score-btn {
+  min-width: 2rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border, #dfe6e9);
+  border-radius: 6px;
+  background: var(--surface, #fff);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.bcs-score-btn.active {
+  background: var(--primary, #5b5ef7);
+  color: #fff;
+  border-color: var(--primary, #5b5ef7);
+}
+
+.bcs-description {
+  padding: 1rem 1.25rem;
+  background: var(--surface-elevated, #f8f9fb);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--primary, #5b5ef7);
+}
+
+.bcs-description h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.bcs-disclaimer {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.dictionary-study-btn {
+  margin-left: auto;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--primary, #5b5ef7);
+  background: transparent;
+  color: var(--primary, #5b5ef7);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+#dictionaryStats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.flashcards-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.flashcards-progress {
+  position: relative;
+  background: var(--surface-elevated, #f0f2f5);
+  border-radius: 999px;
+  height: 2rem;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  font-size: 0.8rem;
+}
+
+.flashcards-progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(91, 94, 247, 0.15);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.flashcards-progress span {
+  position: relative;
+  z-index: 1;
+}
+
+.flashcard {
+  min-height: 220px;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--border, #dfe6e9);
+  background: var(--surface, #fff);
+  box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.06));
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.flashcard--revealed {
+  border-color: var(--primary, #5b5ef7);
+}
+
+.flashcard-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.flashcard-term {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.flashcard-definition {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.flashcard-example {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: left;
+  margin-top: 0.75rem;
+}
+
+.flashcard-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 1rem 0 0;
+}
+
+.flashcards-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.flashcards-know-btn,
+.flashcards-learning-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.flashcards-know-btn {
+  background: #00b894;
+  color: #fff;
+}
+
+.flashcards-learning-btn {
+  background: var(--surface-elevated, #f0f2f5);
+  color: var(--text, #2d3436);
+}
+
+.flashcards-know-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.flashcards-done {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.urgency-tools-banner--latam {
+  margin-top: 0.75rem;
+}
+
+.emergencias-latam-disclaimer {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface-elevated, #f8f9fb);
+  border-radius: var(--radius);
+}
+
+.emergencias-latam-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.emergencias-latam-card {
+  padding: 1.25rem;
+  border: 1px solid var(--border, #e2e6ea);
+  border-radius: var(--radius);
+  background: var(--surface, #fff);
+}
+
+.emergencias-latam-card header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.emergencias-latam-flag {
+  font-size: 1.75rem;
+}
+
+.emergencias-latam-section h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.emergencias-latam-section ul {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .bcs-main {
+    grid-template-columns: 1fr;
+  }
+}

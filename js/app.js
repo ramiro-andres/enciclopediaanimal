@@ -5,6 +5,7 @@ const App = {
   synonymGroups: null,
   crossLinks: null,
   toxicologyData: null,
+  emergenciasLatamData: null,
   vaccinationCalendars: null,
   toxicologyQuery: '',
   toxicologySpecies: 'todos',
@@ -40,6 +41,13 @@ const App = {
     type: 'website'
   },
   currentDictionaryTerm: null,
+  bcsSpecies: 'perros',
+  bcsScore: 5,
+  flashcardsDeck: [],
+  flashcardsIndex: 0,
+  flashcardsRevealed: false,
+  flashcardsCategory: 'todos',
+  FLASHCARDS_KEY: 'atlas_flashcards_progress',
 
   t(key) {
     return window.I18n ? I18n.t(key) : key;
@@ -203,6 +211,10 @@ const App = {
           if (this.currentView === 'unidades') this.renderUnidades();
           if (this.currentView === 'predisposiciones') this.renderPredisposiciones();
           if (this.currentView === 'urgency') this.renderUrgency();
+          if (this.currentView === 'bcs') this.renderBcs();
+          if (this.currentView === 'flashcards') this.renderFlashcards();
+          if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
+          if (this.currentView === 'dictionary') this.renderDictionary();
           this.renderFavorites();
           this.updateMobileTabBar();
           this.updateResultsTitle();
@@ -216,6 +228,7 @@ const App = {
       this.buildSynonymIndex();
       this.crossLinks = await this.loadCrossLinks();
       this.toxicologyData = await this.loadToxicologyData();
+      this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.vaccinationCalendars = await this.loadVaccinationCalendars();
       this.renderNav();
       this.renderStats();
@@ -306,6 +319,17 @@ const App = {
     }
     try {
       const res = await fetch('data/toxicologia.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
+  async loadEmergenciasLatamData() {
+    if (window.EMERGENCIAS_LATAM?.paises?.length) {
+      return window.EMERGENCIAS_LATAM;
+    }
+    try {
+      const res = await fetch('data/emergencias_latam.json');
       if (res.ok) return await res.json();
     } catch (_) { /* fetch falla en file:// */ }
     return null;
@@ -424,6 +448,9 @@ const App = {
     document.getElementById('backFluidoterapiaBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backUnidadesBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backPredisposicionesBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backBcsBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.showDictionary());
+    document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
@@ -765,6 +792,21 @@ const App = {
 
       if (parts[0] === 'predisposiciones') {
         this.showPredisposiciones({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'bcs') {
+        this.showBcs({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'flashcards') {
+        this.showFlashcards({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'emergencias-latam') {
+        this.showEmergenciasLatam({ updateHash: false });
         return true;
       }
 
@@ -1216,7 +1258,9 @@ const App = {
       stats.innerHTML = `
         <span class="dictionary-stat"><strong>${totalVisible}</strong> término(s) mostrados</span>
         <span class="dictionary-stat-muted">de ${totalAll} en el glosario</span>
+        <button type="button" class="dictionary-study-btn" id="openFlashcardsFromDict">${this.esc(this.t('flash.open'))} →</button>
       `;
+      stats.querySelector('#openFlashcardsFromDict')?.addEventListener('click', () => this.showFlashcards());
     }
 
     if (!list) return;
@@ -1404,6 +1448,31 @@ const App = {
     this.exportE2EState();
   },
 
+  showBcs(options = {}) {
+    this.renderBcs();
+    this.showView('bcs');
+    if (options.updateHash !== false) this.updateHash('#bcs');
+    this.exportE2EState();
+  },
+
+  showFlashcards(options = {}) {
+    if (!this.flashcardsDeck.length) this.buildFlashcardsDeck();
+    this.renderFlashcards();
+    this.showView('flashcards');
+    if (options.updateHash !== false) this.updateHash('#flashcards');
+    this.exportE2EState();
+  },
+
+  showEmergenciasLatam(options = {}) {
+    this.renderEmergenciasLatam();
+    this.showView('emergenciasLatam');
+    if (options.updateHash !== false) this.updateHash('#emergencias-latam');
+    this.exportE2EState();
+  },
+
+  BCS_DOG_CAT_SCORES: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  BCS_EQUINE_SCORES: [1, 2, 3, 4, 5],
+
   FLUID_PROFILES: {
     perros: { mlKgDay: 60, shockMin: 10, shockMax: 20 },
     gatos: { mlKgDay: 50, shockMin: 10, shockMax: 15 },
@@ -1445,6 +1514,12 @@ const App = {
         title: this.t('tox.title'),
         desc: this.t('tox.card_desc'),
         action: () => this.showToxicologia()
+      },
+      {
+        icon: '📊',
+        title: this.t('bcs.title'),
+        desc: this.t('bcs.card_desc'),
+        action: () => this.showBcs()
       }
     ];
     grid.innerHTML = cards.map((c, i) => `
@@ -1975,6 +2050,345 @@ const App = {
     `).join('');
   },
 
+  getBcsScores() {
+    return this.bcsSpecies === 'equinos' ? this.BCS_EQUINE_SCORES : this.BCS_DOG_CAT_SCORES;
+  },
+
+  getBcsRibOpacity(score) {
+    const max = this.bcsSpecies === 'equinos' ? 5 : 9;
+    const mid = Math.ceil(max / 2);
+    if (score <= 2) return 1;
+    if (score <= mid - 1) return 0.85;
+    if (score === mid) return 0.55;
+    if (score <= mid + 1) return 0.35;
+    return 0.15;
+  },
+
+  getBcsWaistScale(score) {
+    const max = this.bcsSpecies === 'equinos' ? 5 : 9;
+    const mid = Math.ceil(max / 2);
+    if (score <= 2) return 1.35;
+    if (score <= mid - 1) return 1.15;
+    if (score === mid) return 1;
+    if (score <= mid + 1) return 0.88;
+    return 0.72;
+  },
+
+  renderBcsSvg(score) {
+    const ribOpacity = this.getBcsRibOpacity(score);
+    const waist = this.getBcsWaistScale(score);
+    const isEquine = this.bcsSpecies === 'equinos';
+    const bodyPath = isEquine
+      ? 'M30 55 Q55 40 80 48 Q105 56 120 70 L118 95 Q90 102 62 98 Q35 94 30 70 Z'
+      : 'M35 58 Q60 42 85 50 Q110 58 115 72 L112 92 Q85 98 58 94 Q32 90 35 72 Z';
+  const ribLines = isEquine
+      ? [48, 58, 68, 78].map(y => `<line x1="52" y1="${y}" x2="98" y2="${y}" stroke="currentColor" stroke-width="1.5" opacity="${ribOpacity}"/>`).join('')
+      : [50, 58, 66, 74].map(y => `<line x1="48" y1="${y}" x2="102" y2="${y}" stroke="currentColor" stroke-width="1.5" opacity="${ribOpacity}"/>`).join('');
+    return `
+      <svg class="bcs-silhouette-svg" viewBox="0 0 150 120" role="img" aria-hidden="true">
+        <g transform="scale(${waist}, 1) translate(${(1 - waist) * 75}, 0)">
+          <path d="${bodyPath}" fill="var(--bcs-fill, #c8d6e5)" stroke="var(--bcs-stroke, #576574)" stroke-width="2"/>
+          ${ribLines}
+        </g>
+        <text x="75" y="115" text-anchor="middle" class="bcs-svg-score">${score}</text>
+      </svg>`;
+  },
+
+  renderBcs() {
+    const container = document.getElementById('bcsContent');
+    if (!container) return;
+    const scores = this.getBcsScores();
+    const maxScore = scores[scores.length - 1];
+    if (!scores.includes(this.bcsScore)) this.bcsScore = Math.ceil(maxScore / 2);
+    const speciesOptions = [
+      { id: 'perros', label: this.t('bcs.species.dog') },
+      { id: 'gatos', label: this.t('bcs.species.cat') },
+      { id: 'equinos', label: this.t('bcs.species.horse') }
+    ];
+    const scoreKey = this.bcsSpecies === 'equinos'
+      ? `bcs.equine.${this.bcsScore}`
+      : `bcs.dog_cat.${this.bcsScore}`;
+    container.innerHTML = `
+      <div class="bcs-toolbar">
+        <fieldset class="bcs-species-toggle">
+          <legend>${this.esc(this.t('bcs.select_species'))}</legend>
+          ${speciesOptions.map(s => `
+            <label class="bcs-species-label">
+              <input type="radio" name="bcs_species" value="${s.id}" ${this.bcsSpecies === s.id ? 'checked' : ''}>
+              ${this.esc(s.label)}
+            </label>
+          `).join('')}
+        </fieldset>
+        <div class="bcs-scale-label">
+          ${this.esc(this.t(this.bcsSpecies === 'equinos' ? 'bcs.scale_equine' : 'bcs.scale_dog_cat'))}
+        </div>
+      </div>
+      <div class="bcs-main">
+        <div class="bcs-visual" aria-live="polite">
+          ${this.renderBcsSvg(this.bcsScore)}
+        </div>
+        <div class="bcs-controls">
+          <label for="bcsScoreRange">${this.esc(this.t('bcs.score_label'))}: <strong id="bcsScoreValue">${this.bcsScore}</strong> / ${maxScore}</label>
+          <input type="range" id="bcsScoreRange" min="${scores[0]}" max="${maxScore}" step="1" value="${this.bcsScore}">
+          <div class="bcs-score-buttons" role="group" aria-label="${this.esc(this.t('bcs.score_label'))}">
+            ${scores.map(n => `
+              <button type="button" class="bcs-score-btn ${n === this.bcsScore ? 'active' : ''}" data-score="${n}">${n}</button>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      <article class="bcs-description">
+        <h3>${this.esc(this.t('bcs.score_heading').replace('{score}', String(this.bcsScore)))}</h3>
+        <p>${this.esc(this.t(scoreKey))}</p>
+      </article>
+      <p class="bcs-disclaimer" role="note">⚕️ ${this.esc(this.t('bcs.disclaimer'))}</p>
+    `;
+    const updateScore = (score) => {
+      this.bcsScore = score;
+      container.querySelector('.bcs-visual').innerHTML = this.renderBcsSvg(score);
+      const valueEl = container.querySelector('#bcsScoreValue');
+      if (valueEl) valueEl.textContent = String(score);
+      const range = container.querySelector('#bcsScoreRange');
+      if (range) range.value = String(score);
+      container.querySelectorAll('.bcs-score-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.score, 10) === score);
+      });
+      const desc = container.querySelector('.bcs-description');
+      if (desc) {
+        const key = this.bcsSpecies === 'equinos' ? `bcs.equine.${score}` : `bcs.dog_cat.${score}`;
+        desc.innerHTML = `
+          <h3>${this.esc(this.t('bcs.score_heading').replace('{score}', String(score)))}</h3>
+          <p>${this.esc(this.t(key))}</p>`;
+      }
+    };
+    container.querySelectorAll('input[name="bcs_species"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        this.bcsSpecies = radio.value;
+        const newScores = this.getBcsScores();
+        if (!newScores.includes(this.bcsScore)) this.bcsScore = Math.ceil(newScores[newScores.length - 1] / 2);
+        this.renderBcs();
+      });
+    });
+    container.querySelector('#bcsScoreRange')?.addEventListener('input', (e) => {
+      updateScore(parseInt(e.target.value, 10));
+    });
+    container.querySelectorAll('.bcs-score-btn').forEach(btn => {
+      btn.addEventListener('click', () => updateScore(parseInt(btn.dataset.score, 10)));
+    });
+  },
+
+  getFlashcardsProgress() {
+    try {
+      const raw = localStorage.getItem(this.FLASHCARDS_KEY);
+      return raw ? JSON.parse(raw) : { known: [], stats: { studied: 0, sessions: 0 } };
+    } catch (_) {
+      return { known: [], stats: { studied: 0, sessions: 0 } };
+    }
+  },
+
+  saveFlashcardsProgress(progress) {
+    try {
+      localStorage.setItem(this.FLASHCARDS_KEY, JSON.stringify(progress));
+    } catch (_) { /* sin almacenamiento */ }
+  },
+
+  shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  },
+
+  buildFlashcardsDeck() {
+    const terms = this.getDictionaryTerms().filter(term => {
+      if (this.flashcardsCategory === 'todos') return true;
+      return term.categoriaId === this.flashcardsCategory;
+    });
+    this.flashcardsDeck = this.shuffleArray(terms);
+    this.flashcardsIndex = 0;
+    this.flashcardsRevealed = false;
+    const progress = this.getFlashcardsProgress();
+    progress.stats = progress.stats || { studied: 0, sessions: 0 };
+    progress.stats.sessions += 1;
+    this.saveFlashcardsProgress(progress);
+  },
+
+  renderFlashcards() {
+    const container = document.getElementById('flashcardsContent');
+    if (!container) return;
+    if (!this.dictionaryData) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('flash.no_glossary'))}</p></div>`;
+      return;
+    }
+    if (!this.flashcardsDeck.length) this.buildFlashcardsDeck();
+    const progress = this.getFlashcardsProgress();
+    const knownSet = new Set(progress.known || []);
+    const total = this.flashcardsDeck.length;
+    const current = this.flashcardsDeck[this.flashcardsIndex];
+    const categories = [
+      { id: 'todos', nombre: this.t('flash.all_categories') },
+      ...this.dictionaryData.categorias.map(c => ({ id: c.id, nombre: c.nombre }))
+    ];
+    if (!current) {
+      container.innerHTML = `
+        <div class="flashcards-done">
+          <div class="empty-icon">🎉</div>
+          <h3>${this.esc(this.t('flash.session_done'))}</h3>
+          <p>${this.esc(this.t('flash.known_count').replace('{count}', String(knownSet.size)))}</p>
+          <button type="button" class="disclaimer-accept-btn" id="flashRestartBtn">${this.esc(this.t('flash.restart'))}</button>
+        </div>`;
+      container.querySelector('#flashRestartBtn')?.addEventListener('click', () => {
+        this.buildFlashcardsDeck();
+        this.renderFlashcards();
+      });
+      return;
+    }
+    const pct = total ? Math.round((this.flashcardsIndex / total) * 100) : 0;
+    container.innerHTML = `
+      <div class="flashcards-toolbar">
+        <label for="flashCategorySelect">${this.esc(this.t('flash.category'))}</label>
+        <select id="flashCategorySelect">
+          ${categories.map(c => `<option value="${c.id}" ${this.flashcardsCategory === c.id ? 'selected' : ''}>${this.esc(c.nombre)}</option>`).join('')}
+        </select>
+        <button type="button" class="btn-text-link" id="flashShuffleBtn">${this.esc(this.t('flash.shuffle'))}</button>
+        <button type="button" class="btn-text-link" id="flashResetProgressBtn">${this.esc(this.t('flash.reset_progress'))}</button>
+      </div>
+      <div class="flashcards-progress" role="status" aria-live="polite">
+        <div class="flashcards-progress-bar" style="width:${pct}%"></div>
+        <span>${this.esc(this.t('flash.progress').replace('{current}', String(this.flashcardsIndex + 1)).replace('{total}', String(total)).replace('{known}', String(knownSet.size)))}</span>
+      </div>
+      <div class="flashcard ${this.flashcardsRevealed ? 'flashcard--revealed' : ''}" id="flashcard" role="button" tabindex="0" aria-pressed="${this.flashcardsRevealed}">
+        <p class="flashcard-eyebrow">${this.esc(current.categoriaNombre || '')}</p>
+        <h3 class="flashcard-term">${this.esc(current.termino)}</h3>
+        <div class="flashcard-back" ${this.flashcardsRevealed ? '' : 'hidden'}>
+          <p class="flashcard-definition">${this.esc(current.definicion)}</p>
+          ${current.ejemplo ? `<p class="flashcard-example"><em>${this.esc(this.t('flash.example'))}:</em> ${this.esc(current.ejemplo)}</p>` : ''}
+        </div>
+        <p class="flashcard-hint">${this.esc(this.t(this.flashcardsRevealed ? 'flash.tap_hide' : 'flash.tap_reveal'))}</p>
+      </div>
+      <div class="flashcards-actions">
+        <button type="button" class="btn-text-link" id="flashPrevBtn" ${this.flashcardsIndex === 0 ? 'disabled' : ''}>← ${this.esc(this.t('flash.prev'))}</button>
+        <button type="button" class="flashcards-know-btn" id="flashKnowBtn" ${this.flashcardsRevealed ? '' : 'disabled'}>${this.esc(this.t('flash.mark_known'))}</button>
+        <button type="button" class="flashcards-learning-btn" id="flashLearningBtn">${this.esc(this.t('flash.still_learning'))}</button>
+        <button type="button" class="btn-text-link" id="flashNextBtn">${this.esc(this.t('flash.next'))} →</button>
+      </div>
+    `;
+    const reveal = () => {
+      this.flashcardsRevealed = true;
+      this.renderFlashcards();
+    };
+    const hide = () => {
+      this.flashcardsRevealed = false;
+      this.renderFlashcards();
+    };
+    container.querySelector('#flashcard')?.addEventListener('click', () => {
+      if (this.flashcardsRevealed) hide();
+      else reveal();
+    });
+    container.querySelector('#flashcard')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (this.flashcardsRevealed) hide();
+        else reveal();
+      }
+    });
+    container.querySelector('#flashCategorySelect')?.addEventListener('change', (e) => {
+      this.flashcardsCategory = e.target.value;
+      this.buildFlashcardsDeck();
+      this.renderFlashcards();
+    });
+    container.querySelector('#flashShuffleBtn')?.addEventListener('click', () => {
+      this.flashcardsDeck = this.shuffleArray(this.flashcardsDeck);
+      this.flashcardsIndex = 0;
+      this.flashcardsRevealed = false;
+      this.renderFlashcards();
+    });
+    container.querySelector('#flashResetProgressBtn')?.addEventListener('click', () => {
+      this.saveFlashcardsProgress({ known: [], stats: { studied: 0, sessions: 0 } });
+      this.renderFlashcards();
+    });
+    container.querySelector('#flashPrevBtn')?.addEventListener('click', () => {
+      if (this.flashcardsIndex > 0) {
+        this.flashcardsIndex -= 1;
+        this.flashcardsRevealed = false;
+        this.renderFlashcards();
+      }
+    });
+    container.querySelector('#flashNextBtn')?.addEventListener('click', () => {
+      this.flashcardsIndex += 1;
+      this.flashcardsRevealed = false;
+      if (this.flashcardsIndex >= this.flashcardsDeck.length) {
+        this.renderFlashcards();
+        return;
+      }
+      this.renderFlashcards();
+    });
+    container.querySelector('#flashKnowBtn')?.addEventListener('click', () => {
+      const slug = this.termSlug(current.termino);
+      if (!knownSet.has(slug)) {
+        progress.known = [...(progress.known || []), slug];
+        progress.stats.studied = (progress.stats.studied || 0) + 1;
+        this.saveFlashcardsProgress(progress);
+      }
+      this.flashcardsIndex += 1;
+      this.flashcardsRevealed = false;
+      this.renderFlashcards();
+    });
+    container.querySelector('#flashLearningBtn')?.addEventListener('click', () => {
+      this.flashcardsIndex += 1;
+      this.flashcardsRevealed = false;
+      this.renderFlashcards();
+    });
+  },
+
+  renderEmergenciasLatam() {
+    const title = document.getElementById('emergenciasLatamTitle');
+    const intro = document.getElementById('emergenciasLatamIntro');
+    const list = document.getElementById('emergenciasLatamList');
+    if (!list) return;
+    const data = this.emergenciasLatamData;
+    if (title) title.textContent = data?.titulo || this.t('emerg.title');
+    if (intro) intro.textContent = data?.introduccion || this.t('emerg.intro');
+    if (!data?.paises?.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('emerg.empty'))}</p></div>`;
+      return;
+    }
+    list.innerHTML = `
+      <p class="emergencias-latam-disclaimer" role="note">⚕️ ${this.esc(data.disclaimer || this.t('emerg.disclaimer'))}</p>
+      ${data.paises.map(p => `
+        <article class="emergencias-latam-card" aria-labelledby="emerg-${p.id}">
+          <header>
+            <span class="emergencias-latam-flag" aria-hidden="true">${p.bandera || '🌎'}</span>
+            <h3 id="emerg-${p.id}">${this.esc(p.nombre)}</h3>
+          </header>
+          <div class="emergencias-latam-section">
+            <h4>${this.esc(this.t('emerg.colleges'))}</h4>
+            <ul>
+              ${(p.colegios || []).map(c => `
+                <li><a href="${this.esc(c.url)}" target="_blank" rel="noopener noreferrer">${this.esc(c.nombre)}</a></li>
+              `).join('')}
+            </ul>
+          </div>
+          ${(p.lineas || []).length ? `
+            <div class="emergencias-latam-section">
+              <h4>${this.esc(this.t('emerg.hotlines'))}</h4>
+              <ul>
+                ${p.lineas.map(l => `
+                  <li>
+                    <strong>${this.esc(l.nombre)}</strong>
+                    ${l.telefono ? ` — <a href="tel:${this.esc(l.telefono.replace(/\s/g, ''))}">${this.esc(l.telefono)}</a>` : ''}
+                    ${l.notas ? `<br><small>${this.esc(l.notas)}</small>` : ''}
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        </article>
+      `).join('')}`;
+  },
+
   showToast(message) {
     const container = document.getElementById('toastContainer');
     if (!container) return;
@@ -2211,7 +2625,12 @@ const App = {
         <p>${this.esc(this.t('tox.urgency_link'))}</p>
         <button type="button" class="btn-text-link urgency-tox-btn">${this.esc(this.t('tox.open'))} →</button>
       </div>`;
-    container.innerHTML = toxLink + this.data.animales.map(animal => {
+    const emergLink = `
+      <div class="urgency-tools-banner urgency-tools-banner--latam">
+        <p>${this.esc(this.t('emerg.urgency_link'))}</p>
+        <button type="button" class="btn-text-link urgency-emerg-latam-btn">${this.esc(this.t('emerg.open'))} →</button>
+      </div>`;
+    container.innerHTML = toxLink + emergLink + this.data.animales.map(animal => {
       const breeds = ['pequena', 'mediana', 'grande'].flatMap(size => animal.razas?.[size] || []);
       const alerts = breeds
         .flatMap(b => (Array.isArray(b.senales_alerta) ? b.senales_alerta : [b.senales_alerta]).filter(Boolean))
@@ -2242,6 +2661,7 @@ const App = {
       `;
     }).join('');
     container.querySelector('.urgency-tox-btn')?.addEventListener('click', () => this.showToxicologia());
+    container.querySelector('.urgency-emerg-latam-btn')?.addEventListener('click', () => this.showEmergenciasLatam());
   },
 
   getRecentHistory() {
@@ -2466,6 +2886,9 @@ const App = {
       fluidoterapia: 'tools',
       unidades: 'tools',
       predisposiciones: 'explore',
+      bcs: 'tools',
+      flashcards: 'glossary',
+      emergenciasLatam: 'urgency',
       compare: 'explore'
     };
     return map[view] || 'welcome';
@@ -3156,6 +3579,18 @@ const App = {
       document.title = `${this.t('predis.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'bcs') {
+      document.title = `${this.t('bcs.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'flashcards') {
+      document.title = `${this.t('flash.title')} — ${suffix}`;
+      return;
+    }
+    if (this.currentView === 'emergenciasLatam') {
+      document.title = `${this.t('emerg.title')} — ${suffix}`;
+      return;
+    }
     document.title = 'Enciclopedia Animal — Salud Veterinaria';
   },
 
@@ -3196,6 +3631,9 @@ const App = {
     document.getElementById('fluidoterapiaView').classList.toggle('active', view === 'fluidoterapia');
     document.getElementById('unidadesView').classList.toggle('active', view === 'unidades');
     document.getElementById('predisposicionesView').classList.toggle('active', view === 'predisposiciones');
+    document.getElementById('bcsView').classList.toggle('active', view === 'bcs');
+    document.getElementById('flashcardsView').classList.toggle('active', view === 'flashcards');
+    document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');
     document.getElementById('detailView').classList.toggle('active', view === 'detail');
     document.getElementById('diseaseView').classList.toggle('active', view === 'disease');
     this.updateSidebar();
