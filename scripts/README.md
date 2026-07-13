@@ -39,6 +39,7 @@ bash actualizar_datos.sh   # JSON → enciclopedia.js + diccionario_medicos.js
 | `download_breed_specific.rb` | Fuentes específicas por raza |
 | `fix_wikipedia_images.rb` | Corrige imágenes con Wikipedia |
 | `list_missing_images.rb` | Lista razas sin imagen válida |
+| `list_missing_disease_images.rb` | Lista enfermedades únicas sin JPG (>8 KB) ni SVG |
 | `apply_image_overrides.rb` | Aplica overrides manuales |
 
 Archivos de apoyo: `breed_searches.json`, `wikipedia_titles.json`.

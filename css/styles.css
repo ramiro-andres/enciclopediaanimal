@@ -3566,6 +3566,17 @@ body.disclaimer-open {
   .iso-float {
     display: none !important;
   }
+
+  .welcome-tour-overlay,
+  .welcome-tour-popover,
+  .welcome-tour-highlight {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .welcome-tour-highlight {
+    box-shadow: 0 0 0 3px var(--primary) !important;
+  }
 }
 
 @media (max-width: 768px) {

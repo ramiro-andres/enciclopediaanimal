@@ -13,6 +13,10 @@ labels=(
   "good first issue|Buena primera contribución|7057FF"
   "dependencies|Actualización de dependencias|0366D6"
   "community|Plantillas, gobernanza o contribución|C5DEF5"
+  "a11y|Accesibilidad, contraste o reduced-motion|FEF2C0"
+  "data|Datos JSON, scripts de generación o validación|BFDADC"
+  "images|Imágenes de razas o enfermedades|F9D0C4"
+  "enhancement|Mejora de funcionalidad existente|A2EEEF"
 )
 
 for entry in "${labels[@]}"; do
