@@ -27,7 +27,9 @@ class ChangelogPublicTest < Minitest::Test
     assert_includes @html, 'id="changelogView"'
     assert_includes @html, 'data/changelog.js'
     assert_includes @html, 'id="footerChangelogBtn"'
-    assert_includes @html, 'id="welcomeChangelogBtn"'
+    refute_includes @html, 'id="welcomeChangelogBtn"',
+                    'El changelog no debe aparecer en la página principal (welcome)'
+    refute_includes @app, 'welcomeChangelogBtn'
     assert_includes @app, 'showChangelog'
     assert_includes @app, "parts[0] === 'changelog'"
     assert_includes @app, 'renderChangelog'

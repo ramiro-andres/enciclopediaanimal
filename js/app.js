@@ -759,7 +759,6 @@ const App = {
     document.getElementById('backLaboratorioBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backChangelogBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('footerChangelogBtn')?.addEventListener('click', () => this.showChangelog());
-    document.getElementById('welcomeChangelogBtn')?.addEventListener('click', () => this.showChangelog());
     document.getElementById('clearHistoryBtn')?.addEventListener('click', () => this.clearRecentHistory());
     document.getElementById('clearFavoritesBtn')?.addEventListener('click', () => this.clearFavorites());
     document.getElementById('changeCategoryBtn')?.addEventListener('click', () => this.goWelcome());
