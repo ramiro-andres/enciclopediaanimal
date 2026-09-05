@@ -10,9 +10,11 @@ if [ "${SOLO_JS:-}" != "1" ]; then
   ruby "$DIR/scripts/data/suggest_glossary_links.rb"
   ruby "$DIR/scripts/data/integrate_suggested_links_sprint13.rb"
   ruby "$DIR/scripts/data/dedupe_glossary_and_links.rb"
+  ruby "$DIR/scripts/data/enrich_glossary_definitions.rb"
   ruby "$DIR/scripts/data/build_toxicologia.rb"
   ruby "$DIR/scripts/data/build_emergencias_latam.rb"
   ruby "$DIR/scripts/data/build_triaje.rb"
+  ruby "$DIR/scripts/data/build_evaluacion_preguntas.rb"
   ruby "$DIR/scripts/data/expand_bibliografia_sprint10.rb"
   ruby "$DIR/scripts/data/build_resumen_estudio_sprint10.rb"
   ruby "$DIR/scripts/data/build_chunks.rb"
@@ -70,5 +72,12 @@ ruby -rjson -e '
     changelog = JSON.parse(File.read(changelog_path))
     write_js_window(base + "/data/changelog.js", "ATLAS_CHANGELOG", changelog)
     puts "changelog.js actualizado (#{changelog["entries"].length} entradas)"
+  end
+
+  eval_path = base + "/data/evaluacion_preguntas.json"
+  if File.exist?(eval_path)
+    eval_data = JSON.parse(File.read(eval_path))
+    write_js_window(base + "/data/evaluacion_preguntas.js", "EVALUACION_PREGUNTAS", eval_data)
+    puts "evaluacion_preguntas.js actualizado (#{eval_data.dig("stats", "total") || eval_data["preguntas"]&.length} preguntas)"
   end
 ' "$DIR"

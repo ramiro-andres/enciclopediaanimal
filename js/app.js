@@ -82,6 +82,9 @@ const App = {
   flashcardsRevealed: false,
   flashcardsCategory: 'todos',
   FLASHCARDS_KEY: 'atlas_flashcards_progress',
+  evaluacionData: null,
+  evaluacionSession: null,
+  EVALUACION_PASS_THRESHOLD: 0.8,
 
   t(key) {
     return window.I18n ? I18n.t(key) : key;
@@ -260,6 +263,7 @@ const App = {
           if (this.currentView === 'urgency') this.renderUrgency();
           if (this.currentView === 'bcs') this.renderBcs();
           if (this.currentView === 'flashcards') this.renderFlashcards();
+          if (this.currentView === 'evaluacion') this.renderEvaluacion();
           if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
           if (this.currentView === 'triaje') this.renderTriaje();
           if (this.currentView === 'laboratorio') this.renderLaboratorio();
@@ -281,6 +285,7 @@ const App = {
       this.dictionaryData = await this.loadDictionaryData();
       this.searchSynonyms = await this.loadSearchSynonyms();
       this.buildSynonymIndex();
+      this.evaluacionData = await this.loadEvaluacionData();
       this.crossLinks = await this.loadCrossLinks();
       this.exportE2EState();
       this.toxicologyData = await this.loadToxicologyData();
@@ -551,6 +556,17 @@ const App = {
     return null;
   },
 
+  async loadEvaluacionData() {
+    if (window.EVALUACION_PREGUNTAS?.preguntas?.length) {
+      return window.EVALUACION_PREGUNTAS;
+    }
+    try {
+      const res = await fetch('data/evaluacion_preguntas.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
   buildSynonymIndex() {
     const terms = this.searchSynonyms?.terms || {};
     this.synonymGroups = Object.entries(terms).map(([canonical, synonyms]) => {
@@ -753,7 +769,8 @@ const App = {
     document.getElementById('backUnidadesBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backPredisposicionesBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backBcsBtn')?.addEventListener('click', () => this.showTools());
-    document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.showDictionary());
+    document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backEvaluacionBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('backTriajeBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backLaboratorioBtn')?.addEventListener('click', () => this.showTools());
@@ -797,6 +814,22 @@ const App = {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         openPredisposiciones();
+      }
+    });
+    const openFlashcards = () => this.showFlashcards();
+    document.getElementById('openFlashcardsCard')?.addEventListener('click', openFlashcards);
+    document.getElementById('openFlashcardsCard')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openFlashcards();
+      }
+    });
+    const openEvaluacion = () => this.showEvaluacion();
+    document.getElementById('openEvaluacionCard')?.addEventListener('click', openEvaluacion);
+    document.getElementById('openEvaluacionCard')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openEvaluacion();
       }
     });
     document.getElementById('predisSearchInput')?.addEventListener('input', (e) => {
@@ -1177,6 +1210,11 @@ const App = {
 
       if (parts[0] === 'flashcards') {
         this.showFlashcards({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'evaluacion' || parts[0] === 'examen') {
+        this.showEvaluacion({ updateHash: false });
         return true;
       }
 
@@ -1707,10 +1745,8 @@ const App = {
       stats.innerHTML = `
         <span class="dictionary-stat">${this.esc(this.t('dict.terms_shown').replace('{count}', totalVisible))}</span>
         <span class="dictionary-stat-muted">${this.esc(this.t('dict.terms_of').replace('{total}', totalAll))}</span>
-        <button type="button" class="dictionary-study-btn" id="openFlashcardsFromDict">${this.esc(this.t('flash.open'))} →</button>
         <button type="button" class="dictionary-study-btn dictionary-lab-btn" id="openLabFromDict">${this.esc(this.t('lab.open_from_dict'))}</button>
       `;
-      stats.querySelector('#openFlashcardsFromDict')?.addEventListener('click', () => this.showFlashcards());
       stats.querySelector('#openLabFromDict')?.addEventListener('click', () => this.showLaboratorio());
     }
 
@@ -1911,6 +1947,16 @@ const App = {
     this.renderFlashcards();
     this.showView('flashcards');
     if (options.updateHash !== false) this.updateHash('#flashcards');
+    this.exportE2EState();
+  },
+
+  showEvaluacion(options = {}) {
+    if (!this.evaluacionSession || this.evaluacionSession.phase === 'idle') {
+      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: 10 };
+    }
+    this.renderEvaluacion();
+    this.showView('evaluacion');
+    if (options.updateHash !== false) this.updateHash('#evaluacion');
     this.exportE2EState();
   },
 
@@ -2943,6 +2989,226 @@ const App = {
     });
   },
 
+  /**
+   * Coincidencia aproximada para respuestas escritas:
+   * normaliza (minúsculas, sin acentos), acepta sinónimos,
+   * inclusión de palabras clave y Levenshtein leve.
+   */
+  scoreWrittenAnswer(user, expected, synonyms = [], keywords = []) {
+    const userNorm = this.normalizeSearch(user).replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!userNorm) return { correct: false, reason: 'empty' };
+
+    const candidates = [expected, ...(synonyms || [])]
+      .map(s => this.normalizeSearch(s).replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+
+    for (const cand of candidates) {
+      if (userNorm === cand) return { correct: true, reason: 'exact' };
+      if (cand.length >= 4 && (userNorm.includes(cand) || cand.includes(userNorm))) {
+        return { correct: true, reason: 'contains' };
+      }
+      const maxDist = cand.length <= 5 ? 1 : cand.length <= 10 ? 2 : 3;
+      if (this.levenshtein(userNorm, cand) <= maxDist) {
+        return { correct: true, reason: 'fuzzy' };
+      }
+    }
+
+    const keys = (keywords && keywords.length)
+      ? keywords.map(k => this.normalizeSearch(k)).filter(k => k.length >= 3)
+      : this.normalizeSearch(expected).split(/[^a-z0-9]+/).filter(w => w.length >= 4);
+    if (keys.length) {
+      const hit = keys.filter(k => userNorm.includes(k) || this.levenshtein(
+        userNorm.split(/\s+/).find(w => Math.abs(w.length - k.length) <= 2) || '',
+        k
+      ) <= 1).length;
+      if (hit >= Math.ceil(keys.length * 0.6) && hit >= 1) {
+        return { correct: true, reason: 'keywords' };
+      }
+    }
+
+    return { correct: false, reason: 'mismatch' };
+  },
+
+  startEvaluacionSession(size) {
+    const bank = this.evaluacionData?.preguntas || [];
+    if (!bank.length) {
+      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size };
+      return;
+    }
+    const n = Math.min(Math.max(5, Number(size) || 10), Math.min(30, bank.length));
+    const questions = this.shuffleArray([...bank]).slice(0, n);
+    this.evaluacionSession = {
+      phase: 'quiz',
+      questions,
+      index: 0,
+      answers: [],
+      size: n
+    };
+  },
+
+  submitEvaluacionAnswer(rawAnswer) {
+    const session = this.evaluacionSession;
+    if (!session || session.phase !== 'quiz') return;
+    const q = session.questions[session.index];
+    if (!q) return;
+
+    let correct = false;
+    let detail = null;
+    if (q.tipo === 'mcq') {
+      const idx = Number(rawAnswer);
+      correct = Number.isInteger(idx) && idx === q.correct_index;
+      detail = { selectedIndex: idx, expectedIndex: q.correct_index };
+    } else {
+      detail = this.scoreWrittenAnswer(rawAnswer, q.respuesta, q.sinonimos || [], q.keywords || []);
+      correct = detail.correct;
+    }
+
+    session.answers.push({
+      id: q.id,
+      tipo: q.tipo,
+      correct,
+      user: rawAnswer,
+      expected: q.respuesta,
+      detail
+    });
+    session.index += 1;
+    if (session.index >= session.questions.length) {
+      const score = session.answers.filter(a => a.correct).length;
+      const total = session.answers.length;
+      const pct = total ? score / total : 0;
+      const threshold = this.evaluacionData?.pass_threshold ?? this.EVALUACION_PASS_THRESHOLD;
+      session.phase = 'result';
+      session.result = {
+        score,
+        total,
+        pct,
+        passed: pct >= threshold,
+        threshold
+      };
+    }
+    this.renderEvaluacion();
+  },
+
+  renderEvaluacion() {
+    const container = document.getElementById('evaluacionContent');
+    if (!container) return;
+    const bank = this.evaluacionData?.preguntas || [];
+    const disclaimer = (window.I18n?.lang === 'en'
+      ? this.evaluacionData?.disclaimer_en
+      : this.evaluacionData?.disclaimer_es) || this.t('eval.disclaimer');
+
+    if (!bank.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('eval.empty'))}</p></div>`;
+      return;
+    }
+
+    if (!this.evaluacionSession) {
+      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: 10 };
+    }
+    const session = this.evaluacionSession;
+
+    if (session.phase === 'setup') {
+      const maxN = Math.min(30, bank.length);
+      const options = [5, 10, 15, 20].filter(n => n <= maxN);
+      if (!options.includes(maxN) && maxN >= 5) options.push(maxN);
+      container.innerHTML = `
+        <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
+        <div class="evaluacion-setup">
+          <label for="evaluacionSizeSelect">${this.esc(this.t('eval.size_label'))}</label>
+          <select id="evaluacionSizeSelect">
+            ${options.map(n => `<option value="${n}" ${session.size === n ? 'selected' : ''}>${n}</option>`).join('')}
+          </select>
+          <p class="evaluacion-setup-hint">${this.esc(this.t('eval.setup_hint').replace('{mcq}', String(this.evaluacionData?.stats?.mcq || '—')).replace('{written}', String(this.evaluacionData?.stats?.written || '—')))}</p>
+          <button type="button" class="disclaimer-accept-btn" id="evaluacionStartBtn">${this.esc(this.t('eval.start'))}</button>
+        </div>`;
+      container.querySelector('#evaluacionStartBtn')?.addEventListener('click', () => {
+        const size = Number(container.querySelector('#evaluacionSizeSelect')?.value || 10);
+        this.startEvaluacionSession(size);
+        this.renderEvaluacion();
+      });
+      return;
+    }
+
+    if (session.phase === 'result') {
+      const { score, total, pct, passed, threshold } = session.result;
+      const pctLabel = Math.round(pct * 100);
+      container.innerHTML = `
+        <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
+        <div class="evaluacion-result ${passed ? 'evaluacion-result--pass' : 'evaluacion-result--fail'}">
+          <div class="empty-icon">${passed ? '✅' : '📌'}</div>
+          <h3>${this.esc(this.t(passed ? 'eval.passed' : 'eval.failed'))}</h3>
+          <p class="evaluacion-score">${this.esc(this.t('eval.score').replace('{score}', String(score)).replace('{total}', String(total)).replace('{pct}', String(pctLabel)))}</p>
+          <p class="evaluacion-threshold">${this.esc(this.t('eval.threshold').replace('{threshold}', String(Math.round(threshold * 100))))}</p>
+          <div class="evaluacion-result-actions">
+            <button type="button" class="disclaimer-accept-btn" id="evaluacionRetryBtn">${this.esc(this.t('eval.retry'))}</button>
+            <button type="button" class="btn-text-link" id="evaluacionHomeBtn">${this.esc(this.t('back.home'))}</button>
+          </div>
+        </div>`;
+      container.querySelector('#evaluacionRetryBtn')?.addEventListener('click', () => {
+        this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: session.size || 10 };
+        this.renderEvaluacion();
+      });
+      container.querySelector('#evaluacionHomeBtn')?.addEventListener('click', () => this.goWelcome());
+      return;
+    }
+
+    const q = session.questions[session.index];
+    const progress = this.t('eval.progress')
+      .replace('{current}', String(session.index + 1))
+      .replace('{total}', String(session.questions.length));
+    const prompt = window.I18n?.lang === 'en' && q.prompt_en ? q.prompt_en : q.prompt;
+    const pctBar = Math.round((session.index / session.questions.length) * 100);
+
+    let body = '';
+    if (q.tipo === 'mcq') {
+      body = `
+        <div class="evaluacion-options" role="group" aria-label="${this.esc(this.t('eval.options_aria'))}">
+          ${(q.opciones || []).map((opt, i) => `
+            <button type="button" class="evaluacion-option-btn" data-eval-option="${i}">
+              <span class="evaluacion-option-letter">${String.fromCharCode(65 + i)}</span>
+              <span>${this.esc(opt)}</span>
+            </button>
+          `).join('')}
+        </div>`;
+    } else {
+      body = `
+        <label class="evaluacion-written-label" for="evaluacionWrittenInput">${this.esc(this.t('eval.written_label'))}</label>
+        <input type="text" id="evaluacionWrittenInput" class="evaluacion-written-input" autocomplete="off" enterkeyhint="done" />
+        <p class="evaluacion-written-hint">${this.esc(this.t('eval.written_hint'))}</p>
+        <button type="button" class="disclaimer-accept-btn" id="evaluacionSubmitWritten">${this.esc(this.t('eval.submit'))}</button>`;
+    }
+
+    container.innerHTML = `
+      <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
+      <div class="evaluacion-progress" role="status" aria-live="polite">
+        <div class="evaluacion-progress-bar" style="width:${pctBar}%"></div>
+        <span>${this.esc(progress)}</span>
+      </div>
+      <article class="evaluacion-question">
+        <p class="evaluacion-question-type">${this.esc(this.t(q.tipo === 'mcq' ? 'eval.type_mcq' : 'eval.type_written'))}</p>
+        <p class="evaluacion-prompt">${this.esc(prompt)}</p>
+        <p class="evaluacion-stem">${this.esc(q.stem)}</p>
+        ${body}
+      </article>`;
+
+    if (q.tipo === 'mcq') {
+      container.querySelectorAll('[data-eval-option]').forEach(btn => {
+        btn.addEventListener('click', () => this.submitEvaluacionAnswer(btn.dataset.evalOption));
+      });
+    } else {
+      const input = container.querySelector('#evaluacionWrittenInput');
+      const submit = () => this.submitEvaluacionAnswer(input?.value || '');
+      container.querySelector('#evaluacionSubmitWritten')?.addEventListener('click', submit);
+      input?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          submit();
+        }
+      });
+      input?.focus();
+    }
+  },
+
   renderEmergenciasLatam() {
     const title = document.getElementById('emergenciasLatamTitle');
     const intro = document.getElementById('emergenciasLatamIntro');
@@ -3625,7 +3891,8 @@ const App = {
       predisposiciones: 'explore',
       bcs: 'tools',
       triaje: 'tools',
-      flashcards: 'glossary',
+      flashcards: 'welcome',
+      evaluacion: 'welcome',
       emergenciasLatam: 'urgency',
       compare: 'explore'
     };
@@ -4302,6 +4569,10 @@ const App = {
       document.title = `${this.t('flash.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'evaluacion') {
+      document.title = `${this.t('eval.title')} — ${suffix}`;
+      return;
+    }
     if (this.currentView === 'emergenciasLatam') {
       document.title = `${this.t('emerg.title')} — ${suffix}`;
       return;
@@ -4352,6 +4623,7 @@ const App = {
     document.getElementById('predisposicionesView').classList.toggle('active', view === 'predisposiciones');
     document.getElementById('bcsView').classList.toggle('active', view === 'bcs');
     document.getElementById('flashcardsView').classList.toggle('active', view === 'flashcards');
+    document.getElementById('evaluacionView').classList.toggle('active', view === 'evaluacion');
     document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');
     document.getElementById('triajeView').classList.toggle('active', view === 'triaje');
     document.getElementById('laboratorioView').classList.toggle('active', view === 'laboratorio');

@@ -121,7 +121,7 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#searchResults')).toContainText(/chihuahua/i);
   });
 
-  test('Sprint 9: herramientas BCS y flashcards del glosario', async ({ page }) => {
+  test('Sprint 9: herramientas BCS y flashcards desde welcome', async ({ page }) => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);
 
@@ -132,11 +132,24 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#bcsView')).toHaveClass(/active/);
     await expect(page.locator('.bcs-silhouette-svg')).toBeVisible();
 
-    await page.locator('#goDictionaryBtn').click();
-    await expect(page.locator('#dictionaryView')).toHaveClass(/active/);
-    await page.locator('#openFlashcardsFromDict').click();
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await page.locator('#openFlashcardsCard').click();
     await expect(page.locator('#flashcardsView')).toHaveClass(/active/);
     await expect(page.locator('.flashcard-term')).toBeVisible();
+  });
+
+  test('Simulación de evaluación desde welcome', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#openEvaluacionCard').click();
+    await expect(page.locator('#evaluacionView')).toHaveClass(/active/);
+    await expect(page.locator('.evaluacion-disclaimer')).toBeVisible();
+    await page.locator('#evaluacionSizeSelect').selectOption('5');
+    await page.locator('#evaluacionStartBtn').click();
+    await expect(page.locator('.evaluacion-question')).toBeVisible();
+    await expect(page.locator('.evaluacion-progress')).toContainText(/1/);
   });
 
   test('Sprint 10: triaje educativo, modo nocturno y resumen estudio', async ({ page }) => {
@@ -297,8 +310,8 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     expect(countAll).toBeGreaterThanOrEqual(countLatam);
 
     const estado = await page.evaluate(() => window.__E2E_STATE__);
-    // Tras dedupe de entradas repetidas entre categorías: ≥600 únicos (antes 627 con duplicados).
-    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(600);
-    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(235);
+    // Tras dedupe de alias/paréntesis/sinónimos: ≥550 únicos.
+    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(550);
+    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(200);
   });
 });

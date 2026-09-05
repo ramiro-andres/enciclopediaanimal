@@ -153,6 +153,6 @@ class Sprint12SwTest < Minitest::Test
   def test_sw_precache_changelog
     sw = File.read(File.join(ROOT, 'sw.js'))
     assert_includes sw, 'data/changelog.js'
-    assert_match(/atlas-v1[1-9]\d?/, sw)
+    assert_match(/atlas-v(?:1[1-9]|[2-9]\d+)/, sw)
   end
 end

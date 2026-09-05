@@ -28,9 +28,8 @@ class DictionarySprint13Test < Minitest::Test
 
   def test_cantidad_terminos_minima
     total = @dict['total_terminos'] || @dict['categorias'].sum { |c| c['terminos'].length }
-    # Tras dedupe de entradas repetidas entre categorías, el piso útil es ≥600
-    # (Sprint 13 aportó +100 términos reales; el inflado por duplicados se limpia).
-    assert_operator total, :>=, 600, "Se requieren ≥600 términos únicos (hay #{total})"
+    # Tras dedupe agresivo (alias/paréntesis/sinónimos): piso útil ≥550.
+    assert_operator total, :>=, 550, "Se requieren ≥550 términos únicos (hay #{total})"
   end
 
   def test_categoria_clinica_especializada
@@ -56,7 +55,7 @@ class ClinicalLinksSprint13Test < Minitest::Test
   def test_enlaces_integrados_minimo
     integrated = @links['sprint13_integrados'].to_i
     assert_operator integrated, :>=, 50, "Se requieren ≥50 enlaces integrados (hay #{integrated})"
-    assert_operator @links['total_terminos_enlazados'].to_i, :>=, 235
+    assert_operator @links['total_terminos_enlazados'].to_i, :>=, 200
   end
 
   def test_ui_enlaces_bidireccionales

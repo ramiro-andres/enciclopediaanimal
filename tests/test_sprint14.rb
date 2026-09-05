@@ -112,7 +112,7 @@ end
 class Sprint14SwTest < Minitest::Test
   def test_sw_version_bump
     sw = File.read(File.join(ROOT, 'sw.js'))
-    assert_match(/atlas-v1[1-9]\d?/, sw)
+    assert_match(/atlas-v(?:1[1-9]|[2-9]\d+)/, sw)
   end
 end
 
