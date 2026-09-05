@@ -3187,7 +3187,7 @@ const App = {
     }
 
     const available = bank.length;
-    const minN = available < 5 ? available : 5;
+    const minN = available < 10 ? available : 10;
     const requested = Math.min(Math.max(minN, Number(size) || 10), Math.min(30, available));
     const questions = tipo === 'mixed'
       ? this.buildMixedEvaluacionDeck(bank, requested)
@@ -3311,10 +3311,10 @@ const App = {
       const filtered = this.filterEvaluacionBank(session.category, session.questionType);
       const available = filtered.length;
       const maxN = Math.min(30, Math.max(available, 0));
-      let options = [5, 10, 15, 20].filter(n => n <= maxN);
-      if (available > 0 && available < 5) options = [available];
-      else if (available >= 5 && !options.length) options = [Math.min(5, available)];
-      if (maxN >= 5 && !options.includes(maxN) && maxN <= 30) options.push(maxN);
+      let options = [10, 15, 20, 25].filter(n => n <= maxN);
+      if (available > 0 && available < 10) options = [available];
+      else if (available >= 10 && !options.length) options = [Math.min(10, available)];
+      if (maxN >= 10 && !options.includes(maxN) && maxN <= 30) options.push(maxN);
       const sizeValue = options.includes(session.size) ? session.size : (options[0] || available);
       session.size = sizeValue;
 
@@ -3344,7 +3344,7 @@ const App = {
             ${this.esc(this.t('eval.available_count').replace('{count}', String(available)))}
           </p>
           <p class="evaluacion-setup-hint">${this.esc(this.t('eval.setup_hint').replace('{mcq}', String(this.evaluacionData?.stats?.mcq || '—')).replace('{written}', String(this.evaluacionData?.stats?.written || '—')))}</p>
-          ${available < 5 && available > 0 ? `<p class="evaluacion-setup-warn">${this.esc(this.t('eval.available_low').replace('{count}', String(available)))}</p>` : ''}
+          ${available < 10 && available > 0 ? `<p class="evaluacion-setup-warn">${this.esc(this.t('eval.available_low').replace('{count}', String(available)))}</p>` : ''}
           <button type="button" class="disclaimer-accept-btn" id="evaluacionStartBtn" ${available ? '' : 'disabled'}>${this.esc(this.t('eval.start'))}</button>
         </div>`;
 
@@ -3418,7 +3418,7 @@ const App = {
       });
       container.querySelector('#evaluacionRetryFailedBtn')?.addEventListener('click', () => {
         this.startEvaluacionSession({
-          size: Math.max(failed.length, Math.min(5, failed.length)),
+          size: Math.max(failed.length, Math.min(10, failed.length)),
           category: 'todos',
           questionType: 'all',
           onlyFailedIds: failed.map(f => f.id)
