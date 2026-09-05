@@ -262,6 +262,7 @@ const App = {
           if (this.currentView === 'predisposiciones') this.renderPredisposiciones();
           if (this.currentView === 'urgency') this.renderUrgency();
           if (this.currentView === 'bcs') this.renderBcs();
+          if (this.currentView === 'estudio') this.renderEstudio();
           if (this.currentView === 'flashcards') this.renderFlashcards();
           if (this.currentView === 'evaluacion') this.renderEvaluacion();
           if (this.currentView === 'emergenciasLatam') this.renderEmergenciasLatam();
@@ -769,8 +770,9 @@ const App = {
     document.getElementById('backUnidadesBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backPredisposicionesBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backBcsBtn')?.addEventListener('click', () => this.showTools());
-    document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.goWelcome());
-    document.getElementById('backEvaluacionBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backEstudioBtn')?.addEventListener('click', () => this.goWelcome());
+    document.getElementById('backFlashcardsBtn')?.addEventListener('click', () => this.showEstudio());
+    document.getElementById('backEvaluacionBtn')?.addEventListener('click', () => this.showEstudio());
     document.getElementById('backEmergenciasLatamBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('backTriajeBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backLaboratorioBtn')?.addEventListener('click', () => this.showTools());
@@ -816,20 +818,12 @@ const App = {
         openPredisposiciones();
       }
     });
-    const openFlashcards = () => this.showFlashcards();
-    document.getElementById('openFlashcardsCard')?.addEventListener('click', openFlashcards);
-    document.getElementById('openFlashcardsCard')?.addEventListener('keydown', (e) => {
+    const openEstudio = () => this.showEstudio();
+    document.getElementById('openEstudioCard')?.addEventListener('click', openEstudio);
+    document.getElementById('openEstudioCard')?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        openFlashcards();
-      }
-    });
-    const openEvaluacion = () => this.showEvaluacion();
-    document.getElementById('openEvaluacionCard')?.addEventListener('click', openEvaluacion);
-    document.getElementById('openEvaluacionCard')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openEvaluacion();
+        openEstudio();
       }
     });
     document.getElementById('predisSearchInput')?.addEventListener('input', (e) => {
@@ -1205,6 +1199,11 @@ const App = {
 
       if (parts[0] === 'bcs') {
         this.showBcs({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'estudio' || parts[0] === 'study') {
+        this.showEstudio({ updateHash: false });
         return true;
       }
 
@@ -1940,6 +1939,51 @@ const App = {
     this.showView('bcs');
     if (options.updateHash !== false) this.updateHash('#bcs');
     this.exportE2EState();
+  },
+
+  showEstudio(options = {}) {
+    this.renderEstudio();
+    this.showView('estudio');
+    if (options.updateHash !== false) this.updateHash('#estudio');
+    this.exportE2EState();
+  },
+
+  renderEstudio() {
+    const hub = document.getElementById('estudioHub');
+    if (!hub) return;
+    const cards = [
+      {
+        icon: '🃏',
+        title: this.t('estudio.flashcards_title'),
+        desc: this.t('estudio.flashcards_body'),
+        action: () => this.showFlashcards()
+      },
+      {
+        icon: '📝',
+        title: this.t('estudio.eval_title'),
+        desc: this.t('estudio.eval_body'),
+        action: () => this.showEvaluacion()
+      }
+    ];
+    hub.innerHTML = cards.map((c, i) => `
+      <article class="estudio-hub-card" role="button" tabindex="0" data-estudio-index="${i}" aria-label="${this.esc(c.title)}">
+        <span class="estudio-hub-icon" aria-hidden="true">${c.icon}</span>
+        <h3>${this.esc(c.title)}</h3>
+        <p>${this.esc(c.desc)}</p>
+        <span class="estudio-hub-link">${this.esc(this.t('estudio.open'))} →</span>
+      </article>
+    `).join('');
+    hub.querySelectorAll('.estudio-hub-card').forEach(card => {
+      const idx = parseInt(card.dataset.estudioIndex, 10);
+      const open = () => cards[idx]?.action();
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
   },
 
   showFlashcards(options = {}) {
@@ -3141,14 +3185,14 @@ const App = {
           <p class="evaluacion-threshold">${this.esc(this.t('eval.threshold').replace('{threshold}', String(Math.round(threshold * 100))))}</p>
           <div class="evaluacion-result-actions">
             <button type="button" class="disclaimer-accept-btn" id="evaluacionRetryBtn">${this.esc(this.t('eval.retry'))}</button>
-            <button type="button" class="btn-text-link" id="evaluacionHomeBtn">${this.esc(this.t('back.home'))}</button>
+            <button type="button" class="btn-text-link" id="evaluacionHomeBtn">${this.esc(this.t('back.estudio'))}</button>
           </div>
         </div>`;
       container.querySelector('#evaluacionRetryBtn')?.addEventListener('click', () => {
         this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: session.size || 10 };
         this.renderEvaluacion();
       });
-      container.querySelector('#evaluacionHomeBtn')?.addEventListener('click', () => this.goWelcome());
+      container.querySelector('#evaluacionHomeBtn')?.addEventListener('click', () => this.showEstudio());
       return;
     }
 
@@ -3891,8 +3935,9 @@ const App = {
       predisposiciones: 'explore',
       bcs: 'tools',
       triaje: 'tools',
-      flashcards: 'welcome',
-      evaluacion: 'welcome',
+      estudio: 'estudio',
+      flashcards: 'estudio',
+      evaluacion: 'estudio',
       emergenciasLatam: 'urgency',
       compare: 'explore'
     };
@@ -3923,6 +3968,7 @@ const App = {
       welcome: () => this.goWelcome(),
       explore: () => this.enterBrowse('todos'),
       glossary: () => this.showDictionary(),
+      estudio: () => this.showEstudio(),
       urgency: () => this.showUrgency(),
       tools: () => this.showTools()
     };
@@ -4565,6 +4611,10 @@ const App = {
       document.title = `${this.t('bcs.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'estudio') {
+      document.title = `${this.t('estudio.title')} — ${suffix}`;
+      return;
+    }
     if (this.currentView === 'flashcards') {
       document.title = `${this.t('flash.title')} — ${suffix}`;
       return;
@@ -4622,6 +4672,7 @@ const App = {
     document.getElementById('unidadesView').classList.toggle('active', view === 'unidades');
     document.getElementById('predisposicionesView').classList.toggle('active', view === 'predisposiciones');
     document.getElementById('bcsView').classList.toggle('active', view === 'bcs');
+    document.getElementById('estudioView').classList.toggle('active', view === 'estudio');
     document.getElementById('flashcardsView').classList.toggle('active', view === 'flashcards');
     document.getElementById('evaluacionView').classList.toggle('active', view === 'evaluacion');
     document.getElementById('emergenciasLatamView').classList.toggle('active', view === 'emergenciasLatam');

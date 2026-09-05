@@ -53,6 +53,7 @@ static_routes = [
   ['unidades', 'monthly', '0.6'],
   ['predisposiciones', 'weekly', '0.7'],
   ['bcs', 'monthly', '0.6'],
+  ['estudio', 'monthly', '0.7'],
   ['flashcards', 'monthly', '0.6'],
   ['evaluacion', 'monthly', '0.6'],
   ['emergencias-latam', 'monthly', '0.6'],

@@ -164,18 +164,31 @@ class FlashcardsStudyTest < Minitest::Test
   end
 
   def test_enlace_desde_welcome
-    assert_includes @html, 'id="openFlashcardsCard"'
-    assert_includes @app, 'openFlashcardsCard'
+    assert_includes @html, 'id="openEstudioCard"'
+    assert_includes @html, 'id="estudioView"'
+    assert_includes @app, 'openEstudioCard'
+    assert_includes @app, 'showEstudio'
+    assert_includes @app, "parts[0] === 'estudio'"
+    refute_includes @html, 'id="openFlashcardsCard"'
+    refute_includes @html, 'id="openEvaluacionCard"'
     refute_includes @app, 'openFlashcardsFromDict'
   end
 
   def test_vista_evaluacion
     assert_includes @html, 'id="evaluacionView"'
-    assert_includes @html, 'id="openEvaluacionCard"'
     assert_includes @app, 'showEvaluacion'
     assert_includes @app, "parts[0] === 'evaluacion'"
     assert_includes @app, 'scoreWrittenAnswer'
     assert_includes @app, 'renderEvaluacion'
+  end
+
+  def test_hub_estudio_contiene_flashcards_y_evaluacion
+    assert_includes @app, 'renderEstudio'
+    assert_includes @app, 'estudio.flashcards_title'
+    assert_includes @app, 'estudio.eval_title'
+    assert_includes @i18n, "'estudio.title'"
+    assert_includes @i18n, "'tab.estudio'"
+    assert_includes @html, 'data-tab="estudio"'
   end
 
   def test_i18n_flashcards
@@ -194,6 +207,7 @@ class FlashcardsStudyTest < Minitest::Test
     assert_includes @css, '.flashcards-page'
     assert_includes @css, '.flashcard'
     assert_includes @css, '.evaluacion-page'
+    assert_includes @css, '.estudio-hub'
   end
 end
 
@@ -207,13 +221,15 @@ class Sprint9IntegrationTest < Minitest::Test
 
   def test_tab_bar_sincroniza_vistas_nuevas
     assert_includes @app, "bcs: 'tools'"
-    assert_includes @app, "flashcards: 'welcome'"
-    assert_includes @app, "evaluacion: 'welcome'"
+    assert_includes @app, "estudio: 'estudio'"
+    assert_includes @app, "flashcards: 'estudio'"
+    assert_includes @app, "evaluacion: 'estudio'"
     assert_includes @app, "emergenciasLatam: 'urgency'"
   end
 
   def test_show_view_incluye_vistas_nuevas
     assert_includes @app, "view === 'bcs'"
+    assert_includes @app, "view === 'estudio'"
     assert_includes @app, "view === 'flashcards'"
     assert_includes @app, "view === 'evaluacion'"
     assert_includes @app, "view === 'emergenciasLatam'"
@@ -221,6 +237,7 @@ class Sprint9IntegrationTest < Minitest::Test
 
   def test_sitemap_rutas_nuevas
     assert_includes @sitemap_script, "'bcs'"
+    assert_includes @sitemap_script, "'estudio'"
     assert_includes @sitemap_script, "'flashcards'"
     assert_includes @sitemap_script, "'evaluacion'"
     assert_includes @sitemap_script, "'emergencias-latam'"
