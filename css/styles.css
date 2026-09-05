@@ -2964,7 +2964,9 @@ body {
 .dictionary-definition {
   color: var(--text);
   font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.65;
+  white-space: pre-line;
+  max-width: 65ch;
 }
 
 .dictionary-example {

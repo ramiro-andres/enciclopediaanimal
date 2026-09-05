@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 # Pruebas de higiene del glosario y enlaces cruzados:
-# sin slugs/términos soft-duplicados y sin pares de enlace redundantes.
+# sin slugs/términos soft-duplicados, sin pares de enlace redundantes,
+# y definiciones con longitud educativa mínima.
 
 require 'json'
 require 'set'
 require 'minitest/autorun'
 require_relative '../scripts/data/dedupe_glossary_and_links'
+require_relative '../scripts/data/enrich_glossary_definitions'
 
 ROOT = File.expand_path('..', __dir__) unless defined?(ROOT)
 
@@ -15,6 +17,7 @@ class DedupeGlossaryLinksTest < Minitest::Test
     @dict = JSON.parse(File.read(File.join(ROOT, 'data', 'diccionario_medicos.json')))
     @links = JSON.parse(File.read(File.join(ROOT, 'data', 'enlaces_clinicos.json')))
     @script = File.join(ROOT, 'scripts', 'data', 'dedupe_glossary_and_links.rb')
+    @enrich = File.join(ROOT, 'scripts', 'data', 'enrich_glossary_definitions.rb')
     @actualizar = File.read(File.join(ROOT, 'actualizar_datos.sh'))
   end
 
@@ -24,7 +27,9 @@ class DedupeGlossaryLinksTest < Minitest::Test
 
   def test_script_dedupe_existe_y_esta_en_pipeline
     assert File.exist?(@script)
+    assert File.exist?(@enrich)
     assert_includes @actualizar, 'dedupe_glossary_and_links.rb'
+    assert_includes @actualizar, 'enrich_glossary_definitions.rb'
     build = File.read(File.join(ROOT, 'scripts', 'data', 'build_medical_dictionary.rb'))
     assert_includes build, 'dedupe_glossary_and_links'
     assert_includes build, 'GlossaryDedupe'
@@ -45,7 +50,28 @@ class DedupeGlossaryLinksTest < Minitest::Test
   def test_total_terminos_coincide_con_entradas_unicas
     total = all_terms.length
     assert_equal total, @dict['total_terminos']
-    assert_operator total, :>=, 600, "Se esperan ≥600 términos únicos tras dedupe (hay #{total})"
+    assert_operator total, :>=, 550, "Se esperan ≥550 términos únicos tras dedupe (hay #{total})"
+  end
+
+  def test_no_hay_alias_parenteticos_duplicados
+    by_base = all_terms.group_by { |t| GlossaryDedupe.alias_base_key(t['termino']) }
+    unsafe = by_base.select do |key, group|
+      next false if key.empty? || group.length < 2
+
+      GlossaryDedupe.parenthetical_mergeable_group?(
+        group.each_with_index.map { |t, i| { term: t, idx: i, cat: { 'id' => 'x' }, soft: key } }
+      )
+    end
+    assert_empty unsafe.keys, "Alias entre paréntesis aún duplicados: #{unsafe.keys.take(8).join(', ')}"
+  end
+
+  def test_definiciones_tienen_longitud_minima_mayoritaria
+    lengths = all_terms.map { |t| t['definicion'].to_s.length }
+    under = lengths.count { |l| l < 120 }
+    ratio = under.to_f / lengths.length
+    assert_operator ratio, :<=, 0.25, "Más del 25% de definiciones tienen <120 chars (#{under}/#{lengths.length})"
+    median = GlossaryEnrich.median(lengths)
+    assert_operator median, :>=, 140, "Mediana de longitud demasiado baja: #{median}"
   end
 
   def test_no_hay_ejemplos_duplicados_por_termino

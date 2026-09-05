@@ -297,8 +297,8 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     expect(countAll).toBeGreaterThanOrEqual(countLatam);
 
     const estado = await page.evaluate(() => window.__E2E_STATE__);
-    // Tras dedupe de entradas repetidas entre categorías: ≥600 únicos (antes 627 con duplicados).
-    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(600);
-    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(235);
+    // Tras dedupe de alias/paréntesis/sinónimos: ≥550 únicos.
+    expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(550);
+    expect(estado.crossLinkTerms).toBeGreaterThanOrEqual(200);
   });
 });

@@ -10,6 +10,7 @@ if [ "${SOLO_JS:-}" != "1" ]; then
   ruby "$DIR/scripts/data/suggest_glossary_links.rb"
   ruby "$DIR/scripts/data/integrate_suggested_links_sprint13.rb"
   ruby "$DIR/scripts/data/dedupe_glossary_and_links.rb"
+  ruby "$DIR/scripts/data/enrich_glossary_definitions.rb"
   ruby "$DIR/scripts/data/build_toxicologia.rb"
   ruby "$DIR/scripts/data/build_emergencias_latam.rb"
   ruby "$DIR/scripts/data/build_triaje.rb"

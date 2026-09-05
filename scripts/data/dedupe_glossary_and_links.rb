@@ -61,8 +61,129 @@ module GlossaryDedupe
       .strip
   end
 
+  def strip_parentheticals(text)
+    String(text).gsub(/\s*\([^)]*\)\s*/, ' ').gsub(/\s+/, ' ').strip
+  end
+
+  # Clave tras quitar paréntesis (para Psitacosis vs Psitacosis (clamidiosis)).
+  def alias_base_key(text)
+    soft_term_key(strip_parentheticals(text))
+  end
+
+  # Núcleo semántico: quita "enfermedad de/del", "síndrome de", etc.
+  def core_term_key(text)
+    soft_term_key(text)
+      .sub(/\Aenfermedad (de la |de las |de los |del |de )?/, '')
+      .sub(/\Asindrome (de la |de las |de los |del |de )?/, '')
+      .sub(/\Acondicion (de la |de las |de los |del |de )?/, '')
+      .strip
+  end
+
+  # Contenido entre paréntesis que actúa como sinónimo/acrónimo (no subtipo clínico).
+  def synonym_parenthetical?(paren_content)
+    c = paren_content.to_s.strip
+    return false if c.empty?
+    return true if c.match?(/\A[A-Z0-9]{2,12}\z/)
+    return false if c.match?(/\by\b/i)
+    return false if c.match?(
+      /complejo|lactato|laminitis|lipoma|resistencia|nitrito|ancla|piojo|gusano|corvejon|planta|dermatitis digital/i
+    )
+    # Especificadores de especie/grupo, no sinónimos.
+    return false if soft_term_key(c).match?(
+      /\A(ave|aves|perro|perros|gato|gatos|equino|equinos|bovino|bovinos|porcino|porcinos|pez|peces|reptil|reptiles|felino|canino)\z/
+    )
+
+    synonym_like = %w[
+      farmaco clamidiosis urolitiasis od ecdisis bichera pkd circovirus
+      proliferativa disecdisis neumonía neumonia
+    ]
+    soft = soft_term_key(c)
+    return true if synonym_like.include?(soft)
+    return true if soft.match?(
+      /\A(deficiencia de vitamina c|boca podrida|parelaphostrongylus|meteorismo ruminal|bolas de pelo|cnemidocopte|arrancado de pluma|mancha gangrena gaseosa|clamidiosi)\z/
+    )
+
+    # 1–3 palabras sin conectores de lista → suele ser alias.
+    words = soft.split
+    words.length.between?(1, 3)
+  end
+
+  def extract_parentheticals(text)
+    String(text).scan(/\(([^)]+)\)/).flatten
+  end
+
+  # Pares canónicos adicionales (sinónimos cruzados / ortografía).
+  # Cada grupo lista soft_term_key exactos de las formas a fusionar.
+  EXPLICIT_SYNONYM_GROUPS = [
+    [
+      'mma metritis mastitis agalactia',
+      'mastitis metritis agalactia mma'
+    ],
+    [
+      'wet tail proliferativa',
+      'enfermedad de la cola humeda proliferativa'
+    ],
+    [
+      'discopatia intervertebral',
+      'enfermedad de disco intervertebral',
+      'enfermedad del disco intervertebral'
+    ],
+    [
+      'circovirosis porcina pcv2',
+      'pcv2 circovirus'
+    ],
+    [
+      'muda incompleta disecdisis',
+      'muda retenida'
+    ],
+    [
+      'intoxicacion por amoniaco',
+      'intoxicacion por amoniaco nitrito'
+    ]
+  ].freeze
+
+  def explicit_group_key(text)
+    soft = soft_term_key(text)
+    base = alias_base_key(text)
+    EXPLICIT_SYNONYM_GROUPS.each_with_index do |group, idx|
+      norms = group.map { |g| soft_term_key(g) }
+      return "explicit:#{idx}" if norms.include?(soft) || norms.include?(base)
+    end
+    nil
+  end
+
+  def acronym_from_term(text)
+    m = String(text).match(/\(([A-Z0-9]{2,12})\)/)
+    m ? normalize(m[1]) : nil
+  end
+
   def generic_definition?(definicion)
-    String(definicion).start_with?(GENERIC_DEF_PREFIX)
+    d = String(definicion)
+    d.start_with?(GENERIC_DEF_PREFIX) ||
+      d == 'Condición causada por parásitos externos o internos.' ||
+      d == 'Inflamación o infección de la piel.' ||
+      d == 'Crecimiento celular anormal; benigno o maligno.' ||
+      d == 'Proceso que afecta la función renal y la eliminación de toxinas.' ||
+      d == 'Enfermedad causada por virus.' ||
+      d == 'Lesión mecánica de huesos, tejidos o articulaciones.' ||
+      d == 'Exceso de grasa corporal con riesgo metabólico y ortopédico.' ||
+      d == 'Inflamación del oído externo o medio.' ||
+      d == 'Alteración del metabolismo de la glucosa.'
+  end
+
+  def definitions_nearly_identical?(a, b)
+    da = String(a).strip
+    db = String(b).strip
+    return true if da == db
+    return true if generic_definition?(da) && generic_definition?(db)
+
+    ta = soft_term_key(da).split.reject { |w| w.length < 3 }.to_set
+    tb = soft_term_key(db).split.reject { |w| w.length < 3 }.to_set
+    return false if ta.size < 4 || tb.size < 4
+
+    inter = (ta & tb).size
+    union = (ta | tb).size
+    inter.to_f / union >= 0.9
   end
 
   def category_rank(cat_id)
@@ -91,6 +212,8 @@ module GlossaryDedupe
           term: term,
           soft: soft_term_key(term['termino']),
           slug: normalize(term['termino']),
+          alias_base: alias_base_key(term['termino']),
+          core: core_term_key(term['termino']),
           score: term_score(term, cat['id'])
         }
       end
@@ -98,32 +221,132 @@ module GlossaryDedupe
     entries
   end
 
+  def merge_term_fields!(winner_term, discarded_term)
+    # Conservar definición más rica.
+    w_def = String(winner_term['definicion'])
+    d_def = String(discarded_term['definicion'])
+    if d_def.length > w_def.length && !generic_definition?(d_def)
+      winner_term['definicion'] = d_def
+    elsif generic_definition?(w_def) && !generic_definition?(d_def)
+      winner_term['definicion'] = d_def
+    end
+
+    if discarded_term['ejemplo'] && winner_term['ejemplo'].to_s.empty?
+      winner_term['ejemplo'] = discarded_term['ejemplo']
+    end
+
+    syns = Array(winner_term['sinonimos']).map(&:to_s)
+    [discarded_term['termino'], *Array(discarded_term['sinonimos'])].each do |s|
+      next if s.to_s.empty?
+      next if soft_term_key(s) == soft_term_key(winner_term['termino'])
+      next if syns.any? { |x| soft_term_key(x) == soft_term_key(s) }
+
+      syns << s.to_s
+    end
+    winner_term['sinonimos'] = syns unless syns.empty?
+  end
+
+  def mark_group_drops!(group, drop, aliases)
+    return if group.length < 2
+
+    winner = group.max_by { |e| [e[:score], e[:term]['termino'].to_s.length] }
+    group.each do |e|
+      next if e.equal?(winner)
+      next if e[:cat].object_id == winner[:cat].object_id && e[:idx] == winner[:idx]
+
+      merge_term_fields!(winner[:term], e[:term])
+      drop[[e[:cat].object_id, e[:idx]]] = true
+      discarded = e[:term]['termino'].to_s
+      kept = winner[:term]['termino'].to_s
+      aliases[normalize(discarded)] = kept unless normalize(discarded) == normalize(kept)
+    end
+  end
+
+  # ¿Es seguro fusionar variantes solo por alias entre paréntesis?
+  def parenthetical_mergeable_group?(group)
+    return false if group.length < 2
+
+    defs = group.map { |e| e[:term]['definicion'] }
+    identicalish = defs.combination(2).all? { |a, b| definitions_nearly_identical?(a, b) }
+    return false unless identicalish || group.any? { |e| extract_parentheticals(e[:term]['termino']).empty? }
+
+    # Si hay formas con paréntesis, todos los contenidos deben ser sinónimos/acrónimos
+    # (no subtipos clínicos como "complejo respiratorio bovino").
+    paren_entries = group.select { |e| extract_parentheticals(e[:term]['termino']).any? }
+    return false if paren_entries.empty? && !identicalish
+
+    paren_entries.all? do |e|
+      extract_parentheticals(e[:term]['termino']).all? { |p| synonym_parenthetical?(p) }
+    end
+  end
+
   # Deduplica el diccionario in-place. Devuelve métricas y mapa de aliases
   # (forma descartada → forma canónica) para sinónimos de búsqueda.
   def dedupe_dictionary!(dict)
     before = (dict['categorias'] || []).sum { |c| (c['terminos'] || []).length }
+    drop = {}
+    aliases = {}
+
+    # Pasada 1: soft key exacto (plural leve / acentos).
     entries = collect_term_entries(dict)
+    entries.group_by { |e| e[:soft] }.each_value do |group|
+      next if group.length < 2 || group.first[:soft].empty?
 
-    by_soft = entries.group_by { |e| e[:soft] }
-    drop = {} # object_id del hash término → true
-    aliases = {} # soft/slug descartado → término canónico
+      mark_group_drops!(group, drop, aliases)
+    end
 
-    by_soft.each_value do |group|
+    # Pasada 2: base sin paréntesis (Psitacosis ↔ Psitacosis (clamidiosis)).
+    entries = collect_term_entries(dict).reject { |e| drop[[e[:cat].object_id, e[:idx]]] }
+    entries.group_by { |e| e[:alias_base] }.each_value do |group|
+      next if group.length < 2 || group.first[:alias_base].empty?
+      next unless parenthetical_mergeable_group?(group)
+
+      mark_group_drops!(group, drop, aliases)
+    end
+
+    # Pasada 3: núcleo semántico (enfermedad del disco ↔ discopatía).
+    entries = collect_term_entries(dict).reject { |e| drop[[e[:cat].object_id, e[:idx]]] }
+    entries.group_by { |e| e[:core] }.each_value do |group|
       next if group.length < 2
-      next if group.first[:soft].empty?
+      next if group.first[:core].to_s.length < 8
 
-      winner = group.max_by { |e| [e[:score], e[:term]['termino'].to_s.length] }
-      group.each do |e|
-        next if e.equal?(winner) || e[:term].equal?(winner[:term])
+      defs_ok = group.combination(2).all? { |a, b| definitions_nearly_identical?(a[:term]['definicion'], b[:term]['definicion']) }
+      next unless defs_ok
 
-        # Si es el mismo objeto (no debería), saltar.
-        next if e[:cat].object_id == winner[:cat].object_id && e[:idx] == winner[:idx]
+      mark_group_drops!(group, drop, aliases)
+    end
 
-        drop[[e[:cat].object_id, e[:idx]]] = true
-        discarded = e[:term]['termino'].to_s
-        kept = winner[:term]['termino'].to_s
-        aliases[normalize(discarded)] = kept unless normalize(discarded) == normalize(kept)
-      end
+    # Pasada 4: grupos explícitos de sinónimos cruzados.
+    entries = collect_term_entries(dict).reject { |e| drop[[e[:cat].object_id, e[:idx]]] }
+    by_explicit = {}
+    entries.each do |e|
+      key = explicit_group_key(e[:term]['termino'])
+      next unless key
+
+      (by_explicit[key] ||= []) << e
+    end
+    by_explicit.each_value do |group|
+      next if group.length < 2
+
+      mark_group_drops!(group, drop, aliases)
+    end
+
+    # Pasada 5: acrónimo en paréntesis ↔ entrada solo-acrónimo (AINE).
+    entries = collect_term_entries(dict).reject { |e| drop[[e[:cat].object_id, e[:idx]]] }
+    acronym_owners = {}
+    entries.each do |e|
+      acr = acronym_from_term(e[:term]['termino'])
+      next unless acr
+
+      (acronym_owners[acr] ||= []) << e
+    end
+    entries.each do |e|
+      bare = e[:slug].gsub(/[^a-z0-9]/, '')
+      next unless e[:soft].match?(/\A[a-z0-9]{2,12}\z/) && bare == e[:soft]
+      next unless acronym_owners[bare]
+
+      group = (acronym_owners[bare] + [e]).uniq
+      mark_group_drops!(group, drop, aliases)
     end
 
     removed = 0
@@ -141,7 +364,7 @@ module GlossaryDedupe
       cat['terminos'] = kept_terms
     end
 
-    # Segunda pasada por slug exacto por si soft_key falló en algún caso.
+    # Pasada final: slug exacto por si quedó algún residuo.
     seen_slug = {}
     (dict['categorias'] || []).each do |cat|
       cat['terminos'] = (cat['terminos'] || []).reject do |term|
@@ -169,6 +392,56 @@ module GlossaryDedupe
       removed: before - after,
       aliases: aliases
     }
+  end
+
+  # Reasigna por_termino / por_enfermedad cuando un término se fusionó en otro.
+  def remap_links_for_aliases!(links, aliases)
+    return 0 if aliases.nil? || aliases.empty?
+
+    por_termino = links['por_termino'] || {}
+    remapped = 0
+
+    aliases.each do |discarded_slug, canonical|
+      # Buscar claves del índice que correspondan al descartado.
+      keys = por_termino.keys.select do |k|
+        info = por_termino[k]
+        name = info.is_a?(Hash) ? (info['termino'] || k) : k
+        soft_term_key(name) == soft_term_key(discarded_slug) ||
+          normalize(name) == normalize(discarded_slug) ||
+          soft_term_key(k) == soft_term_key(discarded_slug)
+      end
+      next if keys.empty?
+
+      canon_soft = soft_term_key(canonical)
+      canon_key = por_termino.keys.find do |k|
+        info = por_termino[k]
+        name = info.is_a?(Hash) ? (info['termino'] || k) : k
+        soft_term_key(name) == canon_soft
+      end
+      canon_key ||= normalize(canonical)
+
+      keys.each do |old_key|
+        old = por_termino.delete(old_key)
+        next unless old.is_a?(Hash)
+
+        remapped += 1
+        if por_termino[canon_key]
+          ejemplos = Array(por_termino[canon_key]['ejemplos']) + Array(old['ejemplos'])
+          por_termino[canon_key]['ejemplos'], = dedupe_ejemplos!(ejemplos)
+          por_termino[canon_key]['total'] = [
+            por_termino[canon_key]['total'].to_i,
+            old['total'].to_i,
+            por_termino[canon_key]['ejemplos'].length
+          ].max
+        else
+          old['termino'] = canonical
+          por_termino[canon_key] = old
+        end
+      end
+    end
+
+    links['por_termino'] = por_termino
+    remapped
   end
 
   def dedupe_ejemplos!(ejemplos)
@@ -368,7 +641,9 @@ module GlossaryDedupe
     synonyms = File.exist?(syn_path) ? JSON.parse(File.read(syn_path)) : nil
 
     dict_stats = dedupe_dictionary!(dict)
+    remapped = remap_links_for_aliases!(links, dict_stats[:aliases])
     link_stats = dedupe_links!(links, dict)
+    link_stats[:remapped_aliases] = remapped
     syn_added = synonyms ? merge_aliases_into_synonyms!(synonyms, dict_stats[:aliases]) : 0
 
     unless dry_run
@@ -404,4 +679,5 @@ if __FILE__ == $PROGRAM_NAME
   puts "    términos huérfanos: #{l[:removed_orphan_terms]}"
   puts "    enfermedades vacías: #{l[:removed_orphan_diseases]}"
   puts "  sinónimos añadidos: #{stats[:synonyms_added]}"
+  puts "  enlaces reasignados por alias: #{l[:remapped_aliases]}" if l[:remapped_aliases]
 end
