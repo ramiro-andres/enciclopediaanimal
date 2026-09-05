@@ -194,6 +194,20 @@
               <p data-i18n="predis.card_desc">Mapa cruzado de condiciones hereditarias por raza: filtra por especie o enfermedad y accede a cada ficha.</p>
             </div>
           </article>
+          <article class="feature-card feature-card--flashcards" id="openFlashcardsCard" role="button" tabindex="0" data-i18n-aria="welcome.feature7_aria" aria-label="Abrir modo estudio con flashcards del glosario">
+            <span class="feature-number">07</span>
+            <div>
+              <h3 data-i18n="welcome.feature7_title">Modo estudio</h3>
+              <p data-i18n="welcome.feature7_body">Repasa el glosario con flashcards: revela definiciones y marca tu progreso en este dispositivo.</p>
+            </div>
+          </article>
+          <article class="feature-card feature-card--evaluacion" id="openEvaluacionCard" role="button" tabindex="0" data-i18n-aria="welcome.feature8_aria" aria-label="Abrir simulación de evaluación del glosario">
+            <span class="feature-number">08</span>
+            <div>
+              <h3 data-i18n="welcome.feature8_title">Simulación de evaluación</h3>
+              <p data-i18n="welcome.feature8_body">Autoevalúate con opción múltiple y respuestas escritas. Aprobado desde 80%. No es certificación real.</p>
+            </div>
+          </article>
         </div>
 
         <div class="welcome-picker">
@@ -412,7 +426,7 @@
       </section>
 
       <section id="flashcardsView" class="view">
-        <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.glossary">Volver al glosario</button>
+        <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="flashcards-page">
           <div class="flashcards-hero">
             <span class="eyebrow" data-i18n="flash.eyebrow">ESTUDIO</span>
@@ -420,6 +434,18 @@
             <p data-i18n="flash.intro">Repasa términos médicos: muestra el término, revela la definición y marca tu progreso. El avance se guarda en este dispositivo.</p>
           </div>
           <div id="flashcardsContent" class="flashcards-content"></div>
+        </div>
+      </section>
+
+      <section id="evaluacionView" class="view">
+        <button id="backEvaluacionBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="evaluacion-page">
+          <div class="evaluacion-hero">
+            <span class="eyebrow" data-i18n="eval.eyebrow">EVALUACIÓN</span>
+            <h2 data-i18n="eval.title">Simulación de evaluación</h2>
+            <p data-i18n="eval.intro">Autoevaluación educativa del glosario: opción múltiple y respuestas escritas con coincidencia aproximada. No es un examen oficial ni otorga certificación.</p>
+          </div>
+          <div id="evaluacionContent" class="evaluacion-content"></div>
         </div>
       </section>
 
@@ -592,6 +618,7 @@
   <script src="data/triaje.js"></script>
   <script src="data/calendario_vacunacion.js"></script>
   <script src="data/search_synonyms.js"></script>
+  <script src="data/evaluacion_preguntas.js"></script>
   <script>
     // Bootstrap E2E (file://): expone métricas mínimas antes de que App.init termine.
     window.__E2E_STATE__ = {

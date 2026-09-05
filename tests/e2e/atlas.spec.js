@@ -121,7 +121,7 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#searchResults')).toContainText(/chihuahua/i);
   });
 
-  test('Sprint 9: herramientas BCS y flashcards del glosario', async ({ page }) => {
+  test('Sprint 9: herramientas BCS y flashcards desde welcome', async ({ page }) => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);
 
@@ -132,11 +132,24 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#bcsView')).toHaveClass(/active/);
     await expect(page.locator('.bcs-silhouette-svg')).toBeVisible();
 
-    await page.locator('#goDictionaryBtn').click();
-    await expect(page.locator('#dictionaryView')).toHaveClass(/active/);
-    await page.locator('#openFlashcardsFromDict').click();
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await page.locator('#openFlashcardsCard').click();
     await expect(page.locator('#flashcardsView')).toHaveClass(/active/);
     await expect(page.locator('.flashcard-term')).toBeVisible();
+  });
+
+  test('Simulación de evaluación desde welcome', async ({ page }) => {
+    await abrirAtlas(page);
+    await cerrarDisclaimer(page);
+
+    await page.locator('#openEvaluacionCard').click();
+    await expect(page.locator('#evaluacionView')).toHaveClass(/active/);
+    await expect(page.locator('.evaluacion-disclaimer')).toBeVisible();
+    await page.locator('#evaluacionSizeSelect').selectOption('5');
+    await page.locator('#evaluacionStartBtn').click();
+    await expect(page.locator('.evaluacion-question')).toBeVisible();
+    await expect(page.locator('.evaluacion-progress')).toContainText(/1/);
   });
 
   test('Sprint 10: triaje educativo, modo nocturno y resumen estudio', async ({ page }) => {

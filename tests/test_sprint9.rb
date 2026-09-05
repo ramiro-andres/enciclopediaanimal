@@ -163,9 +163,19 @@ class FlashcardsStudyTest < Minitest::Test
     assert_includes @app, 'flashcard--revealed'
   end
 
-  def test_enlace_desde_glosario
-    assert_includes @app, 'openFlashcardsFromDict'
-    assert_includes @app, 'flash.open'
+  def test_enlace_desde_welcome
+    assert_includes @html, 'id="openFlashcardsCard"'
+    assert_includes @app, 'openFlashcardsCard'
+    refute_includes @app, 'openFlashcardsFromDict'
+  end
+
+  def test_vista_evaluacion
+    assert_includes @html, 'id="evaluacionView"'
+    assert_includes @html, 'id="openEvaluacionCard"'
+    assert_includes @app, 'showEvaluacion'
+    assert_includes @app, "parts[0] === 'evaluacion'"
+    assert_includes @app, 'scoreWrittenAnswer'
+    assert_includes @app, 'renderEvaluacion'
   end
 
   def test_i18n_flashcards
@@ -174,9 +184,16 @@ class FlashcardsStudyTest < Minitest::Test
     end
   end
 
+  def test_i18n_evaluacion
+    %w[eval.title eval.start eval.passed eval.failed eval.retry eval.disclaimer].each do |key|
+      assert_includes @i18n, "'#{key}'"
+    end
+  end
+
   def test_estilos_flashcards
     assert_includes @css, '.flashcards-page'
     assert_includes @css, '.flashcard'
+    assert_includes @css, '.evaluacion-page'
   end
 end
 
@@ -190,19 +207,22 @@ class Sprint9IntegrationTest < Minitest::Test
 
   def test_tab_bar_sincroniza_vistas_nuevas
     assert_includes @app, "bcs: 'tools'"
-    assert_includes @app, "flashcards: 'glossary'"
+    assert_includes @app, "flashcards: 'welcome'"
+    assert_includes @app, "evaluacion: 'welcome'"
     assert_includes @app, "emergenciasLatam: 'urgency'"
   end
 
   def test_show_view_incluye_vistas_nuevas
     assert_includes @app, "view === 'bcs'"
     assert_includes @app, "view === 'flashcards'"
+    assert_includes @app, "view === 'evaluacion'"
     assert_includes @app, "view === 'emergenciasLatam'"
   end
 
   def test_sitemap_rutas_nuevas
     assert_includes @sitemap_script, "'bcs'"
     assert_includes @sitemap_script, "'flashcards'"
+    assert_includes @sitemap_script, "'evaluacion'"
     assert_includes @sitemap_script, "'emergencias-latam'"
   end
 
@@ -211,5 +231,6 @@ class Sprint9IntegrationTest < Minitest::Test
     assert m
     assert_operator m[1].to_i, :>=, 8
     assert_includes @sw, 'emergencias_latam.js'
+    assert_includes @sw, 'evaluacion_preguntas.js'
   end
 end
