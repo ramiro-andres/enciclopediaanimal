@@ -2,8 +2,8 @@
   "generado_por": "scripts/data/build_cross_links.rb + integrate_suggested_links_sprint13.rb",
   "descripcion": "Enlaces bidireccionales entre términos del glosario y enfermedades del atlas.",
   "umbral_generico": 0.3,
-  "total_terminos_enlazados": 238,
-  "total_enfermedades_enlazadas": 180,
+  "total_terminos_enlazados": 224,
+  "total_enfermedades_enlazadas": 169,
   "por_termino": {
     "pronostico": {
       "termino": "Pronóstico",
@@ -3193,21 +3193,6 @@
         }
       ]
     },
-    "calculos urinarios": {
-      "termino": "Cálculos urinarios",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Cálculos urinarios (urolitiasis)",
-          "gravedad": "moderada",
-          "animalId": "gatos",
-          "breedId": "ragdoll",
-          "breedNombre": "Ragdoll"
-        }
-      ]
-    },
     "deficiencia de piruvato quinasa": {
       "termino": "Deficiencia de piruvato quinasa",
       "categoriaId": "enfermedades",
@@ -3342,21 +3327,6 @@
         }
       ]
     },
-    "discopatia intervertebral": {
-      "termino": "Discopatía intervertebral",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 1,
-      "ejemplos": [
-        {
-          "nombre": "Discopatía intervertebral",
-          "gravedad": "grave",
-          "animalId": "perros",
-          "breedId": "beagle",
-          "breedNombre": "Beagle"
-        }
-      ]
-    },
     "disenteria porcina": {
       "termino": "Disentería porcina",
       "categoriaId": "enfermedades",
@@ -3429,21 +3399,6 @@
           "animalId": "roedores",
           "breedId": "huron",
           "breedNombre": "Hurón"
-        }
-      ]
-    },
-    "enfermedad de disco intervertebral": {
-      "termino": "Enfermedad de disco intervertebral",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 1,
-      "ejemplos": [
-        {
-          "nombre": "Enfermedad de disco intervertebral",
-          "gravedad": "grave",
-          "animalId": "perros",
-          "breedId": "cocker",
-          "breedNombre": "Cocker Spaniel"
         }
       ]
     },
@@ -3559,21 +3514,6 @@
         }
       ]
     },
-    "escorbuto": {
-      "termino": "Escorbuto",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Escorbuto (deficiencia de vitamina C)",
-          "gravedad": "grave",
-          "animalId": "roedores",
-          "breedId": "cobaya",
-          "breedNombre": "Cobaya (Cuy)"
-        }
-      ]
-    },
     "espondilosis deformante": {
       "termino": "Espondilosis deformante",
       "categoriaId": "enfermedades",
@@ -3601,28 +3541,6 @@
           "animalId": "conejos",
           "breedId": "conejo_mini",
           "breedNombre": "Conejo Mini (Toy/Enano)"
-        }
-      ]
-    },
-    "estomatitis": {
-      "termino": "Estomatitis",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 3,
-      "ejemplos": [
-        {
-          "nombre": "Enfermedad periodontal",
-          "gravedad": "moderada",
-          "animalId": "perros",
-          "breedId": "chihuahua",
-          "breedNombre": "Chihuahua"
-        },
-        {
-          "nombre": "Estomatitis (boca podrida)",
-          "gravedad": "moderada",
-          "animalId": "reptiles",
-          "breedId": "serpiente_corn",
-          "breedNombre": "Serpiente del Maíz (Corn Snake)"
         }
       ]
     },
@@ -3833,21 +3751,6 @@
         }
       ]
     },
-    "infeccion respiratoria": {
-      "termino": "Infección respiratoria",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Infección respiratoria (neumonía)",
-          "gravedad": "grave",
-          "animalId": "roedores",
-          "breedId": "cobaya",
-          "breedNombre": "Cobaya (Cuy)"
-        }
-      ]
-    },
     "insuficiencia cardiaca": {
       "termino": "Insuficiencia cardíaca",
       "categoriaId": "enfermedades",
@@ -3904,28 +3807,6 @@
           "animalId": "roedores",
           "breedId": "huron",
           "breedNombre": "Hurón"
-        }
-      ]
-    },
-    "intoxicacion por amoniaco": {
-      "termino": "Intoxicación por amoniaco",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Intoxicación por amoniaco",
-          "gravedad": "grave",
-          "animalId": "peces",
-          "breedId": "neon_tetra",
-          "breedNombre": "Neon Tetra"
-        },
-        {
-          "nombre": "Intoxicación por amoniaco/nitritos",
-          "gravedad": "grave",
-          "animalId": "peces",
-          "breedId": "goldfish",
-          "breedNombre": "Pez Dorado (Goldfish)"
         }
       ]
     },
@@ -4078,21 +3959,6 @@
         }
       ]
     },
-    "meningeal worm": {
-      "termino": "Meningeal worm",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Meningeal worm (Parelaphostrongylus)",
-          "gravedad": "grave",
-          "animalId": "camelidos",
-          "breedId": "llama",
-          "breedNombre": "Llama"
-        }
-      ]
-    },
     "metalosis por intoxicacion": {
       "termino": "Metalosis por intoxicación",
       "categoriaId": "enfermedades",
@@ -4105,21 +3971,6 @@
           "animalId": "aves",
           "breedId": "guacamayo",
           "breedNombre": "Guacamayo"
-        }
-      ]
-    },
-    "miasis": {
-      "termino": "Miasis",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Miasis (bichera)",
-          "gravedad": "grave",
-          "animalId": "ovinos",
-          "breedId": "oveja_merino",
-          "breedNombre": "Oveja Merino"
         }
       ]
     },
@@ -4150,21 +4001,6 @@
           "animalId": "aves",
           "breedId": "canario",
           "breedNombre": "Canario"
-        }
-      ]
-    },
-    "muda retenida": {
-      "termino": "Muda retenida",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 1,
-      "ejemplos": [
-        {
-          "nombre": "Muda retenida",
-          "gravedad": "moderada",
-          "animalId": "reptiles",
-          "breedId": "gecko_leopardo",
-          "breedNombre": "Gecko Leopardo"
         }
       ]
     },
@@ -4566,21 +4402,6 @@
         }
       ]
     },
-    "poliquistosis renal": {
-      "termino": "Poliquistosis renal",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Poliquistosis renal (PKD)",
-          "gravedad": "grave",
-          "animalId": "gatos",
-          "breedId": "persa",
-          "breedNombre": "Persa"
-        }
-      ]
-    },
     "problemas cardiacos": {
       "termino": "Problemas cardíacos",
       "categoriaId": "enfermedades",
@@ -4790,21 +4611,6 @@
         }
       ]
     },
-    "timpanismo": {
-      "termino": "Timpanismo",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Timpanismo (meteorismo ruminal)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "hereford",
-          "breedNombre": "Hereford (variedad compacta/mini)"
-        }
-      ]
-    },
     "torsion gastrica": {
       "termino": "Torsión gástrica",
       "categoriaId": "enfermedades",
@@ -4857,21 +4663,6 @@
         }
       ]
     },
-    "tricobezoar": {
-      "termino": "Tricobezoar",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 1,
-      "ejemplos": [
-        {
-          "nombre": "Tricobezoar",
-          "gravedad": "grave",
-          "animalId": "conejos",
-          "breedId": "holandes_enano",
-          "breedNombre": "Holandés Enano"
-        }
-      ]
-    },
     "tumores": {
       "termino": "Tumores",
       "categoriaId": "enfermedades",
@@ -4921,21 +4712,6 @@
           "animalId": "perros",
           "breedId": "gran_danes",
           "breedNombre": "Gran Danés"
-        }
-      ]
-    },
-    "acaros de patas": {
-      "termino": "Ácaros de patas",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Ácaros de patas (Cnemidocoptes)",
-          "gravedad": "leve",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         }
       ]
     },
@@ -6475,10 +6251,6 @@
           "categoriaId": "enfermedades"
         },
         {
-          "termino": "Estomatitis",
-          "categoriaId": "enfermedades"
-        },
-        {
           "termino": "Halitosis",
           "categoriaId": "sintomas"
         },
@@ -7319,10 +7091,6 @@
         {
           "termino": "Simeticona",
           "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "Timpanismo",
-          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -7362,10 +7130,6 @@
         {
           "termino": "Simeticona",
           "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "Timpanismo",
-          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -7627,10 +7391,6 @@
       "breedId": "serpiente_corn",
       "terminos": [
         {
-          "termino": "Infección respiratoria",
-          "categoriaId": "enfermedades"
-        },
-        {
           "termino": "Letargo",
           "categoriaId": "sintomas"
         }
@@ -7678,10 +7438,6 @@
         {
           "termino": "Branquias",
           "categoriaId": "anatomia"
-        },
-        {
-          "termino": "Intoxicación por amoniaco",
-          "categoriaId": "enfermedades"
         },
         {
           "termino": "Intoxicación por amoniaco/nitritos",
@@ -7847,10 +7603,6 @@
           "categoriaId": "ficha_enfermedad"
         },
         {
-          "termino": "Poliquistosis renal",
-          "categoriaId": "enfermedades"
-        },
-        {
           "termino": "Vómitos",
           "categoriaId": "sintomas"
         }
@@ -7864,10 +7616,6 @@
         {
           "termino": "Anamnesis",
           "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Poliquistosis renal",
-          "categoriaId": "enfermedades"
         },
         {
           "termino": "Vómitos",
@@ -8143,10 +7891,6 @@
         {
           "termino": "Cojera",
           "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Escorbuto",
-          "categoriaId": "enfermedades"
         },
         {
           "termino": "Vitamina C",
@@ -8490,10 +8234,6 @@
         {
           "termino": "Bruxismo",
           "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Tricobezoar",
-          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -8705,32 +8445,6 @@
         }
       ]
     },
-    "calculos urinarios (urolitiasis)": {
-      "nombre": "Cálculos urinarios (urolitiasis)",
-      "animalId": "gatos",
-      "breedId": "ragdoll",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Cálculos urinarios",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "calculos urinarios": {
-      "nombre": "Cálculos urinarios",
-      "animalId": "roedores",
-      "breedId": "cobaya",
-      "terminos": [
-        {
-          "termino": "Cálculos urinarios",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "dermatitis en pliegues": {
       "nombre": "Dermatitis en pliegues",
       "animalId": "perros",
@@ -8761,21 +8475,6 @@
         }
       ]
     },
-    "discopatia intervertebral": {
-      "nombre": "Discopatía intervertebral",
-      "animalId": "perros",
-      "breedId": "beagle",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Discopatía intervertebral",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "encefalitozoon cuniculi": {
       "nombre": "Encefalitozoon cuniculi",
       "animalId": "conejos",
@@ -8794,21 +8493,6 @@
       "terminos": [
         {
           "termino": "Enfermedad adrenal",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "enfermedad de disco intervertebral": {
-      "nombre": "Enfermedad de disco intervertebral",
-      "animalId": "perros",
-      "breedId": "cocker",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Enfermedad de disco intervertebral",
           "categoriaId": "enfermedades"
         }
       ]
@@ -8865,39 +8549,6 @@
       "terminos": [
         {
           "termino": "Erisipela",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "escorbuto": {
-      "nombre": "Escorbuto",
-      "animalId": "roedores",
-      "breedId": "raton_domestico",
-      "terminos": [
-        {
-          "termino": "Escorbuto",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "estomatitis (boca podrida)": {
-      "nombre": "Estomatitis (boca podrida)",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "terminos": [
-        {
-          "termino": "Estomatitis",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "estomatitis": {
-      "nombre": "Estomatitis",
-      "animalId": "reptiles",
-      "breedId": "gecko_leopardo",
-      "terminos": [
-        {
-          "termino": "Estomatitis",
           "categoriaId": "enfermedades"
         }
       ]
@@ -8995,21 +8646,6 @@
         }
       ]
     },
-    "infeccion respiratoria (neumonia)": {
-      "nombre": "Infección respiratoria (neumonía)",
-      "animalId": "roedores",
-      "breedId": "cobaya",
-      "terminos": [
-        {
-          "termino": "Infección respiratoria",
-          "categoriaId": "enfermedades"
-        },
-        {
-          "termino": "Neumonía",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "insuficiencia pancreatica exocrina": {
       "nombre": "Insuficiencia pancreática exocrina",
       "animalId": "perros",
@@ -9021,17 +8657,6 @@
         },
         {
           "termino": "Insuficiencia pancreática exocrina",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "intoxicacion por amoniaco": {
-      "nombre": "Intoxicación por amoniaco",
-      "animalId": "peces",
-      "breedId": "neon_tetra",
-      "terminos": [
-        {
-          "termino": "Intoxicación por amoniaco",
           "categoriaId": "enfermedades"
         }
       ]
@@ -9073,50 +8698,6 @@
         }
       ]
     },
-    "meningeal worm": {
-      "nombre": "Meningeal worm",
-      "animalId": "camelidos",
-      "breedId": "alpaca",
-      "terminos": [
-        {
-          "termino": "Meningeal worm",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "meningeal worm (parelaphostrongylus)": {
-      "nombre": "Meningeal worm (Parelaphostrongylus)",
-      "animalId": "camelidos",
-      "breedId": "llama",
-      "terminos": [
-        {
-          "termino": "Meningeal worm",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "miasis": {
-      "nombre": "Miasis",
-      "animalId": "ovinos",
-      "breedId": "ouessant",
-      "terminos": [
-        {
-          "termino": "Miasis",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "miasis (bichera)": {
-      "nombre": "Miasis (bichera)",
-      "animalId": "ovinos",
-      "breedId": "oveja_merino",
-      "terminos": [
-        {
-          "termino": "Miasis",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "mielopatia degenerativa": {
       "nombre": "Mielopatía degenerativa",
       "animalId": "perros",
@@ -9147,17 +8728,6 @@
         }
       ]
     },
-    "muda retenida": {
-      "nombre": "Muda retenida",
-      "animalId": "reptiles",
-      "breedId": "gecko_leopardo",
-      "terminos": [
-        {
-          "termino": "Muda retenida",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "mycoplasma": {
       "nombre": "Mycoplasma",
       "animalId": "porcinos",
@@ -9180,6 +8750,17 @@
         },
         {
           "termino": "Neoplasia mamaria",
+          "categoriaId": "enfermedades"
+        }
+      ]
+    },
+    "infeccion respiratoria (neumonia)": {
+      "nombre": "Infección respiratoria (neumonía)",
+      "animalId": "roedores",
+      "breedId": "cobaya",
+      "terminos": [
+        {
+          "termino": "Neumonía",
           "categoriaId": "enfermedades"
         }
       ]
@@ -9306,32 +8887,6 @@
         }
       ]
     },
-    "acaros de patas (cnemidocoptes)": {
-      "nombre": "Ácaros de patas (Cnemidocoptes)",
-      "animalId": "aves",
-      "breedId": "canario",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        },
-        {
-          "termino": "Ácaros de patas",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "acaros de patas": {
-      "nombre": "Ácaros de patas",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "terminos": [
-        {
-          "termino": "Ácaros de patas",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "acaros respiratorios": {
       "nombre": "Ácaros respiratorios",
       "animalId": "aves",
@@ -9340,6 +8895,28 @@
         {
           "termino": "Ácaros respiratorios",
           "categoriaId": "enfermedades"
+        }
+      ]
+    },
+    "discopatia intervertebral": {
+      "nombre": "Discopatía intervertebral",
+      "animalId": "perros",
+      "breedId": "beagle",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        }
+      ]
+    },
+    "enfermedad de disco intervertebral": {
+      "nombre": "Enfermedad de disco intervertebral",
+      "animalId": "perros",
+      "breedId": "cocker",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
         }
       ]
     },
@@ -9354,8 +8931,30 @@
         }
       ]
     },
+    "calculos urinarios (urolitiasis)": {
+      "nombre": "Cálculos urinarios (urolitiasis)",
+      "animalId": "gatos",
+      "breedId": "ragdoll",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        }
+      ]
+    },
     "acaros de las vias respiratorias (traqueales)": {
       "nombre": "Ácaros de las vías respiratorias (traqueales)",
+      "animalId": "aves",
+      "breedId": "canario",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        }
+      ]
+    },
+    "acaros de patas (cnemidocoptes)": {
+      "nombre": "Ácaros de patas (Cnemidocoptes)",
       "animalId": "aves",
       "breedId": "canario",
       "terminos": [
