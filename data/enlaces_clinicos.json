@@ -2,8 +2,8 @@
   "generado_por": "scripts/data/build_cross_links.rb + integrate_suggested_links_sprint13.rb",
   "descripcion": "Enlaces bidireccionales entre términos del glosario y enfermedades del atlas.",
   "umbral_generico": 0.3,
-  "total_terminos_enlazados": 239,
-  "total_enfermedades_enlazadas": 181,
+  "total_terminos_enlazados": 238,
+  "total_enfermedades_enlazadas": 180,
   "por_termino": {
     "pronostico": {
       "termino": "Pronóstico",
@@ -643,13 +643,6 @@
           "breedNombre": "Hereford (variedad compacta/mini)"
         },
         {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
-        },
-        {
           "nombre": "Estasis gastrointestinal",
           "gravedad": "grave",
           "animalId": "conejos",
@@ -779,13 +772,6 @@
           "animalId": "gatos",
           "breedId": "devon_rex",
           "breedNombre": "Devon Rex"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -1084,13 +1070,6 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
-        },
-        {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
         }
       ]
     },
@@ -1275,13 +1254,6 @@
           "animalId": "gatos",
           "breedId": "devon_rex",
           "breedNombre": "Devon Rex"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -1473,13 +1445,6 @@
           "animalId": "gatos",
           "breedId": "persa",
           "breedNombre": "Persa"
-        },
-        {
-          "nombre": "Poliquistosis renal",
-          "gravedad": "grave",
-          "animalId": "gatos",
-          "breedId": "british_shorthair",
-          "breedNombre": "British Shorthair"
         }
       ]
     },
@@ -1502,13 +1467,6 @@
           "animalId": "perros",
           "breedId": "yorkshire",
           "breedNombre": "Yorkshire Terrier"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -1802,13 +1760,6 @@
           "breedNombre": "Devon Rex"
         },
         {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
-        {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
           "animalId": "aves",
@@ -1886,13 +1837,6 @@
           "animalId": "gatos",
           "breedId": "siames",
           "breedNombre": "Siamés"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -2169,13 +2113,6 @@
           "breedNombre": "Dexter"
         },
         {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
-        },
-        {
           "nombre": "MMA (metritis-mastitis-agalactia)",
           "gravedad": "grave",
           "animalId": "porcinos",
@@ -2246,13 +2183,6 @@
           "animalId": "gatos",
           "breedId": "maine_coon",
           "breedNombre": "Maine Coon"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -2339,13 +2269,6 @@
           "animalId": "gatos",
           "breedId": "bengala",
           "breedNombre": "Bengala"
-        },
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
         },
         {
           "nombre": "Psitacosis (clamidiosis)",
@@ -2440,13 +2363,6 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
-        },
-        {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
         }
       ]
     },
@@ -2462,13 +2378,6 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
-        },
-        {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
         },
         {
           "nombre": "Desplazamiento de abomaso",
@@ -2708,13 +2617,6 @@
       "total": 2,
       "ejemplos": [
         {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
-        {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
           "animalId": "aves",
@@ -2745,13 +2647,6 @@
       "total": 3,
       "ejemplos": [
         {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
-        {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
           "animalId": "aves",
@@ -2773,13 +2668,6 @@
       "categoriaNombre": "Enfermedades infecciosas y parasitarias",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
         {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
@@ -2934,13 +2822,6 @@
           "breedNombre": "Hereford (variedad compacta/mini)"
         },
         {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
-        },
-        {
           "nombre": "Cojeras (laminitis y dermatitis digital)",
           "gravedad": "moderada",
           "animalId": "bovinos",
@@ -2977,13 +2858,6 @@
       "categoriaNombre": "Salud en rumiantes",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Clostridiosis",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
-        },
         {
           "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
           "gravedad": "grave",
@@ -3331,13 +3205,6 @@
           "animalId": "gatos",
           "breedId": "ragdoll",
           "breedNombre": "Ragdoll"
-        },
-        {
-          "nombre": "Cálculos urinarios",
-          "gravedad": "grave",
-          "animalId": "roedores",
-          "breedId": "cobaya",
-          "breedNombre": "Cobaya (Cuy)"
         }
       ]
     },
@@ -3704,13 +3571,6 @@
           "animalId": "roedores",
           "breedId": "cobaya",
           "breedNombre": "Cobaya (Cuy)"
-        },
-        {
-          "nombre": "Escorbuto",
-          "gravedad": "grave",
-          "animalId": "roedores",
-          "breedId": "raton_domestico",
-          "breedNombre": "Ratón Doméstico"
         }
       ]
     },
@@ -3763,13 +3623,6 @@
           "animalId": "reptiles",
           "breedId": "serpiente_corn",
           "breedNombre": "Serpiente del Maíz (Corn Snake)"
-        },
-        {
-          "nombre": "Estomatitis",
-          "gravedad": "moderada",
-          "animalId": "reptiles",
-          "breedId": "gecko_leopardo",
-          "breedNombre": "Gecko Leopardo"
         }
       ]
     },
@@ -3986,13 +3839,6 @@
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Infección respiratoria",
-          "gravedad": "moderada",
-          "animalId": "reptiles",
-          "breedId": "serpiente_corn",
-          "breedNombre": "Serpiente del Maíz (Corn Snake)"
-        },
         {
           "nombre": "Infección respiratoria (neumonía)",
           "gravedad": "grave",
@@ -4239,13 +4085,6 @@
       "total": 2,
       "ejemplos": [
         {
-          "nombre": "Meningeal worm",
-          "gravedad": "grave",
-          "animalId": "camelidos",
-          "breedId": "alpaca",
-          "breedNombre": "Alpaca"
-        },
-        {
           "nombre": "Meningeal worm (Parelaphostrongylus)",
           "gravedad": "grave",
           "animalId": "camelidos",
@@ -4275,13 +4114,6 @@
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Miasis",
-          "gravedad": "grave",
-          "animalId": "ovinos",
-          "breedId": "ouessant",
-          "breedNombre": "Ouessant"
-        },
         {
           "nombre": "Miasis (bichera)",
           "gravedad": "grave",
@@ -4342,13 +4174,6 @@
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
       "total": 3,
       "ejemplos": [
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
         {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
@@ -4415,25 +4240,11 @@
           "breedNombre": "Chihuahua"
         },
         {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
-        {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
           "animalId": "aves",
           "breedId": "periquito",
           "breedNombre": "Periquito"
-        },
-        {
-          "nombre": "Neumonía",
-          "gravedad": "grave",
-          "animalId": "equinos",
-          "breedId": "pony_connemara",
-          "breedNombre": "Pony Connemara"
         },
         {
           "nombre": "Neumonía (complejo respiratorio bovino)",
@@ -4651,28 +4462,6 @@
         }
       ]
     },
-    "parasitos internos": {
-      "termino": "Parásitos internos",
-      "categoriaId": "enfermedades",
-      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
-      "ejemplos": [
-        {
-          "nombre": "Parásitos internos resistentes",
-          "gravedad": "moderada",
-          "animalId": "equinos",
-          "breedId": "pony_shetland",
-          "breedNombre": "Pony Shetland"
-        },
-        {
-          "nombre": "Parásitos internos",
-          "gravedad": "moderada",
-          "animalId": "reptiles",
-          "breedId": "serpiente_corn",
-          "breedNombre": "Serpiente del Maíz (Corn Snake)"
-        }
-      ]
-    },
     "parasitos internos resistentes": {
       "termino": "Parásitos internos resistentes",
       "categoriaId": "enfermedades",
@@ -4754,25 +4543,11 @@
           "breedNombre": "Hereford (variedad compacta/mini)"
         },
         {
-          "nombre": "Pododermatitis",
-          "gravedad": "moderada",
-          "animalId": "conejos",
-          "breedId": "holandes_enano",
-          "breedNombre": "Holandés Enano"
-        },
-        {
           "nombre": "Pododermatitis (llagas en corvejones)",
           "gravedad": "moderada",
           "animalId": "conejos",
           "breedId": "conejo_gigante",
           "breedNombre": "Conejo Gigante de Flandes"
-        },
-        {
-          "nombre": "Pododermatitis (footrot)",
-          "gravedad": "moderada",
-          "animalId": "ovinos",
-          "breedId": "ouessant",
-          "breedNombre": "Ouessant"
         }
       ]
     },
@@ -4803,13 +4578,6 @@
           "animalId": "gatos",
           "breedId": "persa",
           "breedNombre": "Persa"
-        },
-        {
-          "nombre": "Poliquistosis renal",
-          "gravedad": "grave",
-          "animalId": "gatos",
-          "breedId": "british_shorthair",
-          "breedNombre": "British Shorthair"
         }
       ]
     },
@@ -4864,13 +4632,6 @@
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
         {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
@@ -5041,13 +4802,6 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
-        },
-        {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
         }
       ]
     },
@@ -5137,13 +4891,6 @@
           "animalId": "aves",
           "breedId": "periquito",
           "breedNombre": "Periquito"
-        },
-        {
-          "nombre": "Tumores",
-          "gravedad": "moderada",
-          "animalId": "roedores",
-          "breedId": "hamster",
-          "breedNombre": "Hámster"
         }
       ]
     },
@@ -5189,13 +4936,6 @@
           "animalId": "aves",
           "breedId": "canario",
           "breedNombre": "Canario"
-        },
-        {
-          "nombre": "Ácaros de patas",
-          "gravedad": "leve",
-          "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
         }
       ]
     },
@@ -5361,13 +5101,6 @@
       "total": 2,
       "ejemplos": [
         {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
-        {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
           "animalId": "aves",
@@ -5397,13 +5130,6 @@
       "categoriaNombre": "Fármacos de los protocolos clínicos",
       "total": 2,
       "ejemplos": [
-        {
-          "nombre": "Psitacosis",
-          "gravedad": "grave",
-          "animalId": "aves",
-          "breedId": "canario",
-          "breedNombre": "Canario"
-        },
         {
           "nombre": "Psitacosis (clamidiosis)",
           "gravedad": "grave",
@@ -5769,13 +5495,6 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
-        },
-        {
-          "nombre": "Timpanismo",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "dexter",
-          "breedNombre": "Dexter"
         },
         {
           "nombre": "Estasis gastrointestinal",
@@ -6191,10 +5910,6 @@
         {
           "termino": "Diarrea",
           "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Parásitos internos",
-          "categoriaId": "enfermedades"
         },
         {
           "termino": "Parásitos internos resistentes",
@@ -9465,17 +9180,6 @@
         },
         {
           "termino": "Neoplasia mamaria",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "parasitos internos": {
-      "nombre": "Parásitos internos",
-      "animalId": "reptiles",
-      "breedId": "serpiente_corn",
-      "terminos": [
-        {
-          "termino": "Parásitos internos",
           "categoriaId": "enfermedades"
         }
       ]

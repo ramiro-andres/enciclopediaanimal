@@ -1,6 +1,6 @@
 {
   "titulo": "Diccionario de términos médicos",
-  "introduccion": "Glosario veterinario con 631 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
+  "introduccion": "Glosario veterinario con 603 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
   "categorias": [
     {
       "id": "ficha_enfermedad",
@@ -405,16 +405,8 @@
           "definicion": "Extracción de leche; la higiene reduce mastitis."
         },
         {
-          "termino": "Lactancia",
-          "definicion": "Periodo de producción de leche tras el parto."
-        },
-        {
           "termino": "Gestación",
           "definicion": "Embarazo; requiere nutrición y manejo específicos."
-        },
-        {
-          "termino": "Destete",
-          "definicion": "Separación de cría de la madre; momento crítico de estrés e infecciones."
         },
         {
           "termino": "Engorde",
@@ -1413,10 +1405,6 @@
           "definicion": "Caída de calcio al inicio de lactancia; urgencia en vacas."
         },
         {
-          "termino": "Retención de placenta",
-          "definicion": "Placenta retenida >12-24 h postparto."
-        },
-        {
           "termino": "BRD (enfermedad respiratoria bovina)",
           "definicion": "Complejo infeccioso respiratorio en feedlot."
         },
@@ -1529,7 +1517,7 @@
     {
       "id": "enfermedades",
       "nombre": "Enfermedades documentadas en la enciclopedia",
-      "descripcion": "Las 197 condiciones clínicas registradas en las fichas de razas.",
+      "descripcion": "Las 173 condiciones clínicas registradas en las fichas de razas (sin duplicar el resto del glosario).",
       "icono": "📋",
       "terminos": [
         {
@@ -1589,10 +1577,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Aspergilosis",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Atrofia muscular espinal",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -1617,15 +1601,7 @@
           "definicion": "Asintomático en fase preclínica (hallazgo ecocardiográfico). Ecocardiografía: engrosamiento del VI (>6 mm diástole, gatos), movimiento sistólico anterior de la válvula mitral (SAM), obstrucción del tracto de salida. Fracción de acortamiento puede ser normal o e"
         },
         {
-          "termino": "Cetosis",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Circovirosis porcina (PCV2)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Clostridiosis",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
@@ -1641,14 +1617,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Columnaris",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Costia (Ichthyobodo)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Cálculos urinarios",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -1659,10 +1627,6 @@
         {
           "termino": "Cáncer (hemangiosarcoma y linfoma)",
           "definicion": "Crecimiento celular anormal; benigno o maligno."
-        },
-        {
-          "termino": "Cólico",
-          "definicion": "Mirarse el flanco repetidamente. Auscultación intestinal en 4 cuadrantes (debe haber 1-3 ruidos/minuto; silencio = grave). Palpación rectal: impactación, distorsión, impalpable. Sonda nasogástrica: reflujo >2 L indica obstrucción. An"
         },
         {
           "termino": "Deficiencia de piruvato quinasa",
@@ -1729,14 +1693,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Dropsy (hidropesía)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Egg binding",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Encefalitozoon cuniculi",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -1759,10 +1715,6 @@
         {
           "termino": "Enfermedad del disco intervertebral",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Enfermedad del herpesvirus koi (KHV)",
-          "definicion": "Enfermedad causada por virus."
         },
         {
           "termino": "Enfermedad del músculo (PSSM)",
@@ -1869,10 +1821,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Hipocalcemia (fiebre de leche)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Hipocalcemia posparto",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -1885,15 +1833,7 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Ich (punto blanco)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Ictioftiriasis (punto blanco)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Inercia uterina",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
@@ -1925,10 +1865,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Laminitis",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Linfoma",
           "definicion": "Crecimiento celular anormal; benigno o maligno."
         },
@@ -1955,10 +1891,6 @@
         {
           "termino": "Maloclusión dental",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Mastitis",
-          "definicion": "Ubre caliente, dolorosa e inflamada (unilateral o bilateral). Examen físico de ubre: calor, dolor, consistencia. Cytología de leche: >5 leucocitos/campo + bacterias. Cultivo y antibiograma de leche (Staph. aureus, E. coli, Streptococcus). California Mastitis Tes"
         },
         {
           "termino": "Mastitis-metritis-agalactia (MMA)",
@@ -1989,24 +1921,12 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Metritis",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Miasis",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Miasis (bichera)",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
           "termino": "Mielopatía degenerativa",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Moquillo (distemper)",
-          "definicion": "Enfermedad causada por virus."
         },
         {
           "termino": "Muda anormal",
@@ -2089,10 +2009,6 @@
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
-          "termino": "Parto distócico",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Parálisis periódica hiperpotasémica (HYPP)",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -2102,10 +2018,6 @@
         },
         {
           "termino": "Parásitos externos (anclas, piojos, gusanos)",
-          "definicion": "Condición causada por parásitos externos o internos."
-        },
-        {
-          "termino": "Parásitos internos",
           "definicion": "Condición causada por parásitos externos o internos."
         },
         {
@@ -2137,20 +2049,12 @@
           "definicion": "Inflamación o infección de la piel."
         },
         {
-          "termino": "Pododermatitis (footrot)",
-          "definicion": "Inflamación o infección de la piel."
-        },
-        {
           "termino": "Pododermatitis (llagas en corvejones)",
           "definicion": "Inflamación o infección de la piel."
         },
         {
           "termino": "Pododermatitis digital",
           "definicion": "Inflamación o infección de la piel."
-        },
-        {
-          "termino": "Podredumbre de aletas",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
           "termino": "Podredumbre del caparazón (shell rot)",
@@ -2185,10 +2089,6 @@
           "definicion": "Letargo, anorexia, pérdida de peso. PCR de heces, esputo o hisopado cloacal para Chlamydia psittaci (más sensible que cultivo). Serología (complemento fijación, titulación). Radiografía: infiltrados pulmonares, hepatomegalia. Analítica:"
         },
         {
-          "termino": "Psitacosis (clamidiosis)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
           "termino": "Quemaduras por UV/lámpara",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
@@ -2198,10 +2098,6 @@
         },
         {
           "termino": "Queratoconjuntivitis infecciosa (ojo rosado)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Retención de placenta",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
@@ -2282,10 +2178,6 @@
         },
         {
           "termino": "Uveítis recurrente (moon blindness)",
-          "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
-        },
-        {
-          "termino": "Velvet (Oodinium)",
           "definicion": "Enfermedad o condición documentada en la enciclopedia para esta especie. Consulta la ficha clínica completa para síntomas, diagnóstico y tratamiento."
         },
         {
@@ -2624,11 +2516,6 @@
           "ejemplo": "Aplicación tópica vía Tópica — Terramycin Spray"
         },
         {
-          "termino": "Oxitocina",
-          "definicion": "Principio activo usado en protocolos de la enciclopedia. Retención de huevo. Solo si no hay obstrucción.",
-          "ejemplo": "1-2 UI/kg vía IM — Syntocinon"
-        },
-        {
           "termino": "Penicilina procainica",
           "definicion": "Principio activo usado en protocolos de la enciclopedia. Infecciones bacterianas. Rotar sitio de inyección.",
           "ejemplo": "22.000 UI/kg vía IM — Penicilina equina"
@@ -2736,5 +2623,5 @@
       ]
     }
   ],
-  "total_terminos": 631
+  "total_terminos": 603
 }
