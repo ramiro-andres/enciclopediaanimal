@@ -152,10 +152,25 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await page.locator('.estudio-hub-card').filter({ hasText: /evaluaci|evaluation|simulaci/i }).click();
     await expect(page.locator('#evaluacionView')).toHaveClass(/active/);
     await expect(page.locator('.evaluacion-disclaimer')).toBeVisible();
+    await expect(page.locator('#evaluacionCategorySelect')).toBeVisible();
+    await expect(page.locator('#evaluacionTypeSelect')).toBeVisible();
+    await expect(page.locator('#evaluacionAvailableCount')).toBeVisible();
+    await page.locator('#evaluacionCategorySelect').selectOption({ index: 0 });
+    await page.locator('#evaluacionTypeSelect').selectOption('all');
     await page.locator('#evaluacionSizeSelect').selectOption('5');
     await page.locator('#evaluacionStartBtn').click();
     await expect(page.locator('.evaluacion-question')).toBeVisible();
     await expect(page.locator('.evaluacion-progress')).toContainText(/1/);
+    // Responder primera pregunta y ver feedback inmediato
+    const mcq = page.locator('.evaluacion-option-btn').first();
+    if (await mcq.count()) {
+      await mcq.click();
+    } else {
+      await page.locator('#evaluacionWrittenInput').fill('respuesta de prueba');
+      await page.locator('#evaluacionSubmitWritten').click();
+    }
+    await expect(page.locator('.evaluacion-feedback')).toBeVisible();
+    await page.locator('#evaluacionNextBtn').click();
 
     await page.locator('#backEvaluacionBtn').click();
     await expect(page.locator('#estudioView')).toHaveClass(/active/);

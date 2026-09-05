@@ -198,7 +198,11 @@ class FlashcardsStudyTest < Minitest::Test
   end
 
   def test_i18n_evaluacion
-    %w[eval.title eval.start eval.passed eval.failed eval.retry eval.disclaimer].each do |key|
+    %w[
+      eval.title eval.start eval.passed eval.failed eval.retry eval.disclaimer
+      eval.category_label eval.type_label eval.available_count
+      eval.feedback_ok eval.retry_same eval.retry_failed
+    ].each do |key|
       assert_includes @i18n, "'#{key}'"
     end
   end

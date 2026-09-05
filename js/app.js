@@ -85,6 +85,7 @@ const App = {
   evaluacionData: null,
   evaluacionSession: null,
   EVALUACION_PASS_THRESHOLD: 0.8,
+  EVALUACION_PREFS_KEY: 'atlas_evaluacion_prefs',
 
   t(key) {
     return window.I18n ? I18n.t(key) : key;
@@ -1996,7 +1997,7 @@ const App = {
 
   showEvaluacion(options = {}) {
     if (!this.evaluacionSession || this.evaluacionSession.phase === 'idle') {
-      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: 10 };
+      this.evaluacionSession = this.defaultEvaluacionSession();
     }
     this.renderEvaluacion();
     this.showView('evaluacion');
@@ -3073,20 +3074,156 @@ const App = {
     return { correct: false, reason: 'mismatch' };
   },
 
-  startEvaluacionSession(size) {
-    const bank = this.evaluacionData?.preguntas || [];
-    if (!bank.length) {
-      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size };
-      return;
+  loadEvaluacionPrefs() {
+    try {
+      const raw = localStorage.getItem(this.EVALUACION_PREFS_KEY);
+      if (!raw) return { category: 'todos', questionType: 'all', size: 10 };
+      const parsed = JSON.parse(raw);
+      return {
+        category: parsed.category || 'todos',
+        questionType: parsed.questionType || 'all',
+        size: Number(parsed.size) || 10
+      };
+    } catch {
+      return { category: 'todos', questionType: 'all', size: 10 };
     }
-    const n = Math.min(Math.max(5, Number(size) || 10), Math.min(30, bank.length));
-    const questions = this.shuffleArray([...bank]).slice(0, n);
+  },
+
+  saveEvaluacionPrefs(prefs) {
+    try {
+      localStorage.setItem(this.EVALUACION_PREFS_KEY, JSON.stringify({
+        category: prefs.category || 'todos',
+        questionType: prefs.questionType || 'all',
+        size: Number(prefs.size) || 10
+      }));
+    } catch { /* ignore quota */ }
+  },
+
+  getEvaluacionCategories() {
+    const bank = this.evaluacionData?.preguntas || [];
+    const map = new Map();
+    bank.forEach(q => {
+      const id = q.categoria_id || 'otros';
+      const nombre = q.categoria || id;
+      if (!map.has(id)) map.set(id, { id, nombre, count: 0 });
+      map.get(id).count += 1;
+    });
+    return [
+      { id: 'todos', nombre: this.t('eval.category_all'), count: bank.length },
+      ...[...map.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    ];
+  },
+
+  filterEvaluacionBank(category = 'todos', questionType = 'all') {
+    let bank = [...(this.evaluacionData?.preguntas || [])];
+    if (category && category !== 'todos') {
+      bank = bank.filter(q => (q.categoria_id || 'otros') === category);
+    }
+    if (questionType === 'mcq') bank = bank.filter(q => q.tipo === 'mcq');
+    else if (questionType === 'written') bank = bank.filter(q => q.tipo === 'written');
+    return bank;
+  },
+
+  buildMixedEvaluacionDeck(bank, n) {
+    const mcq = this.shuffleArray(bank.filter(q => q.tipo === 'mcq'));
+    const written = this.shuffleArray(bank.filter(q => q.tipo === 'written'));
+    if (!mcq.length || !written.length) {
+      return this.shuffleArray(bank).slice(0, n);
+    }
+    const targetWritten = Math.max(1, Math.round(n * 0.3));
+    const takeWritten = Math.min(written.length, targetWritten);
+    const takeMcq = Math.min(mcq.length, n - takeWritten);
+    const picked = [...mcq.slice(0, takeMcq), ...written.slice(0, takeWritten)];
+    if (picked.length < n) {
+      const used = new Set(picked.map(q => q.id));
+      const rest = this.shuffleArray(bank.filter(q => !used.has(q.id)));
+      picked.push(...rest.slice(0, n - picked.length));
+    }
+    return this.shuffleArray(picked).slice(0, n);
+  },
+
+  defaultEvaluacionSession(overrides = {}) {
+    const prefs = this.loadEvaluacionPrefs();
+    return {
+      phase: 'setup',
+      questions: [],
+      index: 0,
+      answers: [],
+      size: prefs.size || 10,
+      category: prefs.category || 'todos',
+      questionType: prefs.questionType || 'all',
+      feedback: null,
+      result: null,
+      ...overrides
+    };
+  },
+
+  startEvaluacionSession({ size, category, questionType, onlyFailedIds = null } = {}) {
+    // Compatibilidad: startEvaluacionSession(10) desde código antiguo
+    if (typeof arguments[0] === 'number') {
+      size = arguments[0];
+      category = undefined;
+      questionType = undefined;
+      onlyFailedIds = null;
+    }
+    const prefs = this.loadEvaluacionPrefs();
+    const cat = category || prefs.category || 'todos';
+    const tipo = questionType || prefs.questionType || 'all';
+    let bank = this.filterEvaluacionBank(cat, tipo);
+
+    if (onlyFailedIds?.length) {
+      const failedSet = new Set(onlyFailedIds);
+      const fromFailed = (this.evaluacionData?.preguntas || []).filter(q => failedSet.has(q.id));
+      bank = fromFailed.length ? fromFailed : bank;
+    }
+
+    if (!bank.length) {
+      this.evaluacionSession = this.defaultEvaluacionSession({
+        category: cat,
+        questionType: tipo,
+        size: size || prefs.size || 10
+      });
+      return { ok: false, available: 0 };
+    }
+
+    const available = bank.length;
+    const minN = available < 5 ? available : 5;
+    const requested = Math.min(Math.max(minN, Number(size) || 10), Math.min(30, available));
+    const questions = tipo === 'mixed'
+      ? this.buildMixedEvaluacionDeck(bank, requested)
+      : this.shuffleArray([...bank]).slice(0, requested);
+
+    this.saveEvaluacionPrefs({ category: cat, questionType: tipo, size: requested });
     this.evaluacionSession = {
       phase: 'quiz',
       questions,
       index: 0,
       answers: [],
-      size: n
+      size: questions.length,
+      category: cat,
+      questionType: tipo,
+      feedback: null,
+      result: null
+    };
+    return { ok: true, available, size: questions.length };
+  },
+
+  finishEvaluacionSession() {
+    const session = this.evaluacionSession;
+    if (!session) return;
+    const score = session.answers.filter(a => a.correct).length;
+    const total = session.answers.length;
+    const pct = total ? score / total : 0;
+    const threshold = this.evaluacionData?.pass_threshold ?? this.EVALUACION_PASS_THRESHOLD;
+    session.phase = 'result';
+    session.feedback = null;
+    session.result = {
+      score,
+      total,
+      pct,
+      passed: pct >= threshold,
+      threshold,
+      failed: session.answers.filter(a => !a.correct)
     };
   },
 
@@ -3101,36 +3238,54 @@ const App = {
     if (q.tipo === 'mcq') {
       const idx = Number(rawAnswer);
       correct = Number.isInteger(idx) && idx === q.correct_index;
-      detail = { selectedIndex: idx, expectedIndex: q.correct_index };
+      detail = {
+        selectedIndex: idx,
+        expectedIndex: q.correct_index,
+        selectedLabel: q.opciones?.[idx],
+        expectedLabel: q.opciones?.[q.correct_index] || q.respuesta
+      };
     } else {
       detail = this.scoreWrittenAnswer(rawAnswer, q.respuesta, q.sinonimos || [], q.keywords || []);
       correct = detail.correct;
     }
 
-    session.answers.push({
+    const answer = {
       id: q.id,
       tipo: q.tipo,
       correct,
       user: rawAnswer,
       expected: q.respuesta,
-      detail
-    });
+      categoria: q.categoria,
+      categoria_id: q.categoria_id,
+      detail,
+      question: q
+    };
+    session.answers.push(answer);
+    session.feedback = answer;
+    session.phase = 'feedback';
+    this.renderEvaluacion();
+  },
+
+  advanceEvaluacionAfterFeedback() {
+    const session = this.evaluacionSession;
+    if (!session || session.phase !== 'feedback') return;
+    session.feedback = null;
     session.index += 1;
     if (session.index >= session.questions.length) {
-      const score = session.answers.filter(a => a.correct).length;
-      const total = session.answers.length;
-      const pct = total ? score / total : 0;
-      const threshold = this.evaluacionData?.pass_threshold ?? this.EVALUACION_PASS_THRESHOLD;
-      session.phase = 'result';
-      session.result = {
-        score,
-        total,
-        pct,
-        passed: pct >= threshold,
-        threshold
-      };
+      this.finishEvaluacionSession();
+    } else {
+      session.phase = 'quiz';
     }
     this.renderEvaluacion();
+  },
+
+  openGlossaryFromEvalTerm(term) {
+    if (!term) return;
+    this.showDictionary();
+    this.dictionaryQuery = term;
+    const search = document.getElementById('dictionarySearch');
+    if (search) search.value = term;
+    this.renderDictionary();
   },
 
   renderEvaluacion() {
@@ -3147,35 +3302,94 @@ const App = {
     }
 
     if (!this.evaluacionSession) {
-      this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: 10 };
+      this.evaluacionSession = this.defaultEvaluacionSession();
     }
     const session = this.evaluacionSession;
 
     if (session.phase === 'setup') {
-      const maxN = Math.min(30, bank.length);
-      const options = [5, 10, 15, 20].filter(n => n <= maxN);
-      if (!options.includes(maxN) && maxN >= 5) options.push(maxN);
+      const categories = this.getEvaluacionCategories();
+      const filtered = this.filterEvaluacionBank(session.category, session.questionType);
+      const available = filtered.length;
+      const maxN = Math.min(30, Math.max(available, 0));
+      let options = [5, 10, 15, 20].filter(n => n <= maxN);
+      if (available > 0 && available < 5) options = [available];
+      else if (available >= 5 && !options.length) options = [Math.min(5, available)];
+      if (maxN >= 5 && !options.includes(maxN) && maxN <= 30) options.push(maxN);
+      const sizeValue = options.includes(session.size) ? session.size : (options[0] || available);
+      session.size = sizeValue;
+
+      const typeOptions = [
+        { id: 'all', label: this.t('eval.type_all') },
+        { id: 'mcq', label: this.t('eval.type_mcq_only') },
+        { id: 'written', label: this.t('eval.type_written_only') },
+        { id: 'mixed', label: this.t('eval.type_mixed') }
+      ];
+
       container.innerHTML = `
         <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
         <div class="evaluacion-setup">
-          <label for="evaluacionSizeSelect">${this.esc(this.t('eval.size_label'))}</label>
-          <select id="evaluacionSizeSelect">
-            ${options.map(n => `<option value="${n}" ${session.size === n ? 'selected' : ''}>${n}</option>`).join('')}
+          <label for="evaluacionCategorySelect">${this.esc(this.t('eval.category_label'))}</label>
+          <select id="evaluacionCategorySelect">
+            ${categories.map(c => `<option value="${this.esc(c.id)}" ${session.category === c.id ? 'selected' : ''}>${this.esc(c.nombre)} (${c.count})</option>`).join('')}
           </select>
+          <label for="evaluacionTypeSelect">${this.esc(this.t('eval.type_label'))}</label>
+          <select id="evaluacionTypeSelect">
+            ${typeOptions.map(t => `<option value="${t.id}" ${session.questionType === t.id ? 'selected' : ''}>${this.esc(t.label)}</option>`).join('')}
+          </select>
+          <label for="evaluacionSizeSelect">${this.esc(this.t('eval.size_label'))}</label>
+          <select id="evaluacionSizeSelect" ${available ? '' : 'disabled'}>
+            ${options.map(n => `<option value="${n}" ${sizeValue === n ? 'selected' : ''}>${n}</option>`).join('')}
+          </select>
+          <p class="evaluacion-setup-count" id="evaluacionAvailableCount" role="status">
+            ${this.esc(this.t('eval.available_count').replace('{count}', String(available)))}
+          </p>
           <p class="evaluacion-setup-hint">${this.esc(this.t('eval.setup_hint').replace('{mcq}', String(this.evaluacionData?.stats?.mcq || '—')).replace('{written}', String(this.evaluacionData?.stats?.written || '—')))}</p>
-          <button type="button" class="disclaimer-accept-btn" id="evaluacionStartBtn">${this.esc(this.t('eval.start'))}</button>
+          ${available < 5 && available > 0 ? `<p class="evaluacion-setup-warn">${this.esc(this.t('eval.available_low').replace('{count}', String(available)))}</p>` : ''}
+          <button type="button" class="disclaimer-accept-btn" id="evaluacionStartBtn" ${available ? '' : 'disabled'}>${this.esc(this.t('eval.start'))}</button>
         </div>`;
+
+      const syncFilters = () => {
+        session.category = container.querySelector('#evaluacionCategorySelect')?.value || 'todos';
+        session.questionType = container.querySelector('#evaluacionTypeSelect')?.value || 'all';
+        session.size = Number(container.querySelector('#evaluacionSizeSelect')?.value || session.size);
+        this.saveEvaluacionPrefs(session);
+        this.renderEvaluacion();
+      };
+      container.querySelector('#evaluacionCategorySelect')?.addEventListener('change', syncFilters);
+      container.querySelector('#evaluacionTypeSelect')?.addEventListener('change', syncFilters);
+      container.querySelector('#evaluacionSizeSelect')?.addEventListener('change', (e) => {
+        session.size = Number(e.target.value || 10);
+        this.saveEvaluacionPrefs(session);
+      });
       container.querySelector('#evaluacionStartBtn')?.addEventListener('click', () => {
         const size = Number(container.querySelector('#evaluacionSizeSelect')?.value || 10);
-        this.startEvaluacionSession(size);
+        this.startEvaluacionSession({
+          size,
+          category: session.category,
+          questionType: session.questionType
+        });
         this.renderEvaluacion();
       });
       return;
     }
 
     if (session.phase === 'result') {
-      const { score, total, pct, passed, threshold } = session.result;
+      const { score, total, pct, passed, threshold, failed = [] } = session.result;
       const pctLabel = Math.round(pct * 100);
+      const failedHtml = failed.length ? `
+        <div class="evaluacion-failed-list">
+          <h4>${this.esc(this.t('eval.failed_list'))}</h4>
+          <ul>
+            ${failed.map(f => `
+              <li>
+                <strong>${this.esc(f.expected || f.id)}</strong>
+                ${f.categoria ? `<span class="evaluacion-failed-cat">${this.esc(f.categoria)}</span>` : ''}
+                <button type="button" class="btn-text-link evaluacion-open-term" data-term="${this.esc(f.expected || '')}">${this.esc(this.t('eval.open_glossary'))}</button>
+              </li>
+            `).join('')}
+          </ul>
+        </div>` : `<p class="evaluacion-setup-hint">${this.esc(this.t('eval.no_failures'))}</p>`;
+
       container.innerHTML = `
         <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
         <div class="evaluacion-result ${passed ? 'evaluacion-result--pass' : 'evaluacion-result--fail'}">
@@ -3183,16 +3397,66 @@ const App = {
           <h3>${this.esc(this.t(passed ? 'eval.passed' : 'eval.failed'))}</h3>
           <p class="evaluacion-score">${this.esc(this.t('eval.score').replace('{score}', String(score)).replace('{total}', String(total)).replace('{pct}', String(pctLabel)))}</p>
           <p class="evaluacion-threshold">${this.esc(this.t('eval.threshold').replace('{threshold}', String(Math.round(threshold * 100))))}</p>
+          ${failedHtml}
           <div class="evaluacion-result-actions">
-            <button type="button" class="disclaimer-accept-btn" id="evaluacionRetryBtn">${this.esc(this.t('eval.retry'))}</button>
+            <button type="button" class="disclaimer-accept-btn" id="evaluacionRetrySameBtn">${this.esc(this.t('eval.retry_same'))}</button>
+            ${failed.length ? `<button type="button" class="disclaimer-accept-btn evaluacion-secondary-btn" id="evaluacionRetryFailedBtn">${this.esc(this.t('eval.retry_failed'))}</button>` : ''}
+            <button type="button" class="btn-text-link" id="evaluacionSetupBtn">${this.esc(this.t('eval.change_filters'))}</button>
             <button type="button" class="btn-text-link" id="evaluacionHomeBtn">${this.esc(this.t('back.estudio'))}</button>
           </div>
         </div>`;
-      container.querySelector('#evaluacionRetryBtn')?.addEventListener('click', () => {
-        this.evaluacionSession = { phase: 'setup', questions: [], index: 0, answers: [], size: session.size || 10 };
+      container.querySelectorAll('.evaluacion-open-term').forEach(btn => {
+        btn.addEventListener('click', () => this.openGlossaryFromEvalTerm(btn.dataset.term));
+      });
+      container.querySelector('#evaluacionRetrySameBtn')?.addEventListener('click', () => {
+        this.startEvaluacionSession({
+          size: session.size,
+          category: session.category,
+          questionType: session.questionType
+        });
+        this.renderEvaluacion();
+      });
+      container.querySelector('#evaluacionRetryFailedBtn')?.addEventListener('click', () => {
+        this.startEvaluacionSession({
+          size: Math.max(failed.length, Math.min(5, failed.length)),
+          category: 'todos',
+          questionType: 'all',
+          onlyFailedIds: failed.map(f => f.id)
+        });
+        this.renderEvaluacion();
+      });
+      container.querySelector('#evaluacionSetupBtn')?.addEventListener('click', () => {
+        this.evaluacionSession = this.defaultEvaluacionSession({
+          category: session.category,
+          questionType: session.questionType,
+          size: session.size
+        });
         this.renderEvaluacion();
       });
       container.querySelector('#evaluacionHomeBtn')?.addEventListener('click', () => this.showEstudio());
+      return;
+    }
+
+    if (session.phase === 'feedback') {
+      const fb = session.feedback;
+      const q = fb?.question || session.questions[session.index];
+      const synonyms = (q?.sinonimos || []).filter(s => s && s !== q.respuesta);
+      const isLast = session.index >= session.questions.length - 1;
+      container.innerHTML = `
+        <p class="evaluacion-disclaimer" role="note">⚕️ ${this.esc(disclaimer)}</p>
+        <div class="evaluacion-progress" role="status" aria-live="polite">
+          <div class="evaluacion-progress-bar" style="width:${Math.round(((session.index + 1) / session.questions.length) * 100)}%"></div>
+          <span>${this.esc(this.t('eval.progress').replace('{current}', String(session.index + 1)).replace('{total}', String(session.questions.length)))}</span>
+        </div>
+        <div class="evaluacion-feedback ${fb?.correct ? 'evaluacion-feedback--ok' : 'evaluacion-feedback--ko'}" role="status" aria-live="polite">
+          <h3>${this.esc(this.t(fb?.correct ? 'eval.feedback_ok' : 'eval.feedback_ko'))}</h3>
+          <p class="evaluacion-feedback-expected"><strong>${this.esc(this.t('eval.expected'))}:</strong> ${this.esc(q?.respuesta || '')}</p>
+          ${synonyms.length ? `<p class="evaluacion-feedback-syn"><strong>${this.esc(this.t('eval.synonyms'))}:</strong> ${this.esc(synonyms.join(', '))}</p>` : ''}
+          ${fb?.tipo === 'written' && fb?.detail?.reason ? `<p class="evaluacion-feedback-reason">${this.esc(this.t('eval.match_' + fb.detail.reason) || fb.detail.reason)}</p>` : ''}
+          ${q?.categoria ? `<p class="evaluacion-failed-cat">${this.esc(q.categoria)}</p>` : ''}
+          <button type="button" class="disclaimer-accept-btn" id="evaluacionNextBtn">${this.esc(this.t(isLast ? 'eval.see_results' : 'eval.next'))}</button>
+        </div>`;
+      container.querySelector('#evaluacionNextBtn')?.addEventListener('click', () => this.advanceEvaluacionAfterFeedback());
       return;
     }
 
@@ -3229,7 +3493,10 @@ const App = {
         <span>${this.esc(progress)}</span>
       </div>
       <article class="evaluacion-question">
-        <p class="evaluacion-question-type">${this.esc(this.t(q.tipo === 'mcq' ? 'eval.type_mcq' : 'eval.type_written'))}</p>
+        <p class="evaluacion-question-meta">
+          <span class="evaluacion-question-type">${this.esc(this.t(q.tipo === 'mcq' ? 'eval.type_mcq' : 'eval.type_written'))}</span>
+          ${q.categoria ? `<span class="evaluacion-failed-cat">${this.esc(q.categoria)}</span>` : ''}
+        </p>
         <p class="evaluacion-prompt">${this.esc(prompt)}</p>
         <p class="evaluacion-stem">${this.esc(q.stem)}</p>
         ${body}
