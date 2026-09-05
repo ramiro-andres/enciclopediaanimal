@@ -7,6 +7,7 @@ require 'json'
 require_relative 'clinical_disease_library'
 require_relative 'pharma_protocols'
 require_relative 'expand_dictionary_sprint13'
+require_relative 'dedupe_glossary_and_links'
 
 ROOT = File.expand_path('../..', __dir__)
 
@@ -389,27 +390,46 @@ def merge_sprint13_terms(categories)
   categories
 end
 
+def existing_soft_keys(categories)
+  keys = {}
+  categories.each do |cat|
+    (cat['terminos'] || []).each do |t|
+      keys[GlossaryDedupe.soft_term_key(t['termino'])] = true
+    end
+  end
+  keys
+end
+
 def build
   data = JSON.parse(File.read(File.join(ROOT, 'data', 'enciclopedia.json')))
   categories = merge_sprint13_terms(BASE_CATEGORIES.map(&:dup))
+  known = existing_soft_keys(categories)
 
-  # Enfermedades documentadas
-  disease_terms = collect_diseases(data).map do |name|
+  # Enfermedades documentadas (omitir las ya cubiertas en categorías curadas).
+  disease_terms = collect_diseases(data).map { |name|
+    soft = GlossaryDedupe.soft_term_key(name)
+    next if soft.empty? || known[soft]
+
+    known[soft] = true
     entry = ClinicalDiseaseLibrary::ENTRIES[name]
     term(name, disease_definition(name, entry))
-  end
+  }.compact
   categories << category(
     'enfermedades',
     'Enfermedades documentadas en la enciclopedia',
-    "Las #{disease_terms.length} condiciones clínicas registradas en las fichas de razas.",
+    "Las #{disease_terms.length} condiciones clínicas registradas en las fichas de razas (sin duplicar el resto del glosario).",
     '📋',
     disease_terms
   )
 
-  # Fármacos de protocolos
-  drug_terms = collect_drugs.map do |pa, info|
+  # Fármacos de protocolos (sin repetir principios ya definidos).
+  drug_terms = collect_drugs.map { |pa, info|
+    soft = GlossaryDedupe.soft_term_key(pa)
+    next if soft.empty? || known[soft]
+
+    known[soft] = true
     term(pa, info[:definicion], info[:ejemplo])
-  end
+  }.compact
   categories << category(
     'farmacos_protocolo',
     'Fármacos de los protocolos clínicos',
@@ -418,17 +438,24 @@ def build
     drug_terms
   )
 
-  total = categories.sum { |c| c['terminos'].length }
-
-  {
+  output = {
     'titulo' => 'Diccionario de términos médicos',
-    'introduccion' => "Glosario veterinario con #{total} entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
+    'introduccion' => 'Glosario veterinario con entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.',
     'categorias' => categories,
-    'total_terminos' => total
+    'total_terminos' => 0
   }
+
+  # Deduplica también solapes entre categorías base (p. ej. Lactancia, Destete).
+  stats = GlossaryDedupe.dedupe_dictionary!(output)
+  total = output['total_terminos']
+  output['introduccion'] =
+    "Glosario veterinario con #{total} entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado."
+
+  [output, stats]
 end
 
-output = build
+output, dedupe_stats = build
 path = File.join(ROOT, 'data', 'diccionario_medicos.json')
 File.write(path, JSON.pretty_generate(output) + "\n")
 puts "diccionario_medicos.json generado (#{output['total_terminos']} términos, #{output['categorias'].length} categorías)"
+puts "  dedupe glosario: #{dedupe_stats[:before]} → #{dedupe_stats[:after]} (−#{dedupe_stats[:removed]})"

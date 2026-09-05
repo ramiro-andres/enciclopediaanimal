@@ -14,8 +14,9 @@
 #   - por_enfermedad: enfermedad normalizada -> términos del glosario relacionados
 
 require 'json'
+require_relative 'dedupe_glossary_and_links'
 
-ROOT = File.expand_path('../..', __dir__)
+ROOT = File.expand_path('../..', __dir__) unless defined?(ROOT)
 
 # Fracción máxima de enfermedades que puede tocar un término sin considerarse
 # demasiado genérico (p. ej. "Síntomas" o "Tratamiento" aparecen en todas).
@@ -28,11 +29,7 @@ MAX_EXAMPLES_PER_TERM = 10
 MAX_TERMS_PER_DISEASE = 12
 
 def normalize(text)
-  String(text).to_s
-    .unicode_normalize(:nfd)
-    .gsub(/\p{Mn}/, '')
-    .downcase
-    .strip
+  GlossaryDedupe.normalize(text)
 end
 
 def disease_text(disease)
@@ -136,9 +133,15 @@ terms.each do |term_key, term_info|
   end
 end
 
-# Recorta y ordena los términos por enfermedad para una vista limpia.
+# Recorta, deduplica aliases de enfermedad y ordena términos por enfermedad.
+por_termino.each_value do |info|
+  ejemplos, = GlossaryDedupe.dedupe_ejemplos!(info['ejemplos'])
+  info['ejemplos'] = ejemplos.first(MAX_EXAMPLES_PER_TERM)
+end
+
 por_enfermedad.each_value do |entry|
-  entry['terminos'] = entry['terminos']
+  terminos, = GlossaryDedupe.dedupe_terminos_enlace!(entry['terminos'])
+  entry['terminos'] = terminos
     .sort_by { |t| t['termino'].downcase }
     .first(MAX_TERMS_PER_DISEASE)
 end
@@ -153,9 +156,13 @@ output = {
   'por_enfermedad' => por_enfermedad
 }
 
+# Pase final de higiene (huérfanos / pares redundantes).
+link_stats = GlossaryDedupe.dedupe_links!(output, dict)
+
 out_path = File.join(ROOT, 'data', 'enlaces_clinicos.json')
 File.write(out_path, JSON.pretty_generate(output) + "\n")
 
 puts "enlaces_clinicos.json generado"
-puts "  términos enlazados:     #{por_termino.length} / #{terms.length}"
-puts "  enfermedades enlazadas: #{por_enfermedad.length} / #{total_diseases}"
+puts "  términos enlazados:     #{output['total_terminos_enlazados']} / #{terms.length}"
+puts "  enfermedades enlazadas: #{output['total_enfermedades_enlazadas']} / #{total_diseases}"
+puts "  dedupe enlaces: −#{link_stats[:removed_pairs]} pares redundantes"

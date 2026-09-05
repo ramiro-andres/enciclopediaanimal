@@ -5,8 +5,9 @@
 
 require 'json'
 require 'set'
+require_relative 'dedupe_glossary_and_links'
 
-ROOT = File.expand_path('../..', __dir__)
+ROOT = File.expand_path('../..', __dir__) unless defined?(ROOT)
 LINKS_PATH = File.join(ROOT, 'data', 'enlaces_clinicos.json')
 SUGGESTIONS_PATH = File.join(ROOT, 'data', 'sugerencias_enlaces.json')
 ENC_PATH = File.join(ROOT, 'data', 'enciclopedia.json')
@@ -24,11 +25,7 @@ GENERIC_TERMS = %w[
 ].freeze
 
 def normalize(text)
-  String(text).to_s
-    .unicode_normalize(:nfd)
-    .gsub(/\p{Mn}/, '')
-    .downcase
-    .strip
+  GlossaryDedupe.normalize(text)
 end
 
 def disease_text(disease)
@@ -159,7 +156,8 @@ candidates.each do |sug|
   entry = por_termino[term_key]
   from_complement = sug['motivo'] == 'texto_clinico_complementario'
   if entry
-    existing_names = (entry['ejemplos'] || []).map { |e| normalize(e['nombre']) }
+    existing_names = (entry['ejemplos'] || []).map { |e| GlossaryDedupe.disease_alias_key(e['nombre']) }
+    next if existing_names.include?(GlossaryDedupe.disease_alias_key(disease['nombre']))
     next if existing_names.include?(dis_key)
     next if from_complement && sprint13_per_term[term_key] >= MAX_SPRINT13_PER_TERM
   end
@@ -193,12 +191,13 @@ candidates.each do |sug|
     'breedId' => disease['breedId'],
     'terminos' => []
   }
-  unless dis_entry['terminos'].any? { |t| normalize(t['termino']) == term_key }
+  unless dis_entry['terminos'].any? { |t| GlossaryDedupe.soft_term_key(t['termino']) == GlossaryDedupe.soft_term_key(term_info['termino']) }
     dis_entry['terminos'] << {
       'termino' => term_info['termino'],
       'categoriaId' => term_info['categoriaId']
     }
-    dis_entry['terminos'] = dis_entry['terminos']
+    terminos, = GlossaryDedupe.dedupe_terminos_enlace!(dis_entry['terminos'])
+    dis_entry['terminos'] = terminos
       .sort_by { |t| t['termino'].downcase }
       .first(MAX_TERMS_PER_DISEASE)
   end
@@ -208,7 +207,8 @@ candidates.each do |sug|
 end
 
 por_enfermedad.each_value do |entry|
-  entry['terminos'] = entry['terminos']
+  terminos, = GlossaryDedupe.dedupe_terminos_enlace!(entry['terminos'])
+  entry['terminos'] = terminos
     .sort_by { |t| t['termino'].downcase }
     .first(MAX_TERMS_PER_DISEASE)
 end
@@ -222,8 +222,10 @@ output = links.merge(
   'por_enfermedad' => por_enfermedad
 )
 
+GlossaryDedupe.dedupe_links!(output, JSON.parse(File.read(DICT_PATH)))
+
 File.write(LINKS_PATH, JSON.pretty_generate(output) + "\n")
 puts "integrate_suggested_links_sprint13: #{integrated} enlaces nuevos integrados"
-puts "  términos enlazados:     #{por_termino.length}"
-puts "  enfermedades enlazadas: #{por_enfermedad.length}"
+puts "  términos enlazados:     #{output['total_terminos_enlazados']}"
+puts "  enfermedades enlazadas: #{output['total_enfermedades_enlazadas']}"
 abort "Se requieren al menos #{MIN_INTEGRATE} enlaces integrados" if integrated < MIN_INTEGRATE
