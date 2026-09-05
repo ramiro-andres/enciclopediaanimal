@@ -157,7 +157,7 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#evaluacionAvailableCount')).toBeVisible();
     await page.locator('#evaluacionCategorySelect').selectOption({ index: 0 });
     await page.locator('#evaluacionTypeSelect').selectOption('all');
-    await page.locator('#evaluacionSizeSelect').selectOption('5');
+    await page.locator('#evaluacionSizeSelect').selectOption('10');
     await page.locator('#evaluacionStartBtn').click();
     await expect(page.locator('.evaluacion-question')).toBeVisible();
     await expect(page.locator('.evaluacion-progress')).toContainText(/1/);
