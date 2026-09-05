@@ -194,18 +194,11 @@
               <p data-i18n="predis.card_desc">Mapa cruzado de condiciones hereditarias por raza: filtra por especie o enfermedad y accede a cada ficha.</p>
             </div>
           </article>
-          <article class="feature-card feature-card--flashcards" id="openFlashcardsCard" role="button" tabindex="0" data-i18n-aria="welcome.feature7_aria" aria-label="Abrir modo estudio con flashcards del glosario">
+          <article class="feature-card feature-card--estudio" id="openEstudioCard" role="button" tabindex="0" data-i18n-aria="welcome.feature7_aria" aria-label="Abrir hub de modo estudio: flashcards y evaluación">
             <span class="feature-number">07</span>
             <div>
               <h3 data-i18n="welcome.feature7_title">Modo estudio</h3>
-              <p data-i18n="welcome.feature7_body">Repasa el glosario con flashcards: revela definiciones y marca tu progreso en este dispositivo.</p>
-            </div>
-          </article>
-          <article class="feature-card feature-card--evaluacion" id="openEvaluacionCard" role="button" tabindex="0" data-i18n-aria="welcome.feature8_aria" aria-label="Abrir simulación de evaluación del glosario">
-            <span class="feature-number">08</span>
-            <div>
-              <h3 data-i18n="welcome.feature8_title">Simulación de evaluación</h3>
-              <p data-i18n="welcome.feature8_body">Autoevalúate con opción múltiple y respuestas escritas. Aprobado desde 80%. No es certificación real.</p>
+              <p data-i18n="welcome.feature7_body">Flashcards del glosario y simulación de evaluación (MCQ + escritas, aprobado desde 80%).</p>
             </div>
           </article>
         </div>
@@ -425,12 +418,24 @@
         </div>
       </section>
 
+      <section id="estudioView" class="view">
+        <button id="backEstudioBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="estudio-page">
+          <div class="estudio-hero">
+            <span class="eyebrow" data-i18n="estudio.eyebrow">ESTUDIO</span>
+            <h2 data-i18n="estudio.title">Modo estudio</h2>
+            <p data-i18n="estudio.intro">Elige cómo practicar el glosario: repaso con flashcards o simulación de evaluación con umbral de aprobado.</p>
+          </div>
+          <div id="estudioHub" class="estudio-hub"></div>
+        </div>
+      </section>
+
       <section id="flashcardsView" class="view">
-        <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <button id="backFlashcardsBtn" class="back-btn" data-i18n="back.estudio">Volver a modo estudio</button>
         <div class="flashcards-page">
           <div class="flashcards-hero">
-            <span class="eyebrow" data-i18n="flash.eyebrow">ESTUDIO</span>
-            <h2 data-i18n="flash.title">Modo estudio — flashcards del glosario</h2>
+            <span class="eyebrow" data-i18n="flash.eyebrow">REPASO</span>
+            <h2 data-i18n="flash.title">Flashcards del glosario</h2>
             <p data-i18n="flash.intro">Repasa términos médicos: muestra el término, revela la definición y marca tu progreso. El avance se guarda en este dispositivo.</p>
           </div>
           <div id="flashcardsContent" class="flashcards-content"></div>
@@ -438,7 +443,7 @@
       </section>
 
       <section id="evaluacionView" class="view">
-        <button id="backEvaluacionBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <button id="backEvaluacionBtn" class="back-btn" data-i18n="back.estudio">Volver a modo estudio</button>
         <div class="evaluacion-page">
           <div class="evaluacion-hero">
             <span class="eyebrow" data-i18n="eval.eyebrow">EVALUACIÓN</span>
@@ -549,6 +554,10 @@
     <button type="button" class="mobile-tab" data-tab="glossary">
       <span class="mobile-tab-icon" aria-hidden="true">📖</span>
       <span class="mobile-tab-label" data-i18n="tab.glossary">Glosario</span>
+    </button>
+    <button type="button" class="mobile-tab" data-tab="estudio">
+      <span class="mobile-tab-icon" aria-hidden="true">🎓</span>
+      <span class="mobile-tab-label" data-i18n="tab.estudio">Estudio</span>
     </button>
     <button type="button" class="mobile-tab" data-tab="urgency">
       <span class="mobile-tab-icon" aria-hidden="true">🚨</span>

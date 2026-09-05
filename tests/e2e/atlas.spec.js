@@ -134,22 +134,35 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
 
     await page.locator('#goHomeBtn').click();
     await expect(page.locator('#welcomeView')).toHaveClass(/active/);
-    await page.locator('#openFlashcardsCard').click();
+    await page.locator('#openEstudioCard').click();
+    await expect(page.locator('#estudioView')).toHaveClass(/active/);
+    await page.locator('.estudio-hub-card').filter({ hasText: /flashcard|repaso|review/i }).click();
     await expect(page.locator('#flashcardsView')).toHaveClass(/active/);
     await expect(page.locator('.flashcard-term')).toBeVisible();
   });
 
-  test('Simulación de evaluación desde welcome', async ({ page }) => {
+  test('Hub estudio: evaluación desde welcome y tab bar', async ({ page }) => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);
 
-    await page.locator('#openEvaluacionCard').click();
+    await page.locator('#openEstudioCard').click();
+    await expect(page.locator('#estudioView')).toHaveClass(/active/);
+    await expect(page.locator('.estudio-hub-card')).toHaveCount(2);
+
+    await page.locator('.estudio-hub-card').filter({ hasText: /evaluaci|evaluation|simulaci/i }).click();
     await expect(page.locator('#evaluacionView')).toHaveClass(/active/);
     await expect(page.locator('.evaluacion-disclaimer')).toBeVisible();
     await page.locator('#evaluacionSizeSelect').selectOption('5');
     await page.locator('#evaluacionStartBtn').click();
     await expect(page.locator('.evaluacion-question')).toBeVisible();
     await expect(page.locator('.evaluacion-progress')).toContainText(/1/);
+
+    await page.locator('#backEvaluacionBtn').click();
+    await expect(page.locator('#estudioView')).toHaveClass(/active/);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator('#mobileTabBar .mobile-tab[data-tab="estudio"]').click();
+    await expect(page.locator('#estudioView')).toHaveClass(/active/);
   });
 
   test('Sprint 10: triaje educativo, modo nocturno y resumen estudio', async ({ page }) => {
