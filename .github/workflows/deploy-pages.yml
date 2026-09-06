@@ -1,96 +1,91 @@
 name: Desplegar en GitHub Pages
 
 # US-DEV-10 — Gate de deploy: solo se despliega si CI (test + e2e) está verde.
-# En lugar de disparar el deploy directamente en cada push a main (que permitía
-# publicar con `test` rojo o la app rota, ver PR #21), el deploy se dispara al
-# COMPLETARSE los workflows de calidad y verifica que AMBOS (test y e2e) hayan
-# terminado en éxito para el mismo commit antes de publicar.
+# Se dispara en push a main (o manualmente) y espera a que test + e2e terminen
+# en éxito para el mismo commit antes de publicar. Evita workflow_run para no
+# introducir superficies de inyección / checkout de forks (Sonar S7630/S7631).
 on:
-  workflow_run:
-    workflows: ["test", "e2e"]
-    types: [completed]
+  push:
     branches: [main]
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  actions: read
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  # Puerta de calidad: confirma que test y e2e están verdes para el commit.
   gate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     outputs:
       should_deploy: ${{ steps.check.outputs.should_deploy }}
-      sha: ${{ steps.check.outputs.sha }}
     steps:
-      - name: Verificar CI verde (test + e2e) para este commit
+      - name: Esperar CI verde (test + e2e) para este commit
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
 
-          # Despliegue manual (workflow_dispatch): se permite siempre desde main.
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             echo "Despliegue manual solicitado."
             echo "should_deploy=true" >> "$GITHUB_OUTPUT"
-            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Si el workflow que disparó este evento falló, no seguimos.
-          TRIGGER_NAME="${{ github.event.workflow_run.name }}"
-          TRIGGER_CONCL="${{ github.event.workflow_run.conclusion }}"
-          SHA="${{ github.event.workflow_run.head_sha }}"
-          echo "Disparado por '$TRIGGER_NAME' (conclusión: $TRIGGER_CONCL) para $SHA"
-          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Esperando test + e2e verdes para $SHA"
 
-          if [ "$TRIGGER_CONCL" != "success" ]; then
-            echo "El workflow '$TRIGGER_NAME' no fue exitoso; no se despliega."
-            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Conclusión del último run COMPLETADO de un workflow para este SHA.
           conclusion_for() {
             local name="$1"
             gh api --paginate \
               "repos/$REPO/actions/runs?head_sha=$SHA&branch=main&status=completed" \
-              --jq "[.workflow_runs[] | select(.name==\"$name\")] | sort_by(.run_started_at) | last | .conclusion // \"pending\""
+              --jq "[.workflow_runs[] | select(.name==\"$name\")] | sort_by(.run_started_at) | last | .conclusion // \"\""
           }
 
-          TEST_CONCL="$(conclusion_for "test")"
-          E2E_CONCL="$(conclusion_for "e2e")"
-          echo "test=$TEST_CONCL · e2e=$E2E_CONCL"
+          # Hasta ~15 min (90 × 10s): da tiempo a que terminen test y e2e.
+          for i in $(seq 1 90); do
+            TEST_CONCL="$(conclusion_for "test")"
+            E2E_CONCL="$(conclusion_for "e2e")"
+            echo "[$i] test=${TEST_CONCL:-pending} · e2e=${E2E_CONCL:-pending}"
 
-          if [ "$TEST_CONCL" = "success" ] && [ "$E2E_CONCL" = "success" ]; then
-            echo "Ambos workflows de calidad están verdes: se procede al despliegue."
-            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "Aún no están verdes ambos workflows (test=$TEST_CONCL, e2e=$E2E_CONCL)."
-            echo "Se desplegará cuando el otro workflow termine en éxito para este commit."
-            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
-          fi
+            if [[ "$TEST_CONCL" == "success" && "$E2E_CONCL" == "success" ]]; then
+              echo "Ambos workflows de calidad están verdes: se procede al despliegue."
+              echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            if [[ "$TEST_CONCL" == "failure" || "$TEST_CONCL" == "cancelled" || \
+                  "$E2E_CONCL" == "failure" || "$E2E_CONCL" == "cancelled" ]]; then
+              echo "CI no exitoso (test=$TEST_CONCL, e2e=$E2E_CONCL); no se despliega."
+              echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            sleep 10
+          done
+
+          echo "Timeout esperando CI; no se despliega."
+          echo "should_deploy=false" >> "$GITHUB_OUTPUT"
 
   build:
     needs: gate
     if: ${{ needs.gate.outputs.should_deploy == 'true' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: ${{ needs.gate.outputs.sha }}
+          persist-credentials: false
 
       - name: Configurar Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
 
       - name: Preparar sitio estático
         run: |
@@ -102,28 +97,32 @@ jobs:
           find _site -type f | wc -l
 
       - name: Subir artefacto
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: _site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Desplegar
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
 
       - name: Verificar sitio publicado (F4-06)
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          URL="${{ steps.deployment.outputs.page_url }}"
-          echo "Comprobando $URL"
+          echo "Comprobando $PAGE_URL"
           for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-            if [ "$STATUS" = "200" ]; then
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$PAGE_URL")
+            if [[ "$STATUS" == "200" ]]; then
               echo "Sitio responde HTTP 200"
               exit 0
             fi

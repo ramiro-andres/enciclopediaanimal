@@ -15,10 +15,12 @@ fi
 echo "🎭 Pruebas E2E — Enciclopedia Animal (Playwright, file://)"
 echo "=========================================================="
 
-if [ ! -d node_modules/@playwright ]; then
-  echo "📦 Instalando dependencias de Playwright..."
-  npm install
-  npx playwright install --with-deps chromium
+PLAYWRIGHT_BIN="./node_modules/.bin/playwright"
+
+if [[ ! -x "$PLAYWRIGHT_BIN" ]]; then
+  echo "📦 Instalando dependencias de Playwright (lockfile, sin lifecycle scripts)..."
+  npm ci --ignore-scripts
+  "$PLAYWRIGHT_BIN" install --with-deps chromium
 fi
 
-npx playwright test "$@"
+"$PLAYWRIGHT_BIN" test "$@"

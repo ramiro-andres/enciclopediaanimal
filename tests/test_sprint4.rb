@@ -69,15 +69,15 @@ class DeployGateTest < Minitest::Test
     @wf = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
   end
 
-  def test_no_dispara_directo_en_push
-    refute_match(/^on:\s*\n\s*push:/m, @wf,
-                 'El deploy no debe dispararse directamente en push a main')
+  def test_dispara_en_push_y_espera_ci
+    assert_match(/on:\s*\n\s*push:/m, @wf, 'El deploy debe dispararse en push a main')
+    refute_includes @wf, 'workflow_run:', 'Sin workflow_run (Sonar S7630/S7631)'
   end
 
-  def test_usa_workflow_run_sobre_test_y_e2e
-    assert_includes @wf, 'workflow_run:', 'Debe usar el trigger workflow_run'
-    assert_match(/workflows:\s*\[\s*"test"\s*,\s*"e2e"\s*\]/, @wf,
-                 'workflow_run debe depender de "test" y "e2e"')
+  def test_espera_test_y_e2e_antes_de_publicar
+    assert_includes @wf, 'conclusion_for', 'Debe consultar conclusiones de workflows'
+    assert_includes @wf, '"test"'
+    assert_includes @wf, '"e2e"'
   end
 
   def test_tiene_puerta_de_calidad

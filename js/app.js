@@ -2876,8 +2876,13 @@ const App = {
 
   shuffleArray(arr) {
     const a = [...arr];
+    const randomIndex = (maxExclusive) => {
+      const buf = new Uint32Array(1);
+      crypto.getRandomValues(buf);
+      return buf[0] % maxExclusive;
+    };
     for (let i = a.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = randomIndex(i + 1);
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
