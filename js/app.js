@@ -2022,7 +2022,6 @@ const App = {
   renderLaboratorio() {
     const container = document.getElementById('laboratorioContent');
     if (!container || !this.labReferenceData?.especies?.length) return;
-    const lang = I18n?.lang === 'en' ? 'en' : 'es';
     const species = this.labReferenceData.especies;
     const current = species.find(s => s.id === this.labSpecies) || species[0];
     this.labSpecies = current.id;
@@ -2030,14 +2029,14 @@ const App = {
     const speciesTabs = species.map(s => `
       <button type="button" class="lab-species-btn ${s.id === current.id ? 'active' : ''}"
         data-lab-species="${this.esc(s.id)}" aria-pressed="${s.id === current.id}">
-        <span aria-hidden="true">${s.icono}</span> ${this.esc(lang === 'en' ? s.nombre_en : s.nombre_es)}
+        <span aria-hidden="true">${s.icono}</span> ${this.esc(s.nombre_es)}
       </button>
     `).join('');
 
     const renderTable = (titleKey, rows, type) => {
       if (!rows?.length) return '';
-      const nameKey = lang === 'en' ? 'parametro_en' : 'parametro_es';
-      const notesKey = lang === 'en' ? 'notas_en' : 'notas_es';
+      const nameKey = 'parametro_es';
+      const notesKey = 'notas_es';
       return `
         <section class="lab-table-section" aria-labelledby="lab-${type}-title">
           <h3 id="lab-${type}-title">${this.esc(this.t(titleKey))}</h3>
@@ -2074,10 +2073,10 @@ const App = {
         </div>
         <button type="button" id="labPrintBtn" class="btn-text-link lab-print-btn" data-i18n="lab.print">${this.esc(this.t('lab.print'))}</button>
       </div>
-      <p class="lab-species-notes">${this.esc(lang === 'en' ? current.notas_en : current.notas_es)}</p>
+      <p class="lab-species-notes">${this.esc(current.notas_es)}</p>
       ${renderTable('lab.hemogram', current.hemograma, 'hemogram')}
       ${renderTable('lab.biochemistry', current.bioquimica, 'biochem')}
-      <p class="lab-disclaimer" role="note">⚕️ ${this.esc(lang === 'en' ? this.labReferenceData.disclaimer_en : this.labReferenceData.disclaimer_es)}</p>
+      <p class="lab-disclaimer" role="note">⚕️ ${this.esc(this.labReferenceData.disclaimer_es)}</p>
     `;
 
     container.querySelectorAll('[data-lab-species]').forEach(btn => {
@@ -3289,9 +3288,7 @@ const App = {
     const container = document.getElementById('evaluacionContent');
     if (!container) return;
     const bank = this.evaluacionData?.preguntas || [];
-    const disclaimer = (window.I18n?.lang === 'en'
-      ? this.evaluacionData?.disclaimer_en
-      : this.evaluacionData?.disclaimer_es) || this.t('eval.disclaimer');
+    const disclaimer = this.evaluacionData?.disclaimer_es || this.t('eval.disclaimer');
 
     if (!bank.length) {
       container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('eval.empty'))}</p></div>`;
@@ -3461,7 +3458,7 @@ const App = {
     const progress = this.t('eval.progress')
       .replace('{current}', String(session.index + 1))
       .replace('{total}', String(session.questions.length));
-    const prompt = window.I18n?.lang === 'en' && q.prompt_en ? q.prompt_en : q.prompt;
+    const prompt = q.prompt;
     const pctBar = Math.round((session.index / session.questions.length) * 100);
 
     let body = '';
@@ -3565,9 +3562,7 @@ const App = {
 
   triajeLabel(item, field) {
     if (!item) return '';
-    const lang = window.I18n?.lang || 'es';
-    const key = lang === 'en' ? `${field}_en` : `${field}_es`;
-    return item[key] || item[`${field}_es`] || item.nombre || '';
+    return item[`${field}_es`] || item.nombre || '';
   },
 
   resetTriajeFlow() {
@@ -3580,9 +3575,7 @@ const App = {
     const container = document.getElementById('triajeContent');
     if (!container) return;
     const data = this.triajeData;
-    const disclaimer = data
-      ? (window.I18n?.lang === 'en' ? data.disclaimer_en : data.disclaimer_es)
-      : this.t('triaje.disclaimer');
+    const disclaimer = data?.disclaimer_es || this.t('triaje.disclaimer');
 
     if (!data?.categorias?.length) {
       container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>${this.esc(this.t('triaje.empty'))}</p></div>`;
@@ -3781,17 +3774,7 @@ const App = {
   },
 
   bindLangSwitcher() {
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        I18n.setLang(btn.dataset.lang);
-        document.querySelectorAll('.lang-btn').forEach(b => {
-          b.classList.toggle('active', b.dataset.lang === I18n.lang);
-          b.setAttribute('aria-pressed', b.dataset.lang === I18n.lang ? 'true' : 'false');
-        });
-      });
-      btn.classList.toggle('active', btn.dataset.lang === I18n.lang);
-      btn.setAttribute('aria-pressed', btn.dataset.lang === I18n.lang ? 'true' : 'false');
-    });
+    // UI solo en español: sin conmutador de idioma.
   },
 
   loadCompareList() {

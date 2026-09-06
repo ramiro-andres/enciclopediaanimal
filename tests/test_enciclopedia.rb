@@ -553,22 +553,22 @@ class Sprint3BacklogTest < Minitest::Test
     assert File.exist?(File.join(ROOT, 'docs', 'PWA.md'))
   end
 
-  def test_i18n_es_en
+  def test_i18n_es
     assert File.exist?(File.join(ROOT, 'js', 'i18n.js'))
     assert_match(/src="js\/i18n\.js"/, @html)
     i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
-    assert_includes i18n, "'es'"
-    assert_includes i18n, "'en'"
-    assert_includes i18n, 'localStorage'
+    assert_includes i18n, "lang: 'es'"
+    refute_match(/^\s*en:\s*\{/m, i18n)
+    refute_match(/data-lang="en"/, @html)
+    refute_includes @html, 'lang-switcher'
     assert_includes @js, 'I18n'
-    assert_match(/data-lang="es"/, @html)
     assert File.exist?(File.join(ROOT, 'docs', 'I18N.md'))
     assert_includes File.read(File.join(ROOT, 'docs', 'I18N.md')), 'contenido clínico'
   end
 
-  def extract_i18n_keys(i18n_src, lang)
-    m = i18n_src.match(/\b#{lang}\s*:\s*\{/)
-    assert m, "No se encontró bloque #{lang} en i18n.js"
+  def extract_i18n_keys(i18n_src)
+    m = i18n_src.match(/\bstrings\s*:\s*\{/)
+    assert m, 'No se encontró bloque strings en i18n.js'
     start = m.end(0) - 1
     depth = 0
     i = start
@@ -602,26 +602,19 @@ class Sprint3BacklogTest < Minitest::Test
     obj.scan(/['"]([a-zA-Z0-9_.]+)['"]\s*:/).flatten.uniq
   end
 
-  def test_i18n_parity_es_en
+  def test_i18n_claves_ui
     i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
-    es = extract_i18n_keys(i18n, 'es')
-    en = extract_i18n_keys(i18n, 'en')
-    miss_en = es - en
-    miss_es = en - es
-    assert_empty miss_en, "Claves en ES sin par EN: #{miss_en.take(20).join(', ')}"
-    assert_empty miss_es, "Claves en EN sin par ES: #{miss_es.take(20).join(', ')}"
-    assert es.length > 300, "Se esperaban muchas claves UI, hay #{es.length}"
+    keys = extract_i18n_keys(i18n)
+    assert keys.length > 300, "Se esperaban muchas claves UI, hay #{keys.length}"
   end
 
   def test_i18n_html_data_keys_existen
     i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
-    es = extract_i18n_keys(i18n, 'es')
-    en = extract_i18n_keys(i18n, 'en')
+    keys_i18n = extract_i18n_keys(i18n)
     keys = @html.scan(/data-i18n(?:-placeholder|-aria|-html|-title)?="([^"]+)"/).flatten.uniq
     assert keys.length > 40, "Pocos data-i18n en HTML: #{keys.length}"
     keys.each do |key|
-      assert_includes es, key, "Falta clave HTML #{key} en ES"
-      assert_includes en, key, "Falta clave HTML #{key} en EN"
+      assert_includes keys_i18n, key, "Falta clave HTML #{key} en i18n.js"
     end
   end
 
