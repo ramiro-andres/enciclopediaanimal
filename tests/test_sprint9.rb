@@ -37,16 +37,21 @@ class BcsGuideTest < Minitest::Test
   end
 
   def test_svg_y_descripciones_i18n
-    assert_includes @app, 'bcs-silhouette-svg'
-    assert_includes @app, 'renderBcsCompanionSvg'
-    assert_includes @app, 'renderBcsEquineSvg'
-    assert_includes @app, 'getBcsVisualParams'
+    assert_includes @app, 'bcs-photo'
+    assert_includes @app, 'getBcsImageSrc'
+    assert_includes @app, 'renderBcsVisual'
+    assert_includes @app, 'images/bcs/'
     assert_includes @i18n, "'bcs.dog_cat.1'"
     assert_includes @i18n, "'bcs.dog_cat.9'"
     assert_includes @i18n, "'bcs.equine.5'"
     assert_includes @i18n, "'bcs.disclaimer'"
-    assert_includes @i18n, "'bcs.view_dorsal'"
-    assert_includes @i18n, "'bcs.view_lateral'"
+    assert_includes @i18n, "'bcs.image_alt'"
+    root = ROOT
+    %w[dog-1.jpg dog-5.jpg dog-9.jpg cat-5.jpg horse-3.jpg].each do |name|
+      path = File.join(root, 'images', 'bcs', name)
+      assert File.file?(path), "falta #{name}"
+      assert_operator File.size(path), :>, 8_000
+    end
   end
 
   def test_enlace_desde_herramientas
@@ -56,7 +61,7 @@ class BcsGuideTest < Minitest::Test
 
   def test_estilos_bcs
     assert_includes @css, '.bcs-page'
-    assert_includes @css, '.bcs-silhouette-svg'
+    assert_includes @css, '.bcs-photo'
   end
 end
 
