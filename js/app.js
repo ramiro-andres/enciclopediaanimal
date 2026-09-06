@@ -796,38 +796,29 @@ const App = {
       searchInputWelcome?.focus();
     });
 
-    const openDictionary = () => this.showDictionary();
-    document.getElementById('openDictionaryCard')?.addEventListener('click', openDictionary);
-    document.getElementById('openDictionaryCard')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openDictionary();
-      }
+    const bindFeatureCard = (id, action) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('click', action);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          action();
+        }
+      });
+    };
+
+    bindFeatureCard('openEspeciesCard', () => {
+      const picker = document.querySelector('.welcome-picker') || document.getElementById('welcomeCategoryCards');
+      picker?.scrollIntoView({ behavior: scrollBehaviorPref(), block: 'start' });
+      document.querySelector('#welcomeCategoryCards .category-card')?.focus?.();
     });
-    const openTools = () => this.showTools();
-    document.getElementById('openToolsCard')?.addEventListener('click', openTools);
-    document.getElementById('openToolsCard')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openTools();
-      }
-    });
-    const openPredisposiciones = () => this.showPredisposiciones();
-    document.getElementById('openPredisposicionesCard')?.addEventListener('click', openPredisposiciones);
-    document.getElementById('openPredisposicionesCard')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openPredisposiciones();
-      }
-    });
-    const openEstudio = () => this.showEstudio();
-    document.getElementById('openEstudioCard')?.addEventListener('click', openEstudio);
-    document.getElementById('openEstudioCard')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openEstudio();
-      }
-    });
+    bindFeatureCard('openRazasCard', () => this.enterBrowse('todos'));
+    bindFeatureCard('openSaludCard', () => this.showUrgency());
+    bindFeatureCard('openDictionaryCard', () => this.showDictionary());
+    bindFeatureCard('openToolsCard', () => this.showTools());
+    bindFeatureCard('openPredisposicionesCard', () => this.showPredisposiciones());
+    bindFeatureCard('openEstudioCard', () => this.showEstudio());
     document.getElementById('predisSearchInput')?.addEventListener('input', (e) => {
       this.predisposicionesQuery = e.target.value.toLowerCase().trim();
       this.renderPredisposiciones();
