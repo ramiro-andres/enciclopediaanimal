@@ -188,6 +188,7 @@ class FlashcardsStudyTest < Minitest::Test
     assert_includes @app, 'estudio.eval_title'
     assert_includes @i18n, "'estudio.title'"
     assert_includes @i18n, "'tab.estudio'"
+    assert_includes @i18n, "'nav.estudio'"
     assert_includes @html, 'data-tab="estudio"'
   end
 

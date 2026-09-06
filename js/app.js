@@ -758,6 +758,7 @@ const App = {
 
     document.getElementById('goHomeBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('goDictionaryBtn')?.addEventListener('click', () => this.showDictionary());
+    document.getElementById('goEstudioBtn')?.addEventListener('click', () => this.showEstudio());
     document.getElementById('goToolsBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('goUrgencyBtn')?.addEventListener('click', () => this.showUrgency());
     document.getElementById('goCompareBtn')?.addEventListener('click', () => this.showCompare());

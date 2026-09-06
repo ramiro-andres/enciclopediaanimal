@@ -260,7 +260,7 @@ class HtmlStructureTest < Minitest::Test
   def test_elementos_dom_requeridos
     %w[
       welcomeView welcomeCategoryCards welcomeIntro welcomeStats searchInputWelcome
-      goHomeBtn goDictionaryBtn changeCategoryBtn btnExploreAll browseContext sizeFiltersSection
+      goHomeBtn goDictionaryBtn goEstudioBtn changeCategoryBtn btnExploreAll browseContext sizeFiltersSection
       dictionaryView dictionarySearchInput dictionaryList openDictionaryCard backDictionaryBtn
       searchInput animalNav breedGrid statsContent
       searchClearBtn searchResults browseSection focusSearchBtn

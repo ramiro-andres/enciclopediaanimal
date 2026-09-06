@@ -10,6 +10,7 @@ const I18n = {
     es: {
       'nav.home': 'Inicio',
       'nav.glossary': 'Glosario',
+      'nav.estudio': 'Estudio',
       'nav.tools': 'Herramientas',
       'nav.urgency': 'Urgencias',
       'nav.compare': 'Comparar',
@@ -568,6 +569,7 @@ const I18n = {
     en: {
       'nav.home': 'Home',
       'nav.glossary': 'Glossary',
+      'nav.estudio': 'Study',
       'nav.tools': 'Tools',
       'nav.urgency': 'Emergencies',
       'nav.compare': 'Compare',
