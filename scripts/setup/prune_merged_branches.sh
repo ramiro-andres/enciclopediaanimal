@@ -47,6 +47,14 @@ done < <("$GH" api "repos/$REPO/branches" --paginate -q '.[] | select(.name != "
 deleted=0
 skipped=0
 
+if [[ ${#MERGED[@]} -eq 0 ]]; then
+  echo "No hay ramas remotas candidatas (además de main)."
+  echo ""
+  echo "Ramas mergeadas procesadas: 0"
+  echo "Ramas conservadas/omitidas: 0"
+  exit 0
+fi
+
 for branch in "${MERGED[@]}"; do
   [[ -z "$branch" ]] && continue
   for p in $PROTECTED; do
