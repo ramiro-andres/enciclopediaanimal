@@ -18,7 +18,15 @@ concurrency:
 
 jobs:
   # Puerta de calidad: confirma que test y e2e estén verdes para el commit.
+  # Condiciones de origen (rama/repo/fork) van en `if:` — no en el shell (S7630).
   gate:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      )
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,16 +42,11 @@ jobs:
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
           GITHUB_SHA_FALLBACK: ${{ github.sha }}
-          # Valores de workflow_run vía env (no interpolar en el script: S7630).
           TRIGGER_NAME: ${{ github.event.workflow_run.name }}
-          TRIGGER_CONCL: ${{ github.event.workflow_run.conclusion }}
           RUN_SHA: ${{ github.event.workflow_run.head_sha }}
-          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
-          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
         run: |
           set -euo pipefail
 
-          # Despliegue manual (workflow_dispatch): se permite siempre desde main.
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             echo "Despliegue manual solicitado."
             echo "should_deploy=true" >> "$GITHUB_OUTPUT"
@@ -51,15 +54,8 @@ jobs:
             exit 0
           fi
 
-          echo "Disparado por '$TRIGGER_NAME' (conclusión: $TRIGGER_CONCL) para $RUN_SHA"
+          echo "Disparado por '$TRIGGER_NAME' para $RUN_SHA"
           echo "sha=$RUN_SHA" >> "$GITHUB_OUTPUT"
-
-          # Solo desplegar commits del propio repo en main (nunca forks).
-          if [[ "$HEAD_REPO" != "$REPO" || "$HEAD_BRANCH" != "main" ]]; then
-            echo "Origen no confiable (repo=$HEAD_REPO branch=$HEAD_BRANCH); no se despliega."
-            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
 
           if [[ ! "$RUN_SHA" =~ ^[0-9a-f]{40}$ ]]; then
             echo "SHA inválido: $RUN_SHA"
@@ -67,13 +63,6 @@ jobs:
             exit 0
           fi
 
-          if [[ "$TRIGGER_CONCL" != "success" ]]; then
-            echo "El workflow '$TRIGGER_NAME' no fue exitoso; no se despliega."
-            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          # Conclusión del último run COMPLETADO de un workflow para este SHA.
           conclusion_for() {
             local name="$1"
             gh api --paginate \
@@ -102,26 +91,28 @@ jobs:
       contents: read
       pages: write
     steps:
-      # Checkout de main (rama confiable). El SHA de deploy se fija después
-      # de validar que es ancestro de origin/main (mitiga S7631 / forks).
+      # Solo main (rama confiable). No se hace checkout de un SHA externo (S7631).
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
-          fetch-depth: 0
           persist-credentials: false
 
-      - name: Fijar commit de despliegue verificado
+      - name: Confirmar que main apunta al SHA validado por el gate
         env:
           DEPLOY_SHA: ${{ needs.gate.outputs.sha }}
         run: |
           set -euo pipefail
+          TIP="$(git rev-parse HEAD)"
           if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
             echo "SHA inválido: $DEPLOY_SHA"
             exit 1
           fi
-          git merge-base --is-ancestor "$DEPLOY_SHA" origin/main
-          git checkout --detach "$DEPLOY_SHA"
-          echo "Desplegando $(git rev-parse HEAD)"
+          if [[ "$TIP" != "$DEPLOY_SHA" ]]; then
+            echo "main tip ($TIP) != SHA del gate ($DEPLOY_SHA)."
+            echo "Otro commit llegó a main; este deploy se omite (correrá el del tip)."
+            exit 1
+          fi
+          echo "Desplegando $TIP"
 
       - name: Configurar Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
