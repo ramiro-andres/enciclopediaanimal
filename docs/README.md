@@ -4,8 +4,11 @@
 |-----------|-------------|
 | [ARQUITECTURA.md](ARQUITECTURA.md) | Flujo de datos, frontend y pipeline |
 | [ESTRUCTURA.md](ESTRUCTURA.md) | Layout de carpetas del repositorio |
-| [DESARROLLO.md](DESARROLLO.md) | Entorno local, datos, imágenes y pruebas |
+| [DESARROLLO.md](DESARROLLO.md) | Entorno local, datos, imágenes, pruebas y limpieza de ramas |
 | [DESPLIEGUE.md](DESPLIEGUE.md) | GitHub Pages y CI/CD |
+| [I18N.md](I18N.md) | Cadenas de UI (español) |
+| [SONAR.md](SONAR.md) | SonarQube Cloud: scope y Automatic Analysis |
+| [PRIVACIDAD.md](PRIVACIDAD.md) | Analítica y almacenamiento local |
 | [CONTRIBUIR.md](CONTRIBUIR.md) | Guía rápida + enlace a CONTRIBUTING |
 | [TRAZADO_RUTA.md](TRAZADO_RUTA.md) | Roadmap por fases, tareas y prioridades |
 | [SCRUM.md](SCRUM.md) | Backlog ágil: épicas, historias, sprints y DoD/DoR |

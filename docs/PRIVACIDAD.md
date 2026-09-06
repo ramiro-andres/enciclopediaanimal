@@ -1,7 +1,7 @@
 # Política de privacidad y analítica
 
 **Historia:** US-DEV-06  
-**Última actualización:** 12 de julio de 2026
+**Última actualización:** 5 de septiembre de 2026
 
 ## Resumen
 
