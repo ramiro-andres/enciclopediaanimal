@@ -1104,7 +1104,8 @@ const App = {
   diseaseSlug(disease) {
     return this.normalizeSearch(disease?.nombre || '')
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
   },
 
   browseRoute() {
@@ -1487,7 +1488,7 @@ const App = {
 
     container.querySelectorAll('.search-disease-item').forEach(item => {
       item.addEventListener('click', async () => {
-        const match = diseases[parseInt(item.dataset.index, 10)];
+        const match = diseases[Number.parseInt(item.dataset.index, 10)];
         if (!match) return;
         await this.loadChunk(match.breed.animalId);
         const breed = this.findBreed(match.breed.animalId, match.breed.id) || match.breed;
@@ -1498,7 +1499,7 @@ const App = {
 
     container.querySelectorAll('.search-glossary-item').forEach(item => {
       item.addEventListener('click', () => {
-        const hit = glossary[parseInt(item.dataset.index, 10)];
+        const hit = glossary[Number.parseInt(item.dataset.index, 10)];
         if (hit) this.showDictionaryTerm(hit.term);
       });
     });
@@ -1967,7 +1968,7 @@ const App = {
       </article>
     `).join('');
     hub.querySelectorAll('.estudio-hub-card').forEach(card => {
-      const idx = parseInt(card.dataset.estudioIndex, 10);
+      const idx = Number.parseInt(card.dataset.estudioIndex, 10);
       const open = () => cards[idx]?.action();
       card.addEventListener('click', open);
       card.addEventListener('keydown', (e) => {
@@ -2226,7 +2227,7 @@ const App = {
       </article>
     `).join('');
     grid.querySelectorAll('.tools-card').forEach(card => {
-      const idx = parseInt(card.dataset.toolIndex, 10);
+      const idx = Number.parseInt(card.dataset.toolIndex, 10);
       const open = () => cards[idx]?.action();
       card.addEventListener('click', open);
       card.addEventListener('keydown', (e) => {
@@ -2309,14 +2310,14 @@ const App = {
     const update = () => {
       const unit = root.querySelector('input[name="rer_unit"]:checked')?.value || 'kg';
       this.rerMerUnit = unit;
-      let weight = parseFloat(String(weightInput.value).replace(',', '.'));
+      let weight = Number.parseFloat(String(weightInput.value).replace(',', '.'));
       if (!weight || weight <= 0) {
         resultEl.innerHTML = `<p class="rer-result-warn">${this.esc(this.t('rer.invalid_weight'))}</p>`;
         return;
       }
       const kg = unit === 'lb' ? this.lbToKg(weight) : weight;
       const rer = this.calculateRer(kg);
-      const factor = parseFloat(factorSelect.value);
+      const factor = Number.parseFloat(factorSelect.value);
       const mer = rer * factor;
       const altWeight = unit === 'kg'
         ? `${this.formatDoseNumber(this.kgToLb(kg))} lb`
@@ -2388,7 +2389,7 @@ const App = {
       const unit = root.querySelector('input[name="fluid_unit"]:checked')?.value || 'kg';
       this.fluidUnit = unit;
       this.fluidSpecies = speciesSelect.value;
-      let weight = parseFloat(String(weightInput.value).replace(',', '.'));
+      let weight = Number.parseFloat(String(weightInput.value).replace(',', '.'));
       if (!weight || weight <= 0) {
         resultEl.innerHTML = `<p class="fluid-result-warn">${this.esc(this.t('fluid.invalid_weight'))}</p>`;
         shockEl.innerHTML = '';
@@ -2513,21 +2514,21 @@ const App = {
     let syncingTemp = false;
 
     const updateMgG = () => {
-      const mg = parseFloat(String(mgInput?.value || '').replace(',', '.'));
+      const mg = Number.parseFloat(String(mgInput?.value || '').replace(',', '.'));
       if (!mgInput || !gOutput || Number.isNaN(mg)) return;
       gOutput.textContent = `${this.formatDoseNumber(mg / 1000)} g`;
     };
 
     const updateDose = () => {
-      const mgKg = parseFloat(String(doseMgKg?.value || '').replace(',', '.'));
-      const kg = parseFloat(String(doseWeight?.value || '').replace(',', '.'));
+      const mgKg = Number.parseFloat(String(doseMgKg?.value || '').replace(',', '.'));
+      const kg = Number.parseFloat(String(doseWeight?.value || '').replace(',', '.'));
       if (!doseTotal || Number.isNaN(mgKg) || !kg || kg <= 0) return;
       doseTotal.textContent = `${this.formatDoseNumber(mgKg * kg)} mg`;
     };
 
     const updateDrops = () => {
-      const ml = parseFloat(String(mlInput?.value || '').replace(',', '.'));
-      const factor = parseInt(dropsFactor?.value || '20', 10);
+      const ml = Number.parseFloat(String(mlInput?.value || '').replace(',', '.'));
+      const factor = Number.parseInt(dropsFactor?.value || '20', 10);
       this.unitsDropsFactor = factor;
       if (!dropsOutput || Number.isNaN(ml)) return;
       dropsOutput.textContent = this.formatDoseNumber(ml * factor);
@@ -2536,7 +2537,7 @@ const App = {
     celsiusInput?.addEventListener('input', () => {
       if (syncingTemp) return;
       syncingTemp = true;
-      const c = parseFloat(String(celsiusInput.value).replace(',', '.'));
+      const c = Number.parseFloat(String(celsiusInput.value).replace(',', '.'));
       if (!Number.isNaN(c) && fahrenheitInput) {
         fahrenheitInput.value = (Math.round(this.celsiusToFahrenheit(c) * 10) / 10).toString();
       }
@@ -2546,7 +2547,7 @@ const App = {
     fahrenheitInput?.addEventListener('input', () => {
       if (syncingTemp) return;
       syncingTemp = true;
-      const f = parseFloat(String(fahrenheitInput.value).replace(',', '.'));
+      const f = Number.parseFloat(String(fahrenheitInput.value).replace(',', '.'));
       if (!Number.isNaN(f) && celsiusInput) {
         celsiusInput.value = (Math.round(this.fahrenheitToCelsius(f) * 10) / 10).toString();
       }
@@ -2833,7 +2834,7 @@ const App = {
       const range = container.querySelector('#bcsScoreRange');
       if (range) range.value = String(score);
       container.querySelectorAll('.bcs-score-btn').forEach(btn => {
-        btn.classList.toggle('active', parseInt(btn.dataset.score, 10) === score);
+        btn.classList.toggle('active', Number.parseInt(btn.dataset.score, 10) === score);
       });
       const desc = container.querySelector('.bcs-description');
       if (desc) {
@@ -2852,10 +2853,10 @@ const App = {
       });
     });
     container.querySelector('#bcsScoreRange')?.addEventListener('input', (e) => {
-      updateScore(parseInt(e.target.value, 10));
+      updateScore(Number.parseInt(e.target.value, 10));
     });
     container.querySelectorAll('.bcs-score-btn').forEach(btn => {
-      btn.addEventListener('click', () => updateScore(parseInt(btn.dataset.score, 10)));
+      btn.addEventListener('click', () => updateScore(Number.parseInt(btn.dataset.score, 10)));
     });
   },
 
@@ -4514,8 +4515,8 @@ const App = {
 
     const calc = this.getDoseCalculatorData(breed);
     const update = () => {
-      const weight = parseFloat(String(weightInput.value).replace(',', '.'));
-      const drug = calc.farmacos[parseInt(drugSelect.value, 10)];
+      const weight = Number.parseFloat(String(weightInput.value).replace(',', '.'));
+      const drug = calc.farmacos[Number.parseInt(drugSelect.value, 10)];
       if (!drug) {
         resultEl.innerHTML = `<p class="dose-result-empty">${this.esc(this.t('dose.select_drug'))}</p>`;
         return;
@@ -4685,7 +4686,7 @@ const App = {
 
     el.querySelectorAll('.disease-card').forEach(card => {
       card.addEventListener('click', () => {
-        const disease = breed.enfermedades[parseInt(card.dataset.index)];
+        const disease = breed.enfermedades[Number.parseInt(card.dataset.index, 10)];
         this.showDiseaseDetail(breed, disease);
       });
     });

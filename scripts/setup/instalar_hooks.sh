@@ -7,7 +7,7 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 HOOKS_DIR="$REPO_ROOT/.git/hooks"
 SRC="$REPO_ROOT/scripts/setup/pre-commit"
 
-if [ ! -d "$HOOKS_DIR" ]; then
+if [[ ! -d "$HOOKS_DIR" ]]; then
   echo "❌ No se encontró .git/hooks. ¿Estás dentro del repositorio?" >&2
   exit 1
 fi
