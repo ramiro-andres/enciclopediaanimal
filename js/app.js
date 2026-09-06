@@ -1102,10 +1102,10 @@ const App = {
   },
 
   diseaseSlug(disease) {
-    return this.normalizeSearch(disease?.nombre || '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
+    let slug = this.normalizeSearch(disease?.nombre || '').replace(/[^a-z0-9]+/g, '-');
+    while (slug.startsWith('-')) slug = slug.slice(1);
+    while (slug.endsWith('-')) slug = slug.slice(0, -1);
+    return slug;
   },
 
   browseRoute() {
