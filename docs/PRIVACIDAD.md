@@ -33,7 +33,7 @@ window.GOATCOUNTER_ENDPOINT = 'https://TU_CODIGO.goatcounter.com/count';
 
 | Clave | Uso |
 |-------|-----|
-| `atlas_lang` | Preferencia de idioma ES/EN |
+| `atlas_lang` | (obsoleto) Preferencia de idioma; la UI es solo español |
 | `sessionStorage` historial | Últimas 5 fichas visitadas (solo en la sesión) |
 | Service Worker cache | Assets para uso offline |
 

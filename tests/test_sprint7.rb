@@ -62,18 +62,18 @@ class MobileTabBarTest < Minitest::Test
     assert_includes @i18n, "'tab.glosary'"
   end
 
-  def test_i18n_tab_bar_valores_es_en
+  def test_i18n_tab_bar_valores_es
     expected = {
-      'tab.home' => { es: 'Inicio', en: 'Home' },
-      'tab.explore' => { es: 'Explorar', en: 'Explore' },
-      'tab.glossary' => { es: 'Glosario', en: 'Glossary' },
-      'tab.urgency' => { es: 'Urgencias', en: 'Emergencies' },
-      'tab.tools' => { es: 'Herramientas', en: 'Tools' }
+      'tab.home' => 'Inicio',
+      'tab.explore' => 'Explorar',
+      'tab.glossary' => 'Glosario',
+      'tab.urgency' => 'Urgencias',
+      'tab.tools' => 'Herramientas'
     }
-    expected.each do |key, labels|
-      assert_match(/es:\s*\{[^}]*'#{key}':\s*'#{labels[:es]}'/, @i18n, "Falta #{key} en ES")
-      assert_match(/en:\s*\{[^}]*'#{key}':\s*'#{labels[:en]}'/, @i18n, "Falta #{key} en EN")
+    expected.each do |key, label|
+      assert_match(/'#{key}':\s*'#{label}'/, @i18n, "Falta #{key} en i18n ES")
     end
+    refute_match(/\ben:\s*\{/, @i18n)
   end
 
   def test_html_no_expone_claves_i18n_crudas_en_tab_bar
