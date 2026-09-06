@@ -175,7 +175,12 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await page.locator('#backEvaluacionBtn').click();
     await expect(page.locator('#estudioView')).toHaveClass(/active/);
 
+    await page.locator('#goHomeBtn').click();
+    await page.locator('#goEstudioBtn').click();
+    await expect(page.locator('#estudioView')).toHaveClass(/active/);
+
     await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator('#mobileTabBar .mobile-tab[data-tab="estudio"]')).toBeVisible();
     await page.locator('#mobileTabBar .mobile-tab[data-tab="estudio"]').click();
     await expect(page.locator('#estudioView')).toHaveClass(/active/);
   });
