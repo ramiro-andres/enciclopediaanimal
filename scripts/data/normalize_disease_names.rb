@@ -9,10 +9,12 @@
 
 require 'json'
 require 'set'
+require 'fileutils'
 
 module DiseaseNameNormalize
   ROOT = File.expand_path('../..', __dir__)
   DATA_PATH = File.join(ROOT, 'data', 'enciclopedia.json')
+  IMG_DIR = File.join(ROOT, 'images', 'enfermedades')
 
   # Variantes de etiqueta → nombre canónico del catálogo.
   RENAME_MAP = {
@@ -102,6 +104,39 @@ module DiseaseNameNormalize
     merged
   end
 
+  def slugify(text)
+    normalize(text)
+      .gsub(/[^a-z0-9]+/, '_')
+      .gsub(/\A_|_\z/, '')
+  end
+
+  def disease_image_id(animal_id, disease_name)
+    "#{animal_id}_#{slugify(disease_name)}"
+  end
+
+  # Si el slug canónico no tiene imagen, copia desde la ruta actual (p. ej. tras renombrar).
+  def ensure_disease_image!(animal_id, entry)
+    image_id = disease_image_id(animal_id, entry['nombre'])
+    expected_jpg = File.join(IMG_DIR, "#{image_id}.jpg")
+    expected_svg = File.join(IMG_DIR, "#{image_id}.svg")
+    has_expected = (File.exist?(expected_jpg) && File.size(expected_jpg) > 8000) || File.exist?(expected_svg)
+    unless has_expected
+      current = entry['imagen'].to_s
+      stem = File.basename(current, '.*')
+      src_jpg = File.join(IMG_DIR, "#{stem}.jpg")
+      src_svg = File.join(IMG_DIR, "#{stem}.svg")
+      FileUtils.cp(src_jpg, expected_jpg) if File.exist?(src_jpg) && File.size(src_jpg) > 8000
+      FileUtils.cp(src_svg, expected_svg) if File.exist?(src_svg) && !File.exist?(expected_svg)
+    end
+    if File.exist?(expected_jpg) || File.exist?(expected_svg)
+      entry['imagen'] = if File.exist?(expected_jpg)
+                          "images/enfermedades/#{image_id}.jpg"
+                        else
+                          "images/enfermedades/#{image_id}.svg"
+                        end
+    end
+  end
+
   def apply_renames_in_strings!(obj, renamed_counter)
     case obj
     when Hash
@@ -174,6 +209,10 @@ module DiseaseNameNormalize
           end
 
           raza['enfermedades'] = new_list unless diseases.empty?
+
+          Array(raza['enfermedades']).each do |enf|
+            ensure_disease_image!(animal['id'], enf) unless dry_run
+          end
 
           # Predisposiciones y otros strings con la etiqueta antigua.
           apply_renames_in_strings!(raza['predisposiciones_geneticas'], extra) if raza['predisposiciones_geneticas']
