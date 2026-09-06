@@ -125,6 +125,16 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);
 
+    // Cards 01–03 del menú welcome deben navegar
+    await page.locator('#openEspeciesCard').click();
+    await expect(page.locator('#welcomeCategoryCards')).toBeInViewport();
+    await page.locator('#openRazasCard').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.locator('#goHomeBtn').click();
+    await page.locator('#openSaludCard').click();
+    await expect(page.locator('#urgencyView')).toHaveClass(/active/);
+    await page.locator('#goHomeBtn').click();
+
     // BCS: navegar por la UI (App no se expone en window).
     await page.locator('#openToolsCard').click();
     await expect(page.locator('#toolsView')).toHaveClass(/active/);

@@ -175,8 +175,15 @@ class FlashcardsStudyTest < Minitest::Test
 
   def test_enlace_desde_welcome
     assert_includes @html, 'id="openEstudioCard"'
+    assert_includes @html, 'id="openEspeciesCard"'
+    assert_includes @html, 'id="openRazasCard"'
+    assert_includes @html, 'id="openSaludCard"'
     assert_includes @html, 'id="estudioView"'
     assert_includes @app, 'openEstudioCard'
+    assert_includes @app, 'openEspeciesCard'
+    assert_includes @app, 'openRazasCard'
+    assert_includes @app, 'openSaludCard'
+    assert_includes @app, 'bindFeatureCard'
     assert_includes @app, 'showEstudio'
     assert_includes @app, "parts[0] === 'estudio'"
     refute_includes @html, 'id="openFlashcardsCard"'
