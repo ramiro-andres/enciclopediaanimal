@@ -22,7 +22,7 @@ const App = {
   triajeCategoryId: null,
   triajeSymptomId: null,
   triajeCauseId: null,
-  themeMode: 'auto',
+  themeMode: 'dark',
   THEME_KEY: 'atlas_theme',
   vaccinationCalendars: null,
   manifest: null,
@@ -238,7 +238,6 @@ const App = {
         I18n.init();
         I18n.apply();
         this.bindLangSwitcher();
-        this.bindThemeToggle();
         document.addEventListener('atlas:langchange', () => {
           I18n.apply();
           this.updateCompareBadge();
@@ -622,38 +621,15 @@ const App = {
   },
 
   initTheme() {
-    let mode = 'auto';
-    try {
-      const saved = localStorage.getItem(this.THEME_KEY);
-      if (saved === 'light' || saved === 'dark' || saved === 'auto') mode = saved;
-    } catch (_) { /* sin localStorage */ }
-    this.applyTheme(mode);
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (this.themeMode === 'auto') this.applyTheme('auto');
-    });
+    // UI fija en modo oscuro (sin toggle claro / auto).
+    this.applyTheme();
+    try { localStorage.removeItem(this.THEME_KEY); } catch (_) { /* noop */ }
   },
 
-  applyTheme(mode) {
-    this.themeMode = mode;
-    try { localStorage.setItem(this.THEME_KEY, mode); } catch (_) { /* noop */ }
-    document.documentElement.setAttribute('data-theme-mode', mode);
-    const resolved = AtlasUtils.resolveTheme(mode);
-    document.documentElement.setAttribute('data-theme', resolved.dataTheme);
-    const btn = document.getElementById('themeToggleBtn');
-    if (btn) {
-      const label = resolved.isDark ? this.t('theme.light') : this.t('theme.dark');
-      btn.setAttribute('aria-label', label);
-      btn.title = label;
-    }
-  },
-
-  toggleTheme() {
-    const currentlyDark = AtlasUtils.resolveTheme(this.themeMode).isDark;
-    this.applyTheme(currentlyDark ? 'light' : 'dark');
-  },
-
-  bindThemeToggle() {
-    document.getElementById('themeToggleBtn')?.addEventListener('click', () => this.toggleTheme());
+  applyTheme() {
+    this.themeMode = 'dark';
+    document.documentElement.setAttribute('data-theme-mode', 'dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
   },
 
   async loadVaccinationCalendars() {

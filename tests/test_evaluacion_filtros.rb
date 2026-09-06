@@ -105,7 +105,7 @@ class EvaluacionFiltrosTest < Minitest::Test
 
   def test_sw_cache_bump
     sw = File.read(File.join(@root, 'sw.js'))
-    assert_includes sw, "CACHE_VERSION = 'atlas-v40'"
+    assert_includes sw, "CACHE_VERSION = 'atlas-v41'"
   end
 
   def test_build_script_garantiza_minimo_y_redaccion

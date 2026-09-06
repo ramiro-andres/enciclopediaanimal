@@ -138,29 +138,32 @@ class ModoNocturnoTest < Minitest::Test
     @i18n = File.read(File.join(ROOT, 'js', 'i18n.js'))
   end
 
-  def test_toggle_en_header
-    assert_includes @html, 'id="themeToggleBtn"'
+  def test_tema_oscuro_fijo
+    assert_includes @html, 'data-theme="dark"'
+    assert_includes @html, 'data-theme-mode="dark"'
+    refute_includes @html, 'id="themeToggleBtn"'
     assert_includes @app, 'initTheme'
-    assert_includes @app, 'toggleTheme'
-    assert_includes @app, 'bindThemeToggle'
+    assert_includes @app, 'applyTheme'
+    refute_includes @app, 'toggleTheme'
+    refute_includes @app, 'bindThemeToggle'
   end
 
-  def test_variables_css_y_prefers_color_scheme
+  def test_variables_css_modo_oscuro
     assert_includes @css, ':root[data-theme="dark"]'
-    assert_includes @css, 'prefers-color-scheme: dark'
     assert_includes @css, '--bg:'
-    assert_includes @css, '.theme-toggle-btn'
+    refute_includes @css, '.theme-toggle-btn'
   end
 
-  def test_persistencia_local_storage
+  def test_aplica_data_theme_dark
     assert_includes @app, "THEME_KEY: 'atlas_theme'"
     assert_includes @app, 'data-theme-mode'
     assert_includes @app, 'data-theme'
+    assert_includes @app, "setAttribute('data-theme', 'dark')"
   end
 
-  def test_i18n_tema
-    assert_includes @i18n, "'theme.toggle'"
-    assert_includes @i18n, "'theme.dark'"
+  def test_i18n_sin_toggle_tema
+    refute_includes @i18n, "'theme.toggle'"
+    refute_includes @i18n, "'theme.light'"
   end
 
   def test_text_on_light_variables_en_modo_oscuro
