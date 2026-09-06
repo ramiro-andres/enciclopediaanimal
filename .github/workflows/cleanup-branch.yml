@@ -1,0 +1,53 @@
+name: cleanup-branch
+
+# Elimina la rama head cuando un PR se mergea a main.
+# Complementa (o sustituye) la opción "Automatically delete head branches" del repo.
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cleanup-branch-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: false
+
+jobs:
+  delete-merged-branch:
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref != 'main' &&
+      github.event.pull_request.head.ref != 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Eliminar rama remota tras merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          echo "PR #${{ github.event.pull_request.number }} mergeado. Eliminando refs/heads/${HEAD_REF}"
+          if gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEAD_REF}"; then
+            echo "Rama ${HEAD_REF} eliminada."
+          else
+            echo "No se pudo eliminar ${HEAD_REF} (puede que ya no exista). Continuando."
+          fi
+
+  prune-stale-merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Prune de ramas remotas ya mergeadas en main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: bash scripts/setup/prune_merged_branches.sh

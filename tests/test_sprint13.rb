@@ -112,6 +112,7 @@ class RepoHygieneSprint13Test < Minitest::Test
   def setup
     @prune = File.join(ROOT, 'scripts', 'setup', 'prune_merged_branches.sh')
     @dependabot = File.join(ROOT, '.github', 'dependabot.yml')
+    @cleanup = File.join(ROOT, '.github', 'workflows', 'cleanup-branch.yml')
   end
 
   def test_script_prune_ramas
@@ -120,6 +121,17 @@ class RepoHygieneSprint13Test < Minitest::Test
     assert_includes content, 'prune'
     assert_includes content, 'main'
     assert_includes content, '--dry-run'
+  end
+
+  def test_workflow_cleanup_borra_rama_tras_merge
+    assert File.exist?(@cleanup), 'Falta workflow cleanup-branch.yml'
+    wf = File.read(@cleanup)
+    assert_includes wf, 'pull_request:'
+    assert_includes wf, 'types: [closed]'
+    assert_includes wf, 'github.event.pull_request.merged == true'
+    assert_includes wf, 'git/refs/heads/'
+    assert_includes wf, 'prune_merged_branches.sh'
+    assert_match(/permissions:\s*\n\s+contents: write/, wf)
   end
 
   def test_dependabot_github_actions_y_npm
