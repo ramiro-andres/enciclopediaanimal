@@ -174,6 +174,24 @@ class FlashcardsStudyTest < Minitest::Test
     refute_includes @app, 'openFlashcardsFromDict'
   end
 
+  def test_welcome_feature_images
+    %w[
+      images/features/01-especies.jpg
+      images/features/02-razas.jpg
+      images/features/03-salud.jpg
+      images/features/04-diccionario.jpg
+      images/features/05-herramientas.jpg
+      images/features/06-genetica.jpg
+      images/features/07-estudio.jpg
+    ].each do |rel|
+      assert_includes @html, rel
+      path = File.join(ROOT, rel)
+      assert File.file?(path), "falta asset #{rel}"
+      assert_operator File.size(path), :>, 8_000
+    end
+    assert_includes @css, '.feature-media'
+  end
+
   def test_vista_evaluacion
     assert_includes @html, 'id="evaluacionView"'
     assert_includes @app, 'showEvaluacion'
