@@ -81,6 +81,46 @@ class DataIntegrityTest < Minitest::Test
     end
   end
 
+  def test_sin_enfermedades_duplicadas_en_misma_raza
+    stop = %w[de del la las los el y o en por para con sin enfermedad sindrome syndrome disease]
+    dupes = []
+    @breeds.each do |raza|
+      keys = Hash.new(0)
+      (raza['enfermedades'] || []).each do |enf|
+        name = enf['nombre'].to_s
+        key = name.unicode_normalize(:nfd).gsub(/\p{Mn}/, '').downcase
+                 .gsub(/\([^)]*\)/, ' ').gsub(/[^a-z0-9\s]/, ' ')
+                 .split.reject { |w| stop.include?(w) || w.length < 2 }.sort.join(' ')
+        key = name.downcase if key.empty?
+        keys[key] += 1
+      end
+      keys.each do |key, count|
+        next if count < 2
+
+        dupes << "#{raza['animalId']}/#{raza['id']}:#{key}(#{count})"
+      end
+    end
+    assert_empty dupes, "Enfermedades duplicadas intra-raza: #{dupes.take(10).join(', ')}"
+  end
+
+  def test_etiquetas_enfermedad_canónicas
+    banned = [
+      'Enfermedad del Koi herpesvirus (KHV)',
+      'Enfermedad de disco intervertebral',
+      'Timpanismo (meteorismo ruminal)',
+      'Pododermatitis (footrot)',
+      'Tricobezoares (bolas de pelo)',
+      'Hipocalcemia (fiebre de leche)'
+    ]
+    found = []
+    @breeds.each do |raza|
+      (raza['enfermedades'] || []).each do |enf|
+        found << "#{raza['id']}:#{enf['nombre']}" if banned.include?(enf['nombre'])
+      end
+    end
+    assert_empty found, "Etiquetas no canónicas: #{found.take(10).join(', ')}"
+  end
+
   def test_cada_enfermedad_tiene_campos_requeridos
     required = %w[nombre gravedad sintomas diagnostico tratamiento prevencion causas factores_riesgo examenes protocolo_farmacologico cuidados_casa evolucion pronostico urgencia diagnostico_diferencial criterios_diagnostico referencias notas_clinicas imagen]
     valid_gravedad = %w[leve moderada grave]

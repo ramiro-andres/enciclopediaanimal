@@ -15,6 +15,7 @@ scripts/
 
 | Script | Uso |
 |--------|-----|
+| `normalize_disease_names.rb` | Unifica etiquetas de enfermedad y fusiona duplicados intra-raza |
 | `build_medical_dictionary.rb` | Genera `data/diccionario_medicos.json` (invocado por `actualizar_datos.sh`) |
 | `update_enciclopedia_full.rb` | Pipeline completo de actualización de razas y enfermedades |
 | `expand_enciclopedia.rb` | Expande contenido clínico y nutricional |

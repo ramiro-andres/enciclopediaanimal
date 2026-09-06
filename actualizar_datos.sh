@@ -4,6 +4,7 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [[ "${SOLO_JS:-}" != "1" ]]; then
+  ruby "$DIR/scripts/data/normalize_disease_names.rb"
   ruby "$DIR/scripts/data/build_medical_dictionary.rb"
   ruby "$DIR/scripts/data/build_search_index.rb"
   ruby "$DIR/scripts/data/build_cross_links.rb"

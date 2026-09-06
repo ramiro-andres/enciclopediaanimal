@@ -1,6 +1,6 @@
 {
   "titulo": "Diccionario de términos médicos",
-  "introduccion": "Glosario veterinario con 579 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
+  "introduccion": "Glosario veterinario con 575 entradas extraídas y explicadas a partir de las fichas de razas, enfermedades, nutrición y protocolos de esta enciclopedia. Uso educativo; no sustituye la consulta con un veterinario colegiado.",
   "categorias": [
     {
       "id": "ficha_enfermedad",
@@ -1405,10 +1405,7 @@
         },
         {
           "termino": "Clostridiosis",
-          "definicion": "Infección por Clostridium; enterotoxemia y muerte rápida. En rumiantes, «Clostridiosis» se interpreta considerando la fisiología del rumen, el manejo del rodeo y los riesgos metabólicos o infecciosos típicos. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Clostridiosis (mancha, gangrena gaseosa)"
-          ]
+          "definicion": "Infección por Clostridium; enterotoxemia y muerte rápida. En rumiantes, «Clostridiosis» se interpreta considerando la fisiología del rumen, el manejo del rodeo y los riesgos metabólicos o infecciosos típicos. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Pododermatitis / footrot",
@@ -1518,7 +1515,7 @@
     {
       "id": "enfermedades",
       "nombre": "Enfermedades documentadas en la enciclopedia",
-      "descripcion": "Las 173 condiciones clínicas registradas en las fichas de razas (sin duplicar el resto del glosario).",
+      "descripcion": "Las 158 condiciones clínicas registradas en las fichas de razas (sin duplicar el resto del glosario).",
       "icono": "📋",
       "terminos": [
         {
@@ -1617,11 +1614,8 @@
           "definicion": "«Colapso traqueal» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Cálculos urinarios (urolitiasis)",
-          "definicion": "Formación de cálculos en vías urinarias que pueden obstruir, sobre todo en machos. Se asocia a dieta, pH urinario y predisposición. La obstrucción es una emergencia. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Cálculos urinarios"
-          ]
+          "termino": "Cálculos urinarios",
+          "definicion": "Formación de cálculos en vías urinarias (urolitiasis) que pueden irritar u obstruir. Dieta, hidratación y especie influyen en el riesgo. La dificultad para orinar exige atención inmediata. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Cáncer (hemangiosarcoma y linfoma)",
@@ -1703,14 +1697,9 @@
           ]
         },
         {
-          "termino": "Enfermedad del Koi herpesvirus (KHV)",
-          "definicion": "Enfermedad causada por virus. En términos generales, se trata de enfermedad de origen vírico con impacto clínico variable. También se menciona como KHV. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
-        },
-        {
           "termino": "Enfermedad del disco intervertebral",
           "definicion": "«Enfermedad del disco intervertebral» es lesión mecánica de huesos, discos, tejidos o articulaciones. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
           "sinonimos": [
-            "Enfermedad de disco intervertebral",
             "Discopatía intervertebral"
           ]
         },
@@ -1755,11 +1744,8 @@
           "definicion": "«Erisipela» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Escorbuto (deficiencia de vitamina C)",
-          "definicion": "«Escorbuto (deficiencia de vitamina C)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como deficiencia de vitamina C. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Escorbuto"
-          ]
+          "termino": "Escorbuto",
+          "definicion": "«Escorbuto» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Espondilosis deformante",
@@ -1770,11 +1756,8 @@
           "definicion": "Anorexia total o reducción drástica del apetito. Palpación abdominal: masa gasosa/distendida en ciego (lado derecho). Radiografía lateral: dilatación gástrica y cecal con gas, heces ausentes. Ecografía: contenido líquido/gaseoso en estómago y ciego, Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Estomatitis (boca podrida)",
-          "definicion": "«Estomatitis (boca podrida)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como boca podrida. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Estomatitis"
-          ]
+          "termino": "Estomatitis",
+          "definicion": "«Estomatitis» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Estrabismo convergente",
@@ -1833,11 +1816,8 @@
           "definicion": "«Ictioftiriasis (punto blanco)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como punto blanco. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Infección respiratoria (neumonía)",
-          "definicion": "Inflamación del parénquima pulmonar por bacterias, virus, hongos, aspiración o irritantes. Cursa con dificultad respiratoria, tos o fiebre según especie. Es un cuadro potencialmente grave que requiere evaluación clínica pronta. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Infección respiratoria"
-          ]
+          "termino": "Infección respiratoria",
+          "definicion": "«Infección respiratoria» es afección de vías respiratorias o pulmón con riesgo de hipoxemia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Insuficiencia cardíaca",
@@ -1902,11 +1882,8 @@
           "definicion": "«Melanoma en gris» es proliferación celular anormal, benigna o maligna. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Meningeal worm (Parelaphostrongylus)",
-          "definicion": "«Meningeal worm (Parelaphostrongylus)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como Parelaphostrongylus. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Meningeal worm"
-          ]
+          "termino": "Meningeal worm",
+          "definicion": "«Meningeal worm» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Metalosis por intoxicación",
@@ -1937,10 +1914,6 @@
         },
         {
           "termino": "Neumonía",
-          "definicion": "Inflamación del parénquima pulmonar por bacterias, virus, hongos, aspiración o irritantes. Cursa con dificultad respiratoria, tos o fiebre según especie. Es un cuadro potencialmente grave que requiere evaluación clínica pronta. Uso educativo; no sustituye la valoración de un veterinario colegiado."
-        },
-        {
-          "termino": "Neumonía (complejo respiratorio bovino)",
           "definicion": "Inflamación del parénquima pulmonar por bacterias, virus, hongos, aspiración o irritantes. Cursa con dificultad respiratoria, tos o fiebre según especie. Es un cuadro potencialmente grave que requiere evaluación clínica pronta. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
@@ -2028,10 +2001,6 @@
           "definicion": "Inflamación o ulceración de la planta/almohadillas, común en animales de jaula o sobrepeso. Relacionada con sustrato, humedad e infección secundaria; el manejo combina causa y cuidado local. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Pododermatitis (llagas en corvejones)",
-          "definicion": "Inflamación o ulceración de la planta/almohadillas, común en animales de jaula o sobrepeso. Relacionada con sustrato, humedad e infección secundaria; el manejo combina causa y cuidado local. Uso educativo; no sustituye la valoración de un veterinario colegiado."
-        },
-        {
           "termino": "Pododermatitis digital",
           "definicion": "Inflamación o ulceración de la planta/almohadillas, común en animales de jaula o sobrepeso. Relacionada con sustrato, humedad e infección secundaria; el manejo combina causa y cuidado local. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
@@ -2040,11 +2009,8 @@
           "definicion": "«Podredumbre del caparazón (shell rot)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como shell rot. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Poliquistosis renal (PKD)",
-          "definicion": "Proceso que afecta la función renal y la eliminación de toxinas. En términos generales, se trata de proceso que compromete la filtración renal y el equilibrio hídrico-electrolítico. También se menciona como PKD. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Poliquistosis renal"
-          ]
+          "termino": "Poliquistosis renal",
+          "definicion": "Proceso que afecta la función renal y la eliminación de toxinas. En términos generales, se trata de proceso que compromete la filtración renal y el equilibrio hídrico-electrolítico. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Problemas cardíacos",
@@ -2118,11 +2084,8 @@
           "definicion": "«Síndrome metabólico equino» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Timpanismo (meteorismo ruminal)",
-          "definicion": "Acúmulo excesivo de gas en el rumen (meteorismo) que distiende el abdomen y puede comprometer la respiración. Relacionado con dietas fermentables y manejo del pastoreo; puede ser emergencia. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Timpanismo"
-          ]
+          "termino": "Timpanismo",
+          "definicion": "Acúmulo excesivo de gas en el rumen (meteorismo) que distiende el abdomen y puede comprometer la respiración. Relacionado con dietas fermentables y manejo del pastoreo; puede ser emergencia. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Torsión gástrica",
@@ -2137,19 +2100,12 @@
           "definicion": "Lesión mecánica de huesos, tejidos o articulaciones. En términos generales, se trata de lesión mecánica de huesos, discos, tejidos o articulaciones. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Tricobezoares (bolas de pelo)",
-          "definicion": "«Tricobezoares (bolas de pelo)» es una condición clínica documentada en las fichas de esta enciclopedia. También se menciona como bolas de pelo. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Tricobezoar"
-          ]
+          "termino": "Tricobezoar",
+          "definicion": "«Tricobezoar» es una condición clínica documentada en las fichas de esta enciclopedia. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Tumores",
           "definicion": "Crecimiento celular anormal; benigno o maligno. En términos generales, se trata de proliferación celular anormal, benigna o maligna. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
-        },
-        {
-          "termino": "Tumores (lipomas y otros)",
-          "definicion": "Crecimiento celular anormal; benigno o maligno. En términos generales, se trata de proliferación celular anormal, benigna o maligna. También se menciona como lipomas y otros. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Tétanos",
@@ -2168,11 +2124,8 @@
           "definicion": "Condición causada por parásitos externos o internos. En términos generales, se trata de afección de vías respiratorias o pulmón con riesgo de hipoxemia. También se menciona como traqueales. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
-          "termino": "Ácaros de patas (Cnemidocoptes)",
-          "definicion": "Condición causada por parásitos externos o internos. También se menciona como Cnemidocoptes. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado.",
-          "sinonimos": [
-            "Ácaros de patas"
-          ]
+          "termino": "Ácaros de patas",
+          "definicion": "Condición causada por parásitos externos o internos. Revisa la ficha de la enfermedad para síntomas, diagnóstico diferencial y enfoque terapéutico orientativo según especie. Uso educativo; no sustituye la valoración de un veterinario colegiado."
         },
         {
           "termino": "Ácaros respiratorios",
@@ -2597,5 +2550,5 @@
       ]
     }
   ],
-  "total_terminos": 579
+  "total_terminos": 575
 }
