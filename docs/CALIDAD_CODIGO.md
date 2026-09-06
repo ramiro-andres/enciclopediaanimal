@@ -15,7 +15,7 @@
 
 Enciclopedia Animal es un sitio estático en GitHub Pages **sin bundler ni framework**. En ese contexto, un `app.js` monolítico **no es automáticamente “espagueti malo”**: reduce tooling, facilita el precache del service worker y mantiene el despliegue simple. Sí sigue siendo una **bomba de mantenibilidad creciente**, pero el primer corte vertical (`js/utils.js` + `js/tools.js`) ya empezó a bajar riesgo sin romper UX.
 
-Lo positivo pesa: hay `esc()` completo (en `AtlasUtils`), suite de seguridad estática, i18n ES/EN con parity tests, SW versionado (`atlas-v17`), chunks de datos, y pipeline Ruby + tests por sprint + contratos JS (`node --check`).
+Lo positivo pesa: hay `esc()` completo (en `AtlasUtils`), suite de seguridad estática, i18n de UI en **español** (`js/i18n.js`), SW versionado (`atlas-v*`), chunks de datos, y pipeline Ruby + tests por sprint + contratos JS (`node --check`).
 
 **¿Hay que parar features para un refactor urgente?** No. Se puede seguir entregando valor. Conviene **seguir extrayendo verticales en sprints futuros** (urgency/search/catalog) y no dejar crecer `app.js`/`styles.css` sin freno.
 
@@ -47,11 +47,11 @@ Lo positivo pesa: hay `esc()` completo (en `AtlasUtils`), suite de seguridad est
 | `js/app.js` | Métodos `render*` | 48 |
 | `js/app.js` | Usos de `innerHTML` | ~60 |
 | `js/app.js` | Llamadas a `.esc(` | ~454 |
-| `js/i18n.js` | Líneas | ~1057 |
+| `js/i18n.js` | Líneas | ~634 (solo ES) |
 | `css/styles.css` | Líneas | ~6304 |
 | `css/styles.css` | Variables en `:root` | ~27+ (más overrides por tema) |
 | `index.html` | Líneas | ~630 |
-| `sw.js` | Caché | `atlas-v17` |
+| `sw.js` | Caché | `atlas-v*` |
 | `scripts/data/*.rb` | Archivos | 44 (1 stub deprecated) |
 | `tests/test_*.rb` | Archivos | 17 |
 
@@ -72,7 +72,7 @@ Lo positivo pesa: hay `esc()` completo (en `AtlasUtils`), suite de seguridad est
 ## Buenas prácticas que SÍ hay
 
 1. **Escape HTML consciente (`esc`)** — en `AtlasUtils` + fachada `App.esc`; tests de seguridad y contratos JS.
-2. **I18n (`js/i18n.js`)** — ES/EN, `data-i18n*`, parity en tests, evento `atlas:langchange`.
+2. **I18n (`js/i18n.js`)** — UI en español, `data-i18n*`; ver `docs/I18N.md`.
 3. **Service Worker** — precache de shell + datos críticos + módulos nuevos, caché de imágenes SWR, versión `atlas-v*`.
 4. **Seguridad estática** — `tests/test_security.rb` (secretos, `eval`/`document.write`, payloads en JSON, `rel=noopener`).
 5. **Arquitectura de datos offline** — JSON fuente → scripts Ruby → JS globales / chunks; documentado en `docs/ARQUITECTURA.md`.
@@ -224,6 +224,6 @@ Regla: **cada PR de feature que toque un área grande debe reducir o no aumentar
 - [ ] ¿Nuevo HTML dinámico usa `this.esc(...)` / `AtlasUtils.esc` en texto y atributos?
 - [ ] ¿Handlers inline evitan interpolar datos?
 - [ ] ¿Nueva vista añade método a `App` o a un módulo extraído (`tools`/`utils`/…)?
-- [ ] ¿Claves i18n ES+EN + test parity?
+- [ ] ¿Claves i18n presentes para textos UI nuevos?
 - [ ] ¿SW `CACHE_VERSION` bump si cambia shell?
 - [ ] ¿`bash ejecutar_pruebas.sh` verde?

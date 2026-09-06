@@ -130,11 +130,27 @@ Detalle en [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md).
 
 ## Mantenimiento del repositorio
 
-Tras mergear PRs, elimina ramas remotas obsoletas para mantener solo `main` activa:
+### Borrado automático de ramas tras merge
+
+El repo tiene **Automatically delete head branches** activado (`delete_branch_on_merge`).
+
+Además, el workflow [`.github/workflows/cleanup-branch.yml`](../.github/workflows/cleanup-branch.yml) corre cuando un PR se **cierra mergeado**:
+
+1. Elimina `refs/heads/<rama-del-PR>` (solo si es del mismo repo, no forks; nunca `main`/`master`).
+2. Ejecuta `scripts/setup/prune_merged_branches.sh` para barrer otras ramas remotas ya contenidas en `main`.
+
+### Limpieza manual
 
 ```bash
 git fetch --prune origin
-gh api repos/OWNER/REPO/branches --jq '.[].name'
+bash scripts/setup/prune_merged_branches.sh --dry-run   # ver candidatas
+bash scripts/setup/prune_merged_branches.sh             # borrar remotas mergeadas
 ```
 
-Ramas mergeadas pueden borrarse con `gh api -X DELETE repos/OWNER/REPO/git/refs/heads/NOMBRE-RAMA`.
+Localmente, tras `fetch --prune`, puedes borrar ramas cuyo remoto marque `[gone]`:
+
+```bash
+git branch -vv | awk '/: gone]/{print $1}' | xargs -r git branch -D
+```
+
+> Worktrees (`git worktree`) no se borran solos: quítalos con `git worktree remove` si ya no los usas.

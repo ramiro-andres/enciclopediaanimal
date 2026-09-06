@@ -479,6 +479,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 **Tareas técnicas:**
 - [x] Borrar ramas remotas mergeadas vía `scripts/setup/prune_merged_branches.sh`
 - [x] Prune local: `git fetch --prune`
+- [x] Workflow `cleanup-branch.yml` + setting `delete_branch_on_merge` (borra head al mergear)
 
 **Criterios de aceptación:**
 - [x] Solo `main` activa en remoto (salvo ramas de trabajo en curso)
@@ -1269,7 +1270,7 @@ Una historia se marca **Hecho** solo si cumple **todas** estas condiciones:
 - `scripts/data/expand_dictionary_sprint13.rb` + integración en `build_medical_dictionary.rb`
 - `scripts/data/integrate_suggested_links_sprint13.rb` (pipeline tras `build_cross_links.rb`)
 - Filtro macro-región (LATAM, Europa…) + país en `js/app.js`, i18n ES/EN, `css/styles.css`
-- `scripts/setup/prune_merged_branches.sh` · `.github/dependabot.yml` (github-actions + npm)
+- `scripts/setup/prune_merged_branches.sh` · `.github/workflows/cleanup-branch.yml` · `.github/dependabot.yml` (github-actions + npm)
 - `tests/test_sprint13.rb` · E2E filtro región · `sw.js` atlas-v13
 
 ---

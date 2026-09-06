@@ -8,7 +8,10 @@ enciclopedia_animal/
 ├── .nojekyll               # Desactiva Jekyll en GitHub Pages
 ├── css/                    # Estilos
 ├── js/
-│   └── app.js              # Aplicación SPA
+│   ├── app.js              # Aplicación SPA
+│   ├── i18n.js             # Cadenas UI (español)
+│   ├── tools.js / utils.js # Cálculos y helpers
+│   └── analytics*.js
 ├── data/
 │   ├── enciclopedia.json   # Fuente de verdad (datos)
 │   ├── enciclopedia.js     # Generado — window.ENCICLOPEDIA_DATA
@@ -16,18 +19,24 @@ enciclopedia_animal/
 │   └── diccionario_medicos.js
 ├── images/                 # Fotos y SVG de razas y enfermedades
 ├── tests/
-│   └── test_enciclopedia.rb    # Pruebas unitarias
+│   └── test_*.rb           # Pruebas unitarias por sprint
 ├── docs/                   # Documentación del proyecto
 ├── scripts/
 │   ├── README.md           # Índice de scripts
 │   ├── data/               # Generación de JSON
 │   ├── images/             # Descarga y corrección de imágenes
-│   └── setup/              # GitHub Pages, placeholders
+│   └── setup/              # Hooks, prune de ramas, Pages
 ├── .github/
 │   ├── workflows/
-│   │   ├── test.yml        # CI en PRs
-│   │   └── deploy-pages.yml
+│   │   ├── test.yml
+│   │   ├── e2e.yml
+│   │   ├── lighthouse.yml
+│   │   ├── preview.yml
+│   │   ├── deploy-pages.yml
+│   │   └── cleanup-branch.yml  # Borra rama al mergear
 │   └── CONTRIBUTING.md
+├── .sonarcloud.properties  # Scope Automatic Analysis (Sonar)
+├── sonar-project.properties
 ├── actualizar_datos.sh     # Wrapper UX — JSON → JS
 ├── ejecutar_pruebas.sh     # Wrapper UX — pruebas unitarias
 └── README.md               # Entrada — enlaces a docs/

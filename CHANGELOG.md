@@ -2,6 +2,17 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
 
+## [Unreleased]
+
+### Changed
+- UI solo en español (`js/i18n.js` plano; sin conmutador EN).
+- Scope Sonar vía `.sonarcloud.properties` (Automatic Analysis).
+- Deploy en `push` a `main` con espera de `test` + `e2e` verdes.
+- Borrado automático de ramas al mergear (`cleanup-branch.yml` + `delete_branch_on_merge`).
+
+### Fixed
+- Issues Sonar (vulns CI, bug de label, code smells de parse/regex/a11y).
+
 ## [Sprint 12] - 2026-07-13
 
 - Changelog público accesible desde `#changelog` (US-UX-18)
