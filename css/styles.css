@@ -5130,10 +5130,6 @@ body.welcome-tour-open {
   line-height: 1.4;
 }
 
-.bcs-silhouette-svg {
-  display: none;
-}
-
 .bcs-controls label {
   display: block;
   margin-bottom: 0.5rem;

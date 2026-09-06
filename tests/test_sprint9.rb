@@ -25,7 +25,7 @@ class BcsGuideTest < Minitest::Test
     assert_includes @app, 'showBcs'
     assert_includes @app, "parts[0] === 'bcs'"
     assert_includes @app, 'renderBcs'
-    assert_includes @app, 'renderBcsSvg'
+    assert_includes @app, 'renderBcsVisual'
   end
 
   def test_escalas_perro_gato_y_equino

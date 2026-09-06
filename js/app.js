@@ -2756,11 +2756,6 @@ const App = {
     return `images/bcs/${this.getBcsImageSpeciesKey()}-${score}.jpg`;
   },
 
-  renderBcsSvg(score) {
-    // Compat: tests / callers antiguos; el visual real es fotográfico.
-    return this.renderBcsVisual(score);
-  },
-
   renderBcsVisual(score) {
     const src = this.getBcsImageSrc(score);
     const speciesLabel = this.bcsSpecies === 'equinos'
@@ -2821,7 +2816,7 @@ const App = {
       </div>
       <div class="bcs-main">
         <div class="bcs-visual" aria-live="polite">
-          ${this.renderBcsSvg(this.bcsScore)}
+          ${this.renderBcsVisual(this.bcsScore)}
         </div>
         <div class="bcs-controls">
           <label for="bcsScoreRange">${this.esc(this.t('bcs.score_label'))}: <strong id="bcsScoreValue">${this.bcsScore}</strong> / ${maxScore}</label>
@@ -2841,7 +2836,7 @@ const App = {
     `;
     const updateScore = (score) => {
       this.bcsScore = score;
-      container.querySelector('.bcs-visual').innerHTML = this.renderBcsSvg(score);
+      container.querySelector('.bcs-visual').innerHTML = this.renderBcsVisual(score);
       const valueEl = container.querySelector('#bcsScoreValue');
       if (valueEl) valueEl.textContent = String(score);
       const range = container.querySelector('#bcsScoreRange');
