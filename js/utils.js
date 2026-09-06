@@ -26,14 +26,12 @@
       .replace(/'/g, '&#39;');
   }
 
-  /** Resuelve modo light/dark a partir de 'light' | 'dark' | 'auto'. */
-  function resolveTheme(mode) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = mode === 'dark' || (mode === 'auto' && prefersDark);
+  /** Tema del atlas: siempre oscuro. */
+  function resolveTheme() {
     return {
-      prefersDark,
-      isDark,
-      dataTheme: isDark ? 'dark' : 'light'
+      prefersDark: true,
+      isDark: true,
+      dataTheme: 'dark'
     };
   }
 

@@ -5698,36 +5698,6 @@ body.welcome-tour-open {
   }
 }
 
-.theme-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.theme-toggle-btn:hover {
-  border-color: var(--primary);
-  background: var(--surface-alt);
-}
-
-:root[data-theme="light"] .theme-toggle-icon--dark,
-:root[data-theme-mode="light"] .theme-toggle-icon--dark,
-:root:not([data-theme="dark"]):not([data-theme-mode="dark"]) .theme-toggle-icon--dark {
-  display: none;
-}
-
-:root[data-theme="dark"] .theme-toggle-icon--light,
-:root[data-theme-mode="dark"] .theme-toggle-icon--light {
-  display: none;
-}
-
 /* Sprint 10: triaje educativo */
 .triaje-page {
   max-width: 900px;

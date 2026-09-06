@@ -200,8 +200,7 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await abrirAtlas(page);
     await cerrarDisclaimer(page);
 
-    // Modo nocturno
-    await page.locator('#themeToggleBtn').click();
+    // Tema fijo oscuro (sin toggle)
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 
     // Triaje desde urgencias
