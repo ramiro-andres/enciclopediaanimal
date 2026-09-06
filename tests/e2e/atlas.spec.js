@@ -130,7 +130,8 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     await expect(page.locator('#toolsView')).toHaveClass(/active/);
     await page.locator('.tools-card').filter({ hasText: /BCS/i }).click();
     await expect(page.locator('#bcsView')).toHaveClass(/active/);
-    await expect(page.locator('.bcs-silhouette-svg')).toBeVisible();
+    await expect(page.locator('.bcs-photo')).toBeVisible();
+    await expect(page.locator('#bcsPhoto')).toHaveAttribute('src', /images\/bcs\/dog-/);
 
     await page.locator('#goHomeBtn').click();
     await expect(page.locator('#welcomeView')).toHaveClass(/active/);

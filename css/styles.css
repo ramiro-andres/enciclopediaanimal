@@ -5099,53 +5099,39 @@ body.welcome-tour-open {
 .bcs-visual {
   display: flex;
   justify-content: center;
-  padding: 1.1rem 1rem 0.85rem;
+  padding: 0.65rem;
   background: var(--surface-elevated);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   min-height: 220px;
+  overflow: hidden;
+}
+
+.bcs-figure {
+  margin: 0;
+  width: 100%;
+}
+
+.bcs-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  object-fit: contain;
+  background: var(--surface);
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.bcs-photo-caption {
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.4;
 }
 
 .bcs-silhouette-svg {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  color: var(--text);
-  --bcs-fill: #e8eef2;
-  --bcs-stroke: #4b5b63;
-  --bcs-rib: #2f3e46;
-  --bcs-fat: #f0c9a0;
-}
-
-.bcs-silhouette-svg--equine {
-  max-width: 320px;
-}
-
-.bcs-svg-score {
-  font-size: 13px;
-  font-weight: 700;
-  fill: var(--primary, #0e7490);
-}
-
-.bcs-svg-caption {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  fill: var(--text-muted, #64748b);
-}
-
-.bcs-svg-hint {
-  font-size: 9px;
-  fill: var(--text-muted, #64748b);
-}
-
-:root[data-theme="dark"] .bcs-silhouette-svg,
-:root[data-theme-mode="dark"] .bcs-silhouette-svg {
-  --bcs-fill: #334155;
-  --bcs-stroke: #cbd5e1;
-  --bcs-rib: #94a3b8;
-  --bcs-fat: #b45309;
+  display: none;
 }
 
 .bcs-controls label {

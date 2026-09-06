@@ -2746,160 +2746,48 @@ const App = {
     return this.bcsSpecies === 'equinos' ? this.BCS_EQUINE_SCORES : this.BCS_DOG_CAT_SCORES;
   },
 
-  /** Parámetros visuales 0–1 según BCS (delgado → ideal → obeso). */
-  getBcsVisualParams(score) {
-    const equine = this.bcsSpecies === 'equinos';
-    const max = equine ? 5 : 9;
-    const t = Math.max(0, Math.min(1, (score - 1) / (max - 1)));
-    const waist = equine
-      ? Math.max(0, 1 - (score - 1) / 3.2)
-      : Math.max(0, 1 - (score - 1) / 7.2);
-    const ribs = equine
-      ? Math.max(0, 1 - (score - 1) / 2.4)
-      : Math.max(0, 1 - (score - 1) / 5.5);
-    const fat = t;
-    const bellySag = Math.max(0, (t - 0.45) / 0.55);
-    const tuck = Math.max(0, 1 - t * 1.15);
-    return { t, waist, ribs, fat, bellySag, tuck, equine };
+  getBcsImageSpeciesKey() {
+    if (this.bcsSpecies === 'equinos') return 'horse';
+    if (this.bcsSpecies === 'gatos') return 'cat';
+    return 'dog';
+  },
+
+  getBcsImageSrc(score) {
+    return `images/bcs/${this.getBcsImageSpeciesKey()}-${score}.jpg`;
   },
 
   renderBcsSvg(score) {
-    if (this.bcsSpecies === 'equinos') return this.renderBcsEquineSvg(score);
-    if (this.bcsSpecies === 'gatos') return this.renderBcsCompanionSvg(score, 'cat');
-    return this.renderBcsCompanionSvg(score, 'dog');
+    // Compat: tests / callers antiguos; el visual real es fotográfico.
+    return this.renderBcsVisual(score);
   },
 
-  renderBcsCompanionSvg(score, kind) {
-    const p = this.getBcsVisualParams(score);
-    const isCat = kind === 'cat';
-    const chestW = 28 + p.fat * 18;
-    const waistW = 10 + (1 - p.waist) * 30 + p.fat * 8;
-    const hipW = 26 + p.fat * 20;
-    const dorsalPath = [
-      `M ${75 - chestW * 0.15} 18`,
-      `C ${75 - chestW} 28, ${75 - chestW} 48, ${75 - waistW} 58`,
-      `C ${75 - hipW} 68, ${75 - hipW} 86, ${75 - hipW * 0.35} 98`,
-      `L ${75 + hipW * 0.35} 98`,
-      `C ${75 + hipW} 86, ${75 + hipW} 68, ${75 + waistW} 58`,
-      `C ${75 + chestW} 48, ${75 + chestW} 28, ${75 + chestW * 0.15} 18`,
-      'Z'
-    ].join(' ');
-
-    const headR = isCat ? 11 : 13;
-    const muzzle = isCat
-      ? `M 38 ${52 - headR * 0.2} L 28 54 L 38 ${54 + headR * 0.35} Z`
-      : `M 40 ${50 - headR * 0.15} Q 24 54 40 ${56 + headR * 0.2} Z`;
-    const ear = isCat
-      ? `<path d="M 42 36 L 48 22 L 54 38 Z" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.6"/>
-         <path d="M 54 37 L 62 24 L 66 40 Z" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.6"/>`
-      : `<path d="M 48 34 Q 52 18 62 32" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.6"/>`;
-
-    const backY = 44 - p.fat * 4;
-    const bellyY = 72 + p.bellySag * 16 - p.tuck * 10;
-    const chestY = 68 + p.fat * 4;
-    const rumpY = 70 + p.fat * 6;
-    const sidePath = [
-      `M 48 ${52 - headR}`,
-      `Q 58 ${backY - 2}, 78 ${backY}`,
-      `Q 108 ${backY + 2}, 128 ${backY + 8}`,
-      `Q 138 ${backY + 14}, 136 ${rumpY}`,
-      `Q 132 ${rumpY + 8}, 118 ${bellyY}`,
-      `Q 92 ${bellyY + 2}, 72 ${chestY}`,
-      `Q 58 ${chestY - 2}, 48 ${52 + headR * 0.55}`,
-      'Z'
-    ].join(' ');
-
-    const ribOpacity = Math.max(0.08, p.ribs);
-    const ribs = [62, 72, 82, 92].map((x, i) => {
-      const y1 = backY + 8 + i;
-      const y2 = bellyY - 6 - i * 0.5;
-      return `<path d="M ${x} ${y1} Q ${x + 2} ${(y1 + y2) / 2} ${x} ${y2}" fill="none" stroke="var(--bcs-rib)" stroke-width="1.4" opacity="${ribOpacity.toFixed(2)}"/>`;
-    }).join('');
-
-    const fatPads = p.fat > 0.55
-      ? `<ellipse cx="118" cy="${rumpY - 2}" rx="${6 + p.fat * 8}" ry="${5 + p.fat * 6}" fill="var(--bcs-fat)" opacity="${(0.25 + p.fat * 0.45).toFixed(2)}"/>
-         <ellipse cx="78" cy="${bellyY - 4}" rx="${10 + p.fat * 12}" ry="${5 + p.fat * 7}" fill="var(--bcs-fat)" opacity="${(0.2 + p.fat * 0.4).toFixed(2)}"/>`
-      : '';
-
-    const spine = `<path d="M 56 ${backY + 2} Q 90 ${backY - 1} 126 ${backY + 6}" fill="none" stroke="var(--bcs-stroke)" stroke-width="1.2" opacity="0.45"/>`;
-    const dorsalLabel = this.esc(this.t('bcs.view_dorsal'));
-    const lateralLabel = this.esc(this.t('bcs.view_lateral'));
-    const waistHint = p.waist > 0.55
-      ? this.esc(this.t('bcs.hint_waist_marked'))
-      : p.waist > 0.25
-        ? this.esc(this.t('bcs.hint_waist_mild'))
-        : this.esc(this.t('bcs.hint_waist_none'));
-
+  renderBcsVisual(score) {
+    const src = this.getBcsImageSrc(score);
+    const speciesLabel = this.bcsSpecies === 'equinos'
+      ? this.t('bcs.species.horse')
+      : this.bcsSpecies === 'gatos'
+        ? this.t('bcs.species.cat')
+        : this.t('bcs.species.dog');
+    const alt = this.t('bcs.image_alt')
+      .replace('{species}', speciesLabel)
+      .replace('{score}', String(score));
+    const caption = this.bcsSpecies === 'equinos'
+      ? this.t('bcs.image_caption_equine')
+      : this.t('bcs.image_caption_companion');
     return `
-      <svg class="bcs-silhouette-svg bcs-silhouette-svg--companion" viewBox="0 0 280 150" role="img" aria-label="${this.esc(this.t('bcs.score_heading').replace('{score}', String(score)))}">
-        <g class="bcs-panel bcs-panel--dorsal">
-          <text x="70" y="12" class="bcs-svg-caption">${dorsalLabel}</text>
-          <path d="${dorsalPath}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="2" stroke-linejoin="round"/>
-          <line x1="75" y1="22" x2="75" y2="94" stroke="var(--bcs-stroke)" stroke-width="1" stroke-dasharray="2 3" opacity="0.35"/>
-          <text x="75" y="112" text-anchor="middle" class="bcs-svg-hint">${waistHint}</text>
-        </g>
-        <g class="bcs-panel bcs-panel--lateral" transform="translate(150,0)">
-          <text x="65" y="12" class="bcs-svg-caption">${lateralLabel}</text>
-          <circle cx="48" cy="52" r="${headR}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.8"/>
-          <path d="${muzzle}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.5"/>
-          ${ear}
-          <path d="${sidePath}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="2" stroke-linejoin="round"/>
-          ${spine}
-          ${ribs}
-          ${fatPads}
-          <line x1="58" y1="88" x2="58" y2="108" stroke="var(--bcs-stroke)" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="72" y1="90" x2="72" y2="110" stroke="var(--bcs-stroke)" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="108" y1="92" x2="108" y2="112" stroke="var(--bcs-stroke)" stroke-width="2.2" stroke-linecap="round"/>
-          <line x1="122" y1="90" x2="122" y2="110" stroke="var(--bcs-stroke)" stroke-width="2.2" stroke-linecap="round"/>
-          <text x="65" y="132" text-anchor="middle" class="bcs-svg-score">BCS ${score}</text>
-        </g>
-      </svg>`;
-  },
-
-  renderBcsEquineSvg(score) {
-    const p = this.getBcsVisualParams(score);
-    const crest = 28 - p.fat * 10;
-    const back = 42 - p.fat * 6;
-    const belly = 78 + p.bellySag * 14 - p.tuck * 6;
-    const rump = 48 - p.fat * 8;
-    const neckW = 10 + p.fat * 10;
-    const bodyPath = [
-      `M 36 58`,
-      `Q 48 ${crest}, 68 ${back}`,
-      `Q 100 ${back - 2}, 128 ${rump}`,
-      `Q 142 ${rump + 8}, 138 ${rump + 22}`,
-      `Q 134 ${belly}, 100 ${belly + 2}`,
-      `Q 72 ${belly}, 58 72`,
-      `Q 48 68, 40 64`,
-      'Z'
-    ].join(' ');
-    const head = 'M 22 48 Q 12 52 18 62 Q 28 66 36 58 Q 34 50 28 46 Z';
-    const ribOpacity = Math.max(0.08, p.ribs);
-    const ribs = [72, 84, 96, 108].map((x) => (
-      `<path d="M ${x} ${back + 6} Q ${x + 1} ${(back + belly) / 2} ${x} ${belly - 4}" fill="none" stroke="var(--bcs-rib)" stroke-width="1.5" opacity="${ribOpacity.toFixed(2)}"/>`
-    )).join('');
-    const crestPad = p.fat > 0.4
-      ? `<ellipse cx="54" cy="${crest + 8}" rx="${neckW}" ry="${5 + p.fat * 7}" fill="var(--bcs-fat)" opacity="${(0.25 + p.fat * 0.4).toFixed(2)}"/>`
-      : '';
-    const tailhead = p.fat > 0.5
-      ? `<ellipse cx="130" cy="${rump + 6}" rx="${7 + p.fat * 6}" ry="${6 + p.fat * 5}" fill="var(--bcs-fat)" opacity="${(0.3 + p.fat * 0.35).toFixed(2)}"/>`
-      : '';
-
-    return `
-      <svg class="bcs-silhouette-svg bcs-silhouette-svg--equine" viewBox="0 0 170 130" role="img" aria-label="${this.esc(this.t('bcs.score_heading').replace('{score}', String(score)))}">
-        <text x="85" y="14" text-anchor="middle" class="bcs-svg-caption">${this.esc(this.t('bcs.view_lateral'))} · Henneke</text>
-        <path d="${head}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="1.8"/>
-        <path d="${bodyPath}" fill="var(--bcs-fill)" stroke="var(--bcs-stroke)" stroke-width="2" stroke-linejoin="round"/>
-        ${crestPad}
-        ${ribs}
-        ${tailhead}
-        <path d="M 136 ${rump + 10} Q 148 ${rump + 4} 152 ${rump + 18}" fill="none" stroke="var(--bcs-stroke)" stroke-width="2" stroke-linecap="round"/>
-        <line x1="70" y1="88" x2="66" y2="112" stroke="var(--bcs-stroke)" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="86" y1="90" x2="90" y2="114" stroke="var(--bcs-stroke)" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="112" y1="88" x2="108" y2="114" stroke="var(--bcs-stroke)" stroke-width="2.4" stroke-linecap="round"/>
-        <line x1="124" y1="86" x2="130" y2="112" stroke="var(--bcs-stroke)" stroke-width="2.4" stroke-linecap="round"/>
-        <text x="85" y="126" text-anchor="middle" class="bcs-svg-score">BCS ${score}</text>
-      </svg>`;
+      <figure class="bcs-figure">
+        <img
+          class="bcs-photo"
+          id="bcsPhoto"
+          src="${this.esc(src)}"
+          alt="${this.esc(alt)}"
+          width="960"
+          height="540"
+          loading="eager"
+          decoding="async"
+        >
+        <figcaption class="bcs-photo-caption">${this.esc(caption)}</figcaption>
+      </figure>`;
   },
 
   renderBcs() {
