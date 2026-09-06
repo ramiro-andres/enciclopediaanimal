@@ -1,7 +1,19 @@
 {
-  "generated_at": "2026-09-05T15:09:00Z",
+  "generated_at": "2026-09-06T05:21:23Z",
   "source": "changelog.md",
   "entries": [
+    {
+      "version": "Unreleased",
+      "date": null,
+      "title": "Unreleased",
+      "items": [
+        "UI solo en español (`js/i18n.js` plano; sin conmutador EN).",
+        "Scope Sonar vía `.sonarcloud.properties` (Automatic Analysis).",
+        "Deploy en `push` a `main` con espera de `test` + `e2e` verdes.",
+        "Borrado automático de ramas al mergear (`cleanup-branch.yml` + `delete_branch_on_merge`).",
+        "Issues Sonar (vulns CI, bug de label, code smells de parse/regex/a11y)."
+      ]
+    },
     {
       "version": "Sprint 12",
       "date": "2026-07-13",

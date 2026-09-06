@@ -2,8 +2,8 @@
   "generado_por": "scripts/data/build_cross_links.rb + integrate_suggested_links_sprint13.rb",
   "descripcion": "Enlaces bidireccionales entre términos del glosario y enfermedades del atlas.",
   "umbral_generico": 0.3,
-  "total_terminos_enlazados": 224,
-  "total_enfermedades_enlazadas": 169,
+  "total_terminos_enlazados": 233,
+  "total_enfermedades_enlazadas": 160,
   "por_termino": {
     "pronostico": {
       "termino": "Pronóstico",
@@ -470,7 +470,7 @@
       "termino": "mg/kg",
       "categoriaId": "farmacia",
       "categoriaNombre": "Farmacología veterinaria",
-      "total": 21,
+      "total": 19,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -584,7 +584,7 @@
       "termino": "Fluidoterapia",
       "categoriaId": "farmacia",
       "categoriaNombre": "Farmacología veterinaria",
-      "total": 13,
+      "total": 12,
       "ejemplos": [
         {
           "nombre": "Torsión gástrica",
@@ -636,7 +636,7 @@
           "breedNombre": "Pony Shetland"
         },
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -648,6 +648,13 @@
           "animalId": "conejos",
           "breedId": "conejo_mini",
           "breedNombre": "Conejo Mini (Toy/Enano)"
+        },
+        {
+          "nombre": "Enfermedad ósea metabólica",
+          "gravedad": "grave",
+          "animalId": "reptiles",
+          "breedId": "gecko_leopardo",
+          "breedNombre": "Gecko Leopardo"
         }
       ]
     },
@@ -715,7 +722,7 @@
       "termino": "Radiografía",
       "categoriaId": "examenes",
       "categoriaNombre": "Exámenes y pruebas diagnósticas",
-      "total": 16,
+      "total": 15,
       "ejemplos": [
         {
           "nombre": "Colapso traqueal",
@@ -774,11 +781,18 @@
           "breedNombre": "Devon Rex"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
+        },
+        {
+          "nombre": "Laminitis",
+          "gravedad": "grave",
+          "animalId": "equinos",
+          "breedId": "pony_shetland",
+          "breedNombre": "Pony Shetland"
         }
       ]
     },
@@ -1034,7 +1048,7 @@
       "termino": "Auscultación",
       "categoriaId": "examenes",
       "categoriaNombre": "Exámenes y pruebas diagnósticas",
-      "total": 6,
+      "total": 5,
       "ejemplos": [
         {
           "nombre": "Colapso traqueal",
@@ -1065,7 +1079,7 @@
           "breedNombre": "Pony Shetland"
         },
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -1232,7 +1246,7 @@
       "termino": "Anorexia",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 13,
+      "total": 12,
       "ejemplos": [
         {
           "nombre": "Cardiomiopatía hipertrófica",
@@ -1256,11 +1270,11 @@
           "breedNombre": "Devon Rex"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Fiebre de embarque (complejo respiratorio bovino)",
@@ -1296,6 +1310,13 @@
           "animalId": "conejos",
           "breedId": "conejo_mini",
           "breedNombre": "Conejo Mini (Toy/Enano)"
+        },
+        {
+          "nombre": "Pasteurelosis",
+          "gravedad": "grave",
+          "animalId": "conejos",
+          "breedId": "conejo_mini",
+          "breedNombre": "Conejo Mini (Toy/Enano)"
         }
       ]
     },
@@ -1303,7 +1324,7 @@
       "termino": "Letargo",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 29,
+      "total": 26,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -1381,7 +1402,7 @@
       "termino": "Vómitos",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 13,
+      "total": 12,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -1440,11 +1461,18 @@
           "breedNombre": "Devon Rex"
         },
         {
-          "nombre": "Poliquistosis renal (PKD)",
+          "nombre": "Poliquistosis renal",
           "gravedad": "grave",
           "animalId": "gatos",
           "breedId": "persa",
           "breedNombre": "Persa"
+        },
+        {
+          "nombre": "Metalosis por intoxicación",
+          "gravedad": "grave",
+          "animalId": "aves",
+          "breedId": "guacamayo",
+          "breedNombre": "Guacamayo"
         }
       ]
     },
@@ -1452,7 +1480,7 @@
       "termino": "Diarrea",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 12,
+      "total": 11,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -1469,11 +1497,11 @@
           "breedNombre": "Yorkshire Terrier"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Parásitos internos resistentes",
@@ -1516,6 +1544,13 @@
           "animalId": "camelidos",
           "breedId": "llama",
           "breedNombre": "Llama"
+        },
+        {
+          "nombre": "Enfermedad de la cola húmeda (proliferativa)",
+          "gravedad": "grave",
+          "animalId": "roedores",
+          "breedId": "hamster",
+          "breedNombre": "Hámster"
         }
       ]
     },
@@ -1523,7 +1558,7 @@
       "termino": "Cojera",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 18,
+      "total": 16,
       "ejemplos": [
         {
           "nombre": "Luxación de rótula",
@@ -1589,11 +1624,11 @@
           "breedNombre": "Hereford (variedad compacta/mini)"
         },
         {
-          "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
-          "gravedad": "grave",
+          "nombre": "Cojeras (laminitis y dermatitis digital)",
+          "gravedad": "moderada",
           "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
+          "breedId": "holstein",
+          "breedNombre": "Holstein"
         }
       ]
     },
@@ -1651,7 +1686,7 @@
       "termino": "Fiebre",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 13,
+      "total": 10,
       "ejemplos": [
         {
           "nombre": "Fiebre de embarque (complejo respiratorio bovino)",
@@ -1668,20 +1703,6 @@
           "breedNombre": "Dexter"
         },
         {
-          "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
-        },
-        {
-          "nombre": "Neumonía (complejo respiratorio bovino)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
-        },
-        {
           "nombre": "Anaplasmosis",
           "gravedad": "grave",
           "animalId": "bovinos",
@@ -1694,13 +1715,6 @@
           "animalId": "bovinos",
           "breedId": "angus",
           "breedNombre": "Angus"
-        },
-        {
-          "nombre": "Hipocalcemia (fiebre de leche)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "holstein",
-          "breedNombre": "Holstein"
         },
         {
           "nombre": "Neumonía enzoótica",
@@ -1722,6 +1736,27 @@
           "animalId": "porcinos",
           "breedId": "mini_pig",
           "breedNombre": "Mini Pig"
+        },
+        {
+          "nombre": "Mastitis-metritis-agalactia (MMA)",
+          "gravedad": "grave",
+          "animalId": "porcinos",
+          "breedId": "cerdo_landrace",
+          "breedNombre": "Cerdo Landrace"
+        },
+        {
+          "nombre": "Enfermedad hemorrágica vírica (RHDV)",
+          "gravedad": "grave",
+          "animalId": "conejos",
+          "breedId": "conejo_mini",
+          "breedNombre": "Conejo Mini (Toy/Enano)"
+        },
+        {
+          "nombre": "Abscesos por mordeduras",
+          "gravedad": "moderada",
+          "animalId": "roedores",
+          "breedId": "hamster",
+          "breedNombre": "Hámster"
         }
       ]
     },
@@ -1729,7 +1764,7 @@
       "termino": "Convulsiones",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 10,
+      "total": 9,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -1760,11 +1795,11 @@
           "breedNombre": "Devon Rex"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Metalosis por intoxicación",
@@ -1822,7 +1857,7 @@
       "termino": "Ictericia",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 6,
+      "total": 5,
       "ejemplos": [
         {
           "nombre": "Anemia de estres eritrocitario (IMHA)",
@@ -1839,11 +1874,11 @@
           "breedNombre": "Siamés"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Anaplasmosis",
@@ -2075,7 +2110,7 @@
       "termino": "Shock",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 8,
+      "total": 7,
       "ejemplos": [
         {
           "nombre": "Traumatismo por caída",
@@ -2099,7 +2134,7 @@
           "breedNombre": "Pastor Alemán"
         },
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -2161,7 +2196,7 @@
       "termino": "Temblores",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 11,
+      "total": 9,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -2185,11 +2220,11 @@
           "breedNombre": "Maine Coon"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Parálisis periódica hiperpotasémica (HYPP)",
@@ -2197,13 +2232,6 @@
           "animalId": "equinos",
           "breedId": "cuarto_milla",
           "breedNombre": "Cuarto de Milla (Quarter Horse)"
-        },
-        {
-          "nombre": "Hipocalcemia (fiebre de leche)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "holstein",
-          "breedNombre": "Holstein"
         },
         {
           "nombre": "Golpe de calor",
@@ -2225,6 +2253,13 @@
           "animalId": "reptiles",
           "breedId": "gecko_leopardo",
           "breedNombre": "Gecko Leopardo"
+        },
+        {
+          "nombre": "Insulinoma",
+          "gravedad": "grave",
+          "animalId": "roedores",
+          "breedId": "huron",
+          "breedNombre": "Hurón"
         }
       ]
     },
@@ -2261,7 +2296,7 @@
       "termino": "Muerte súbita",
       "categoriaId": "sintomas",
       "categoriaNombre": "Síntomas y signos clínicos",
-      "total": 8,
+      "total": 6,
       "ejemplos": [
         {
           "nombre": "Cardiomiopatía hipertrófica",
@@ -2271,18 +2306,11 @@
           "breedNombre": "Bengala"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
-        },
-        {
-          "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
-          "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Aflatoxicosis",
@@ -2355,10 +2383,10 @@
       "termino": "Retículo",
       "categoriaId": "anatomia",
       "categoriaNombre": "Anatomía y fisiología",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -2370,10 +2398,10 @@
       "termino": "Abomaso",
       "categoriaId": "anatomia",
       "categoriaNombre": "Anatomía y fisiología",
-      "total": 3,
+      "total": 2,
       "ejemplos": [
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -2614,14 +2642,14 @@
       "termino": "Zoonosis",
       "categoriaId": "infecciosas",
       "categoriaNombre": "Enfermedades infecciosas y parasitarias",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -2644,14 +2672,14 @@
       "termino": "Aspergilosis",
       "categoriaId": "infecciosas",
       "categoriaNombre": "Enfermedades infecciosas y parasitarias",
-      "total": 3,
+      "total": 2,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Aspergilosis",
@@ -2666,14 +2694,14 @@
       "termino": "Seroconversión",
       "categoriaId": "infecciosas",
       "categoriaNombre": "Enfermedades infecciosas y parasitarias",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -2784,7 +2812,7 @@
       "termino": "Cólico",
       "categoriaId": "rumiantes",
       "categoriaNombre": "Salud en rumiantes",
-      "total": 7,
+      "total": 6,
       "ejemplos": [
         {
           "nombre": "Torsión gástrica",
@@ -2815,7 +2843,7 @@
           "breedNombre": "Pony Shetland"
         },
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -2856,14 +2884,14 @@
       "termino": "Clostridiosis",
       "categoriaId": "rumiantes",
       "categoriaNombre": "Salud en rumiantes",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
+          "nombre": "Clostridiosis",
           "gravedad": "grave",
           "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
+          "breedId": "dexter",
+          "breedNombre": "Dexter"
         }
       ]
     },
@@ -3193,6 +3221,21 @@
         }
       ]
     },
+    "calculos urinarios": {
+      "termino": "Cálculos urinarios",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Cálculos urinarios",
+          "gravedad": "moderada",
+          "animalId": "gatos",
+          "breedId": "ragdoll",
+          "breedNombre": "Ragdoll"
+        }
+      ]
+    },
     "deficiencia de piruvato quinasa": {
       "termino": "Deficiencia de piruvato quinasa",
       "categoriaId": "enfermedades",
@@ -3412,8 +3455,8 @@
           "nombre": "Enfermedad del disco intervertebral",
           "gravedad": "grave",
           "animalId": "perros",
-          "breedId": "bulldog_frances",
-          "breedNombre": "Bulldog Francés"
+          "breedId": "cocker",
+          "breedNombre": "Cocker Spaniel"
         }
       ]
     },
@@ -3514,6 +3557,21 @@
         }
       ]
     },
+    "escorbuto": {
+      "termino": "Escorbuto",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Escorbuto",
+          "gravedad": "grave",
+          "animalId": "roedores",
+          "breedId": "cobaya",
+          "breedNombre": "Cobaya (Cuy)"
+        }
+      ]
+    },
     "espondilosis deformante": {
       "termino": "Espondilosis deformante",
       "categoriaId": "enfermedades",
@@ -3541,6 +3599,28 @@
           "animalId": "conejos",
           "breedId": "conejo_mini",
           "breedNombre": "Conejo Mini (Toy/Enano)"
+        }
+      ]
+    },
+    "estomatitis": {
+      "termino": "Estomatitis",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 2,
+      "ejemplos": [
+        {
+          "nombre": "Enfermedad periodontal",
+          "gravedad": "moderada",
+          "animalId": "perros",
+          "breedId": "chihuahua",
+          "breedNombre": "Chihuahua"
+        },
+        {
+          "nombre": "Estomatitis",
+          "gravedad": "moderada",
+          "animalId": "reptiles",
+          "breedId": "serpiente_corn",
+          "breedNombre": "Serpiente del Maíz (Corn Snake)"
         }
       ]
     },
@@ -3748,6 +3828,21 @@
           "animalId": "perros",
           "breedId": "beagle",
           "breedNombre": "Beagle"
+        }
+      ]
+    },
+    "infeccion respiratoria": {
+      "termino": "Infección respiratoria",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Infección respiratoria",
+          "gravedad": "moderada",
+          "animalId": "reptiles",
+          "breedId": "serpiente_corn",
+          "breedNombre": "Serpiente del Maíz (Corn Snake)"
         }
       ]
     },
@@ -3959,6 +4054,21 @@
         }
       ]
     },
+    "meningeal worm": {
+      "termino": "Meningeal worm",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Meningeal worm",
+          "gravedad": "grave",
+          "animalId": "camelidos",
+          "breedId": "alpaca",
+          "breedNombre": "Alpaca"
+        }
+      ]
+    },
     "metalosis por intoxicacion": {
       "termino": "Metalosis por intoxicación",
       "categoriaId": "enfermedades",
@@ -4008,14 +4118,14 @@
       "termino": "Mycoplasma",
       "categoriaId": "enfermedades",
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 3,
+      "total": 2,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
           "nombre": "Mycoplasma",
@@ -4066,7 +4176,7 @@
       "termino": "Neumonía",
       "categoriaId": "enfermedades",
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 7,
+      "total": 4,
       "ejemplos": [
         {
           "nombre": "Colapso traqueal",
@@ -4076,18 +4186,18 @@
           "breedNombre": "Chihuahua"
         },
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         },
         {
-          "nombre": "Neumonía (complejo respiratorio bovino)",
+          "nombre": "Neumonía",
           "gravedad": "grave",
-          "animalId": "bovinos",
-          "breedId": "angus",
-          "breedNombre": "Angus"
+          "animalId": "equinos",
+          "breedId": "pony_connemara",
+          "breedNombre": "Pony Connemara"
         },
         {
           "nombre": "Neumonía enzoótica",
@@ -4095,13 +4205,6 @@
           "animalId": "porcinos",
           "breedId": "cerdo_iberico",
           "breedNombre": "Cerdo Ibérico"
-        },
-        {
-          "nombre": "Infección respiratoria (neumonía)",
-          "gravedad": "grave",
-          "animalId": "roedores",
-          "breedId": "cobaya",
-          "breedNombre": "Cobaya (Cuy)"
         }
       ]
     },
@@ -4362,7 +4465,7 @@
       "termino": "Pododermatitis",
       "categoriaId": "enfermedades",
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 5,
+      "total": 3,
       "ejemplos": [
         {
           "nombre": "Dermatitis atópica",
@@ -4379,11 +4482,11 @@
           "breedNombre": "Hereford (variedad compacta/mini)"
         },
         {
-          "nombre": "Pododermatitis (llagas en corvejones)",
+          "nombre": "Pododermatitis",
           "gravedad": "moderada",
           "animalId": "conejos",
-          "breedId": "conejo_gigante",
-          "breedNombre": "Conejo Gigante de Flandes"
+          "breedId": "holandes_enano",
+          "breedNombre": "Holandés Enano"
         }
       ]
     },
@@ -4399,6 +4502,21 @@
           "animalId": "bovinos",
           "breedId": "hereford",
           "breedNombre": "Hereford (variedad compacta/mini)"
+        }
+      ]
+    },
+    "poliquistosis renal": {
+      "termino": "Poliquistosis renal",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Poliquistosis renal",
+          "gravedad": "grave",
+          "animalId": "gatos",
+          "breedId": "persa",
+          "breedNombre": "Persa"
         }
       ]
     },
@@ -4451,14 +4569,14 @@
       "termino": "Psitacosis",
       "categoriaId": "enfermedades",
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -4611,6 +4729,21 @@
         }
       ]
     },
+    "timpanismo": {
+      "termino": "Timpanismo",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Timpanismo",
+          "gravedad": "grave",
+          "animalId": "bovinos",
+          "breedId": "hereford",
+          "breedNombre": "Hereford (variedad compacta/mini)"
+        }
+      ]
+    },
     "torsion gastrica": {
       "termino": "Torsión gástrica",
       "categoriaId": "enfermedades",
@@ -4663,11 +4796,26 @@
         }
       ]
     },
+    "tricobezoar": {
+      "termino": "Tricobezoar",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Tricobezoar",
+          "gravedad": "grave",
+          "animalId": "conejos",
+          "breedId": "holandes_enano",
+          "breedNombre": "Holandés Enano"
+        }
+      ]
+    },
     "tumores": {
       "termino": "Tumores",
       "categoriaId": "enfermedades",
       "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
-      "total": 3,
+      "total": 2,
       "ejemplos": [
         {
           "nombre": "Hipoglucemia",
@@ -4677,7 +4825,7 @@
           "breedNombre": "Chihuahua"
         },
         {
-          "nombre": "Tumores (lipomas y otros)",
+          "nombre": "Tumores",
           "gravedad": "moderada",
           "animalId": "aves",
           "breedId": "periquito",
@@ -4712,6 +4860,21 @@
           "animalId": "perros",
           "breedId": "gran_danes",
           "breedNombre": "Gran Danés"
+        }
+      ]
+    },
+    "acaros de patas": {
+      "termino": "Ácaros de patas",
+      "categoriaId": "enfermedades",
+      "categoriaNombre": "Enfermedades documentadas en la enciclopedia",
+      "total": 1,
+      "ejemplos": [
+        {
+          "nombre": "Ácaros de patas",
+          "gravedad": "leve",
+          "animalId": "aves",
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -4874,14 +5037,14 @@
       "termino": "Doxiciclina",
       "categoriaId": "farmacos_protocolo",
       "categoriaNombre": "Fármacos de los protocolos clínicos",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -4904,14 +5067,14 @@
       "termino": "Enrofloxacina",
       "categoriaId": "farmacos_protocolo",
       "categoriaNombre": "Fármacos de los protocolos clínicos",
-      "total": 2,
+      "total": 1,
       "ejemplos": [
         {
-          "nombre": "Psitacosis (clamidiosis)",
+          "nombre": "Psitacosis",
           "gravedad": "grave",
           "animalId": "aves",
-          "breedId": "periquito",
-          "breedNombre": "Periquito"
+          "breedId": "canario",
+          "breedNombre": "Canario"
         }
       ]
     },
@@ -5263,10 +5426,10 @@
       "termino": "Simeticona",
       "categoriaId": "farmacos_protocolo",
       "categoriaNombre": "Fármacos de los protocolos clínicos",
-      "total": 3,
+      "total": 2,
       "ejemplos": [
         {
-          "nombre": "Timpanismo (meteorismo ruminal)",
+          "nombre": "Timpanismo",
           "gravedad": "grave",
           "animalId": "bovinos",
           "breedId": "hereford",
@@ -5288,7 +5451,7 @@
       "total": 1,
       "ejemplos": [
         {
-          "nombre": "Escorbuto (deficiencia de vitamina C)",
+          "nombre": "Escorbuto",
           "gravedad": "grave",
           "animalId": "roedores",
           "breedId": "cobaya",
@@ -5303,11 +5466,11 @@
       "total": 50,
       "ejemplos": [
         {
-          "nombre": "Trastorno de la vejiga natatoria",
+          "nombre": "Pododermatitis",
           "gravedad": "moderada",
-          "animalId": "peces",
-          "breedId": "goldfish",
-          "breedNombre": "Pez Dorado (Goldfish)"
+          "animalId": "conejos",
+          "breedId": "holandes_enano",
+          "breedNombre": "Holandés Enano"
         },
         {
           "nombre": "Shunt portosistémico",
@@ -6251,6 +6414,10 @@
           "categoriaId": "enfermedades"
         },
         {
+          "termino": "Estomatitis",
+          "categoriaId": "enfermedades"
+        },
+        {
           "termino": "Halitosis",
           "categoriaId": "sintomas"
         },
@@ -7000,63 +7167,8 @@
         }
       ]
     },
-    "psitacosis (clamidiosis)": {
-      "nombre": "Psitacosis (clamidiosis)",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "terminos": [
-        {
-          "termino": "Anorexia",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Aspergilosis",
-          "categoriaId": "infecciosas"
-        },
-        {
-          "termino": "Convulsiones",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Diarrea",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Doxiciclina",
-          "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "Enrofloxacina",
-          "categoriaId": "farmacos_protocolo"
-        },
-        {
-          "termino": "Ictericia",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Letargo",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "mg/kg",
-          "categoriaId": "farmacia"
-        },
-        {
-          "termino": "Muerte súbita",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Mycoplasma",
-          "categoriaId": "enfermedades"
-        },
-        {
-          "termino": "Neumonía",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "timpanismo (meteorismo ruminal)": {
-      "nombre": "Timpanismo (meteorismo ruminal)",
+    "timpanismo": {
+      "nombre": "Timpanismo",
       "animalId": "bovinos",
       "breedId": "hereford",
       "terminos": [
@@ -7091,45 +7203,10 @@
         {
           "termino": "Simeticona",
           "categoriaId": "farmacos_protocolo"
-        }
-      ]
-    },
-    "timpanismo": {
-      "nombre": "Timpanismo",
-      "animalId": "bovinos",
-      "breedId": "dexter",
-      "terminos": [
-        {
-          "termino": "Abomaso",
-          "categoriaId": "anatomia"
         },
         {
-          "termino": "Auscultación",
-          "categoriaId": "examenes"
-        },
-        {
-          "termino": "Cólico",
-          "categoriaId": "rumiantes"
-        },
-        {
-          "termino": "Fluidoterapia",
-          "categoriaId": "farmacia"
-        },
-        {
-          "termino": "mg/kg",
-          "categoriaId": "farmacia"
-        },
-        {
-          "termino": "Retículo",
-          "categoriaId": "anatomia"
-        },
-        {
-          "termino": "Shock",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Simeticona",
-          "categoriaId": "farmacos_protocolo"
+          "termino": "Timpanismo",
+          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -7351,11 +7428,15 @@
         }
       ]
     },
-    "tumores (lipomas y otros)": {
-      "nombre": "Tumores (lipomas y otros)",
+    "tumores": {
+      "nombre": "Tumores",
       "animalId": "aves",
       "breedId": "periquito",
       "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Letargo",
           "categoriaId": "sintomas"
@@ -7390,6 +7471,10 @@
       "animalId": "reptiles",
       "breedId": "serpiente_corn",
       "terminos": [
+        {
+          "termino": "Infección respiratoria",
+          "categoriaId": "enfermedades"
+        },
         {
           "termino": "Letargo",
           "categoriaId": "sintomas"
@@ -7476,32 +7561,6 @@
         {
           "termino": "Letargo",
           "categoriaId": "sintomas"
-        }
-      ]
-    },
-    "enfermedad del koi herpesvirus (khv)": {
-      "nombre": "Enfermedad del Koi herpesvirus (KHV)",
-      "animalId": "peces",
-      "breedId": "carpa_koi",
-      "terminos": [
-        {
-          "termino": "Letargo",
-          "categoriaId": "sintomas"
-        }
-      ]
-    },
-    "tumores": {
-      "nombre": "Tumores",
-      "animalId": "roedores",
-      "breedId": "hamster",
-      "terminos": [
-        {
-          "termino": "Letargo",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Tumores",
-          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -7593,8 +7652,8 @@
         }
       ]
     },
-    "poliquistosis renal (pkd)": {
-      "nombre": "Poliquistosis renal (PKD)",
+    "poliquistosis renal": {
+      "nombre": "Poliquistosis renal",
       "animalId": "gatos",
       "breedId": "persa",
       "terminos": [
@@ -7603,19 +7662,8 @@
           "categoriaId": "ficha_enfermedad"
         },
         {
-          "termino": "Vómitos",
-          "categoriaId": "sintomas"
-        }
-      ]
-    },
-    "poliquistosis renal": {
-      "nombre": "Poliquistosis renal",
-      "animalId": "gatos",
-      "breedId": "british_shorthair",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
+          "termino": "Poliquistosis renal",
+          "categoriaId": "enfermedades"
         },
         {
           "termino": "Vómitos",
@@ -7808,44 +7856,6 @@
         }
       ]
     },
-    "clostridiosis (mancha, gangrena gaseosa)": {
-      "nombre": "Clostridiosis (mancha, gangrena gaseosa)",
-      "animalId": "bovinos",
-      "breedId": "angus",
-      "terminos": [
-        {
-          "termino": "Clostridiosis",
-          "categoriaId": "rumiantes"
-        },
-        {
-          "termino": "Cojera",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Fiebre",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Muerte súbita",
-          "categoriaId": "sintomas"
-        }
-      ]
-    },
-    "pododermatitis (llagas en corvejones)": {
-      "nombre": "Pododermatitis (llagas en corvejones)",
-      "animalId": "conejos",
-      "breedId": "conejo_gigante",
-      "terminos": [
-        {
-          "termino": "Cojera",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Pododermatitis",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "pedero (pietin)": {
       "nombre": "Pedero (pietín)",
       "animalId": "ovinos",
@@ -7883,14 +7893,18 @@
         }
       ]
     },
-    "escorbuto (deficiencia de vitamina c)": {
-      "nombre": "Escorbuto (deficiencia de vitamina C)",
+    "escorbuto": {
+      "nombre": "Escorbuto",
       "animalId": "roedores",
       "breedId": "cobaya",
       "terminos": [
         {
           "termino": "Cojera",
           "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Escorbuto",
+          "categoriaId": "enfermedades"
         },
         {
           "termino": "Vitamina C",
@@ -7951,21 +7965,6 @@
         }
       ]
     },
-    "neumonia (complejo respiratorio bovino)": {
-      "nombre": "Neumonía (complejo respiratorio bovino)",
-      "animalId": "bovinos",
-      "breedId": "angus",
-      "terminos": [
-        {
-          "termino": "Fiebre",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Neumonía",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "anaplasmosis": {
       "nombre": "Anaplasmosis",
       "animalId": "bovinos",
@@ -7997,21 +7996,6 @@
         {
           "termino": "Retención de placenta",
           "categoriaId": "reproduccion"
-        }
-      ]
-    },
-    "hipocalcemia (fiebre de leche)": {
-      "nombre": "Hipocalcemia (fiebre de leche)",
-      "animalId": "bovinos",
-      "breedId": "holstein",
-      "terminos": [
-        {
-          "termino": "Fiebre",
-          "categoriaId": "sintomas"
-        },
-        {
-          "termino": "Temblores",
-          "categoriaId": "sintomas"
         }
       ]
     },
@@ -8234,6 +8218,10 @@
         {
           "termino": "Bruxismo",
           "categoriaId": "sintomas"
+        },
+        {
+          "termino": "Tricobezoar",
+          "categoriaId": "enfermedades"
         }
       ]
     },
@@ -8257,10 +8245,6 @@
       "animalId": "peces",
       "breedId": "goldfish",
       "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        },
         {
           "termino": "Trastorno de la vejiga natatoria",
           "categoriaId": "enfermedades"
@@ -8445,6 +8429,21 @@
         }
       ]
     },
+    "calculos urinarios": {
+      "nombre": "Cálculos urinarios",
+      "animalId": "gatos",
+      "breedId": "ragdoll",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
+          "termino": "Cálculos urinarios",
+          "categoriaId": "enfermedades"
+        }
+      ]
+    },
     "dermatitis en pliegues": {
       "nombre": "Dermatitis en pliegues",
       "animalId": "perros",
@@ -8500,7 +8499,7 @@
     "enfermedad del disco intervertebral": {
       "nombre": "Enfermedad del disco intervertebral",
       "animalId": "perros",
-      "breedId": "bulldog_frances",
+      "breedId": "cocker",
       "terminos": [
         {
           "termino": "Anamnesis",
@@ -8549,6 +8548,17 @@
       "terminos": [
         {
           "termino": "Erisipela",
+          "categoriaId": "enfermedades"
+        }
+      ]
+    },
+    "estomatitis": {
+      "nombre": "Estomatitis",
+      "animalId": "reptiles",
+      "breedId": "serpiente_corn",
+      "terminos": [
+        {
+          "termino": "Estomatitis",
           "categoriaId": "enfermedades"
         }
       ]
@@ -8698,6 +8708,17 @@
         }
       ]
     },
+    "meningeal worm": {
+      "nombre": "Meningeal worm",
+      "animalId": "camelidos",
+      "breedId": "alpaca",
+      "terminos": [
+        {
+          "termino": "Meningeal worm",
+          "categoriaId": "enfermedades"
+        }
+      ]
+    },
     "mielopatia degenerativa": {
       "nombre": "Mielopatía degenerativa",
       "animalId": "perros",
@@ -8754,17 +8775,6 @@
         }
       ]
     },
-    "infeccion respiratoria (neumonia)": {
-      "nombre": "Infección respiratoria (neumonía)",
-      "animalId": "roedores",
-      "breedId": "cobaya",
-      "terminos": [
-        {
-          "termino": "Neumonía",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
     "piodermia": {
       "nombre": "Piodermia",
       "animalId": "gatos",
@@ -8786,16 +8796,9 @@
       "breedId": "holandes_enano",
       "terminos": [
         {
-          "termino": "Pododermatitis",
-          "categoriaId": "enfermedades"
-        }
-      ]
-    },
-    "pododermatitis (footrot)": {
-      "nombre": "Pododermatitis (footrot)",
-      "animalId": "ovinos",
-      "breedId": "ouessant",
-      "terminos": [
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
         {
           "termino": "Pododermatitis",
           "categoriaId": "enfermedades"
@@ -8887,6 +8890,21 @@
         }
       ]
     },
+    "acaros de patas": {
+      "nombre": "Ácaros de patas",
+      "animalId": "aves",
+      "breedId": "canario",
+      "terminos": [
+        {
+          "termino": "Anamnesis",
+          "categoriaId": "ficha_enfermedad"
+        },
+        {
+          "termino": "Ácaros de patas",
+          "categoriaId": "enfermedades"
+        }
+      ]
+    },
     "acaros respiratorios": {
       "nombre": "Ácaros respiratorios",
       "animalId": "aves",
@@ -8909,32 +8927,10 @@
         }
       ]
     },
-    "enfermedad de disco intervertebral": {
-      "nombre": "Enfermedad de disco intervertebral",
-      "animalId": "perros",
-      "breedId": "cocker",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        }
-      ]
-    },
     "anomalia del ojo del collie (cea)": {
       "nombre": "Anomalía del ojo del Collie (CEA)",
       "animalId": "perros",
       "breedId": "border_collie",
-      "terminos": [
-        {
-          "termino": "Anamnesis",
-          "categoriaId": "ficha_enfermedad"
-        }
-      ]
-    },
-    "calculos urinarios (urolitiasis)": {
-      "nombre": "Cálculos urinarios (urolitiasis)",
-      "animalId": "gatos",
-      "breedId": "ragdoll",
       "terminos": [
         {
           "termino": "Anamnesis",
@@ -8953,10 +8949,10 @@
         }
       ]
     },
-    "acaros de patas (cnemidocoptes)": {
-      "nombre": "Ácaros de patas (Cnemidocoptes)",
+    "megabacteriosis (macrorhabdus)": {
+      "nombre": "Megabacteriosis (Macrorhabdus)",
       "animalId": "aves",
-      "breedId": "canario",
+      "breedId": "periquito",
       "terminos": [
         {
           "termino": "Anamnesis",
