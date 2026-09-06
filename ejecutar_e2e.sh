@@ -17,7 +17,7 @@ echo "=========================================================="
 
 PLAYWRIGHT_BIN="./node_modules/.bin/playwright"
 
-if [ ! -x "$PLAYWRIGHT_BIN" ]; then
+if [[ ! -x "$PLAYWRIGHT_BIN" ]]; then
   echo "📦 Instalando dependencias de Playwright (lockfile, sin lifecycle scripts)..."
   npm ci --ignore-scripts
   "$PLAYWRIGHT_BIN" install --with-deps chromium

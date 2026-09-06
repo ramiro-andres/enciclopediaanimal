@@ -446,6 +446,10 @@ class WorkflowAndGovernanceTest < Minitest::Test
     assert_match(/build:\n(?:.*\n)*?    permissions:\n      contents: read\n      pages: write/, workflow)
     assert_match(/deploy:\n(?:.*\n)*?    permissions:\n      pages: write\n      id-token: write/, workflow)
     refute_includes workflow, 'write-all'
+    # Mitigaciones Sonar S7630/S7631: env para workflow_run + checkout de main verificado.
+    assert_includes workflow, 'HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}'
+    assert_includes workflow, 'ref: main'
+    assert_includes workflow, 'git merge-base --is-ancestor'
   end
 
   def test_plantillas_de_issues_existen
