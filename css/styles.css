@@ -810,14 +810,16 @@ body {
   display: block;
   margin-bottom: 0.5rem;
 }
-.feature-card h3 {
+.feature-card h3,
+.feature-card-title {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 1.05rem;
   font-weight: 800;
   color: var(--primary-dark);
   margin-bottom: 0.4rem;
 }
-.feature-card p {
+.feature-card p,
+.feature-card-text {
   font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.55;
@@ -2202,6 +2204,15 @@ body {
   box-shadow: none;
   overflow: hidden;
 }
+button.feature-card {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
 .feature-card:hover {
   transform: none;
   box-shadow: none;
@@ -2244,7 +2255,9 @@ body {
   font-size: 0.7rem;
   letter-spacing: 0.12em;
 }
-.feature-card h3 {
+.feature-card h3,
+.feature-card-title {
+  display: block;
   margin-bottom: 0.8rem;
   color: inherit;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -2252,7 +2265,9 @@ body {
   font-weight: 600;
   letter-spacing: -0.035em;
 }
-.feature-card p {
+.feature-card p,
+.feature-card-text {
+  display: block;
   max-width: 330px;
   color: inherit;
   font-size: 0.85rem;
@@ -2686,7 +2701,8 @@ body {
     padding: 1.15rem 1.25rem 1.4rem;
     gap: 0.9rem;
   }
-  .feature-card h3 { font-size: 1.35rem; }
+  .feature-card h3,
+  .feature-card-title { font-size: 1.35rem; }
   .welcome-picker {
     margin: 0 -1rem;
     padding: 3rem 1rem;
@@ -6435,7 +6451,9 @@ textarea::placeholder {
 }
 
 :root[data-theme="dark"] .welcome-features .feature-card h3,
-:root[data-theme-mode="dark"] .welcome-features .feature-card h3 {
+:root[data-theme="dark"] .welcome-features .feature-card-title,
+:root[data-theme-mode="dark"] .welcome-features .feature-card h3,
+:root[data-theme-mode="dark"] .welcome-features .feature-card-title {
   color: var(--text);
 }
 
@@ -6490,11 +6508,13 @@ textarea::placeholder {
     color: var(--text);
   }
 
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card h3 {
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card h3,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card-title {
     color: var(--text);
   }
 
   :root:not([data-theme-mode="light"]) .welcome-features .feature-card p,
+  :root:not([data-theme-mode="light"]) .welcome-features .feature-card-text,
   :root:not([data-theme-mode="light"]) .welcome-features .feature-card .feature-number {
     color: var(--text-muted);
     opacity: 1;

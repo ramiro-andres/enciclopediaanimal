@@ -54,14 +54,14 @@
 
   function parseTypicalWeightKg(pesoTexto) {
     if (!pesoTexto) return 10;
-    const range = String(pesoTexto).match(/(\d[\d.,]*)\s*-\s*(\d[\d.,]*)\s*kg/i);
+    const range = String(pesoTexto).match(/(\d+(?:[.,]\d+)?)\s*-\s*(\d+(?:[.,]\d+)?)\s*kg/i);
     if (range) {
-      const min = parseFloat(range[1].replace(',', '.'));
-      const max = parseFloat(range[2].replace(',', '.'));
+      const min = Number.parseFloat(range[1].replace(',', '.'));
+      const max = Number.parseFloat(range[2].replace(',', '.'));
       return Math.round(((min + max) / 2) * 100) / 100;
     }
-    const single = String(pesoTexto).match(/(\d[\d.,]*)\s*kg/i);
-    if (single) return parseFloat(single[1].replace(',', '.'));
+    const single = String(pesoTexto).match(/(\d+(?:[.,]\d+)?)\s*kg/i);
+    if (single) return Number.parseFloat(single[1].replace(',', '.'));
     return 10;
   }
 

@@ -3,7 +3,7 @@
 # SOLO_JS=1 omite la regeneración de JSON (CI: validar sincronización sin reintegrar enlaces).
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-if [ "${SOLO_JS:-}" != "1" ]; then
+if [[ "${SOLO_JS:-}" != "1" ]]; then
   ruby "$DIR/scripts/data/build_medical_dictionary.rb"
   ruby "$DIR/scripts/data/build_search_index.rb"
   ruby "$DIR/scripts/data/build_cross_links.rb"
