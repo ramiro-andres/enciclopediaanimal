@@ -164,6 +164,8 @@ class E2eInfraTest < Minitest::Test
     assert_includes wf, 'permissions:'
     assert_includes wf, 'contents: read'
     assert_includes wf, 'playwright'
+    assert_includes wf, 'npm ci --ignore-scripts'
+    refute_includes wf, 'npx '
   end
 
   def test_app_exporta_conteo_de_enlaces_en_estado_e2e

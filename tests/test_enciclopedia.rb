@@ -440,7 +440,11 @@ class WorkflowAndGovernanceTest < Minitest::Test
 
   def test_workflow_deploy_usa_permisos_minimos
     workflow = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
-    assert_match(/permissions:\s*\n\s+contents: read\n\s+pages: write\n\s+id-token: write/, workflow)
+    # Permisos por job (least privilege), no a nivel workflow.
+    refute_match(/^permissions:/, workflow)
+    assert_match(/gate:\n(?:.*\n)*?    permissions:\n      contents: read\n      actions: read/, workflow)
+    assert_match(/build:\n(?:.*\n)*?    permissions:\n      contents: read\n      pages: write/, workflow)
+    assert_match(/deploy:\n(?:.*\n)*?    permissions:\n      pages: write\n      id-token: write/, workflow)
     refute_includes workflow, 'write-all'
   end
 

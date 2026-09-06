@@ -12,12 +12,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  actions: read
-
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -26,6 +20,9 @@ jobs:
   # Puerta de calidad: confirma que test y e2e están verdes para el commit.
   gate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     outputs:
       should_deploy: ${{ steps.check.outputs.should_deploy }}
       sha: ${{ steps.check.outputs.sha }}
@@ -50,8 +47,17 @@ jobs:
           TRIGGER_NAME="${{ github.event.workflow_run.name }}"
           TRIGGER_CONCL="${{ github.event.workflow_run.conclusion }}"
           SHA="${{ github.event.workflow_run.head_sha }}"
+          HEAD_BRANCH="${{ github.event.workflow_run.head_branch }}"
+          HEAD_REPO="${{ github.event.workflow_run.head_repository.full_name }}"
           echo "Disparado por '$TRIGGER_NAME' (conclusión: $TRIGGER_CONCL) para $SHA"
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+          # Solo desplegar commits del propio repo en main (nunca forks).
+          if [ "$HEAD_REPO" != "$REPO" ] || [ "$HEAD_BRANCH" != "main" ]; then
+            echo "Origen no confiable (repo=$HEAD_REPO branch=$HEAD_BRANCH); no se despliega."
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           if [ "$TRIGGER_CONCL" != "success" ]; then
             echo "El workflow '$TRIGGER_NAME' no fue exitoso; no se despliega."
@@ -84,13 +90,18 @@ jobs:
     needs: gate
     if: ${{ needs.gate.outputs.should_deploy == 'true' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.gate.outputs.sha }}
+          repository: ${{ github.repository }}
+          persist-credentials: false
 
       - name: Configurar Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
 
       - name: Preparar sitio estático
         run: |
@@ -102,20 +113,23 @@ jobs:
           find _site -type f | wc -l
 
       - name: Subir artefacto
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: _site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Desplegar
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
 
       - name: Verificar sitio publicado (F4-06)
         run: |
