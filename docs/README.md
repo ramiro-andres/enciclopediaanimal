@@ -14,4 +14,6 @@
 | [SCRUM.md](SCRUM.md) | Backlog ágil: épicas, historias, sprints y DoD/DoR |
 | [PIPELINE_ERRORES.md](PIPELINE_ERRORES.md) | Análisis de fallos CI/CD y despliegue a `main` |
 
+Skills para el agente (Cursor): [`.cursor/skills/`](../.cursor/skills/README.md).
+
 Entrada principal del proyecto: [README.md](../README.md).
