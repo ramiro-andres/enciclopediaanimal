@@ -38,10 +38,15 @@ class BcsGuideTest < Minitest::Test
 
   def test_svg_y_descripciones_i18n
     assert_includes @app, 'bcs-silhouette-svg'
+    assert_includes @app, 'renderBcsCompanionSvg'
+    assert_includes @app, 'renderBcsEquineSvg'
+    assert_includes @app, 'getBcsVisualParams'
     assert_includes @i18n, "'bcs.dog_cat.1'"
     assert_includes @i18n, "'bcs.dog_cat.9'"
     assert_includes @i18n, "'bcs.equine.5'"
     assert_includes @i18n, "'bcs.disclaimer'"
+    assert_includes @i18n, "'bcs.view_dorsal'"
+    assert_includes @i18n, "'bcs.view_lateral'"
   end
 
   def test_enlace_desde_herramientas
