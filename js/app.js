@@ -46,6 +46,8 @@ const App = {
   currentAnimal: 'todos',
   currentSize: 'todos',
   currentRegion: 'todos',
+  /** Opciones del menú región fijadas al animal/tamaño (no se regeneran al elegir país). */
+  _regionOptions: null,
   REGION_MACRO_GROUPS: {
     LATAM: ['Colombia', 'México', 'Argentina', 'Chile', 'Perú', 'Brasil', 'Ecuador', 'Venezuela', 'Bolivia', 'Uruguay', 'Paraguay', 'Centroamérica', 'Cuba', 'República Dominicana', 'Costa Rica', 'Panamá', 'Guatemala', 'Honduras'],
     Europa: ['España', 'Francia', 'Alemania', 'Italia', 'Reino Unido', 'Países Bajos', 'Suiza', 'Escandinavia'],
@@ -425,14 +427,24 @@ const App = {
 
   async preloadAllChunks() {
     if (!this.manifest?.animales?.length) return;
+    const animalAtStart = this.currentAnimal;
+    const sizeAtStart = this.currentSize;
     await Promise.all(this.manifest.animales.map(a => this.loadChunk(a.id)));
     this.renderWelcome();
     this.renderBreedOfWeek();
     this.renderStats();
     this.showLoadStatus();
+    // Recalcular países con el animal/tamaño actuales (no el de cuando empezó el preload).
     this._regionOptions = null;
     this.rebuildRegionOptions();
-    if (this.currentView === 'home') this.renderHome();
+    if (this.currentView === 'home') {
+      // Si el usuario cambió de categoría durante la carga, respetar el alcance actual.
+      if (this.currentAnimal !== animalAtStart || this.currentSize !== sizeAtStart) {
+        this._regionOptions = null;
+        this.rebuildRegionOptions();
+      }
+      this.renderHome();
+    }
     // Tras hidratar razas, re-evaluar filtros de región (si no, el menú queda hidden).
     this.updateSidebar();
     this.exportE2EState();
@@ -949,12 +961,14 @@ const App = {
   },
 
   rebuildRegionOptions() {
+    const animal = this.currentAnimal || 'todos';
+    const size = this.currentSize || 'todos';
     let breeds = this.getAllBreeds();
-    if (this.currentAnimal && this.currentAnimal !== 'todos') {
-      breeds = breeds.filter(b => b.animalId === this.currentAnimal);
+    if (animal !== 'todos') {
+      breeds = breeds.filter(b => b.animalId === animal);
     }
-    if (this.currentSize && this.currentSize !== 'todos') {
-      breeds = breeds.filter(b => b.tamano === this.currentSize);
+    if (size !== 'todos') {
+      breeds = breeds.filter(b => b.tamano === size);
     }
     const countries = new Set();
     breeds.forEach(b => {
@@ -963,13 +977,15 @@ const App = {
     });
     const countryList = Array.from(countries).sort((a, b) => a.localeCompare(b, 'es'));
     // Con animal concreto: solo países (sin macros LATAM/Europa/…).
-    const macros = (this.currentAnimal && this.currentAnimal !== 'todos')
+    const macros = animal !== 'todos'
       ? []
       : Object.keys(this.REGION_MACRO_GROUPS).filter(macro =>
         this.REGION_MACRO_GROUPS[macro].some(c => countries.has(c))
       );
     this._regionOptions = {
-      key: this.getRegionScopeKey(),
+      key: `${animal}|${size}`,
+      animal,
+      size,
       macros,
       countries: countryList
     };
@@ -990,6 +1006,15 @@ const App = {
     if (!allowed.has(this.currentRegion)) {
       this.currentRegion = 'todos';
     }
+  },
+
+  /** Solo marca el botón activo; no regenera la lista de países. */
+  markActiveRegionButton(container) {
+    if (!container) return;
+    container.querySelectorAll('.region-btn').forEach(btn => {
+      const id = btn.getAttribute('data-region') || btn.dataset.region || '';
+      btn.classList.toggle('active', id === this.currentRegion);
+    });
   },
 
   renderRegionFilters() {
@@ -1022,8 +1047,9 @@ const App = {
       btn.addEventListener('click', () => {
         const next = btn.getAttribute('data-region') || btn.dataset.region || 'todos';
         this.currentRegion = next;
-        // No recalcular países desde todo el catálogo: mismo alcance animal/tamaño.
-        this.renderRegionFilters();
+        // Crítico: no llamar renderRegionFilters / renderHome — eso reabría el catálogo global
+        // si el alcance animal se perdía o el SW servía lógica antigua.
+        this.markActiveRegionButton(container);
         this.renderBreeds();
         this.updateResultsTitle();
         this.exportE2EState();

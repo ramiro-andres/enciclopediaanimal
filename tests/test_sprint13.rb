@@ -115,12 +115,18 @@ class RegionFilterSprint13Test < Minitest::Test
   def test_regiones_acotadas_al_animal_filtrado
     assert_includes @app, 'syncRegionFilterToAvailable'
     assert_includes @app, 'rebuildRegionOptions'
+    assert_includes @app, 'markActiveRegionButton'
     body = @app[/\brebuildRegionOptions\(\) \{.*?\n  \},/m]
     assert body, 'Falta rebuildRegionOptions'
-    assert_includes body, 'currentAnimal'
-    assert_includes body, 'currentSize'
+    assert_includes body, 'animal !== \'todos\''
+    assert_includes body, 'size !== \'todos\''
     # Con animal concreto no se listan macros globales
-    assert_includes body, 'macros = (this.currentAnimal'
+    assert_includes body, 'macros = animal !== \'todos\''
+    # Elegir país no debe regenerar el listado completo
+    click = @app[/\brenderRegionFilters\(\) \{.*?\n  \},/m]
+    assert click, 'Falta renderRegionFilters'
+    assert_includes click, 'markActiveRegionButton'
+    refute_match(/this\.currentRegion = next;\s*this\.renderRegionFilters\(\)/, click)
   end
 
   def test_estilos_region
@@ -173,6 +179,8 @@ class Sprint13SwTest < Minitest::Test
     sw = File.read(File.join(ROOT, 'sw.js'))
     m = sw.match(/CACHE_VERSION\s*=\s*'atlas-v(\d+)'/)
     assert m, 'CACHE_VERSION atlas-vN no encontrado'
-    assert_operator m[1].to_i, :>=, 13
+    assert_operator m[1].to_i, :>=, 47
+    assert_includes sw, 'networkFirstWithCache'
+    assert_includes sw, 'isAppShellRequest'
   end
 end
