@@ -134,7 +134,7 @@ Detalle en [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md).
 
 El repo tiene **Automatically delete head branches** activado (`delete_branch_on_merge`).
 
-Además, el workflow [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) (jobs de cleanup) corre cuando un PR se **cierra mergeado**:
+Además, el workflow [`.github/workflows/cleanup.yml`](../.github/workflows/cleanup.yml) corre cuando un PR se **cierra mergeado**:
 
 1. Elimina `refs/heads/<rama-del-PR>` (solo si es del mismo repo, no forks; nunca `main`/`master`).
 2. Ejecuta `scripts/setup/prune_merged_branches.sh` para barrer otras ramas remotas ya contenidas en `main`.
