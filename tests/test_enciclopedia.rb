@@ -444,19 +444,16 @@ showDictionary renderDictionary loadDictionaryData openRouteFromHash updateHash 
   end
 
   def test_workflow_ci_valida_json_js
-    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
     assert_includes workflow, 'actualizar_datos.sh'
     assert_includes workflow, 'git diff --exit-code'
-    assert_includes workflow, 'permissions:'
-    assert_includes workflow, 'contents: read'
+    assert_match(/test:\n(?:.*\n)*?    permissions:\n      contents: read/, workflow)
   end
 
   def test_workflow_deploy_tiene_permisos_minimos
-    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
-    assert_includes workflow, 'permissions:'
-    assert_includes workflow, 'contents: read'
-    assert_includes workflow, 'pages: write'
-    assert_includes workflow, 'id-token: write'
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
+    assert_match(/build:\n(?:.*\n)*?    permissions:\n      contents: read\n      pages: write/, workflow)
+    assert_match(/deploy:\n(?:.*\n)*?    permissions:\n      pages: write\n      id-token: write/, workflow)
   end
 
   def test_scripts_de_inicio_existen
@@ -472,24 +469,23 @@ end
 
 class WorkflowAndGovernanceTest < Minitest::Test
   def test_workflow_test_valida_js_derivados
-    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
-    assert_match(/permissions:\s*\n\s+contents: read/, workflow)
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
+    assert_match(/test:\n(?:.*\n)*?    permissions:\n      contents: read/, workflow)
     assert_includes workflow, 'bash actualizar_datos.sh'
     assert_includes workflow, 'git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js'
   end
 
   def test_workflow_deploy_usa_permisos_minimos
-    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
+    workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
     # Permisos por job (least privilege), no a nivel workflow.
     refute_match(/^permissions:/, workflow)
-    assert_match(/gate:\n(?:.*\n)*?    permissions:\n      contents: read\n      actions: read/, workflow)
     assert_match(/build:\n(?:.*\n)*?    permissions:\n      contents: read\n      pages: write/, workflow)
     assert_match(/deploy:\n(?:.*\n)*?    permissions:\n      pages: write\n      id-token: write/, workflow)
     refute_includes workflow, 'write-all'
-    # Sin workflow_run (Sonar S7630/S7631): push a main + espera de CI.
+    # Sin workflow_run (Sonar S7630/S7631): push a main + needs de test/e2e.
     refute_includes workflow, 'workflow_run:'
     assert_includes workflow, 'push:'
-    assert_includes workflow, 'github.sha'
+    assert_match(/needs: \[test, e2e\]/, workflow)
   end
 
   def test_plantillas_de_issues_existen
@@ -546,11 +542,10 @@ class Sprint4BacklogTest < Minitest::Test
   end
 
   def test_workflow_verifica_imagenes_y_deploy
-    test_wf = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
-    deploy_wf = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
-    assert_includes test_wf, 'list_missing_images.rb'
-    assert_includes deploy_wf, 'curl'
-    assert_includes deploy_wf, 'HTTP 200'
+    wf = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
+    assert_includes wf, 'list_missing_images.rb'
+    assert_includes wf, 'curl'
+    assert_includes wf, 'HTTP 200'
   end
 
   def test_codeowners_por_area
@@ -698,7 +693,7 @@ class Sprint3BacklogTest < Minitest::Test
 
   def test_validacion_clinica_script
     assert File.exist?(File.join(ROOT, 'scripts', 'data', 'validate_clinical_content.rb'))
-    workflow_path = File.join(ROOT, '.github', 'workflows', 'test.yml')
+    workflow_path = File.join(ROOT, '.github', 'workflows', 'ci.yml')
     workflow = File.read(workflow_path)
     assert_includes workflow, 'validate_clinical_content.rb'
   end

@@ -19,15 +19,11 @@ class ReadmeBadgesSprint14Test < Minitest::Test
   end
 
   def test_badges_test_e2e_deploy
-    assert_match(/workflows\/test\.yml\/badge\.svg/, @readme)
-    assert_match(/workflows\/e2e\.yml\/badge\.svg/, @readme)
-    assert_match(/workflows\/deploy-pages\.yml\/badge\.svg/, @readme)
+    assert_match(/workflows\/ci\.yml\/badge\.svg/, @readme)
   end
 
   def test_workflows_existen
-    %w[test.yml e2e.yml deploy-pages.yml].each do |wf|
-      assert File.exist?(File.join(ROOT, '.github', 'workflows', wf)), "Falta workflow #{wf}"
-    end
+    assert File.exist?(File.join(ROOT, '.github', 'workflows', 'ci.yml')), 'Falta workflow ci.yml'
   end
 end
 
@@ -36,7 +32,7 @@ class DiseaseImagesSprint14Test < Minitest::Test
   def setup
     @list = File.join(ROOT, 'scripts', 'images', 'list_missing_disease_images.rb')
     @download = File.read(File.join(ROOT, 'scripts', 'images', 'download_disease_google_images.rb'))
-    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
   end
 
   def test_script_list_missing_disease_existe

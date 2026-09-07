@@ -28,12 +28,7 @@ enciclopedia_animal/
 │   └── setup/              # Hooks, prune de ramas, Pages
 ├── .github/
 │   ├── workflows/
-│   │   ├── test.yml
-│   │   ├── e2e.yml
-│   │   ├── lighthouse.yml
-│   │   ├── preview.yml
-│   │   ├── deploy-pages.yml
-│   │   └── cleanup-branch.yml  # Borra rama al mergear
+│   │   └── ci.yml              # Pipeline único: test, e2e, lighthouse, preview, deploy, cleanup
 │   └── CONTRIBUTING.md
 ├── .sonarcloud.properties  # Scope Automatic Analysis (Sonar)
 ├── sonar-project.properties

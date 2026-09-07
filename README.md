@@ -1,8 +1,6 @@
 # Enciclopedia Animal
 
-[![test](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/test.yml/badge.svg)](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/test.yml)
-[![e2e](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/e2e.yml/badge.svg)](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/e2e.yml)
-[![deploy](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/deploy-pages.yml)
+[![CI](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/ci.yml/badge.svg)](https://github.com/ramiro-andres/enciclopediaanimal/actions/workflows/ci.yml)
 
 Atlas veterinario interactivo con razas, nutrición, enfermedades y diccionario médico.
 

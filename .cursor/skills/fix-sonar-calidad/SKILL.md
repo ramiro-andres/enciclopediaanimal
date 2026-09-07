@@ -18,7 +18,7 @@ Enfoque: **fixes mínimos de alto riesgo**, sin mega-refactor de `app.js`/`style
 | `parseInt` / `parseFloat` | `Number.parseInt` / `Number.parseFloat` con radix |
 | Regex con backtracking | Patrones acotados, sin cuantificadores anidados peligrosos |
 | Shells con `[` frágil | Preferir `[[ … ]]` en bash donde el estilo del repo lo permita |
-| `workflow_run` en deploy | Gate por checks `test`/`e2e` en el mismo SHA, no `workflow_run` |
+| `workflow_run` en deploy | Gate con `needs: [test, e2e]` en `ci.yml`, no `workflow_run` |
 | XSS / HTML dinámico | Siempre `esc()` / `AtlasUtils.esc`; sin `eval` / `document.write` |
 | `onerror` con rutas interpoladas | `data-fallback` + `getAttribute` |
 | Enlaces `target="_blank"` | `rel="noopener noreferrer"` |

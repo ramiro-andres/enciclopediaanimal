@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Validación de integridad del atlas usada por el workflow de vista previa (preview.yml)
+# Validación de integridad del atlas usada por el job preview del workflow CI (ci.yml)
 # y ejecutable en local. Comprueba, con permisos mínimos y sin servidor:
 #   1. Los JSON principales son válidos.
 #   2. Los .js derivados están sincronizados con sus JSON.

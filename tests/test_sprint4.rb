@@ -66,29 +66,30 @@ end
 # US-DEV-10 — Gate de deploy
 class DeployGateTest < Minitest::Test
   def setup
-    @wf = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
+    @wf = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
   end
 
   def test_dispara_en_push_y_espera_ci
-    assert_match(/on:\s*\n\s*push:/m, @wf, 'El deploy debe dispararse en push a main')
+    assert_match(/on:\s*\n\s*push:/m, @wf, 'El CI debe dispararse en push a main')
     refute_includes @wf, 'workflow_run:', 'Sin workflow_run (Sonar S7630/S7631)'
   end
 
   def test_espera_test_y_e2e_antes_de_publicar
-    assert_includes @wf, 'conclusion_for', 'Debe consultar conclusiones de workflows'
-    assert_includes @wf, '"test"'
-    assert_includes @wf, '"e2e"'
+    assert_match(/build:\n(?:.*\n)*?    needs: \[test, e2e\]/, @wf,
+                 'build debe depender de test + e2e')
+    assert_includes @wf, "needs.test.result == 'success'"
+    assert_includes @wf, "needs.e2e.result == 'success'"
   end
 
   def test_tiene_puerta_de_calidad
-    assert_includes @wf, 'should_deploy', 'Debe existir la salida de puerta should_deploy'
-    assert_match(/needs\.gate\.outputs\.should_deploy == 'true'/, @wf,
-                 'build debe condicionarse a la puerta de calidad')
+    assert_match(/needs\.test\.result == 'success'/, @wf)
+    assert_match(/needs\.e2e\.result == 'success'/, @wf)
+    assert_includes @wf, "github.ref == 'refs/heads/main'"
   end
 
   def test_verifica_conclusiones_de_ambos_workflows
-    assert_includes @wf, 'conclusion_for', 'Debe verificar la conclusión de cada workflow'
-    assert_match(/actions: read/, @wf, 'Requiere permiso actions: read para consultar runs')
+    refute_includes @wf, 'conclusion_for', 'Ya no se consulta la API de runs; se usa needs'
+    assert_match(/build:\n(?:.*\n)*?    needs: \[test, e2e\]/, @wf)
   end
 end
 
@@ -122,11 +123,11 @@ end
 # US-DEV-13 — Lighthouse CI
 class LighthouseCiTest < Minitest::Test
   def test_workflow_existe
-    path = File.join(ROOT, '.github', 'workflows', 'lighthouse.yml')
-    assert File.exist?(path), 'Falta workflow lighthouse.yml'
+    path = File.join(ROOT, '.github', 'workflows', 'ci.yml')
+    assert File.exist?(path), 'Falta workflow ci.yml'
     wf = File.read(path)
-    assert_includes wf, 'permissions:'
-    assert_includes wf, 'contents: read'
+    assert_includes wf, 'lighthouse:'
+    assert_match(/lighthouse:\n(?:.*\n)*?    permissions:\n      contents: read/, wf)
     assert_match(/lighthouse-ci-action/, wf, 'Debe usar Lighthouse CI')
   end
 

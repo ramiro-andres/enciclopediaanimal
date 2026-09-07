@@ -129,7 +129,7 @@ class SuggestLinksCiTest < Minitest::Test
   def setup
     @script = File.join(ROOT, 'scripts', 'data', 'suggest_glossary_links.rb')
     @out = File.join(ROOT, 'data', 'sugerencias_enlaces.json')
-    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
     @ejecutar = File.read(File.join(ROOT, 'ejecutar_pruebas.sh'))
   end
 

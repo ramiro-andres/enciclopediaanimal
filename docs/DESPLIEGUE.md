@@ -1,77 +1,54 @@
-# Despliegue
+# Despliegue — Enciclopedia Animal
 
-Enciclopedia Animal se publica en **GitHub Pages** con **GitHub Actions** (sin Jekyll).
+Sitio en GitHub Pages: https://ramiro-andres.github.io/enciclopediaanimal/
 
-## URL de producción
+## Pipeline
 
-https://ramiro-andres.github.io/enciclopediaanimal/
+Archivo único: [`.github/workflows/ci.yml`](../.github/workflows/ci.yml)
 
-## Workflow de despliegue
-
-Archivo: `.github/workflows/deploy-pages.yml`
-
-**Disparadores:**
+Se dispara en:
 
 - Push a `main`
+- Pull requests hacia `main`
 - Ejecución manual (`workflow_dispatch`)
 
-**Puerta de calidad:** el job `gate` espera a que los workflows `test` y `e2e` estén en éxito para el mismo commit (`github.sha`) antes de construir y publicar.
+**Puerta de calidad:** el job `build` declara `needs: [test, e2e]` y solo corre si ambos terminaron en éxito y el evento es push a `main` (o manual).
 
-**Pasos (si el gate abre):**
+### Jobs
 
-1. Checkout del commit validado
-2. Crear `_site/` y copiar shell + `css/`, `js/`, `data/`, `images/`
+| Job | Evento | Qué hace |
+|-----|--------|----------|
+| `test` | push / PR | Pruebas Ruby, integridad, imágenes |
+| `e2e` | push / PR | Playwright (file://) |
+| `lighthouse` | PR | Accesibilidad ≥ 90 |
+| `preview` | PR | Artefacto `_site` descargable |
+| `build` → `deploy` | push `main` | Publicar Pages si CI verde |
+| `delete-merged-branch` / `prune-stale-merged` | PR mergeado | Borrar rama head + prune |
+
+Checks de protección de rama: **`CI / test`**, **`CI / e2e`**.
+
+## Pasos del deploy
+
+1. `test` + `e2e` verdes
+2. Construir `_site` (sitemap + assets)
 3. Subir artefacto y desplegar con `actions/deploy-pages`
-4. Verificar HTTP 200 en la URL de Pages
+4. Health check `curl` HTTP 200 (F4-06)
 
-No hay bundler: el sitio es estático. Los `.js` en `data/` deben estar actualizados en el repo antes del merge a `main`.
+## Activar Pages (una vez)
 
-## Workflows de CI
-
-| Workflow | Cuándo | Rol |
-|----------|--------|-----|
-| `test.yml` | PR / push `main` | Pruebas Ruby, integridad, imágenes |
-| `e2e.yml` | PR / push `main` | Playwright (file://) |
-| `lighthouse.yml` | PR | Accesibilidad ≥ 90 |
-| `preview.yml` | PR | Artefacto `_site` descargable |
-| `deploy-pages.yml` | push `main` | Publicar Pages si CI verde |
-| `cleanup-branch.yml` | PR cerrado mergeado | Borrar rama head + prune |
-
-El contexto del check requerido en protección de rama suele ser **`test`** (y opcionalmente Sonar / e2e).
-
-## Configuración inicial (mantenedores)
-
-Con [GitHub CLI](https://cli.github.com/) autenticada:
-
-```bash
-bash scripts/setup/setup_github_security.sh
-```
-
-Configura:
-
-- Pages con fuente **GitHub Actions**
+- Settings → Pages → Build and deployment → **GitHub Actions**
 - Permisos de workflow read/write
-- Protección de `main` (PR, check CI, sin force push)
 
-Alternativa manual: **Settings → Pages → Build and deployment → GitHub Actions**.
+Alternativa: `bash scripts/setup/setup_github_security.sh`
 
-## Primer despliegue
+## Manual
 
-Tras activar Pages:
+1. **Actions → CI → Run workflow**
+2. Eso corre test/e2e y, si pasan, despliega
 
-1. Merge a `main`, o
-2. **Actions → Desplegar en GitHub Pages → Run workflow**
+## Notas
 
-## Consideraciones
-
-- **`main` protegida**: cambios solo vía PR.
-- **Ramas**: se borran al mergear (setting del repo + workflow `cleanup-branch`).
-- **Repo público**: Pages gratuito requiere visibilidad pública.
-- **Tamaño**: muchas imágenes aumentan el artefacto; el workflow lista tamaño y conteo de archivos.
-- **Verificación post-deploy (F4-06)**: tras publicar, el job `deploy` hace `curl` a la URL de Pages y falla si no responde HTTP 200 en ~50 s.
-- **No modificar paths de assets en raíz** sin actualizar `deploy-pages.yml`.
-- **Calidad estática**: ver [SONAR.md](SONAR.md).
-
-## Rollback
-
-Revertir el merge problemático en `main` o restaurar un commit anterior vía PR. El workflow redeployará la versión fusionada.
+- **Ramas**: se borran al mergear (setting del repo + jobs de cleanup en `ci.yml`).
+- **Tamaño**: muchas imágenes aumentan el artefacto; el job lista tamaño y conteo.
+- **No modificar paths de assets en raíz** sin actualizar el job `build` en `ci.yml`.
+- Tras cambiar el pipeline, actualizar los **required status checks** de `main` a `CI / test` y `CI / e2e`.

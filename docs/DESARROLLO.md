@@ -104,11 +104,11 @@ Las pruebas end-to-end usan [Playwright](https://playwright.dev) y cargan `index
 bash ejecutar_e2e.sh          # instala dependencias la primera vez y corre las pruebas
 ```
 
-En CI se ejecutan en el workflow `e2e`. Los escenarios cubren: carga inicial + aviso educativo, raza → enfermedad, enlaces cruzados del glosario y búsqueda global.
+En CI se ejecutan en el job `e2e` del workflow `ci.yml`. Los escenarios cubren: carga inicial + aviso educativo, raza → enfermedad, enlaces cruzados del glosario y búsqueda global.
 
 ### Vista previa de una PR
 
-El workflow `preview` valida la integridad de datos/enlaces y publica un artefacto descargable `vista-previa-sitio` con el `_site` construido, para revisar la PR sin desplegar.
+El job `preview` del workflow [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) valida la integridad de datos/enlaces y publica un artefacto descargable `vista-previa-sitio` con el `_site` construido, para revisar la PR sin desplegar.
 
 ## Flujo de contribución
 
@@ -134,7 +134,7 @@ Detalle en [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md).
 
 El repo tiene **Automatically delete head branches** activado (`delete_branch_on_merge`).
 
-Además, el workflow [`.github/workflows/cleanup-branch.yml`](../.github/workflows/cleanup-branch.yml) corre cuando un PR se **cierra mergeado**:
+Además, el workflow [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) (jobs de cleanup) corre cuando un PR se **cierra mergeado**:
 
 1. Elimina `refs/heads/<rama-del-PR>` (solo si es del mismo repo, no forks; nunca `main`/`master`).
 2. Ejecuta `scripts/setup/prune_merged_branches.sh` para barrer otras ramas remotas ya contenidas en `main`.

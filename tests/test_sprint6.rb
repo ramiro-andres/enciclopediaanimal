@@ -47,14 +47,13 @@ class SitemapTest < Minitest::Test
   end
 
   def test_workflows_copian_sitemap_y_robots
-    deploy = File.read(File.join(ROOT, '.github', 'workflows', 'deploy-pages.yml'))
-    lighthouse = File.read(File.join(ROOT, '.github', 'workflows', 'lighthouse.yml'))
-    preview = File.read(File.join(ROOT, '.github', 'workflows', 'preview.yml'))
-    assert_includes deploy, 'build_sitemap.rb'
-    assert_includes deploy, 'sitemap.xml'
-    assert_includes deploy, 'robots.txt'
-    assert_includes lighthouse, 'sitemap.xml'
-    assert_includes preview, 'sitemap.xml'
+    ci = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
+    assert_includes ci, 'build_sitemap.rb'
+    assert_includes ci, 'sitemap.xml'
+    assert_includes ci, 'robots.txt'
+    assert_includes ci, 'lighthouse:'
+    assert_includes ci, 'preview:'
+    assert_includes ci, 'build:'
   end
 
   def test_index_enlaza_sitemap

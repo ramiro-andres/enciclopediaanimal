@@ -15,13 +15,13 @@ Gracias por mejorar el atlas veterinario. Este repositorio es **público** y `ma
    bash ejecutar_pruebas.sh
    ```
 5. Abre un **Pull Request** hacia `main` y espera la revisión de `@ramiro-andres` (CODEOWNERS).
-6. Tras la aprobación y el merge, el workflow **Desplegar en GitHub Pages** publica el sitio automáticamente.
+6. Tras la aprobación y el merge, el workflow **CI** publica el sitio en GitHub Pages automáticamente.
 
 ## Reglas de la rama `main`
 
 - No se permiten **force push** ni borrado de la rama.
 - Los merges requieren **al menos una aprobación** del code owner.
-- Debe pasar el check de CI **`test / test`** (workflow `.github/workflows/test.yml`).
+- Deben pasar los checks **`CI / test`** y **`CI / e2e`** (workflow `.github/workflows/ci.yml`).
 - Solo el propietario puede hacer push directo a `main` (cuando la protección de rama lo permite en el plan de GitHub).
 
 ## Desarrollo local
