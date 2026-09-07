@@ -3,7 +3,7 @@
 // enlaces clínicos) para que la app funcione sin red tras la primera visita.
 // Las imágenes de razas/enfermedades usan stale-while-revalidate en una caché
 // aparte para no invalidar el shell al renovar versión.
-const CACHE_VERSION = 'atlas-v43';
+const CACHE_VERSION = 'atlas-v47';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
 const CURRENT_CACHES = [STATIC_CACHE, IMAGE_CACHE];
@@ -59,6 +59,17 @@ function isImageRequest(request, url) {
   return request.destination === 'image' || /\.(png|jpe?g|svg|webp|gif|avif)$/i.test(url.pathname);
 }
 
+function isAppShellRequest(url) {
+  // HTML/JS/CSS: priorizar red para no quedar atrapado en lógica vieja tras un fix.
+  return (
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('/') ||
+    url.pathname.includes('/js/') ||
+    url.pathname.includes('/css/') ||
+    url.pathname.endsWith('/sw.js')
+  );
+}
+
 // Stale-while-revalidate: responde con la caché al instante y actualiza en 2.º plano.
 function staleWhileRevalidate(request, cacheName) {
   return caches.open(cacheName).then((cache) =>
@@ -76,7 +87,20 @@ function staleWhileRevalidate(request, cacheName) {
   );
 }
 
-// Cache-first con actualización en red para el app shell y datos JS.
+// Network-first: intenta red; si falla (offline), usa caché.
+function networkFirstWithCache(request) {
+  return fetch(request)
+    .then((response) => {
+      if (response && response.status === 200 && response.type === 'basic') {
+        const clone = response.clone();
+        caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone));
+      }
+      return response;
+    })
+    .catch(() => caches.match(request));
+}
+
+// Cache-first con actualización en red para datos JS estáticos (chunks, diccionario…).
 function cacheFirstWithUpdate(request) {
   return caches.match(request).then((cached) => {
     const network = fetch(request)
@@ -101,6 +125,11 @@ self.addEventListener('fetch', (event) => {
 
   if (isImageRequest(request, url)) {
     event.respondWith(staleWhileRevalidate(request, IMAGE_CACHE));
+    return;
+  }
+
+  if (isAppShellRequest(url)) {
+    event.respondWith(networkFirstWithCache(request));
     return;
   }
 

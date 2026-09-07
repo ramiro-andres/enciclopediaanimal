@@ -352,6 +352,29 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     const countAll = await cards.count();
     expect(countAll).toBeGreaterThanOrEqual(countLatam);
 
+    // Con filtro de animal: solo países con razas de esa especie
+    await page.locator('#goHomeBtn').click();
+    await expect(page.locator('#welcomeView')).toHaveClass(/active/);
+    await page.locator('#welcomeCategoryCards .category-card[data-animal="perros"]').click();
+    await expect(page.locator('#homeView')).toHaveClass(/active/);
+    await page.waitForFunction(() => window.__E2E_STATE__?.currentAnimal === 'perros');
+    const countryCount = await page.evaluate(() => {
+      const macros = new Set(['todos', 'LATAM', 'Europa', 'Norteamérica', 'Asia', 'Oceanía']);
+      return [...document.querySelectorAll('#regionFilters .region-btn')]
+        .map((b) => b.dataset.region)
+        .filter((id) => id && !macros.has(id)).length;
+    });
+    expect(countryCount).toBeGreaterThan(0);
+    expect(countryCount).toBeLessThan(25);
+    const scoped = await page.evaluate(() => window.__E2E_STATE__);
+    expect(scoped.currentAnimal).toBe('perros');
+    expect(scoped.regionCountries.length).toBe(countryCount);
+    // Elegir un país no debe reexpandir el menú a todo el catálogo
+    const firstCountry = scoped.regionCountries[0];
+    await page.locator(`#regionFilters .region-btn[data-region="${firstCountry}"]`).click();
+    const afterClick = await page.evaluate(() => window.__E2E_STATE__.regionCountries.length);
+    expect(afterClick).toBe(countryCount);
+
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     // Tras dedupe de alias/paréntesis/sinónimos: ≥550 únicos.
     expect(estado.dictionaryTerms).toBeGreaterThanOrEqual(550);
