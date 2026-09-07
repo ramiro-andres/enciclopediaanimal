@@ -6846,10 +6846,6 @@ textarea::placeholder {
   margin-top: 0.65rem;
 }
 
-.criaderos-block--sources a {
-  color: var(--primary);
-}
-
 .feature-card--criaderos {
   border-color: var(--feature-card-criaderos-border);
   background: var(--feature-card-criaderos-bg);

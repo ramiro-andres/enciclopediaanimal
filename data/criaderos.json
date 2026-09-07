@@ -1,471 +1,436 @@
 {
   "titulo": "Guía de criaderos e instalaciones por especie",
-  "introduccion": "Referencia educativa de alojamiento, espacio, alimentación y cuidados a nivel de especie. Las cifras citadas provienen de guías oficiales o manuales técnicos; varían por jurisdicción, sistema productivo y condición del animal. No sustituyen normativa local ni el criterio veterinario.",
-  "disclaimer": "Uso educativo. Antes de construir o ampliar un criadero, verifica la legislación de bienestar animal, sanidad y zonificación de tu país o región.",
+  "introduccion": "Orientación educativa sobre alojamiento, espacio útil, alimentación y cuidados básicos a nivel de especie. Los valores de área son orientativos: cambian según país, normativa local, sistema de producción y estado del animal. No sustituyen el criterio veterinario ni la legislación vigente.",
+  "disclaimer": "Uso educativo. Antes de construir o ampliar un criadero, revisa bienestar animal, sanidad y zonificación en tu región.",
   "actualizado": "2026-09-07",
   "especies": [
     {
       "id": "perros",
       "nombre": "Perros",
       "icono": "🐕",
-      "ambito": "compañía / refugio / crianza licenciada",
+      "ambito": "compañía / refugio / crianza",
       "espacio": {
-        "resumen": "En establecimientos de bienestar animal (Escocia, 2021), el canil mínimo por perro es 4 m² (ej. 2×2 m) hasta 20 kg, y 8 m² (ej. 4×2 m) entre 20 y 30 kg; altura mínima 2 m. Más de 30 kg: escalar. Hembras con camada: el doble del área de su rango de peso.",
+        "resumen": "En alojamientos colectivos conviene un canil que permita descanso y movimiento. Como referencia práctica: unos 4 m² (por ejemplo 2×2 m) para perros de hasta ~20 kg y unos 8 m² (por ejemplo 4×2 m) entre ~20 y 30 kg, con altura libre cercana a 2 m. Animales más grandes necesitan más superficie; una hembra con camada suele requerir el doble del área de su rango de peso.",
         "metricas": [
           {
             "condicion": "Perro <20 kg (canil individual)",
-            "valor": "4 m²",
+            "valor": "≈4 m²",
             "ejemplo_dimensiones": "2 m × 2 m",
-            "altura_min": "2 m",
-            "fuente_id": "scotland_awe_2021"
+            "altura_min": "≈2 m"
           },
           {
             "condicion": "Perro 20–30 kg",
-            "valor": "8 m²",
+            "valor": "≈8 m²",
             "ejemplo_dimensiones": "4 m × 2 m",
-            "altura_min": "2 m",
-            "fuente_id": "scotland_awe_2021"
+            "altura_min": "≈2 m"
           }
         ],
         "imagen": "images/criaderos/perros-canil-2x2m.jpg",
         "notas": [
-          "El área debe permitir zona de descanso y de actividad separadas.",
-          "El perro debe poder caminar, girar, erguirse sobre los cuartos traseros y echarse estirado sin tocar a otro individuo."
+          "Separar zona de descanso de la de actividad cuando sea posible.",
+          "Debe poder caminar, girar, erguirse y echarse estirado sin rozar a otro perro."
         ]
       },
       "alimentacion": {
-        "resumen": "Dieta completa según etapa (crecimiento, mantenimiento, gestación/lactancia). Calcular energía con RER/MER (herramienta del atlas) y ajustar con BCS.",
+        "resumen": "Pienso o dieta completa según etapa (crecimiento, mantenimiento, gestación o lactancia). Usa la calculadora RER/MER del atlas y ajusta con la condición corporal.",
         "puntos": [
-          "Agua limpia a libre disposición.",
+          "Agua limpia siempre disponible.",
           "Evitar chocolate, xilitol, uvas/pasas y otros tóxicos (ver índice de toxicología).",
-          "En criaderos: comederos higiénicos, raciones individuales y control de peso semanal en cachorros."
+          "En criaderos: comederos limpios, raciones individuales y control de peso en cachorros."
         ]
       },
       "cuidados": {
-        "resumen": "Vacunación, desparasitación y socialización según calendario y riesgo local. Higiene diaria del canil y ventilación sin corrientes frías directas.",
+        "resumen": "Vacunación, desparasitación y socialización según riesgo local. Limpieza diaria del canil y buena ventilación sin corriente fría directa.",
         "puntos": [
-          "Separar áreas de orina/defecación de descanso y comida.",
-          "Enriquecimiento y ejercicio diario fuera del canil cuando sea seguro.",
-          "Aislamiento sanitario para ingresos nuevos (cuarentena)."
+          "Separar zonas de orina/heces del descanso y la comida.",
+          "Ejercicio y enriquecimiento fuera del canil cuando sea seguro.",
+          "Cuarentena para ingresos nuevos."
         ]
-      },
-      "fuentes": ["scotland_awe_2021"]
+      }
     },
     {
       "id": "gatos",
       "nombre": "Gatos",
       "icono": "🐈",
-      "ambito": "compañía / refugio / crianza licenciada",
+      "ambito": "compañía / refugio / crianza",
       "espacio": {
-        "resumen": "Unidad mínima para un gato adulto (Escocia): 2,5 m² totales (≈0,85 m² descanso + 1,65 m² ejercicio), altura ≥1,8 m. ASV (refugios, 2022): <0,75 m² de piso por gato adulto es inaceptable; ideal ≥1,0 m².",
+        "resumen": "Una unidad para un adulto puede plantearse en torno a 2,5 m² totales (parte para descanso y parte para movimiento), con altura cercana a 1,8 m. En alojamiento prolongado, menos de ~0,75 m² de piso por gato adulto suele ser insuficiente; conviene acercarse a 1 m² o más cuando el espacio lo permita.",
         "metricas": [
           {
-            "condicion": "1 gato adulto (unidad única interior)",
-            "valor": "2,5 m² totales",
-            "ejemplo_dimensiones": "descanso 0,85 m² + ejercicio 1,65 m²",
-            "altura_min": "1,8 m",
-            "fuente_id": "scotland_awe_2021"
+            "condicion": "1 gato adulto (unidad interior)",
+            "valor": "≈2,5 m² totales",
+            "ejemplo_dimensiones": "descanso + zona de movimiento",
+            "altura_min": "≈1,8 m"
           },
           {
             "condicion": "Hasta 2 gatos",
-            "valor": "3,3 m² totales",
-            "ejemplo_dimensiones": "1,1 + 2,2 m²",
-            "altura_min": "1,8 m",
-            "fuente_id": "scotland_awe_2021"
+            "valor": "≈3,3 m² totales",
+            "ejemplo_dimensiones": "ampliar descanso y ejercicio",
+            "altura_min": "≈1,8 m"
           },
           {
-            "condicion": "Piso mínimo refugio (ASV)",
-            "valor": "≥0,75 m² (ideal ≥1,0 m²)",
+            "condicion": "Piso orientativo por adulto",
+            "valor": "evitar <0,75 m²; preferible ≥1 m²",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "asv_shelter_2022"
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/gatos-unidad-2.5m2.jpg",
         "notas": [
-          "Preferir superficies elevadas, escondite, rascado y arenero del tamaño del cuerpo.",
-          "Unidades enfrentadas: ASV recomienda >1,2 m de separación o no frente a frente (aerosoles respiratorios)."
+          "Incluye estantes, escondite, rascado y arenero del tamaño del cuerpo.",
+          "Evita unidades muy cercanas frente a frente para reducir estrés y contagio respiratorio."
         ]
       },
       "alimentacion": {
-        "resumen": "Carnívoros estrictos: proteína animal de alta calidad; agua siempre disponible. En grupo, vigilar competencia por el comedero.",
+        "resumen": "Carnívoros estrictos: proteína animal de calidad y agua siempre disponible. En grupo, vigila que todos coman.",
         "puntos": [
-          "Separar zona de comida del arenero.",
-          "Controlar peso y BCS; obesidad frecuente en criaderos con poco ejercicio."
+          "Separa la comida del arenero.",
+          "Controla peso y condición corporal; la obesidad es frecuente con poco ejercicio."
         ]
       },
       "cuidados": {
-        "resumen": "Vacunas core (panleucopenia, calicivirus, herpesvirus) según riesgo; control de parásitos; ventilación y baja densidad para reducir enfermedades respiratorias.",
+        "resumen": "Vacunas básicas según riesgo, control de parásitos, buena ventilación y densidades moderadas para limitar problemas respiratorios.",
         "puntos": [
           "Cuarentena de ingresos.",
-          "Enriquecimiento vertical obligatorio en alojamiento prolongado."
+          "Enriquecimiento vertical en estancias largas."
         ]
-      },
-      "fuentes": ["scotland_awe_2021", "asv_shelter_2022"]
+      }
     },
     {
       "id": "aves",
       "nombre": "Aves (gallinas)",
       "icono": "🐔",
-      "ambito": "producción avícola / traspatio",
+      "ambito": "producción / traspatio",
       "espacio": {
-        "resumen": "FAO (Farm structures): en cama profunda, densidad orientativa de 3–4 aves/m² (baja) a 5–7 aves/m² (alta) en adultas/puesta según sistema. Semi-intensivo casa-run: ≈3 aves/m² en el galpón. FAO small-scale: ejemplo 6×11 m ≈200 ponedoras a 3 aves/m².",
+        "resumen": "En cama profunda, una densidad orientativa para adultas es de unas 3–4 aves por m² en manejos holgados, pudiendo subir a 5–7 en sistemas más intensivos. Los pollitos necesitan mucho más animales por m² al inicio y se van espaciando al crecer. Más espacio suele reducir estrés y picaje.",
         "metricas": [
           {
-            "condicion": "Ponedoras / adultas — cama profunda (densidad baja)",
-            "valor": "3–4 aves/m²",
+            "condicion": "Adultas / postura — cama profunda (holgado)",
+            "valor": "≈3–4 aves/m²",
             "ejemplo_dimensiones": "≈0,25–0,33 m² por ave",
-            "altura_min": "—",
-            "fuente_id": "fao_farm_structures_poultry"
+            "altura_min": "—"
           },
           {
-            "condicion": "Ponedoras — cama profunda (densidad alta)",
-            "valor": "5–7 aves/m²",
+            "condicion": "Adultas — cama profunda (más denso)",
+            "valor": "≈5–7 aves/m²",
             "ejemplo_dimensiones": "≈0,14–0,20 m² por ave",
-            "altura_min": "—",
-            "fuente_id": "fao_farm_structures_poultry"
+            "altura_min": "—"
           },
           {
-            "condicion": "Pollitos 1–4 semanas (densidad baja)",
-            "valor": "15–20 aves/m²",
+            "condicion": "Pollitos 1–4 semanas (holgado)",
+            "valor": "≈15–20 aves/m²",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "fao_farm_structures_poultry"
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/aves-cama-profunda.jpg",
         "notas": [
-          "Más espacio reduce estrés, picaje y competencia por comedero/bebedero.",
-          "Asegurar comedero y bebedero lineales según tabla FAO (p. ej. adultas ≈7–10 aves/m de comedero tubo)."
+          "Asegura comedero y bebedero suficientes para el número de aves.",
+          "Mantén la cama seca y el galpón bien ventilado."
         ]
       },
       "alimentacion": {
-        "resumen": "Pienso equilibrado por etapa (iniciación, crecimiento, postura). Agua limpia permanente. En traspatio, complementar con forraje sin descuidar calcio en postura.",
+        "resumen": "Pienso por etapa (iniciación, crecimiento, postura). Agua limpia permanente. En traspatio, el forraje no reemplaza el calcio en postura.",
         "puntos": [
-          "Evitar hacinamiento en comederos.",
-          "Almacenar alimento seco y protegido de roedores."
+          "Evita pelea por el comedero.",
+          "Guarda el alimento seco y protegido de roedores."
         ]
       },
       "cuidados": {
-        "resumen": "Bioseguridad (calzado, visitas, aves nuevas), ventilación, cama seca y programa vacunal según riesgo regional.",
+        "resumen": "Bioseguridad (calzado, visitas, aves nuevas), ventilación, cama seca y plan vacunal según riesgo regional.",
         "puntos": [
-          "Limpieza periódica de cama y control de amoníaco.",
-          "Aislamiento de aves enfermas."
+          "Controla amoníaco y humedad de la cama.",
+          "Aísla aves enfermas."
         ]
-      },
-      "fuentes": ["fao_farm_structures_poultry", "fao_small_scale_poultry"]
+      }
     },
     {
       "id": "equinos",
       "nombre": "Equinos",
       "icono": "🐴",
-      "ambito": "establo / crianza equina",
+      "ambito": "establo / crianza",
       "espacio": {
-        "resumen": "British Horse Society: mínimo 3,65×3,65 m (12×12 ft) para caballo estándar; 3,65×4,25 m si ≥17 hh; ponis 3,05×3,05 m; box de parto 4,25×4,25 m. El box debe permitir girar y tumbarse con comodidad.",
+        "resumen": "El box debe permitir girar y tumbarse con comodidad. Referencias habituales: unos 3,65×3,65 m para un caballo estándar; algo más largo si es muy alto; ponis pueden ir en torno a 3,05×3,05 m; un box de parto suele ser más amplio (cerca de 4,25×4,25 m).",
         "metricas": [
           {
             "condicion": "Caballo estándar",
-            "valor": "3,65 m × 3,65 m",
-            "ejemplo_dimensiones": "≈13,3 m²",
-            "altura_min": "—",
-            "fuente_id": "bhs_stable"
+            "valor": "≈3,65 m × 3,65 m",
+            "ejemplo_dimensiones": "≈13 m²",
+            "altura_min": "—"
           },
           {
-            "condicion": "Caballo grande (≥17 hh)",
-            "valor": "3,65 m × 4,25 m",
-            "ejemplo_dimensiones": "≈15,5 m²",
-            "altura_min": "—",
-            "fuente_id": "bhs_stable"
+            "condicion": "Caballo grande",
+            "valor": "≈3,65 m × 4,25 m",
+            "ejemplo_dimensiones": "≈15–16 m²",
+            "altura_min": "—"
           },
           {
             "condicion": "Poni",
-            "valor": "3,05 m × 3,05 m",
-            "ejemplo_dimensiones": "≈9,3 m²",
-            "altura_min": "—",
-            "fuente_id": "bhs_stable"
+            "valor": "≈3,05 m × 3,05 m",
+            "ejemplo_dimensiones": "≈9 m²",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/equinos-boxe-3.65.jpg",
         "notas": [
-          "Pasillos suficientemente anchos para guiar caballos con seguridad.",
-          "Acceso a paddock/ejercicio según clima y manejo; el box mínimo no reemplaza el movimiento diario."
+          "Pasillos anchos para guiar con seguridad.",
+          "El box mínimo no sustituye el ejercicio diario en paddock o trabajo."
         ]
       },
       "alimentacion": {
-        "resumen": "Forraje de calidad como base; concentrados según trabajo. Agua a libre disposición. Evitar cambios bruscos de dieta (cólico).",
+        "resumen": "Forraje de calidad como base; concentrado según trabajo. Agua a libre disposición. Evita cambios bruscos de dieta.",
         "puntos": [
-          "Distribuir forraje en varias tomas si no hay pastoreo continuo.",
-          "Controlar peso y BCS equino (escala Henneke 1–5 en el atlas)."
+          "Reparte el forraje en varias tomas si no hay pastoreo continuo.",
+          "Sigue el BCS equino del atlas."
         ]
       },
       "cuidados": {
-        "resumen": "Cama limpia y seca, ventilación, desparasitación y vacunación según riesgo, herrado/casquería y control de cólico/laminitis.",
+        "resumen": "Cama limpia y seca, ventilación, desparasitación y vacunación según riesgo, casquería y prevención de cólico/laminitis.",
         "puntos": [
           "Pisos antideslizantes.",
-          "Separación de potros/yeguas según manejo reproductivo."
+          "Separa grupos según manejo reproductivo."
         ]
-      },
-      "fuentes": ["bhs_stable"]
+      }
     },
     {
       "id": "bovinos",
       "nombre": "Bovinos",
       "icono": "🐄",
-      "ambito": "producción lechera / carne (sistemas sueltos)",
+      "ambito": "leche / carne (sistemas sueltos)",
       "espacio": {
-        "resumen": "Normas BIS/ICAR (India, ampliamente citadas en alojamiento tropical): vaca adulta 3,5 m² cubiertos + 7,0 m² abiertos. FAO (Farm structures): patio de espera a ordeño 1,1–2,0 m²/vaca. CIGR: en reposo suelto con cama, literaturas de 6,5–7,0 m² de área de descanso por vaca Frisona son habituales.",
+        "resumen": "En sistemas sueltos tropicales se usan a menudo del orden de 3,5 m² cubiertos más unos 7 m² abiertos por vaca adulta (búfalas algo más). El patio de espera al ordeño suele dimensionarse cerca de 1–2 m² por animal. En sistemas con área de reposo generosa, el descanso por vaca adulta puede acercarse a 6–7 m² según diseño.",
         "metricas": [
           {
-            "condicion": "Vaca adulta (BIS/ICAR)",
-            "valor": "3,5 m² cubierto + 7,0 m² abierto",
+            "condicion": "Vaca adulta (cubierto + abierto)",
+            "valor": "≈3,5 m² + ≈7 m²",
             "ejemplo_dimensiones": "total ≈10,5 m²/animal",
-            "altura_min": "alero ≈1,75–2,20 m según clima (guías ICAR)",
-            "fuente_id": "bis_icar_dairy"
+            "altura_min": "alero según clima"
           },
           {
-            "condicion": "Búfala adulta (BIS)",
-            "valor": "4,0 m² cubierto + 8,0 m² abierto",
+            "condicion": "Búfala adulta",
+            "valor": "≈4 m² + ≈8 m²",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "bis_icar_dairy"
+            "altura_min": "—"
           },
           {
-            "condicion": "Patio de espera (FAO)",
-            "valor": "1,1–2,0 m²/vaca",
+            "condicion": "Patio de espera a ordeño",
+            "valor": "≈1–2 m²/vaca",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "fao_cattle_collecting"
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/bovinos-cubierto-abierto.jpg",
         "notas": [
-          "Sombra y agua son críticos en climas cálidos.",
-          "El diseño de cubículos/pasillos en sistemas europeos sigue guías CIGR/locales distintas a BIS."
+          "Sombra y agua son críticos en calor.",
+          "El diseño de cubículos europeos puede diferir de estos números."
         ]
       },
       "alimentacion": {
-        "resumen": "Forraje + concentrado según producción. Agua limpia (FAO: requerimientos altos en lactación; ambiente caluroso aumenta la demanda).",
+        "resumen": "Forraje más concentrado según producción. Agua limpia; la demanda sube en lactación y en calor.",
         "puntos": [
-          "Espacio de comedero adulto típico BIS ≈60–75 cm/animal.",
-          "Evitar competencia excesiva en el pesebre."
+          "Deja frente de comedero suficiente (~60–75 cm/adulto en muchos diseños).",
+          "Reduce competencia excesiva en el pesebre."
         ]
       },
       "cuidados": {
-        "resumen": "Higiene de ubre en lecheras, control de cojeras (pisos), vacunación y bioseguridad según plan sanitario.",
+        "resumen": "Higiene de ubre en lecheras, control de cojeras, vacunación y bioseguridad según plan sanitario.",
         "puntos": [
-          "Áreas de parto y aislamiento sanitarios.",
+          "Áreas de parto y aislamiento.",
           "Drenaje y manejo de estiércol."
         ]
-      },
-      "fuentes": ["bis_icar_dairy", "fao_cattle_collecting", "cigr_dairy_housing"]
+      }
     },
     {
       "id": "porcinos",
       "nombre": "Porcinos",
       "icono": "🐷",
-      "ambito": "producción porcina (normativa UE como referencia)",
+      "ambito": "producción porcina",
       "espacio": {
-        "resumen": "Directiva 2008/120/CE (mínimos de piso libre por cerdo en grupo, excl. cerdas gestantes): hasta 10 kg → 0,15 m²; 10–20 kg → 0,20; 20–30 → 0,30; 30–50 → 0,40; 50–85 → 0,55; 85–110 → 0,65; >110 kg → 1,00 m². Cerdas en grupo: ≥2,25 m²; primerizas gestantes: ≥1,64 m².",
+        "resumen": "El piso libre por cerdo en grupo suele escalarse con el peso: desde ~0,15 m² en lechones muy pequeños hasta ~1 m² en animales de más de ~110 kg. Cerdas en grupo necesitan más superficie (en torno a 2 m² o más por cabeza). Estos valores son mínimos de referencia; sistemas de mayor bienestar usan más espacio y enriquecimiento.",
         "metricas": [
           {
             "condicion": "Cerdo >110 kg (grupo)",
-            "valor": "1,00 m²/animal",
+            "valor": "≈1,0 m²/animal",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "eu_pigs_2008"
+            "altura_min": "—"
           },
           {
             "condicion": "Cerdo 50–85 kg",
-            "valor": "0,55 m²/animal",
+            "valor": "≈0,55 m²/animal",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "eu_pigs_2008"
+            "altura_min": "—"
           },
           {
             "condicion": "Cerda en grupo",
-            "valor": "≥2,25 m²",
-            "ejemplo_dimensiones": "lados del corral >2,8 m (≥6 animales)",
-            "altura_min": "—",
-            "fuente_id": "eu_pigs_2008"
+            "valor": "≈2,25 m² o más",
+            "ejemplo_dimensiones": "corrales no muy estrechos",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/porcinos-espacio-peso.jpg",
         "notas": [
-          "Son mínimos legales en la UE; sistemas de bienestar superiores usan más espacio y enriquecimiento.",
-          "Material manipulable permanente para cerdas/primerizas."
+          "Ofrece material manipulable.",
+          "Ajusta densidad a ventilación y temperatura."
         ]
       },
       "alimentacion": {
-        "resumen": "Dietas por fase (iniciación, crecimiento, engorde, gestación/lactancia). Agua ad libitum. FAO: mezclar pienso con ≈1,5–2,1 L agua/kg cuando se usa papilla.",
+        "resumen": "Dietas por fase (iniciación, crecimiento, engorde, gestación/lactancia). Agua a voluntad.",
         "puntos": [
-          "Evitar competencia en el comedero en grupos grandes.",
-          "Almacenamiento seco y control de micotoxinas."
+          "Evita competencia fuerte en el comedero.",
+          "Almacén seco y control de calidad del pienso."
         ]
       },
       "cuidados": {
-        "resumen": "Bioseguridad estricta, vacunación según granja, control de ambiente (temperatura, gases) y enriquecimiento.",
+        "resumen": "Bioseguridad, vacunación según granja, ambiente controlado y enriquecimiento.",
         "puntos": [
-          "Limpieza diaria de corrales.",
-          "Separación por edades / all-in all-out cuando sea posible."
+          "Limpieza frecuente de corrales.",
+          "Manejo por lotes de edad cuando sea posible."
         ]
-      },
-      "fuentes": ["eu_pigs_2008", "fao_pig_housing"]
+      }
     },
     {
       "id": "conejos",
       "nombre": "Conejos",
       "icono": "🐇",
-      "ambito": "compañía / producción cunicola",
+      "ambito": "compañía / cunicultura",
       "espacio": {
-        "resumen": "Compañía (RWAF/RSPCA): para un par de tamaño medio, huella mínima 3 m × 2 m y 1 m de alto, disponible siempre. Producción (DEFRA Code): mínimos comerciales absolutos, p. ej. hembra reproductora en jaula 0,56 m²; en jaulones/hutches 0,75 m²; altura ≥45 cm o suficiente para orejas erguidas. FAO: ≈1200–1500 cm² por kg de peso adulto; hembra mediana mín. ≈80×115 cm.",
+        "resumen": "Para un par de compañía de tamaño medio, una huella continua de unos 3×2 m y ~1 m de alto es una meta razonable de bienestar. En producción comercial las jaulas históricas son mucho más pequeñas (a menudo por debajo de 1 m² por reproductora); si crías para carne o piel, prioriza higiene y, cuando puedas, más espacio que el mínimo productivo antiguo. Un adulto por compartimento facilita el manejo.",
         "metricas": [
           {
-            "condicion": "Par de compañía (RWAF/RSPCA)",
-            "valor": "3 m × 2 m × 1 m alto",
-            "ejemplo_dimensiones": "6 m² de huella continua",
-            "altura_min": "1 m",
-            "fuente_id": "rwaf_rspca_rabbits"
+            "condicion": "Par de compañía",
+            "valor": "≈3 m × 2 m × 1 m alto",
+            "ejemplo_dimensiones": "≈6 m² de huella",
+            "altura_min": "≈1 m"
           },
           {
-            "condicion": "Hembra adulta reproductora — jaula (DEFRA mínimo comercial)",
-            "valor": "0,56 m²",
-            "ejemplo_dimensiones": "—",
-            "altura_min": "≥45 cm (>12 sem)",
-            "fuente_id": "defra_rabbits"
+            "condicion": "Hembra reproductora (mínimo productivo clásico)",
+            "valor": "≈0,56–0,75 m²",
+            "ejemplo_dimensiones": "según jaula o jaulón",
+            "altura_min": "≥45 cm o orejas erguidas"
           },
           {
-            "condicion": "Hembra mediana — FAO",
-            "valor": "mín. ≈80 × 115 cm",
-            "ejemplo_dimensiones": "1200–1500 cm²/kg adulto",
-            "altura_min": "45–60 cm",
-            "fuente_id": "fao_rabbit_housing"
+            "condicion": "Adulto mediano (referencia por peso)",
+            "valor": "orden de 80×80–115 cm",
+            "ejemplo_dimensiones": "más espacio si hay nido/camada",
+            "altura_min": "≈45–60 cm"
           }
         ],
         "imagen": "images/criaderos/conejos-pareja-3x2m.jpg",
         "notas": [
-          "Los mínimos DEFRA son de producción comercial; el bienestar de compañía exige mucho más espacio (RWAF).",
-          "FAO: un adulto por jaula; colonias de engorde con 900–1200 cm²/kg."
+          "Compañía y producción no comparten el mismo estándar de espacio.",
+          "Evita mallas que lesionen patas; protege de depredadores y escapes."
         ]
       },
       "alimentacion": {
-        "resumen": "Heno a libre disposición (compañía); pienso peletizado según sistema. Agua siempre. Verdes frescos en sistemas semi-intensivos FAO.",
+        "resumen": "Heno a voluntad en compañía; pellets según sistema. Agua siempre. Verdes frescos solo si el manejo lo permite sin ensuciar el piso.",
         "puntos": [
-          "No poner forraje húmedo en el piso (coccidiosis).",
-          "Hembra con camada: hasta ≈5 L agua/día si solo come pellets (FAO)."
+          "No dejes forraje húmedo en el suelo.",
+          "Hembras con camada beben mucho si solo comen pellets."
         ]
       },
       "cuidados": {
-        "resumen": "Ventilación, higiene, control de coccidiosis y pododermatitis (evitar mallas inadecuadas).",
+        "resumen": "Ventilación, higiene, control de coccidiosis y pododermatitis.",
         "puntos": [
-          "Nidal 5–7 días antes del parto (FAO).",
-          "Protección de depredadores y escape por excavación."
+          "Nidal unos días antes del parto.",
+          "Revisa mallas y anclajes."
         ]
-      },
-      "fuentes": ["rwaf_rspca_rabbits", "defra_rabbits", "fao_rabbit_housing"]
+      }
     },
     {
       "id": "reptiles",
       "nombre": "Reptiles",
       "icono": "🦎",
-      "ambito": "terrario / herpetocultura",
+      "ambito": "terrario",
       "espacio": {
-        "resumen": "Merck Veterinary Manual (tabla de mínimos orientativos): tortugas terrestres 0,2 m² por cada 0,1 m de largo de caparazón; lagartos terrestres 0,2 m² por 0,1 m de longitud total; boas/pitones y culebras tipo rey/rata 0,6 m² por metro de serpiente; culebras rápidas 1,0 m²/m. Siempre preferir el mayor recinto posible y mobiliario correcto.",
+        "resumen": "El tamaño del recinto depende del tipo y la longitud del animal. Orientación práctica: tortugas terrestres ~0,2 m² por cada 10 cm de caparazón; lagartos terrestres ~0,2 m² por cada 10 cm de longitud total; muchas serpientes terrestres ~0,6 m² de piso por metro de cuerpo (más en especies muy activas). Arbóreos priorizan volumen y altura. Siempre es mejor un recinto mayor con buen mobiliario.",
         "metricas": [
           {
-            "condicion": "Lagarto terrestre (ej. 50 cm LT)",
-            "valor": "0,2 m² / 0,1 m LT → ≈1,0 m²",
-            "ejemplo_dimensiones": "p. ej. 1,0 m × 1,0 m de piso",
-            "altura_min": "según especie (arbóreas: volumen)",
-            "fuente_id": "merck_reptiles"
+            "condicion": "Lagarto terrestre (ej. 50 cm)",
+            "valor": "≈1,0 m² de piso",
+            "ejemplo_dimensiones": "p. ej. 1×1 m",
+            "altura_min": "según especie"
           },
           {
             "condicion": "Boa/pitón (ej. 2 m)",
-            "valor": "0,6 m² / m → ≈1,2 m²",
+            "valor": "≈1,2 m² de piso",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "merck_reptiles"
+            "altura_min": "—"
           },
           {
             "condicion": "Lagarto arbóreo",
-            "valor": "0,4 m³ / 0,1 m LT",
-            "ejemplo_dimensiones": "priorizar volumen/altura",
-            "altura_min": "—",
-            "fuente_id": "merck_reptiles"
+            "valor": "priorizar volumen (≈0,4 m³ / 10 cm LT)",
+            "ejemplo_dimensiones": "más altura",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/reptiles-lagarto-terrestre.jpg",
         "notas": [
-          "Gradiente térmico, UVB (especies diurnas) y humedad son tan críticos como el área.",
-          "Tipo de recinto: terrestre, arbóreo, acuático o mixto según especie."
+          "Gradiente térmico, UVB (diurnos) y humedad importan tanto como el área.",
+          "Elige terrario terrestre, arbóreo o acuático según la especie."
         ]
       },
       "alimentacion": {
-        "resumen": "Dieta especie-específica (insectívora, herbívora, carnívora). Suplementación de calcio/vitamina D según protocolo veterinario.",
+        "resumen": "Dieta según especie (insectos, vegetal o presa). Suplementa calcio/vitamina D solo con criterio veterinario.",
         "puntos": [
-          "No mezclar especies incompatibles.",
-          "Agua en bebedero o inmersión según especie."
+          "No mezcles especies incompatibles.",
+          "Agua en bebedero o baño según hábito."
         ]
       },
       "cuidados": {
-        "resumen": "Higiene del sustrato, control de parásitos, cuarentena de ejemplares nuevos y evitar sobrecarga térmica.",
+        "resumen": "Sustrato limpio, cuarentena de ejemplares nuevos y evita sobrecalentamiento.",
         "puntos": [
-          "Refugios en extremos caliente y frío.",
-          "Luz solar natural filtrada con precaución (Merck: 1–2 h/semana pueden ayudar si el clima lo permite)."
+          "Refugios en zona cálida y fría.",
+          "Luz natural solo con control de temperatura y escape."
         ]
-      },
-      "fuentes": ["merck_reptiles"]
+      }
     },
     {
       "id": "peces",
-      "nombre": "Peces (tilapia, referencia acuícola)",
+      "nombre": "Peces",
       "icono": "🐟",
-      "ambito": "acuicultura / estanques y jaulas",
+      "ambito": "acuicultura",
       "espacio": {
-        "resumen": "Las densidades se miden en volumen (m³) o superficie de estanque (peces/ha), no en m² de “piso”. Perfil UF/IFAS de tilapia híbrida: estanques con aireación ≈9 500–19 500 peces/ha (50 g); tanques/raceways 140–248 peces/m³ (25–50 g); jaulas de engorde 250–400 peces/m³ (60–100 g).",
+        "resumen": "En peces la densidad se mide en volumen o en estanque, no en m² de piso. En engorde en jaula puede manejarse del orden de 250–400 peces/m³ según talla y aireación; tanques suelen ir más bajos; estanques aireados se expresan en miles de peces por hectárea. La calidad del agua marca el techo real.",
         "metricas": [
           {
-            "condicion": "Jaula engorde tilapia 60–100 g",
-            "valor": "250–400 peces/m³",
-            "ejemplo_dimensiones": "volumen de jaula útil",
-            "altura_min": "—",
-            "fuente_id": "uf_tilapia"
+            "condicion": "Jaula engorde (tilapia mediana)",
+            "valor": "≈250–400 peces/m³",
+            "ejemplo_dimensiones": "volumen útil de jaula",
+            "altura_min": "—"
           },
           {
-            "condicion": "Tanque/raceway 25–50 g",
-            "valor": "140–248 peces/m³",
+            "condicion": "Tanque / raceway (juveniles)",
+            "valor": "≈140–250 peces/m³",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "uf_tilapia"
+            "altura_min": "—"
           },
           {
-            "condicion": "Estanque aireado (≈50 g)",
-            "valor": "9 500–19 500 peces/ha",
-            "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "uf_tilapia"
+            "condicion": "Estanque aireado",
+            "valor": "orden de 10⁴ peces/ha",
+            "ejemplo_dimensiones": "según talla y manejo",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/peces-tilapia-densidad.jpg",
         "notas": [
-          "La densidad máxima depende de aireación, recambio y calidad de agua (O₂, amonio).",
-          "Otras especies (ornamentales, trucha, etc.) tienen rangos distintos: no extrapolés tilapia."
+          "Oxígeno, amonio y recambio limitan la densidad.",
+          "No copies densidades de tilapia a otras especies."
         ]
       },
       "alimentacion": {
-        "resumen": "Pienso extruido según tamaño; tasa de alimentación ajustada a biomasa y temperatura. Evitar sobredosificación (empeora la calidad del agua).",
+        "resumen": "Pienso según tamaño; tasa según biomasa y temperatura. Evita sobredosificar (empeora el agua).",
         "puntos": [
-          "Monitorear oxígeno disuelto.",
+          "Monitorea oxígeno disuelto.",
           "Ayuno previo a cosecha/transporte según protocolo."
         ]
       },
       "cuidados": {
-        "resumen": "Bioseguridad hídrica, cuarentena de alevines, control de depredadores y mantenimiento de filtros/aireadores.",
+        "resumen": "Bioseguridad hídrica, cuarentena de alevines y mantenimiento de aireación/filtración.",
         "puntos": [
-          "Registros de mortalidad y parámetros de agua.",
-          "Densidad de jaula no debe superar la capacidad del estanque receptor (UF/IFAS)."
+          "Registra mortalidad y parámetros de agua.",
+          "La jaula no debe sobrecargar el cuerpo de agua receptor."
         ]
-      },
-      "fuentes": ["uf_tilapia"]
+      }
     },
     {
       "id": "ovinos",
@@ -473,51 +438,47 @@
       "icono": "🐑",
       "ambito": "producción intensiva / semi-intensiva",
       "espacio": {
-        "resumen": "FAO Farm structures (Tabla 10.18): oveja 50 kg → 1,1 m² piso sólido (0,9 m² enrejillado) + 2,5 m² corral abierto; 35 kg → 0,8 / 0,7 / 2,0 m²; 70 kg → 1,4 / 1,1 / 3,0 m². Moruecos ≈3,0 m² sólido. Corrales de parto individuales ≈1,5 m según peso y número de corderos.",
+        "resumen": "En intensivo, una oveja de ~50 kg suele necesitar cerca de 1,1 m² de piso sólido (algo menos si hay enrejado) más un corral abierto de unos 2–3 m². Animales más pesados piden más área; corderos, menos; moruecos, bastante más. El drenaje es clave: el barro enferma pezuñas.",
         "metricas": [
           {
-            "condicion": "Oveja 50 kg — piso sólido",
-            "valor": "1,1 m²/animal",
-            "ejemplo_dimensiones": "corral abierto 2,5 m²",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "condicion": "Oveja ~50 kg — piso sólido",
+            "valor": "≈1,1 m²/animal",
+            "ejemplo_dimensiones": "abierto ≈2,5 m²",
+            "altura_min": "—"
           },
           {
-            "condicion": "Oveja 70 kg — piso sólido",
-            "valor": "1,4 m²/animal",
-            "ejemplo_dimensiones": "corral abierto 3,0 m²",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "condicion": "Oveja ~70 kg — piso sólido",
+            "valor": "≈1,4 m²/animal",
+            "ejemplo_dimensiones": "abierto ≈3 m²",
+            "altura_min": "—"
           },
           {
             "condicion": "Cordero",
-            "valor": "0,4–0,5 m² sólido",
+            "valor": "≈0,4–0,5 m² sólido",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/ovinos-caprinos-1.1m2.jpg",
         "notas": [
-          "Evitar barro: drenaje esencial.",
-          "Espacio de comedero oveja 50 kg ≈0,40 m/animal (FAO)."
+          "Frente de comedero ~0,4 m por adulto en muchos diseños.",
+          "Corrales de parto individuales según tamaño de la madre."
         ]
       },
       "alimentacion": {
-        "resumen": "Pastoreo y/o forraje + suplemento según etapa. Agua limpia. En intensivo, raciones calculadas por peso.",
+        "resumen": "Pastoreo y/o forraje con suplemento según etapa. Agua limpia.",
         "puntos": [
-          "Separar lotes por condición corporal cuando sea posible.",
-          "Cuidado con toxemias de gestación en ovejas gordas con poca fibra."
+          "Agrupa por condición corporal si puedes.",
+          "Cuidado con toxemia de gestación en ovejas gordas con poca fibra."
         ]
       },
       "cuidados": {
-        "resumen": "Control de parásitos, pezuñas, esquila y manejo de partos. Baños/dips según zona (FAO describe layouts de inmersión).",
+        "resumen": "Parásitos, pezuñas, esquila y manejo de partos. Sombra en climas cálidos.",
         "puntos": [
-          "Sombra en climas cálidos.",
-          "Protección nocturna frente a depredadores en sistemas extensivos."
+          "Protección nocturna frente a depredadores en extensivo.",
+          "Áreas secas para patas."
         ]
-      },
-      "fuentes": ["fao_sheep_goat"]
+      }
     },
     {
       "id": "caprinos",
@@ -525,51 +486,47 @@
       "icono": "🐐",
       "ambito": "producción intensiva / semi-intensiva",
       "espacio": {
-        "resumen": "Misma tabla FAO 10.18 que ovinos (cabra/oveja tratadas juntas): cabra 50 kg → 1,1 m² sólido + 2,5 m² abierto; macho ≈3,0 m² sólido. Plataforma de ordeño sugerida: 0,8 m de fondo y 0,35–0,5 m elevada.",
+        "resumen": "Las necesidades de piso son similares a las de ovinos: cabra de ~50 kg ≈1,1 m² sólido más corral abierto; machos adultos cerca de 3 m² sólidos. Trepan: cercas y estructuras deben ser seguras. En zonas muy húmedas ayudan pisos elevados.",
         "metricas": [
           {
-            "condicion": "Cabra 50 kg — piso sólido",
-            "valor": "1,1 m²/animal",
-            "ejemplo_dimensiones": "corral abierto 2,5 m²",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "condicion": "Cabra ~50 kg — piso sólido",
+            "valor": "≈1,1 m²/animal",
+            "ejemplo_dimensiones": "abierto ≈2,5 m²",
+            "altura_min": "—"
           },
           {
             "condicion": "Macho adulto",
-            "valor": "3,0 m² sólido (2,5 m² enrejillado)",
+            "valor": "≈3 m² sólido",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "altura_min": "—"
           },
           {
             "condicion": "Cabrito",
-            "valor": "0,4–0,5 m² sólido",
+            "valor": "≈0,4–0,5 m² sólido",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "fao_sheep_goat"
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/ovinos-caprinos-1.1m2.jpg",
         "notas": [
-          "Casas sobre pilotes con piso enrejillado 1–1,5 m sobre suelo en zonas muy lluviosas (FAO).",
-          "Cabras trepan: cercas y estructuras deben ser seguras."
+          "Plataforma de ordeño elevada facilita el trabajo.",
+          "Separa machos adultos."
         ]
       },
       "alimentacion": {
-        "resumen": "Browsers: forraje diverso + concentrado en lecheras. Agua limpia. Minerales según zona.",
+        "resumen": "Browse y forraje diverso; concentrado en lecheras. Agua y minerales según zona.",
         "puntos": [
-          "Evitar plantas tóxicas en el pastoreo.",
-          "Espacio de comedero similar a ovinos (FAO)."
+          "Revisa plantas tóxicas en el pastoreo.",
+          "Frente de comedero similar al ovino."
         ]
       },
       "cuidados": {
-        "resumen": "Parásitos gastrointestinales, pezuñas, CAEV/bioseguridad en lecheras, higiene de ordeño.",
+        "resumen": "Parásitos, pezuñas, higiene de ordeño y bioseguridad en lecheras.",
         "puntos": [
-          "Separar machos adultos.",
-          "Ventilación en alojamiento cerrado."
+          "Ventilación en alojamiento cerrado.",
+          "Control de pezuñas frecuente."
         ]
-      },
-      "fuentes": ["fao_sheep_goat"]
+      }
     },
     {
       "id": "camelidos",
@@ -577,187 +534,89 @@
       "icono": "🦙",
       "ambito": "crianza de alpacas/llamas",
       "espacio": {
-        "resumen": "AOA/AIMS (Alpaca Owners Association): mínimo de refugio ≈8 ft² (≈0,74 m²) por alpaca y ≈10 ft² (≈0,93 m²) por llama en cobertizo de tres lados. Estándares de cuidado citados por criadores (p. ej. Cotton Creek): ≥18 ft² (≈1,67 m²) de refugio por alpaca. Outdoor: fuentes extensionistas mencionan del orden de 200–400 ft² (≈19–37 m²) de ejercicio por adulto; pastoreo suele requerir mucho más terreno por rebaño. ILA (llamas): guía práctica 12×16 ft (≈17,8 m²) para ≈5 adultos compatibles en cobertizo abierto.",
+        "resumen": "Un cobertizo de tres lados puede bastar como refugio: del orden de 0,7–1 m² por alpaca como mínimo muy ajustado, y cerca de 1,5–1,7 m² si buscas más holgura. El ejercicio diario pide decenas de m² por adulto (a menudo ~20–40 m²) y el pastoreo real exige mucho más terreno por rebaño. Son animales sociales: no dejes un solo ejemplar aislado.",
         "metricas": [
           {
-            "condicion": "Refugio mínimo alpaca (AOA/AIMS)",
-            "valor": "≈8 ft² ≈ 0,74 m²/animal",
+            "condicion": "Refugio mínimo por alpaca",
+            "valor": "≈0,7–1 m²",
             "ejemplo_dimensiones": "cobertizo 3 lados",
-            "altura_min": "—",
-            "fuente_id": "aoa_alpaca_shelter"
+            "altura_min": "—"
           },
           {
-            "condicion": "Refugio (estándar cuidado citado ≥18 ft²/alpaca)",
-            "valor": "≈1,67 m²/animal",
+            "condicion": "Refugio más holgado",
+            "valor": "≈1,5–1,7 m²/animal",
             "ejemplo_dimensiones": "—",
-            "altura_min": "—",
-            "fuente_id": "cotton_creek_alpaca"
+            "altura_min": "—"
           },
           {
-            "condicion": "Ejercicio outdoor por adulto (rango extensionista)",
-            "valor": "≈19–37 m² (200–400 ft²)",
-            "ejemplo_dimensiones": "más espacio si hay pastoreo real",
-            "altura_min": "—",
-            "fuente_id": "camelid_extension_space"
+            "condicion": "Ejercicio outdoor por adulto",
+            "valor": "≈20–40 m²",
+            "ejemplo_dimensiones": "más si hay pastoreo",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/camelidos-refugio.jpg",
         "notas": [
-          "Animales sociales: mínimo práctico de compañía (no aislar un solo ejemplar).",
-          "Sombra y enfriamiento en calor/humedad; evitar alambre de púas."
+          "Sombra y enfriamiento en calor húmedo.",
+          "Evita cercas peligrosas (p. ej. púas)."
         ]
       },
       "alimentacion": {
-        "resumen": "Forraje de buena calidad; evitar obesidad. Agua limpia. Necesidades minerales según región (consultar veterinario de camélidos).",
+        "resumen": "Forraje de buena calidad; evita obesidad. Agua limpia. Minerales según región y criterio veterinario.",
         "puntos": [
-          "No usar comederos que permitan competencia extrema sin supervisión.",
-          "Cuidado con plantas tóxicas en potreros."
+          "Vigila competencia en comederos.",
+          "Revisa plantas tóxicas en potreros."
         ]
       },
       "cuidados": {
-        "resumen": "Esquila (alpacas), control de parásitos, cuidado de dientes/pezuñas, protección térmica.",
+        "resumen": "Esquila (alpacas), parásitos, dientes/pezuñas y protección térmica.",
         "puntos": [
-          "Áreas secas para patas en climas lluviosos (ILA).",
-          "Separación de machos jóvenes según plan de crianza."
+          "Pisos secos en climas lluviosos.",
+          "Separa machos jóvenes según el plan de crianza."
         ]
-      },
-      "fuentes": ["aoa_alpaca_shelter", "cotton_creek_alpaca", "camelid_extension_space", "ila_llama_housing"]
+      }
     },
     {
       "id": "roedores",
       "nombre": "Roedores (cobayas)",
       "icono": "🐹",
-      "ambito": "compañía / bioterio doméstico",
+      "ambito": "compañía",
       "espacio": {
-        "resumen": "Merck Veterinary Manual: mínimo ≈7,5 ft² (≈0,70 m²) para una cobaya, más ≈2–4 ft² (≈0,19–0,37 m²) por animal adicional; piso sólido. Humane Society: 7,5 ft² mínimo para una; preferible ≥10,5 ft² para dos. Altura de laterales ≥≈30 cm (12 in) si no hay depredadores domésticos.",
+        "resumen": "Para una cobaya, un mínimo orientativo ronda 0,7 m² de piso sólido; por cada animal extra suma ~0,2–0,4 m². Dos cobayas compatibles viven mejor con cerca de 1 m² o más. No uses piso de malla. Esta ficha se centra en cobaya; hámsters y ratas tienen otras necesidades.",
         "metricas": [
           {
-            "condicion": "1 cobaya (Merck)",
-            "valor": "≥7,5 ft² ≈ 0,70 m²",
-            "ejemplo_dimensiones": "≈76 × 91 cm (30×36 in)",
-            "altura_min": "laterales ≈30 cm+",
-            "fuente_id": "merck_guinea"
+            "condicion": "1 cobaya",
+            "valor": "≥≈0,70 m²",
+            "ejemplo_dimensiones": "≈76 × 91 cm",
+            "altura_min": "laterales ≈30 cm+"
           },
           {
-            "condicion": "2 cobayas (preferible Humane Society)",
-            "valor": "≥10,5 ft² ≈ 0,98 m²",
-            "ejemplo_dimensiones": "≈76 × 127 cm (30×50 in)",
-            "altura_min": "—",
-            "fuente_id": "hsus_guinea"
+            "condicion": "2 cobayas (preferible)",
+            "valor": "≥≈1,0 m²",
+            "ejemplo_dimensiones": "≈76 × 127 cm",
+            "altura_min": "—"
           }
         ],
         "imagen": "images/criaderos/roedores-cobaya-0.70m2.jpg",
         "notas": [
-          "Piso de malla contraindicado (pododermatitis).",
-          "Especie social: conviene al menos un par compatible.",
-          "Otras especies de roedor (hámster, rata) tienen estándares distintos; esta ficha se centra en cobaya por tener cifras claras en Merck."
+          "Especie social: ideal un par compatible.",
+          "Cama absorbente y buena ventilación (evita acuarios cerrados)."
         ]
       },
       "alimentacion": {
-        "resumen": "Heno a libre disposición, pellets específicos, verduras; vitamina C diaria (no sintetizan suficiente).",
+        "resumen": "Heno a voluntad, pellets específicos, verdura y vitamina C diaria.",
         "puntos": [
           "Agua limpia siempre.",
-          "Evitar dietas solo de semillas."
+          "Evita dietas solo de semillas."
         ]
       },
       "cuidados": {
-        "resumen": "Cama absorbente (papel), ventilación (evitar acuarios de vidrio), control dental y de peso.",
+        "resumen": "Limpieza frecuente, control dental y de peso, temperatura templada.",
         "puntos": [
-          "Temperatura confort Merck ≈18–26 °C.",
-          "Limpieza frecuente del recinto."
+          "Mantén ~18–26 °C cuando puedas.",
+          "Revisa uñas y dientes con regularidad."
         ]
-      },
-      "fuentes": ["merck_guinea", "hsus_guinea"]
+      }
     }
-  ],
-  "fuentes_catalogo": {
-    "scotland_awe_2021": {
-      "nombre": "Scottish Government — Guidance for Animal Welfare Establishments (Regulations 2021), Annex C",
-      "url": "https://www.gov.scot/publications/animal-welfare-licensing-activities-involving-animals-scotland-regulations-2021-guidance-animal-welfare-establishments/pages/8/"
-    },
-    "asv_shelter_2022": {
-      "nombre": "Association of Shelter Veterinarians — Guidelines for Standards of Care in Animal Shelters, 2nd ed. (2022)",
-      "url": "https://jsmcah.org/index.php/jasv/article/download/42/20/182?inline=1"
-    },
-    "fao_farm_structures_poultry": {
-      "nombre": "FAO — Farm structures… Ch.10 Animal housing (poultry Table 10.13)",
-      "url": "https://www.fao.org/4/S1250E/S1250E14.htm"
-    },
-    "fao_small_scale_poultry": {
-      "nombre": "FAO — Small-scale poultry production (housing density)",
-      "url": "https://www.fao.org/4/y5169e/y5169e05.htm"
-    },
-    "bhs_stable": {
-      "nombre": "British Horse Society — Horse Stables: Safety, Design & Size",
-      "url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/stable-safety/"
-    },
-    "bis_icar_dairy": {
-      "nombre": "BIS / ICAR dairy housing floor space (cow 3.5 + 7.0 m²) — resumen TNAU / guías indias",
-      "url": "http://www.agritech.tnau.ac.in/expert_system/cattlebuffalo/Housing%20Management%20of%20Cattle%20and%20Buffalo.html"
-    },
-    "fao_cattle_collecting": {
-      "nombre": "FAO — Farm structures… cattle (collecting yard 1.1–2.0 m²/cow)",
-      "url": "https://www.fao.org/4/s1250e/s1250e12.htm"
-    },
-    "cigr_dairy_housing": {
-      "nombre": "CIGR — Design Recommendations of Beef Cattle Housing / dairy housing literature (lying area guidance)",
-      "url": "https://www.cigr.org/"
-    },
-    "eu_pigs_2008": {
-      "nombre": "Council Directive 2008/120/EC — minimum pig space allowances",
-      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008L0120"
-    },
-    "fao_pig_housing": {
-      "nombre": "FAO — Farm structures… pig housing / feed-water notes",
-      "url": "https://www.fao.org/4/S1250E/S1250E14.htm"
-    },
-    "rwaf_rspca_rabbits": {
-      "nombre": "RWAF / RSPCA — rabbit living space 3×2×1 m for a pair",
-      "url": "https://rabbitwelfare.co.uk/welfare-need/space-recommendations/"
-    },
-    "defra_rabbits": {
-      "nombre": "DEFRA — Code of recommendations for the welfare of livestock: Rabbits",
-      "url": "https://www.gov.uk/government/publications/rabbits-on-farm-welfare/caring-for-rabbits"
-    },
-    "fao_rabbit_housing": {
-      "nombre": "FAO — Farm structures… rabbit housing space",
-      "url": "https://www.fao.org/4/s1250e/s1250e17.htm"
-    },
-    "merck_reptiles": {
-      "nombre": "Merck Veterinary Manual — Management and Husbandry of Reptiles (minimum space table)",
-      "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/reptiles/management-and-husbandry-of-reptiles"
-    },
-    "uf_tilapia": {
-      "nombre": "University of Florida / IFAS — Culture of Hybrid Tilapia: A Reference Profile (EDIS FA012)",
-      "url": "https://edis.ifas.ufl.edu/publication/FA012"
-    },
-    "fao_sheep_goat": {
-      "nombre": "FAO — Farm structures… Table 10.18 sheep/goat floor space",
-      "url": "https://www.fao.org/4/s1250e/s1250e17.htm"
-    },
-    "aoa_alpaca_shelter": {
-      "nombre": "Alpaca Owners Association / AIMS — Farm Management shelter minima (8 ft² alpaca, 10 ft² llama)",
-      "url": "https://aims.alpacainfo.com/academy/farm-management"
-    },
-    "cotton_creek_alpaca": {
-      "nombre": "Cotton Creek Farms — Minimum standards of care for alpacas (shelter ≥18 ft²)",
-      "url": "https://cottoncreekfarms.com/adhering-to-the-minimum-standards-of-care-for-alpacas/"
-    },
-    "camelid_extension_space": {
-      "nombre": "Extension / camelid housing summaries — outdoor exercise ~200–400 ft²/adult",
-      "url": "https://www.zubairkhalid.com/knowledge/animal-farming/alternative-livestock/alpaca-llama-housing-fencing-facility-design"
-    },
-    "ila_llama_housing": {
-      "nombre": "International Llama Association — Llama Housing & Fencing (shed sizing guide)",
-      "url": "https://www.sprucelane.com/housing.pdf"
-    },
-    "merck_guinea": {
-      "nombre": "Merck Veterinary Manual — Housing and Nutrition of Guinea Pigs (≥7.5 ft²)",
-      "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/guinea-pigs/housing-and-nutrition-of-guinea-pigs"
-    },
-    "hsus_guinea": {
-      "nombre": "Humane Society — Guinea Pig Housing Requirements",
-      "url": "https://www.humaneworld.org/en/resources/guinea-pig-housing-requirements"
-    }
-  }
+  ]
 }
