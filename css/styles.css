@@ -3251,14 +3251,21 @@ body.disclaimer-open {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
+  color: var(--text);
   font-family: inherit;
   font-size: 0.88rem;
   cursor: pointer;
 }
 
-.region-filters .region-btn.active {
-  background: var(--primary-light);
+.region-filters .region-btn:hover {
+  background: var(--surface-alt);
   border-color: var(--primary);
+}
+
+.region-filters .region-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
   font-weight: 700;
 }
 
