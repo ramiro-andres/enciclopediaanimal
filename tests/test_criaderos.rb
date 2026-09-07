@@ -22,17 +22,30 @@ class CriaderosSectionTest < Minitest::Test
     assert_equal expected.sort, ids.sort
   end
 
-  def test_cada_especie_tiene_espacio_alimentacion_cuidados_y_fuentes
+  def test_cada_especie_tiene_espacio_alimentacion_y_cuidados
     @json['especies'].each do |sp|
       assert sp.dig('espacio', 'resumen').to_s.strip != '', "#{sp['id']} sin espacio.resumen"
       assert sp.dig('espacio', 'metricas').is_a?(Array) && !sp['espacio']['metricas'].empty?, "#{sp['id']} sin métricas"
       assert sp.dig('alimentacion', 'resumen').to_s.strip != '', "#{sp['id']} sin alimentacion"
       assert sp.dig('cuidados', 'resumen').to_s.strip != '', "#{sp['id']} sin cuidados"
-      assert sp['fuentes'].is_a?(Array) && !sp['fuentes'].empty?, "#{sp['id']} sin fuentes"
-      sp['fuentes'].each do |fid|
-        assert @json.dig('fuentes_catalogo', fid), "Falta fuente #{fid} en catálogo (#{sp['id']})"
+      refute sp.key?('fuentes'), "#{sp['id']} no debe listar fuentes"
+    end
+  end
+
+  def test_sin_catalogo_ni_fuente_id
+    refute @json.key?('fuentes_catalogo')
+    @json['especies'].each do |sp|
+      sp.dig('espacio', 'metricas').each do |m|
+        refute m.key?('fuente_id'), "#{sp['id']} métrica con fuente_id"
+        assert m['valor'].to_s.strip != '', "#{sp['id']} métrica sin valor"
       end
     end
+  end
+
+  def test_ui_no_renderiza_bloque_fuentes
+    refute_includes @app, 'renderCriaderosFuenteLinks'
+    refute_includes @app, 'criaderos-block--sources'
+    refute_includes @i18n, "'criaderos.sources'"
   end
 
   def test_imagenes_de_diagramas_existen
@@ -62,20 +75,11 @@ class CriaderosSectionTest < Minitest::Test
 
   def test_sw_precache_y_version
     assert_includes @sw, './data/criaderos.js'
-    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:5[0-9]|[6-9]\d|\d{3,})'/, @sw)
+    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:5[1-9]|[6-9]\d|\d{3,})'/, @sw)
   end
 
   def test_sitemap_incluye_criaderos
     script = File.read(File.join(@root, 'scripts', 'data', 'build_sitemap.rb'))
     assert_includes script, "'criaderos'"
-  end
-
-  def test_metricas_tienen_fuente_id
-    @json['especies'].each do |sp|
-      sp.dig('espacio', 'metricas').each do |m|
-        assert m['fuente_id'].to_s.strip != '', "#{sp['id']} métrica sin fuente_id"
-        assert m['valor'].to_s.strip != '', "#{sp['id']} métrica sin valor"
-      end
-    end
   end
 end

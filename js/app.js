@@ -2828,19 +2828,6 @@ const App = {
     return especies.filter(e => e.id === this.criaderosSpecies);
   },
 
-  renderCriaderosFuenteLinks(fuenteIds) {
-    const catalog = this.criaderosData?.fuentes_catalogo || {};
-    return (fuenteIds || []).map(id => {
-      const src = catalog[id];
-      if (!src) return `<li>${this.esc(id)}</li>`;
-      const label = this.esc(src.nombre || id);
-      if (src.url) {
-        return `<li><a href="${this.esc(src.url)}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
-      }
-      return `<li>${label}</li>`;
-    }).join('');
-  },
-
   renderCriaderos() {
     const title = document.getElementById('criaderosTitle');
     const intro = document.getElementById('criaderosIntro');
@@ -2922,10 +2909,6 @@ const App = {
             <h4>${this.esc(this.t('criaderos.care'))}</h4>
             <p>${this.esc(item.cuidados?.resumen || '')}</p>
             ${carePoints ? `<ul>${carePoints}</ul>` : ''}
-          </div>
-          <div class="criaderos-block criaderos-block--sources">
-            <h4>${this.esc(this.t('criaderos.sources'))}</h4>
-            <ul>${this.renderCriaderosFuenteLinks(item.fuentes)}</ul>
           </div>
         </article>
       `;
