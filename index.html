@@ -229,6 +229,18 @@
               </span>
             </span>
           </button>
+          <button type="button" class="feature-card feature-card--criaderos feature-card--action" id="openCriaderosCard" data-i18n-aria="welcome.feature8_aria" aria-label="Abrir guía de criaderos e instalaciones">
+            <span class="feature-media" aria-hidden="true">
+              <img src="images/features/08-criaderos.jpg" alt="" width="960" height="540" loading="lazy" decoding="async">
+            </span>
+            <span class="feature-card-body">
+              <span class="feature-number">08</span>
+              <span>
+                <span class="feature-card-title" data-i18n="welcome.feature8_title">Criaderos e instalaciones</span>
+                <span class="feature-card-text" data-i18n="welcome.feature8_body">Espacio, alimentación y cuidados por especie con diagramas acotados y fuentes citadas.</span>
+              </span>
+            </span>
+          </button>
         </div>
 
         <div class="welcome-picker">
@@ -519,6 +531,20 @@
         </div>
       </section>
 
+      <section id="criaderosView" class="view">
+        <button id="backCriaderosBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
+        <div class="criaderos-page">
+          <div class="criaderos-hero">
+            <span class="eyebrow" data-i18n="criaderos.eyebrow">INSTALACIONES</span>
+            <h2 id="criaderosTitle" data-i18n="criaderos.title">Guía de criaderos e instalaciones</h2>
+            <p id="criaderosIntro" data-i18n="criaderos.loading">Cargando...</p>
+            <p class="criaderos-disclaimer" data-i18n="criaderos.disclaimer">Referencia educativa con cifras de fuentes publicadas. No sustituye normativa local ni criterio veterinario.</p>
+          </div>
+          <div id="criaderosSpeciesFilters" class="criaderos-filters" role="group" data-i18n-aria="criaderos.filter_aria" aria-label="Filtrar por especie"></div>
+          <div id="criaderosList" class="criaderos-list"></div>
+        </div>
+      </section>
+
       <section id="changelogView" class="view">
         <button id="backChangelogBtn" class="back-btn" data-i18n="back.home">Volver al inicio</button>
         <div class="changelog-page">
@@ -655,6 +681,7 @@
   <script src="data/emergencias_latam.js"></script>
   <script src="data/triaje.js"></script>
   <script src="data/calendario_vacunacion.js"></script>
+  <script src="data/criaderos.js"></script>
   <script src="data/search_synonyms.js"></script>
   <script src="data/evaluacion_preguntas.js"></script>
   <script>

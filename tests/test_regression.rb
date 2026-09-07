@@ -80,6 +80,7 @@ class JsonJsSyncTest < Minitest::Test
     ['data/diccionario_medicos.json', 'data/diccionario_medicos.js', 'DICCIONARIO_MEDICOS'],
     ['data/enlaces_clinicos.json', 'data/enlaces_clinicos.js', 'ENLACES_CLINICOS'],
     ['data/toxicologia.json', 'data/toxicologia.js', 'TOXICOLOGIA_DATA'],
+    ['data/criaderos.json', 'data/criaderos.js', 'CRIADEROS_DATA'],
     ['data/chunks/manifest.json', 'data/chunks/manifest.js', 'ENCICLOPEDIA_MANIFEST']
   ].freeze
 

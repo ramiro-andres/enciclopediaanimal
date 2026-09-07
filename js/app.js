@@ -259,6 +259,7 @@ const App = {
           if (this.currentView === 'tools') this.renderTools();
           if (this.currentView === 'rerMer') this.renderRerMer();
           if (this.currentView === 'toxicologia') this.renderToxicologia();
+          if (this.currentView === 'criaderos') this.renderCriaderos();
           if (this.currentView === 'fluidoterapia') this.renderFluidoterapia();
           if (this.currentView === 'unidades') this.renderUnidades();
           if (this.currentView === 'predisposiciones') this.renderPredisposiciones();
@@ -292,6 +293,7 @@ const App = {
       this.crossLinks = await this.loadCrossLinks();
       this.exportE2EState();
       this.toxicologyData = await this.loadToxicologyData();
+      this.criaderosData = await this.loadCriaderosData();
       this.emergenciasLatamData = await this.loadEmergenciasLatamData();
       this.triajeData = await this.loadTriajeData();
       this.labReferenceData = await this.loadLabReferenceData();
@@ -614,6 +616,17 @@ const App = {
     return null;
   },
 
+  async loadCriaderosData() {
+    if (window.CRIADEROS_DATA?.especies?.length) {
+      return window.CRIADEROS_DATA;
+    }
+    try {
+      const res = await fetch('data/criaderos.json');
+      if (res.ok) return await res.json();
+    } catch (_) { /* fetch falla en file:// */ }
+    return null;
+  },
+
   async loadEmergenciasLatamData() {
     if (window.EMERGENCIAS_LATAM?.paises?.length) {
       return window.EMERGENCIAS_LATAM;
@@ -760,6 +773,7 @@ const App = {
     document.getElementById('backToolsBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backRerMerBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backToxicologiaBtn')?.addEventListener('click', () => this.showTools());
+    document.getElementById('backCriaderosBtn')?.addEventListener('click', () => this.goWelcome());
     document.getElementById('backFluidoterapiaBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backUnidadesBtn')?.addEventListener('click', () => this.showTools());
     document.getElementById('backPredisposicionesBtn')?.addEventListener('click', () => this.goWelcome());
@@ -811,6 +825,7 @@ const App = {
     bindFeatureCard('openToolsCard', () => this.showTools());
     bindFeatureCard('openPredisposicionesCard', () => this.showPredisposiciones());
     bindFeatureCard('openEstudioCard', () => this.showEstudio());
+    bindFeatureCard('openCriaderosCard', () => this.showCriaderos());
     document.getElementById('predisSearchInput')?.addEventListener('input', (e) => {
       this.predisposicionesQuery = e.target.value.toLowerCase().trim();
       this.renderPredisposiciones();
@@ -1223,6 +1238,11 @@ const App = {
 
       if (parts[0] === 'toxicologia') {
         this.showToxicologia({ updateHash: false });
+        return true;
+      }
+
+      if (parts[0] === 'criaderos') {
+        this.showCriaderos({ updateHash: false });
         return true;
       }
 
@@ -1963,6 +1983,13 @@ const App = {
     this.exportE2EState();
   },
 
+  showCriaderos(options = {}) {
+    this.renderCriaderos();
+    this.showView('criaderos');
+    if (options.updateHash !== false) this.updateHash('#criaderos');
+    this.exportE2EState();
+  },
+
   showFluidoterapia(options = {}) {
     this.renderFluidoterapia();
     this.showView('fluidoterapia');
@@ -2253,6 +2280,12 @@ const App = {
         title: this.t('tox.title'),
         desc: this.t('tox.card_desc'),
         action: () => this.showToxicologia()
+      },
+      {
+        icon: '🏠',
+        title: this.t('criaderos.title'),
+        desc: this.t('criaderos.card_desc'),
+        action: () => this.showCriaderos()
       },
       {
         icon: '📊',
@@ -2787,6 +2820,116 @@ const App = {
         ${item.antidoto ? `<div class="tox-block"><h4>${this.esc(this.t('tox.antidote'))}</h4><p>${this.esc(item.antidoto)}</p></div>` : ''}
       </article>
     `).join('');
+  },
+
+  getFilteredCriaderos() {
+    const especies = this.criaderosData?.especies || [];
+    if (!this.criaderosSpecies || this.criaderosSpecies === 'todos') return especies;
+    return especies.filter(e => e.id === this.criaderosSpecies);
+  },
+
+  renderCriaderosFuenteLinks(fuenteIds) {
+    const catalog = this.criaderosData?.fuentes_catalogo || {};
+    return (fuenteIds || []).map(id => {
+      const src = catalog[id];
+      if (!src) return `<li>${this.esc(id)}</li>`;
+      const label = this.esc(src.nombre || id);
+      if (src.url) {
+        return `<li><a href="${this.esc(src.url)}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+      }
+      return `<li>${label}</li>`;
+    }).join('');
+  },
+
+  renderCriaderos() {
+    const title = document.getElementById('criaderosTitle');
+    const intro = document.getElementById('criaderosIntro');
+    const filters = document.getElementById('criaderosSpeciesFilters');
+    const list = document.getElementById('criaderosList');
+    if (!list) return;
+
+    if (!this.criaderosSpecies) this.criaderosSpecies = 'todos';
+
+    if (title) title.textContent = this.criaderosData?.titulo || this.t('criaderos.title');
+    if (intro) intro.textContent = this.criaderosData?.introduccion || this.t('criaderos.loading');
+
+    if (filters) {
+      const species = [{ id: 'todos', label: this.t('criaderos.all_species') }];
+      (this.criaderosData?.especies || []).forEach(a => {
+        species.push({ id: a.id, label: `${a.icono || ''} ${a.nombre}`.trim() });
+      });
+      filters.innerHTML = species.map(s => `
+        <button type="button" class="criaderos-filter-btn ${this.criaderosSpecies === s.id ? 'active' : ''}"
+          data-species="${s.id}" aria-pressed="${this.criaderosSpecies === s.id}">
+          ${this.esc(s.label)}
+        </button>
+      `).join('');
+      filters.querySelectorAll('.criaderos-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.criaderosSpecies = btn.dataset.species;
+          this.renderCriaderos();
+        });
+      });
+    }
+
+    const items = this.getFilteredCriaderos();
+    if (!items.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>${this.esc(this.t('criaderos.empty'))}</p></div>`;
+      return;
+    }
+
+    list.innerHTML = items.map(item => {
+      const espacio = item.espacio || {};
+      const metrics = (espacio.metricas || []).map(m => `
+        <tr>
+          <td>${this.esc(m.condicion || '')}</td>
+          <td><strong>${this.esc(m.valor || '')}</strong></td>
+          <td>${this.esc(m.ejemplo_dimensiones || '—')}</td>
+          <td>${this.esc(m.altura_min || '—')}</td>
+        </tr>
+      `).join('');
+      const notes = (espacio.notas || []).map(n => `<li>${this.esc(n)}</li>`).join('');
+      const feedPoints = (item.alimentacion?.puntos || []).map(p => `<li>${this.esc(p)}</li>`).join('');
+      const carePoints = (item.cuidados?.puntos || []).map(p => `<li>${this.esc(p)}</li>`).join('');
+      const img = espacio.imagen
+        ? `<figure class="criaderos-diagram">
+            <img src="${this.esc(espacio.imagen)}" alt="${this.esc(this.t('criaderos.diagram_alt'))}: ${this.esc(item.nombre)}" loading="lazy" decoding="async" width="960" height="720">
+          </figure>`
+        : '';
+      return `
+        <article class="criaderos-card" id="criadero-${this.esc(item.id)}" aria-labelledby="criadero-title-${this.esc(item.id)}">
+          <header class="criaderos-card-header">
+            <h3 id="criadero-title-${this.esc(item.id)}">${this.esc(item.icono || '')} ${this.esc(item.nombre)}</h3>
+            ${item.ambito ? `<p class="criaderos-scope"><span>${this.esc(this.t('criaderos.scope'))}:</span> ${this.esc(item.ambito)}</p>` : ''}
+          </header>
+          <div class="criaderos-block">
+            <h4>${this.esc(this.t('criaderos.space'))}</h4>
+            <p>${this.esc(espacio.resumen || '')}</p>
+            ${img}
+            ${metrics ? `<div class="criaderos-table-wrap"><table class="criaderos-table">
+              <caption>${this.esc(this.t('criaderos.metrics'))}</caption>
+              <thead><tr><th>Condición</th><th>Valor</th><th>Ejemplo</th><th>Altura</th></tr></thead>
+              <tbody>${metrics}</tbody>
+            </table></div>` : ''}
+            ${notes ? `<ul class="criaderos-notes">${notes}</ul>` : ''}
+          </div>
+          <div class="criaderos-block">
+            <h4>${this.esc(this.t('criaderos.nutrition'))}</h4>
+            <p>${this.esc(item.alimentacion?.resumen || '')}</p>
+            ${feedPoints ? `<ul>${feedPoints}</ul>` : ''}
+          </div>
+          <div class="criaderos-block">
+            <h4>${this.esc(this.t('criaderos.care'))}</h4>
+            <p>${this.esc(item.cuidados?.resumen || '')}</p>
+            ${carePoints ? `<ul>${carePoints}</ul>` : ''}
+          </div>
+          <div class="criaderos-block criaderos-block--sources">
+            <h4>${this.esc(this.t('criaderos.sources'))}</h4>
+            <ul>${this.renderCriaderosFuenteLinks(item.fuentes)}</ul>
+          </div>
+        </article>
+      `;
+    }).join('');
   },
 
   getBcsScores() {
@@ -4233,6 +4376,7 @@ const App = {
       tools: 'tools',
       rerMer: 'tools',
       toxicologia: 'tools',
+      criaderos: 'explore',
       fluidoterapia: 'tools',
       unidades: 'tools',
       predisposiciones: 'explore',
@@ -4898,6 +5042,10 @@ const App = {
       document.title = `${this.t('tox.title')} — ${suffix}`;
       return;
     }
+    if (this.currentView === 'criaderos') {
+      document.title = `${this.t('criaderos.title')} — ${suffix}`;
+      return;
+    }
     if (this.currentView === 'fluidoterapia') {
       document.title = `${this.t('fluid.title')} — ${suffix}`;
       return;
@@ -4971,6 +5119,7 @@ const App = {
     document.getElementById('toolsView').classList.toggle('active', view === 'tools');
     document.getElementById('rerMerView').classList.toggle('active', view === 'rerMer');
     document.getElementById('toxicologiaView').classList.toggle('active', view === 'toxicologia');
+    document.getElementById('criaderosView').classList.toggle('active', view === 'criaderos');
     document.getElementById('fluidoterapiaView').classList.toggle('active', view === 'fluidoterapia');
     document.getElementById('unidadesView').classList.toggle('active', view === 'unidades');
     document.getElementById('predisposicionesView').classList.toggle('active', view === 'predisposiciones');

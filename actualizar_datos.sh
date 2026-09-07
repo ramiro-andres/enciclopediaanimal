@@ -81,4 +81,11 @@ ruby -rjson -e '
     write_js_window(base + "/data/evaluacion_preguntas.js", "EVALUACION_PREGUNTAS", eval_data)
     puts "evaluacion_preguntas.js actualizado (#{eval_data.dig("stats", "total") || eval_data["preguntas"]&.length} preguntas)"
   end
+
+  criaderos_path = base + "/data/criaderos.json"
+  if File.exist?(criaderos_path)
+    criaderos = JSON.parse(File.read(criaderos_path))
+    write_js_window(base + "/data/criaderos.js", "CRIADEROS_DATA", criaderos)
+    puts "criaderos.js actualizado (#{criaderos["especies"].length} especies)"
+  end
 ' "$DIR"

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T02:51:06Z",
+  "generated_at": "2026-09-07T03:52:46Z",
   "total_sugerencias": 200,
   "nota": "Sugerencias para revisión manual; no se aplican automáticamente en la UI.",
   "sugerencias": [
@@ -15,8 +15,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Shunt portosistémico",
       "enfermedad_norm": "shunt portosistemico",
@@ -26,8 +26,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Atrofia progresiva de retina",
       "enfermedad_norm": "atrofia progresiva de retina",
@@ -37,8 +37,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Alopecia X (enfermedad del pelaje negro)",
       "enfermedad_norm": "alopecia x (enfermedad del pelaje negro)",
@@ -48,8 +48,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Otitis externa",
       "enfermedad_norm": "otitis externa",
@@ -59,8 +59,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad",
       "enfermedad_norm": "obesidad",
@@ -70,8 +70,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Epilepsia idiopática",
       "enfermedad_norm": "epilepsia idiopatica",
@@ -81,8 +81,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hipotiroidismo",
       "enfermedad_norm": "hipotiroidismo",
@@ -92,8 +92,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Discopatía intervertebral",
       "enfermedad_norm": "discopatia intervertebral",
@@ -103,8 +103,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Glaucoma",
       "enfermedad_norm": "glaucoma",
@@ -114,8 +114,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Otitis crónica",
       "enfermedad_norm": "otitis cronica",
@@ -125,8 +125,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatitis por alergia",
       "enfermedad_norm": "dermatitis por alergia",
@@ -136,8 +136,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del disco intervertebral",
       "enfermedad_norm": "enfermedad del disco intervertebral",
@@ -147,8 +147,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anomalía del ojo del Collie (CEA)",
       "enfermedad_norm": "anomalia del ojo del collie (cea)",
@@ -158,8 +158,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sensibilidad a fármacos (mutación MDR1)",
       "enfermedad_norm": "sensibilidad a farmacos (mutacion mdr1)",
@@ -169,8 +169,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anemia de estres eritrocitario (IMHA)",
       "enfermedad_norm": "anemia de estres eritrocitario (imha)",
@@ -180,8 +180,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Osteocondrosis disecante",
       "enfermedad_norm": "osteocondrosis disecante",
@@ -191,8 +191,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Síndrome braquicefálico",
       "enfermedad_norm": "sindrome braquicefalico",
@@ -202,8 +202,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hernia discal",
       "enfermedad_norm": "hernia discal",
@@ -213,8 +213,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatitis en pliegues",
       "enfermedad_norm": "dermatitis en pliegues",
@@ -224,8 +224,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Alergias cutáneas",
       "enfermedad_norm": "alergias cutaneas",
@@ -235,8 +235,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Displasia de codo",
       "enfermedad_norm": "displasia de codo",
@@ -246,8 +246,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Lipoma múltiple",
       "enfermedad_norm": "lipoma multiple",
@@ -257,8 +257,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Mielopatía degenerativa",
       "enfermedad_norm": "mielopatia degenerativa",
@@ -268,8 +268,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Insuficiencia pancreática exocrina",
       "enfermedad_norm": "insuficiencia pancreatica exocrina",
@@ -279,8 +279,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pancreatitis",
       "enfermedad_norm": "pancreatitis",
@@ -290,8 +290,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hemangiosarcoma esplénico",
       "enfermedad_norm": "hemangiosarcoma esplenico",
@@ -301,8 +301,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Cáncer (hemangiosarcoma y linfoma)",
       "enfermedad_norm": "cancer (hemangiosarcoma y linfoma)",
@@ -312,8 +312,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Lipoma y mastocitoma",
       "enfermedad_norm": "lipoma y mastocitoma",
@@ -323,8 +323,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Osteosarcoma",
       "enfermedad_norm": "osteosarcoma",
@@ -334,8 +334,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Wobbler syndrome",
       "enfermedad_norm": "wobbler syndrome",
@@ -345,8 +345,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Deficiencia de piruvato quinasa",
       "enfermedad_norm": "deficiencia de piruvato quinasa",
@@ -356,8 +356,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Amiloidosis",
       "enfermedad_norm": "amiloidosis",
@@ -367,8 +367,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Estrabismo convergente",
       "enfermedad_norm": "estrabismo convergente",
@@ -378,8 +378,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Neoplasia mamaria",
       "enfermedad_norm": "neoplasia mamaria",
@@ -389,8 +389,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Poliquistosis renal",
       "enfermedad_norm": "poliquistosis renal",
@@ -400,8 +400,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Problemas respiratorios braquicefálicos",
       "enfermedad_norm": "problemas respiratorios braquicefalicos",
@@ -411,8 +411,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Epífora y problemas oculares",
       "enfermedad_norm": "epifora y problemas oculares",
@@ -422,8 +422,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatofitosis (tiña)",
       "enfermedad_norm": "dermatofitosis (tina)",
@@ -433,8 +433,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Megacolon",
       "enfermedad_norm": "megacolon",
@@ -444,8 +444,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Atrofia muscular espinal",
       "enfermedad_norm": "atrofia muscular espinal",
@@ -455,8 +455,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Espondilosis deformante",
       "enfermedad_norm": "espondilosis deformante",
@@ -466,8 +466,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Piodermia",
       "enfermedad_norm": "piodermia",
@@ -477,8 +477,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Cálculos urinarios",
       "enfermedad_norm": "calculos urinarios",
@@ -488,8 +488,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros de las vías respiratorias (traqueales)",
       "enfermedad_norm": "acaros de las vias respiratorias (traqueales)",
@@ -499,8 +499,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros de patas",
       "enfermedad_norm": "acaros de patas",
@@ -510,8 +510,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Muda anormal",
       "enfermedad_norm": "muda anormal",
@@ -521,8 +521,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Candidiasis",
       "enfermedad_norm": "candidiasis",
@@ -532,8 +532,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Tumores",
       "enfermedad_norm": "tumores",
@@ -543,8 +543,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Megabacteriosis (Macrorhabdus)",
       "enfermedad_norm": "megabacteriosis (macrorhabdus)",
@@ -554,8 +554,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Aspergilosis",
       "enfermedad_norm": "aspergilosis",
@@ -565,8 +565,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ácaros respiratorios",
       "enfermedad_norm": "acaros respiratorios",
@@ -576,8 +576,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Egg binding",
       "enfermedad_norm": "egg binding",
@@ -587,8 +587,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Picaje (arrancado de plumas)",
       "enfermedad_norm": "picaje (arrancado de plumas)",
@@ -598,8 +598,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del pico y las plumas (PBFD)",
       "enfermedad_norm": "enfermedad del pico y las plumas (pbfd)",
@@ -609,8 +609,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad y lipomas",
       "enfermedad_norm": "obesidad y lipomas",
@@ -620,8 +620,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dilatación proventricular (PDD)",
       "enfermedad_norm": "dilatacion proventricular (pdd)",
@@ -631,8 +631,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Picaje por estrés",
       "enfermedad_norm": "picaje por estres",
@@ -642,8 +642,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Metalosis por intoxicación",
       "enfermedad_norm": "metalosis por intoxicacion",
@@ -653,8 +653,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Síndrome metabólico equino",
       "enfermedad_norm": "sindrome metabolico equino",
@@ -664,8 +664,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Obesidad y resistencia a insulina",
       "enfermedad_norm": "obesidad y resistencia a insulina",
@@ -675,8 +675,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parásitos internos resistentes",
       "enfermedad_norm": "parasitos internos resistentes",
@@ -686,8 +686,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Artritis degenerativa",
       "enfermedad_norm": "artritis degenerativa",
@@ -697,8 +697,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Úlcera gástrica",
       "enfermedad_norm": "ulcera gastrica",
@@ -708,8 +708,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Neumonía",
       "enfermedad_norm": "neumonia",
@@ -719,8 +719,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Tétanos",
       "enfermedad_norm": "tetanos",
@@ -730,8 +730,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parálisis periódica hiperpotasémica (HYPP)",
       "enfermedad_norm": "paralisis periodica hiperpotasemica (hypp)",
@@ -741,8 +741,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del músculo (PSSM)",
       "enfermedad_norm": "enfermedad del musculo (pssm)",
@@ -752,8 +752,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sarcoides cutáneos",
       "enfermedad_norm": "sarcoides cutaneos",
@@ -763,8 +763,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Melanoma en gris",
       "enfermedad_norm": "melanoma en gris",
@@ -774,8 +774,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Uveítis recurrente (moon blindness)",
       "enfermedad_norm": "uveitis recurrente (moon blindness)",
@@ -785,8 +785,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Queratoconjuntivitis infecciosa (ojo rosado)",
       "enfermedad_norm": "queratoconjuntivitis infecciosa (ojo rosado)",
@@ -796,8 +796,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Fiebre de embarque (complejo respiratorio bovino)",
       "enfermedad_norm": "fiebre de embarque (complejo respiratorio bovino)",
@@ -807,8 +807,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pododermatitis digital",
       "enfermedad_norm": "pododermatitis digital",
@@ -818,8 +818,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anemia parasitaria",
       "enfermedad_norm": "anemia parasitaria",
@@ -829,8 +829,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Mastitis",
+      "enfermedad_norm": "mastitis",
+      "animalId": "bovinos",
+      "breedId": "dexter",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Clostridiosis",
       "enfermedad_norm": "clostridiosis",
@@ -840,8 +851,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Metritis",
       "enfermedad_norm": "metritis",
@@ -851,8 +862,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hipocalcemia posparto",
       "enfermedad_norm": "hipocalcemia posparto",
@@ -862,8 +873,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Distocia (parto difícil)",
       "enfermedad_norm": "distocia (parto dificil)",
@@ -873,8 +884,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Anaplasmosis",
       "enfermedad_norm": "anaplasmosis",
@@ -884,8 +895,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Retención de placenta",
       "enfermedad_norm": "retencion de placenta",
@@ -895,8 +906,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Cetosis",
       "enfermedad_norm": "cetosis",
@@ -906,8 +917,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Desplazamiento de abomaso",
       "enfermedad_norm": "desplazamiento de abomaso",
@@ -917,8 +928,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Golpe de calor",
       "enfermedad_norm": "golpe de calor",
@@ -928,8 +939,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sarna sarcóptica",
       "enfermedad_norm": "sarna sarcoptica",
@@ -939,8 +950,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Neumonía enzoótica",
       "enfermedad_norm": "neumonia enzootica",
@@ -950,8 +961,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Aflatoxicosis",
       "enfermedad_norm": "aflatoxicosis",
@@ -961,8 +972,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Disentería porcina",
       "enfermedad_norm": "disenteria porcina",
@@ -972,8 +983,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Erisipela",
       "enfermedad_norm": "erisipela",
@@ -983,8 +994,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "PCV2 (circovirus)",
       "enfermedad_norm": "pcv2 (circovirus)",
@@ -994,8 +1005,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Mycoplasma",
       "enfermedad_norm": "mycoplasma",
@@ -1005,8 +1016,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "MMA (metritis-mastitis-agalactia)",
+      "enfermedad_norm": "mma (metritis-mastitis-agalactia)",
+      "animalId": "porcinos",
+      "breedId": "mini_pig",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Síndrome de estrés porcino (PSS)",
       "enfermedad_norm": "sindrome de estres porcino (pss)",
@@ -1016,8 +1038,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Prolapso (rectal o uterino)",
       "enfermedad_norm": "prolapso (rectal o uterino)",
@@ -1027,8 +1049,19 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
+      "categoria": "Ficha clínica de enfermedad",
+      "enfermedad": "Mastitis-metritis-agalactia (MMA)",
+      "enfermedad_norm": "mastitis-metritis-agalactia (mma)",
+      "animalId": "porcinos",
+      "breedId": "cerdo_landrace",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Osteocondrosis y cojeras",
       "enfermedad_norm": "osteocondrosis y cojeras",
@@ -1038,8 +1071,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Circovirosis porcina (PCV2)",
       "enfermedad_norm": "circovirosis porcina (pcv2)",
@@ -1049,8 +1082,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Maloclusión dental",
       "enfermedad_norm": "maloclusion dental",
@@ -1060,8 +1093,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad hemorrágica vírica (RHDV)",
       "enfermedad_norm": "enfermedad hemorragica virica (rhdv)",
@@ -1071,8 +1104,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Fractura por caída",
       "enfermedad_norm": "fractura por caida",
@@ -1082,8 +1115,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pasteurelosis",
       "enfermedad_norm": "pasteurelosis",
@@ -1093,8 +1126,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pododermatitis",
       "enfermedad_norm": "pododermatitis",
@@ -1104,8 +1137,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Encefalitozoon cuniculi",
       "enfermedad_norm": "encefalitozoon cuniculi",
@@ -1115,8 +1148,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Tricobezoar",
       "enfermedad_norm": "tricobezoar",
@@ -1126,8 +1159,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dermatitis y golpe de calor",
       "enfermedad_norm": "dermatitis y golpe de calor",
@@ -1137,8 +1170,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Problemas cardíacos",
       "enfermedad_norm": "problemas cardiacos",
@@ -1148,8 +1181,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Artritis por peso",
       "enfermedad_norm": "artritis por peso",
@@ -1159,8 +1192,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Muda incompleta (disecdisis)",
       "enfermedad_norm": "muda incompleta (disecdisis)",
@@ -1170,8 +1203,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Estomatitis",
       "enfermedad_norm": "estomatitis",
@@ -1181,8 +1214,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Infección respiratoria",
       "enfermedad_norm": "infeccion respiratoria",
@@ -1192,8 +1225,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parásitos internos",
       "enfermedad_norm": "parasitos internos",
@@ -1203,8 +1236,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Quemaduras térmicas",
       "enfermedad_norm": "quemaduras termicas",
@@ -1214,8 +1247,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Muda retenida",
       "enfermedad_norm": "muda retenida",
@@ -1225,8 +1258,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Podredumbre del caparazón (shell rot)",
       "enfermedad_norm": "podredumbre del caparazon (shell rot)",
@@ -1236,8 +1269,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Prolapso cloacal",
       "enfermedad_norm": "prolapso cloacal",
@@ -1247,8 +1280,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Gota",
       "enfermedad_norm": "gota",
@@ -1258,8 +1291,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Abscesos y parásitos",
       "enfermedad_norm": "abscesos y parasitos",
@@ -1269,8 +1302,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Quemaduras por UV/lámpara",
       "enfermedad_norm": "quemaduras por uv/lampara",
@@ -1280,8 +1313,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Podredumbre de aletas",
       "enfermedad_norm": "podredumbre de aletas",
@@ -1291,8 +1324,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ictioftiriasis (punto blanco)",
       "enfermedad_norm": "ictioftiriasis (punto blanco)",
@@ -1302,8 +1335,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Hidropesía",
       "enfermedad_norm": "hidropesia",
@@ -1313,8 +1346,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Velvet (Oodinium)",
       "enfermedad_norm": "velvet (oodinium)",
@@ -1324,8 +1357,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Columnaris",
       "enfermedad_norm": "columnaris",
@@ -1335,8 +1368,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Ich (punto blanco)",
       "enfermedad_norm": "ich (punto blanco)",
@@ -1346,8 +1379,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Dropsy (hidropesía)",
       "enfermedad_norm": "dropsy (hidropesia)",
@@ -1357,8 +1390,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Intoxicación por amoniaco",
       "enfermedad_norm": "intoxicacion por amoniaco",
@@ -1368,8 +1401,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Trastorno de la vejiga natatoria",
       "enfermedad_norm": "trastorno de la vejiga natatoria",
@@ -1379,8 +1412,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Intoxicación por amoniaco/nitritos",
       "enfermedad_norm": "intoxicacion por amoniaco/nitritos",
@@ -1390,8 +1423,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad del herpesvirus koi (KHV)",
       "enfermedad_norm": "enfermedad del herpesvirus koi (khv)",
@@ -1401,8 +1434,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Úlceras bacterianas",
       "enfermedad_norm": "ulceras bacterianas",
@@ -1412,8 +1445,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parásitos externos (anclas, piojos, gusanos)",
       "enfermedad_norm": "parasitos externos (anclas, piojos, gusanos)",
@@ -1423,8 +1456,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Costia (Ichthyobodo)",
       "enfermedad_norm": "costia (ichthyobodo)",
@@ -1434,8 +1467,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Miasis",
       "enfermedad_norm": "miasis",
@@ -1445,8 +1478,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Pedero (pietín)",
       "enfermedad_norm": "pedero (pietin)",
@@ -1456,8 +1489,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parasitosis gastrointestinal",
       "enfermedad_norm": "parasitosis gastrointestinal",
@@ -1467,8 +1500,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Listeriosis",
       "enfermedad_norm": "listeriosis",
@@ -1478,8 +1511,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parto distócico",
       "enfermedad_norm": "parto distocico",
@@ -1489,8 +1522,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Artritis-encefalitis caprina (CAEV)",
       "enfermedad_norm": "artritis-encefalitis caprina (caev)",
@@ -1500,8 +1533,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Meningeal worm",
       "enfermedad_norm": "meningeal worm",
@@ -1511,8 +1544,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Parásitos (incluida la barberpole)",
       "enfermedad_norm": "parasitos (incluida la barberpole)",
@@ -1522,8 +1555,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Deficiencia de vitamina D (raquitismo)",
       "enfermedad_norm": "deficiencia de vitamina d (raquitismo)",
@@ -1533,8 +1566,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad de la cola húmeda (proliferativa)",
       "enfermedad_norm": "enfermedad de la cola humeda (proliferativa)",
@@ -1544,8 +1577,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Sobrecrecimiento dental",
       "enfermedad_norm": "sobrecrecimiento dental",
@@ -1555,8 +1588,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Insuficiencia cardíaca",
       "enfermedad_norm": "insuficiencia cardiaca",
@@ -1566,8 +1599,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Abscesos por mordeduras",
       "enfermedad_norm": "abscesos por mordeduras",
@@ -1577,8 +1610,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Escorbuto",
       "enfermedad_norm": "escorbuto",
@@ -1588,8 +1621,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Insulinoma",
       "enfermedad_norm": "insulinoma",
@@ -1599,8 +1632,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enfermedad adrenal",
       "enfermedad_norm": "enfermedad adrenal",
@@ -1610,8 +1643,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Enteritis catarral epizoótica (gripe/virus)",
       "enfermedad_norm": "enteritis catarral epizootica (gripe/virus)",
@@ -1621,8 +1654,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Linfoma",
       "enfermedad_norm": "linfoma",
@@ -1632,8 +1665,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Moquillo (distemper)",
       "enfermedad_norm": "moquillo (distemper)",
@@ -1643,8 +1676,8 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Anamnesis",
-      "termino_norm": "anamnesis",
+      "termino": "Examen físico",
+      "termino_norm": "examen fisico",
       "categoria": "Ficha clínica de enfermedad",
       "enfermedad": "Wet tail (proliferativa)",
       "enfermedad_norm": "wet tail (proliferativa)",
@@ -1654,9 +1687,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Traumatismo por caída",
       "enfermedad_norm": "traumatismo por caida",
       "animalId": "perros",
@@ -1665,9 +1698,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Shunt portosistémico",
       "enfermedad_norm": "shunt portosistemico",
       "animalId": "perros",
@@ -1676,9 +1709,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Atrofia progresiva de retina",
       "enfermedad_norm": "atrofia progresiva de retina",
       "animalId": "perros",
@@ -1687,9 +1720,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Alopecia X (enfermedad del pelaje negro)",
       "enfermedad_norm": "alopecia x (enfermedad del pelaje negro)",
       "animalId": "perros",
@@ -1698,9 +1731,20 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
+      "enfermedad": "Síndrome de manchas lagrimales",
+      "enfermedad_norm": "sindrome de manchas lagrimales",
+      "animalId": "perros",
+      "breedId": "maltes",
+      "score": 0.4,
+      "motivo": "texto_clinico"
+    },
+    {
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Otitis externa",
       "enfermedad_norm": "otitis externa",
       "animalId": "perros",
@@ -1709,9 +1753,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Obesidad",
       "enfermedad_norm": "obesidad",
       "animalId": "perros",
@@ -1720,9 +1764,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Epilepsia idiopática",
       "enfermedad_norm": "epilepsia idiopatica",
       "animalId": "perros",
@@ -1731,9 +1775,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Hipotiroidismo",
       "enfermedad_norm": "hipotiroidismo",
       "animalId": "perros",
@@ -1742,9 +1786,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Discopatía intervertebral",
       "enfermedad_norm": "discopatia intervertebral",
       "animalId": "perros",
@@ -1753,9 +1797,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Glaucoma",
       "enfermedad_norm": "glaucoma",
       "animalId": "perros",
@@ -1764,9 +1808,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Otitis crónica",
       "enfermedad_norm": "otitis cronica",
       "animalId": "perros",
@@ -1775,9 +1819,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Dermatitis por alergia",
       "enfermedad_norm": "dermatitis por alergia",
       "animalId": "perros",
@@ -1786,9 +1830,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Enfermedad del disco intervertebral",
       "enfermedad_norm": "enfermedad del disco intervertebral",
       "animalId": "perros",
@@ -1797,9 +1841,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Anomalía del ojo del Collie (CEA)",
       "enfermedad_norm": "anomalia del ojo del collie (cea)",
       "animalId": "perros",
@@ -1808,9 +1852,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Sensibilidad a fármacos (mutación MDR1)",
       "enfermedad_norm": "sensibilidad a farmacos (mutacion mdr1)",
       "animalId": "perros",
@@ -1819,9 +1863,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Anemia de estres eritrocitario (IMHA)",
       "enfermedad_norm": "anemia de estres eritrocitario (imha)",
       "animalId": "perros",
@@ -1830,9 +1874,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Osteocondrosis disecante",
       "enfermedad_norm": "osteocondrosis disecante",
       "animalId": "perros",
@@ -1841,20 +1885,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Síndrome braquicefálico",
-      "enfermedad_norm": "sindrome braquicefalico",
-      "animalId": "perros",
-      "breedId": "bulldog_frances",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Hernia discal",
       "enfermedad_norm": "hernia discal",
       "animalId": "perros",
@@ -1863,9 +1896,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Dermatitis en pliegues",
       "enfermedad_norm": "dermatitis en pliegues",
       "animalId": "perros",
@@ -1874,9 +1907,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Alergias cutáneas",
       "enfermedad_norm": "alergias cutaneas",
       "animalId": "perros",
@@ -1885,9 +1918,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Displasia de codo",
       "enfermedad_norm": "displasia de codo",
       "animalId": "perros",
@@ -1896,9 +1929,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Lipoma múltiple",
       "enfermedad_norm": "lipoma multiple",
       "animalId": "perros",
@@ -1907,9 +1940,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Mielopatía degenerativa",
       "enfermedad_norm": "mielopatia degenerativa",
       "animalId": "perros",
@@ -1918,9 +1951,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Insuficiencia pancreática exocrina",
       "enfermedad_norm": "insuficiencia pancreatica exocrina",
       "animalId": "perros",
@@ -1929,9 +1962,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Pancreatitis",
       "enfermedad_norm": "pancreatitis",
       "animalId": "perros",
@@ -1940,9 +1973,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Hemangiosarcoma esplénico",
       "enfermedad_norm": "hemangiosarcoma esplenico",
       "animalId": "perros",
@@ -1951,9 +1984,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Cáncer (hemangiosarcoma y linfoma)",
       "enfermedad_norm": "cancer (hemangiosarcoma y linfoma)",
       "animalId": "perros",
@@ -1962,9 +1995,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Lipoma y mastocitoma",
       "enfermedad_norm": "lipoma y mastocitoma",
       "animalId": "perros",
@@ -1973,9 +2006,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Osteosarcoma",
       "enfermedad_norm": "osteosarcoma",
       "animalId": "perros",
@@ -1984,9 +2017,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Wobbler syndrome",
       "enfermedad_norm": "wobbler syndrome",
       "animalId": "perros",
@@ -1995,9 +2028,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Deficiencia de piruvato quinasa",
       "enfermedad_norm": "deficiencia de piruvato quinasa",
       "animalId": "gatos",
@@ -2006,9 +2039,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Amiloidosis",
       "enfermedad_norm": "amiloidosis",
       "animalId": "gatos",
@@ -2017,9 +2050,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Estrabismo convergente",
       "enfermedad_norm": "estrabismo convergente",
       "animalId": "gatos",
@@ -2028,9 +2061,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Neoplasia mamaria",
       "enfermedad_norm": "neoplasia mamaria",
       "animalId": "gatos",
@@ -2039,9 +2072,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Poliquistosis renal",
       "enfermedad_norm": "poliquistosis renal",
       "animalId": "gatos",
@@ -2050,9 +2083,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Problemas respiratorios braquicefálicos",
       "enfermedad_norm": "problemas respiratorios braquicefalicos",
       "animalId": "gatos",
@@ -2061,9 +2094,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Epífora y problemas oculares",
       "enfermedad_norm": "epifora y problemas oculares",
       "animalId": "gatos",
@@ -2072,9 +2105,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Dermatofitosis (tiña)",
       "enfermedad_norm": "dermatofitosis (tina)",
       "animalId": "gatos",
@@ -2083,9 +2116,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Megacolon",
       "enfermedad_norm": "megacolon",
       "animalId": "gatos",
@@ -2094,9 +2127,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Atrofia muscular espinal",
       "enfermedad_norm": "atrofia muscular espinal",
       "animalId": "gatos",
@@ -2105,9 +2138,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Espondilosis deformante",
       "enfermedad_norm": "espondilosis deformante",
       "animalId": "gatos",
@@ -2116,9 +2149,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Piodermia",
       "enfermedad_norm": "piodermia",
       "animalId": "gatos",
@@ -2127,9 +2160,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Cálculos urinarios",
       "enfermedad_norm": "calculos urinarios",
       "animalId": "gatos",
@@ -2138,9 +2171,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Ácaros de las vías respiratorias (traqueales)",
       "enfermedad_norm": "acaros de las vias respiratorias (traqueales)",
       "animalId": "aves",
@@ -2149,9 +2182,9 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Ácaros de patas",
       "enfermedad_norm": "acaros de patas",
       "animalId": "aves",
@@ -2160,46 +2193,13 @@
       "motivo": "texto_clinico"
     },
     {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
+      "termino": "Vacunación",
+      "termino_norm": "vacunacion",
+      "categoria": "Salud y manejo de la raza",
       "enfermedad": "Muda anormal",
       "enfermedad_norm": "muda anormal",
       "animalId": "aves",
       "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Candidiasis",
-      "enfermedad_norm": "candidiasis",
-      "animalId": "aves",
-      "breedId": "canario",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Tumores",
-      "enfermedad_norm": "tumores",
-      "animalId": "aves",
-      "breedId": "periquito",
-      "score": 0.4,
-      "motivo": "texto_clinico"
-    },
-    {
-      "termino": "Examen físico",
-      "termino_norm": "examen fisico",
-      "categoria": "Ficha clínica de enfermedad",
-      "enfermedad": "Megabacteriosis (Macrorhabdus)",
-      "enfermedad_norm": "megabacteriosis (macrorhabdus)",
-      "animalId": "aves",
-      "breedId": "periquito",
       "score": 0.4,
       "motivo": "texto_clinico"
     }

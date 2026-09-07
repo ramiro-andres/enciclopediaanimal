@@ -200,6 +200,7 @@ class FlashcardsStudyTest < Minitest::Test
       images/features/05-herramientas.jpg
       images/features/06-genetica.jpg
       images/features/07-estudio.jpg
+      images/features/08-criaderos.jpg
     ].each do |rel|
       assert_includes @html, rel
       path = File.join(ROOT, rel)
