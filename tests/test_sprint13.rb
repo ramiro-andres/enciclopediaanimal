@@ -112,6 +112,15 @@ class RegionFilterSprint13Test < Minitest::Test
     end
   end
 
+  def test_regiones_acotadas_al_animal_filtrado
+    assert_includes @app, 'syncRegionFilterToAvailable'
+    # getAvailableRegions debe respetar currentAnimal / currentSize
+    body = @app[/\bgetAvailableRegions\(\) \{.*?\n  \},/m]
+    assert body, 'Falta getAvailableRegions'
+    assert_includes body, 'currentAnimal'
+    assert_includes body, 'currentSize'
+  end
+
   def test_estilos_region
     assert_includes @css, '.region-filters'
     assert_includes @css, '.region-filter-heading'

@@ -940,8 +940,16 @@ const App = {
   },
 
   getAvailableRegions() {
+    // Solo países (y macros) con razas del animal/tamaño actuales.
+    let breeds = this.getAllBreeds();
+    if (this.currentAnimal !== 'todos') {
+      breeds = breeds.filter(b => b.animalId === this.currentAnimal);
+    }
+    if (this.currentSize !== 'todos') {
+      breeds = breeds.filter(b => b.tamano === this.currentSize);
+    }
     const countries = new Set();
-    this.getAllBreeds().forEach(b => {
+    breeds.forEach(b => {
       const region = this.getBreedRegion(b);
       if (region) countries.add(region);
     });
@@ -951,9 +959,18 @@ const App = {
     return { macros, countries: Array.from(countries).sort((a, b) => a.localeCompare(b, 'es')) };
   },
 
+  syncRegionFilterToAvailable() {
+    const { macros, countries } = this.getAvailableRegions();
+    const allowed = new Set(['todos', ...macros, ...countries]);
+    if (!allowed.has(this.currentRegion)) {
+      this.currentRegion = 'todos';
+    }
+  },
+
   renderRegionFilters() {
     const container = document.getElementById('regionFilters');
     if (!container) return;
+    this.syncRegionFilterToAvailable();
     const { macros, countries } = this.getAvailableRegions();
     const items = [{ id: 'todos', label: this.t('region.all'), group: 'macro' }];
     macros.forEach(m => items.push({ id: m, label: this.t(`region.macro.${m}`) || m, group: 'macro' }));
@@ -1567,6 +1584,7 @@ const App = {
 
     const regionSection = document.getElementById('regionFiltersSection');
     if (regionSection) {
+      this.syncRegionFilterToAvailable();
       const { countries } = this.getAvailableRegions();
       const showRegions = onBrowse && countries.length > 0;
       regionSection.hidden = !showRegions;
