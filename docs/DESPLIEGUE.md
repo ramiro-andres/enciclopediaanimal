@@ -23,7 +23,8 @@ Se dispara en:
 | `lighthouse` | PR | Accesibilidad ≥ 90 |
 | `preview` | PR | Artefacto `_site` descargable |
 | `build` → `deploy` | push `main` | Publicar Pages si CI verde |
-| `delete-merged-branch` / `prune-stale-merged` | PR mergeado | Borrar rama head + prune |
+
+Cleanup (workflow aparte `cleanup.yml`): PR mergeado → borrar rama head + prune. Separado de CI para no duplicar el pipeline al cerrar el PR.
 
 Checks de protección de rama: **`CI / test`**, **`CI / e2e`**.
 

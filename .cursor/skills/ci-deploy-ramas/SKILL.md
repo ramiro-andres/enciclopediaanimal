@@ -21,12 +21,13 @@ Un solo archivo: [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml).
 
 | Job | Cuándo | Rol |
 |-----|--------|-----|
-| `test` | push/PR (no closed) | Ruby, integridad, seguridad estática |
-| `e2e` | push/PR (no closed) | Playwright (`file://`, sin servidor) |
+| `test` | push/PR | Ruby, integridad, seguridad estática |
+| `e2e` | push/PR | Playwright (`file://`, sin servidor) |
 | `lighthouse` | PR / manual | Accesibilidad ≥ 90 |
 | `preview` | PR / manual | Artefacto `_site` |
 | `build` + `deploy` | push `main` / manual | Pages; **needs** `test` + `e2e` verdes |
-| `delete-merged-branch` + `prune-stale-merged` | PR mergeado | Limpieza de ramas |
+
+Cleanup de ramas: [`.github/workflows/cleanup.yml`](../../.github/workflows/cleanup.yml) (solo `pull_request` closed), para no relanzar CI al mergear.
 
 Checks requeridos en branch protection: **`CI / test`** y **`CI / e2e`**.
 
@@ -39,7 +40,7 @@ Checks requeridos en branch protection: **`CI / test`** y **`CI / e2e`**.
 ## Ramas
 
 - Repo: `delete_branch_on_merge=true`.
-- Jobs de cleanup en `ci.yml`: solo mismo repo (no forks); nunca `main`/`master`.
+- Jobs de cleanup en `cleanup.yml`: solo mismo repo (no forks); nunca `main`/`master`.
 - Manual: `bash scripts/setup/prune_merged_branches.sh` (`--dry-run` primero).
 - Script con `set -u`: manejar arrays vacíos (sin fallar si no hay candidatas).
 - Worktrees no se borran solos: `git worktree remove`.

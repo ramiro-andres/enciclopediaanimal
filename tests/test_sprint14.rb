@@ -24,6 +24,7 @@ class ReadmeBadgesSprint14Test < Minitest::Test
 
   def test_workflows_existen
     assert File.exist?(File.join(ROOT, '.github', 'workflows', 'ci.yml')), 'Falta workflow ci.yml'
+    assert File.exist?(File.join(ROOT, '.github', 'workflows', 'cleanup.yml')), 'Falta workflow cleanup.yml'
   end
 end
 

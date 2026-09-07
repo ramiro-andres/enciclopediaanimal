@@ -1,13 +1,12 @@
 name: CI
 
-# Pipeline único: calidad (test/e2e/lighthouse/preview) + deploy Pages + cleanup.
-# Un solo workflow por push/PR evita N ejecuciones paralelas independientes.
+# Pipeline único de calidad + deploy. Cleanup de ramas vive en cleanup.yml
+# (evento closed aparte) para no disparar un segundo run de "CI" al mergear.
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-    types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
 concurrency:
@@ -17,7 +16,6 @@ concurrency:
 jobs:
   # ── Calidad ───────────────────────────────────────────────────────────────
   test:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -79,7 +77,6 @@ jobs:
         run: ruby scripts/setup/validar_integridad.rb
 
   e2e:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -109,9 +106,7 @@ jobs:
           retention-days: 7
 
   lighthouse:
-    if: >
-      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
-      github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -138,9 +133,7 @@ jobs:
           temporaryPublicStorage: true
 
   preview:
-    if: >
-      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
-      github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -251,49 +244,3 @@ jobs:
           done
           echo "El sitio no respondió HTTP 200 tras el despliegue"
           exit 1
-
-  # ── Cleanup tras merge ────────────────────────────────────────────────────
-  delete-merged-branch:
-    if: >
-      github.event_name == 'pull_request' &&
-      github.event.action == 'closed' &&
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.event.pull_request.head.ref != 'main' &&
-      github.event.pull_request.head.ref != 'master'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Eliminar rama remota tras merge
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          set -euo pipefail
-          echo "PR #${{ github.event.pull_request.number }} mergeado. Eliminando refs/heads/${HEAD_REF}"
-          if gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEAD_REF}"; then
-            echo "Rama ${HEAD_REF} eliminada."
-          else
-            echo "No se pudo eliminar ${HEAD_REF} (puede que ya no exista). Continuando."
-          fi
-
-  prune-stale-merged:
-    if: >
-      github.event_name == 'pull_request' &&
-      github.event.action == 'closed' &&
-      github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          fetch-depth: 0
-
-      - name: Prune de ramas remotas ya mergeadas en main
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: bash scripts/setup/prune_merged_branches.sh
