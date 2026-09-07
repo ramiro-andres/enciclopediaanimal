@@ -62,7 +62,7 @@ class CriaderosSectionTest < Minitest::Test
 
   def test_sw_precache_y_version
     assert_includes @sw, './data/criaderos.js'
-    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:4[9]|[5-9]\d|\d{3,})'/, @sw)
+    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:5[0-9]|[6-9]\d|\d{3,})'/, @sw)
   end
 
   def test_sitemap_incluye_criaderos
