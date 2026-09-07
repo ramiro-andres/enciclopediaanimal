@@ -386,11 +386,11 @@
     },
     {
       "id": "peces",
-      "nombre": "Peces (tilapia, referencia acuícola)",
+      "nombre": "Peces",
       "icono": "🐟",
       "ambito": "acuicultura",
       "espacio": {
-        "resumen": "Aquí la “densidad” se mide en volumen o en estanque, no en m² de piso. En tilapia de engorde, jaulas pueden manejar del orden de 250–400 peces/m³ (según talla y aireación); tanques/raceways suelen ir más bajos; estanques aireados se expresan en miles de peces por hectárea. La calidad del agua marca el techo real.",
+        "resumen": "En peces la densidad se mide en volumen o en estanque, no en m² de piso. En engorde en jaula puede manejarse del orden de 250–400 peces/m³ según talla y aireación; tanques suelen ir más bajos; estanques aireados se expresan en miles de peces por hectárea. La calidad del agua marca el techo real.",
         "metricas": [
           {
             "condicion": "Jaula engorde (tilapia mediana)",
