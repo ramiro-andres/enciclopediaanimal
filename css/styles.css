@@ -1,37 +1,44 @@
 /*
   DIFERIDO (auditoría calidad): no fragmentar styles.css sin bundler.
-  Tokens vivos en el bloque «Minimalista Quirúrgico» más abajo + overrides dark.
+  Tema único oscuro en :root (sin esquema de día). Overrides [data-theme=dark] se mantienen por compatibilidad.
   Extraer a css/tokens.css solo cuando haya concatenación/CI de CSS o un solo
   <link> generado; hoy los tests de sprint leen variables desde este archivo.
 */
 :root {
-  --bg: #F8FAFC;
-  --bg-accent: #F1F5F9;
-  --surface: #FFFFFF;
-  --surface-alt: #F1F5F9;
-  --primary: #0891B2;
-  --primary-light: #22D3EE;
-  --primary-dark: #0E7490;
-  --accent: #0891B2;
-  --accent-light: #E0F2FE;
-  --accent-mint: #14B8A6;
-  --accent-sky: #0EA5E9;
-  --text: #0F172A;
-  --text-muted: #64748B;
-  --border: #E2E8F0;
-  --shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.12);
-  --shadow-pop: 0 4px 0 rgba(15, 23, 42, 0.06);
-  --radius: 16px;
-  --radius-lg: 24px;
+  /* Base oscura inmediata (antes de JS) */
+  --bg: #0F172A;
+  --bg-accent: #1E293B;
+  --surface: #1E293B;
+  --surface-alt: #334155;
+  --primary: #22D3EE;
+  --primary-light: #67E8F9;
+  --primary-dark: #22D3EE;
+  --accent: #22D3EE;
+  --accent-light: #A5F3FC;
+  --accent-mint: #2DD4BF;
+  --accent-sky: #38BDF8;
+  --text: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border: #334155;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --shadow-pop: 0 6px 0 rgba(0, 0, 0, 0.25);
+  --radius: 4px;
+  --radius-lg: 8px;
   --pequena: #6EE7B7;
   --mediana: #67E8F9;
   --iso-depth: 9px;
   --iso-depth-lg: 14px;
-  --iso-face-right: #BAE6FD;
-  --iso-face-bottom: #7DD3FC;
+  --iso-face-right: #0E7490;
+  --iso-face-bottom: #155E75;
   --iso-extrude: #0891B2;
   --perspective: 1400px;
+  --on-primary: #0F172A;
+  --sidebar-bg: rgba(30, 41, 59, 0.95);
+  --sidebar-bg-solid: #1E293B;
+  --nav-hover-bg: #334155;
+  --nav-hover-border: #475569;
+  --nav-hover-overlay: rgba(34, 211, 238, 0.1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -571,7 +578,7 @@ body {
   height: fit-content;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-  box-shadow: 8px 0 24px rgba(99, 102, 241, 0.08);
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.25);
   transform: perspective(800px) rotateY(2deg);
   transform-origin: left center;
 }
@@ -613,10 +620,10 @@ body {
   transform: translateX(3px);
 }
 .nav-btn.active, .filter-btn.active {
-  background: linear-gradient(120deg, var(--primary), #8b5cf6);
+  background: var(--primary);
   color: var(--on-primary);
   font-weight: 700;
-  box-shadow: 0 5px 0 rgba(67, 56, 202, 0.4), 0 10px 20px rgba(91, 94, 247, 0.35);
+  box-shadow: none;
   transform: translateX(4px) translateZ(8px);
 }
 
@@ -1705,152 +1712,165 @@ body {
 
 /* ── Minimalista Quirúrgico — Alta legibilidad tecnológica ─────── */
 :root {
-  --bg: #F8FAFC;
-  --bg-accent: #F1F5F9;
-  --surface: #FFFFFF;
-  --surface-alt: #F1F5F9;
-  --primary: #0891B2;
-  --primary-light: #22D3EE;
-  --primary-dark: #0E7490;
-  --accent: #0891B2;
-  --accent-light: #E0F2FE;
-  --accent-mint: #14B8A6;
-  --accent-sky: #0EA5E9;
-  --text: #0F172A;
-  --text-muted: #64748B;
-  --border: #E2E8F0;
-  --shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.12);
+  /* Tema único: oscuro (sin esquema de día) */
+--bg: #0F172A;
+  --bg-accent: #1E293B;
+  --surface: #1E293B;
+  --surface-alt: #334155;
+  --primary: #22D3EE;
+  --primary-light: #67E8F9;
+  --primary-dark: #22D3EE;
+  --accent: #22D3EE;
+  --accent-light: #A5F3FC;
+  --accent-mint: #2DD4BF;
+  --accent-sky: #38BDF8;
+  --text: #F1F5F9;
+  --text-muted: #94A3B8;
+  --border: #334155;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --shadow-pop: 0 6px 0 rgba(0, 0, 0, 0.25);
+  --iso-face-right: #0E7490;
+  --iso-face-bottom: #155E75;
+  --iso-extrude: #0891B2;
+  --surface-elevated: #334155;
+  --chip-bg: #334155;
+  --chip-text: #F1F5F9;
+  --chip-hover-bg: #475569;
+  --chip-border: rgba(148, 163, 184, 0.25);
+  --warn-bg: #422006;
+  --warn-text: #FCD34D;
+  --warn-text-alt: #FBBF24;
+  --warn-border: #B45309;
+  --alert-bg: #450A0A;
+  --alert-border: #991B1B;
+  --dose-panel-bg: linear-gradient(135deg, #1E293B 0%, #164E63 100%);
+  --dose-panel-border: #334155;
+  --input-bg: #1E293B;
+  --input-border: #475569;
+  --tab-bar-bg: rgba(15, 23, 42, 0.96);
+  --accordion-bg: #334155;
+  --table-stripe: #1E293B;
+  --dosis-badge-bg: #164E63;
+  --dosis-badge-text: #67E8F9;
+  --tag-region-bg: #164E63;
+  --tag-region-text: #67E8F9;
+  --zoonotic-bg: #4A1942;
+  --zoonotic-text: #F9A8D4;
+  --favorite-active-bg: #164E63;
+  --favorite-active-text: #67E8F9;
+  --fluid-shock-bg: #431407;
+  --fluid-shock-border: #C2410C;
+  --dictionary-feature-bg: #1E293B;
+  --header-bg: rgba(15, 23, 42, 0.94);
+  --header-border: rgba(148, 163, 184, 0.2);
+  --border-subtle: rgba(148, 163, 184, 0.15);
+  --border-dashed: rgba(148, 163, 184, 0.2);
+  --tab-active-bg: rgba(34, 211, 238, 0.12);
+  --mobile-tab-shadow: rgba(0, 0, 0, 0.35);
+  --severity-leve-bg: #14532D;
+  --severity-leve-text: #6EE7B7;
+  --severity-mod-bg: #78350F;
+  --severity-mod-text: #FCD34D;
+  --severity-grave-bg: #7F1D1D;
+  --severity-grave-text: #F87171;
+  --tox-alta-bg: #7F1D1D;
+  --tox-alta-text: #F87171;
+  --tox-mod-bg: #78350F;
+  --tox-mod-text: #FCD34D;
+  --tox-leve-bg: #14532D;
+  --tox-leve-text: #6EE7B7;
+  --tag-pequena-bg: #14532D;
+  --tag-pequena-text: #6EE7B7;
+  --tag-mediana-bg: #164E63;
+  --tag-mediana-text: #67E8F9;
+  --tag-grande-bg: #312E81;
+  --tag-grande-text: #A5B4FC;
+  --tag-animal-bg: #334155;
+  --tag-animal-text: #CBD5E1;
+  --tag-production-bg: #78350F;
+  --tag-production-text: #FCD34D;
+  --alert-danger-bg: #450A0A;
+  --alert-danger-border: #991B1B;
+  --feature-card-bg: linear-gradient(180deg, #1E293B 0%, #334155 100%);
+  --surface-muted: #334155;
+  --emergency-btn-bg: #450A0A;
+  --emergency-btn-text: #F87171;
+  --emergency-btn-border: #EF4444;
+  --emergency-btn-hover-bg: #7F1D1D;
+  --on-primary: #0F172A;
+  --border-accent: #334155;
+  --border-accent-soft: #475569;
+  --border-accent-blue: #334155;
+  --panel-gradient: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  --hero-gradient: linear-gradient(135deg, #1E293B 0%, #164E63 45%, #1E293B 100%);
+  --footer-gradient: linear-gradient(180deg, #1E293B, #0F172A);
+  --nav-hover-bg: #334155;
+  --nav-hover-border: #475569;
+  --stats-panel-bg: linear-gradient(135deg, #334155, #1E293B);
+  --stats-panel-border: #475569;
+  --stats-panel-divider: #475569;
+  --search-count-bg: #334155;
+  --sidebar-bg: rgba(30, 41, 59, 0.95);
+  --sidebar-bg-solid: #1E293B;
+  --welcome-hero-bg: #0F172A;
+  --welcome-hero-text: #94A3B8;
+  --welcome-stat-bg: rgba(51, 65, 85, 0.85);
+  --stats-panel-muted-bg: rgba(51, 65, 85, 0.5);
+  --change-category-bg: #334155;
+  --change-category-hover: #475569;
+  --selected-chip-bg: linear-gradient(120deg, #334155, #1E293B);
+  --card-img-bg: linear-gradient(180deg, #334155, #1E293B);
+  --search-clear-bg: #450A0A;
+  --search-clear-hover: #7F1D1D;
+  --search-clear-text: #F87171;
+  --search-clear-text-hover: #FCA5A5;
+  --category-card-bg-1: linear-gradient(180deg, #1E293B 70%, #164E63);
+  --category-card-bg-2: linear-gradient(180deg, #1E293B 70%, #14532D);
+  --category-card-bg-3: linear-gradient(180deg, #1E293B 70%, #78350F);
+  --category-card-bg-4: linear-gradient(180deg, #1E293B 70%, #4A1942);
+  --category-card-bg-5: linear-gradient(180deg, #1E293B 70%, #312E81);
+  --category-card-bg-6: linear-gradient(180deg, #1E293B 70%, #164E63);
+  --feature-card-tools-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+  --feature-card-tools-border: #475569;
+  --feature-card-predis-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+  --feature-card-predis-border: #475569;
+  --nutrition-stage-bg: rgba(51, 65, 85, 0.7);
+  --disclaimer-icon-gradient-end: #334155;
+  --clinical-note-bg: rgba(34, 211, 238, 0.1);
+  --clinical-note-heading: #2DD4BF;
+  --floating-card-bg: rgba(30, 41, 59, 0.94);
+  --flashcards-know-bg: #0D9488;
+  --header-input-bg: #1E293B;
+  --header-input-focus-ring: rgba(34, 211, 238, 0.25);
+  --header-btn-border: rgba(148, 163, 184, 0.35);
+  --header-btn-bg: rgba(51, 65, 85, 0.5);
+  --header-btn-hover-bg: rgba(51, 65, 85, 0.75);
+  --iso-cube-border: #334155;
+  --breed-card-hover-border: #475569;
+  --toast-bg: #334155;
+  --toast-text: #F1F5F9;
+  --footer-contribute-bg: rgba(0, 0, 0, 0.25);
+  --footer-contribute-border: rgba(255, 255, 255, 0.1);
+  --inverse-text: #0F172A;
+  --inverse-text-muted: rgba(15, 23, 42, 0.65);
+  --inverse-text-subtle: rgba(15, 23, 42, 0.7);
+  --inverse-border: rgba(15, 23, 42, 0.35);
+  --inverse-border-subtle: rgba(15, 23, 42, 0.2);
+  --inverse-placeholder: rgba(15, 23, 42, 0.5);
+  --nav-hover-overlay: rgba(34, 211, 238, 0.1);
+  --text-on-light: #0F172A;
+  --text-on-light-muted: #334155;
+
   --radius: 4px;
   --radius-lg: 8px;
-  --surface-elevated: #FFFFFF;
-  --chip-bg: #F1F5F9;
-  --chip-text: var(--text);
-  --chip-hover-bg: #E2E8F0;
-  --chip-border: rgba(15, 23, 42, 0.1);
-  --warn-bg: #FFFBEB;
-  --warn-text: #92400E;
-  --warn-text-alt: #B45309;
-  --warn-border: #FCD34D;
-  --alert-bg: #FEF2F2;
-  --alert-border: #FECACA;
-  --dose-panel-bg: linear-gradient(135deg, #F8FAFC 0%, #F0FDFA 100%);
-  --dose-panel-border: #99F6E4;
-  --input-bg: #FFFFFF;
-  --input-border: #CBD5E1;
-  --tab-bar-bg: rgba(248, 250, 252, 0.96);
-  --accordion-bg: #F8FAFC;
-  --table-stripe: #F8FAFC;
-  --dosis-badge-bg: #E0F2FE;
-  --dosis-badge-text: #0369A1;
-  --tag-region-bg: #E0F2FE;
-  --tag-region-text: #0E7490;
-  --zoonotic-bg: #FCE7F3;
-  --zoonotic-text: #9D174D;
-  --favorite-active-bg: #ECFEFF;
-  --favorite-active-text: #0E7490;
-  --fluid-shock-bg: #FFF7ED;
-  --fluid-shock-border: #FDBA74;
-  --dictionary-feature-bg: #F0F9FF;
-  --header-bg: rgba(248, 250, 252, 0.94);
-  --header-border: rgba(15, 23, 42, 0.12);
-  --border-subtle: rgba(15, 23, 42, 0.06);
-  --border-dashed: rgba(15, 23, 42, 0.1);
-  --tab-active-bg: rgba(8, 145, 178, 0.1);
-  --mobile-tab-shadow: rgba(15, 23, 42, 0.08);
-  --severity-leve-bg: #ECFDF5;
-  --severity-leve-text: #047857;
-  --severity-mod-bg: #FFFBEB;
-  --severity-mod-text: #B45309;
-  --severity-grave-bg: #FEF2F2;
-  --severity-grave-text: #DC2626;
-  --tox-alta-bg: #FEF2F2;
-  --tox-alta-text: #DC2626;
-  --tox-mod-bg: #FFFBEB;
-  --tox-mod-text: #B45309;
-  --tox-leve-bg: #ECFDF5;
-  --tox-leve-text: #047857;
-  --tag-pequena-bg: #ECFDF5;
-  --tag-pequena-text: #047857;
-  --tag-mediana-bg: #CFFAFE;
-  --tag-mediana-text: #0E7490;
-  --tag-grande-bg: #E0E7FF;
-  --tag-grande-text: #3730A3;
-  --tag-animal-bg: #F1F5F9;
-  --tag-animal-text: #475569;
-  --tag-production-bg: #FFFBEB;
-  --tag-production-text: #B45309;
-  --alert-danger-bg: #FEF2F2;
-  --alert-danger-border: #FECACA;
-  --feature-card-bg: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
-  --surface-muted: #F1F5F9;
-  --emergency-btn-bg: #FEF2F2;
-  --emergency-btn-text: #EF4444;
-  --emergency-btn-border: #EF4444;
-  --emergency-btn-hover-bg: #FEE2E2;
-  --on-primary: #FFFFFF;
-  --border-accent: #E0E7FF;
-  --border-accent-soft: #C7D2FE;
-  --border-accent-blue: #DBEAFE;
-  --panel-gradient: linear-gradient(135deg, #FFFFFF 0%, #F8F7FF 100%);
-  --hero-gradient: linear-gradient(135deg, #FFFFFF 0%, #EEF2FF 45%, #FDF2F8 100%);
-  --footer-gradient: linear-gradient(180deg, #FFFFFF, #F5F3FF);
-  --nav-hover-bg: #EDE9FE;
-  --nav-hover-border: #DDD6FE;
-  --stats-panel-bg: linear-gradient(135deg, #EDE9FE, #FCE7F3);
-  --stats-panel-border: #E9D5FF;
-  --stats-panel-divider: #D8B4FE;
-  --search-count-bg: #EDE9FE;
-  --sidebar-bg: rgba(255, 255, 255, 0.88);
-  --sidebar-bg-solid: #E4E8DF;
-  --welcome-hero-bg: #DFE6D7;
-  --welcome-hero-text: #475048;
-  --welcome-stat-bg: rgba(255, 255, 255, 0.85);
-  --stats-panel-muted-bg: rgba(255, 255, 255, 0.4);
-  --change-category-bg: #EEF2FF;
-  --change-category-hover: #E0E7FF;
-  --selected-chip-bg: linear-gradient(120deg, #EEF2FF, #FDF2F8);
-  --card-img-bg: linear-gradient(180deg, #F8FAFC, #EEF2FF);
-  --search-clear-bg: #FFE4E6;
-  --search-clear-hover: #FECDD3;
-  --search-clear-text: #E11D48;
-  --search-clear-text-hover: #BE123C;
-  --category-card-bg-1: linear-gradient(180deg, #FFFFFF 70%, #ECFEFF);
-  --category-card-bg-2: linear-gradient(180deg, #FFFFFF 70%, #F0FDF4);
-  --category-card-bg-3: linear-gradient(180deg, #FFFFFF 70%, #FEF3C7);
-  --category-card-bg-4: linear-gradient(180deg, #FFFFFF 70%, #FCE7F3);
-  --category-card-bg-5: linear-gradient(180deg, #FFFFFF 70%, #EDE9FE);
-  --category-card-bg-6: linear-gradient(180deg, #FFFFFF 70%, #E0F2FE);
-  --feature-card-tools-bg: linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%);
-  --feature-card-tools-border: #C4B5FD;
-  --feature-card-predis-bg: linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%);
-  --feature-card-predis-border: #A7F3D0;
-  --feature-card-criaderos-bg: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 100%);
-  --feature-card-criaderos-border: #86EFAC;
-  --nutrition-stage-bg: rgba(255, 255, 255, 0.7);
-  --disclaimer-icon-gradient-end: #E0E7FF;
-  --clinical-note-bg: #ECFDF5;
-  --clinical-note-heading: #0F766E;
-  --floating-card-bg: rgba(248, 250, 252, 0.94);
-  --flashcards-know-bg: #00B894;
-  --header-input-bg: rgba(255, 255, 255, 0.95);
-  --header-input-focus-ring: rgba(255, 255, 255, 0.4);
-  --header-btn-border: rgba(255, 255, 255, 0.55);
-  --header-btn-bg: rgba(255, 255, 255, 0.2);
-  --header-btn-hover-bg: rgba(255, 255, 255, 0.32);
-  --iso-cube-border: #E0E7FF;
-  --breed-card-hover-border: #C4B5FD;
-  --toast-bg: #1E293B;
-  --toast-text: #F1F5F9;
-  --footer-contribute-bg: rgba(255, 255, 255, 0.06);
-  --footer-contribute-border: rgba(255, 255, 255, 0.12);
-  --inverse-text: #FFFFFF;
-  --inverse-text-muted: rgba(255, 255, 255, 0.65);
-  --inverse-text-subtle: rgba(255, 255, 255, 0.7);
-  --inverse-border: rgba(255, 255, 255, 0.75);
-  --inverse-border-subtle: rgba(255, 255, 255, 0.18);
-  --inverse-placeholder: rgba(255, 255, 255, 0.62);
-  --nav-hover-overlay: rgba(30, 59, 47, 0.08);
+  --pequena: #6EE7B7;
+  --mediana: #67E8F9;
+  --iso-depth: 9px;
+  --iso-depth-lg: 14px;
+  --perspective: 1400px;
+  --shadow-pop: 0 6px 0 rgba(0, 0, 0, 0.25);
+
 }
 
 body {
@@ -2412,7 +2432,7 @@ button.feature-card {
 }
 .nav-section h3,
 .stats-panel h3 {
-  color: var(--primary-dark);
+  color: var(--text-muted);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .nav-btn,
@@ -2428,7 +2448,7 @@ button.feature-card {
 }
 .nav-btn.active,
 .filter-btn.active {
-  background: var(--primary-dark);
+  background: var(--primary);
   color: var(--on-primary);
   box-shadow: none;
   transform: none;
@@ -5567,158 +5587,6 @@ body.welcome-tour-open {
   --text-on-light-muted: #334155;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) {
-    --bg: #0F172A;
-    --bg-accent: #1E293B;
-    --surface: #1E293B;
-    --surface-alt: #334155;
-    --primary: #22D3EE;
-    --primary-light: #67E8F9;
-    --primary-dark: #22D3EE;
-    --accent: #22D3EE;
-    --accent-light: #A5F3FC;
-    --accent-mint: #2DD4BF;
-    --accent-sky: #38BDF8;
-    --text: #F1F5F9;
-    --text-muted: #94A3B8;
-    --border: #334155;
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.45);
-    --shadow-pop: 0 6px 0 rgba(0, 0, 0, 0.25);
-    --iso-face-right: #0E7490;
-    --iso-face-bottom: #155E75;
-    --iso-extrude: #0891B2;
-    --surface-elevated: #334155;
-    --chip-bg: #334155;
-    --chip-text: #F1F5F9;
-    --chip-hover-bg: #475569;
-    --chip-border: rgba(148, 163, 184, 0.25);
-    --warn-bg: #422006;
-    --warn-text: #FCD34D;
-    --warn-text-alt: #FBBF24;
-    --warn-border: #B45309;
-    --alert-bg: #450A0A;
-    --alert-border: #991B1B;
-    --dose-panel-bg: linear-gradient(135deg, #1E293B 0%, #164E63 100%);
-    --dose-panel-border: #334155;
-    --input-bg: #1E293B;
-    --input-border: #475569;
-    --tab-bar-bg: rgba(15, 23, 42, 0.96);
-    --accordion-bg: #334155;
-    --table-stripe: #1E293B;
-    --dosis-badge-bg: #164E63;
-    --dosis-badge-text: #67E8F9;
-    --tag-region-bg: #164E63;
-    --tag-region-text: #67E8F9;
-    --zoonotic-bg: #4A1942;
-    --zoonotic-text: #F9A8D4;
-    --favorite-active-bg: #164E63;
-    --favorite-active-text: #67E8F9;
-    --fluid-shock-bg: #431407;
-    --fluid-shock-border: #C2410C;
-    --dictionary-feature-bg: #1E293B;
-    --header-bg: rgba(15, 23, 42, 0.94);
-    --header-border: rgba(148, 163, 184, 0.2);
-    --border-subtle: rgba(148, 163, 184, 0.15);
-    --border-dashed: rgba(148, 163, 184, 0.2);
-    --tab-active-bg: rgba(34, 211, 238, 0.12);
-    --mobile-tab-shadow: rgba(0, 0, 0, 0.35);
-    --severity-leve-bg: #14532D;
-    --severity-leve-text: #6EE7B7;
-    --severity-mod-bg: #78350F;
-    --severity-mod-text: #FCD34D;
-    --severity-grave-bg: #7F1D1D;
-    --severity-grave-text: #F87171;
-    --tox-alta-bg: #7F1D1D;
-    --tox-alta-text: #F87171;
-    --tox-mod-bg: #78350F;
-    --tox-mod-text: #FCD34D;
-    --tox-leve-bg: #14532D;
-    --tox-leve-text: #6EE7B7;
-    --tag-pequena-bg: #14532D;
-    --tag-pequena-text: #6EE7B7;
-    --tag-mediana-bg: #164E63;
-    --tag-mediana-text: #67E8F9;
-    --tag-grande-bg: #312E81;
-    --tag-grande-text: #A5B4FC;
-    --tag-animal-bg: #334155;
-    --tag-animal-text: #CBD5E1;
-    --tag-production-bg: #78350F;
-    --tag-production-text: #FCD34D;
-    --alert-danger-bg: #450A0A;
-    --alert-danger-border: #991B1B;
-    --feature-card-bg: linear-gradient(180deg, #1E293B 0%, #334155 100%);
-    --surface-muted: #334155;
-    --emergency-btn-bg: #450A0A;
-    --emergency-btn-text: #F87171;
-    --emergency-btn-border: #EF4444;
-    --emergency-btn-hover-bg: #7F1D1D;
-    --on-primary: #0F172A;
-    --border-accent: #334155;
-    --border-accent-soft: #475569;
-    --border-accent-blue: #334155;
-    --panel-gradient: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-    --hero-gradient: linear-gradient(135deg, #1E293B 0%, #164E63 45%, #1E293B 100%);
-    --footer-gradient: linear-gradient(180deg, #1E293B, #0F172A);
-    --nav-hover-bg: #334155;
-    --nav-hover-border: #475569;
-    --stats-panel-bg: linear-gradient(135deg, #334155, #1E293B);
-    --stats-panel-border: #475569;
-    --stats-panel-divider: #475569;
-    --search-count-bg: #334155;
-    --sidebar-bg: rgba(30, 41, 59, 0.95);
-    --sidebar-bg-solid: #1E293B;
-    --welcome-hero-bg: #0F172A;
-    --welcome-hero-text: #94A3B8;
-    --welcome-stat-bg: rgba(51, 65, 85, 0.85);
-    --stats-panel-muted-bg: rgba(51, 65, 85, 0.5);
-    --change-category-bg: #334155;
-    --change-category-hover: #475569;
-    --selected-chip-bg: linear-gradient(120deg, #334155, #1E293B);
-    --card-img-bg: linear-gradient(180deg, #334155, #1E293B);
-    --search-clear-bg: #450A0A;
-    --search-clear-hover: #7F1D1D;
-    --search-clear-text: #F87171;
-    --search-clear-text-hover: #FCA5A5;
-    --category-card-bg-1: linear-gradient(180deg, #1E293B 70%, #164E63);
-    --category-card-bg-2: linear-gradient(180deg, #1E293B 70%, #14532D);
-    --category-card-bg-3: linear-gradient(180deg, #1E293B 70%, #78350F);
-    --category-card-bg-4: linear-gradient(180deg, #1E293B 70%, #4A1942);
-    --category-card-bg-5: linear-gradient(180deg, #1E293B 70%, #312E81);
-    --category-card-bg-6: linear-gradient(180deg, #1E293B 70%, #164E63);
-    --feature-card-tools-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
-    --feature-card-tools-border: #475569;
-    --feature-card-predis-bg: linear-gradient(135deg, #1E293B 0%, #334155 100%);
-    --feature-card-predis-border: #475569;
-    --nutrition-stage-bg: rgba(51, 65, 85, 0.7);
-    --disclaimer-icon-gradient-end: #334155;
-    --clinical-note-bg: rgba(34, 211, 238, 0.1);
-    --clinical-note-heading: #2DD4BF;
-    --floating-card-bg: rgba(30, 41, 59, 0.94);
-    --flashcards-know-bg: #0D9488;
-    --header-input-bg: #1E293B;
-    --header-input-focus-ring: rgba(34, 211, 238, 0.25);
-    --header-btn-border: rgba(148, 163, 184, 0.35);
-    --header-btn-bg: rgba(51, 65, 85, 0.5);
-    --header-btn-hover-bg: rgba(51, 65, 85, 0.75);
-    --iso-cube-border: #334155;
-    --breed-card-hover-border: #475569;
-    --toast-bg: #334155;
-    --toast-text: #F1F5F9;
-    --footer-contribute-bg: rgba(0, 0, 0, 0.25);
-    --footer-contribute-border: rgba(255, 255, 255, 0.12);
-    --inverse-text: #0F172A;
-    --inverse-text-muted: rgba(15, 23, 42, 0.65);
-    --inverse-text-subtle: rgba(15, 23, 42, 0.7);
-    --inverse-border: rgba(15, 23, 42, 0.35);
-    --inverse-border-subtle: rgba(15, 23, 42, 0.2);
-    --inverse-placeholder: rgba(15, 23, 42, 0.5);
-    --nav-hover-overlay: rgba(34, 211, 238, 0.1);
-    --text-on-light: #0F172A;
-    --text-on-light-muted: #334155;
-  }
-}
 
 /* Sprint 10: triaje educativo */
 .triaje-page {
@@ -6229,11 +6097,6 @@ body.welcome-tour-open {
   color: var(--inverse-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .welcome-search {
-    color: var(--inverse-text);
-  }
-}
 
 /* Dark mode: inputs, placeholders y textos residuales */
 input,
@@ -6277,22 +6140,12 @@ textarea::placeholder {
   background: rgba(0, 0, 0, 0.55);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .disclaimer-overlay {
-    background: rgba(0, 0, 0, 0.55);
-  }
-}
 
 :root[data-theme="dark"] .clinical-note h4,
 :root[data-theme-mode="dark"] .clinical-note h4 {
   color: var(--clinical-note-heading);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .clinical-note h4 {
-    color: var(--clinical-note-heading);
-  }
-}
 
 :root[data-theme="dark"] .disclaimer-overlay,
 :root[data-theme-mode="dark"] .breed-card-img,
@@ -6350,50 +6203,6 @@ textarea::placeholder {
   color: var(--severity-grave-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .breed-card-img,
-  :root:not([data-theme-mode="light"]) .disease-card-img {
-    background: var(--surface-alt);
-  }
-
-  :root:not([data-theme-mode="light"]) .breed-hero,
-  :root:not([data-theme-mode="light"]) .detail-panel,
-  :root:not([data-theme-mode="light"]) .disease-detail-card,
-  :root:not([data-theme-mode="light"]) .disease-card {
-    box-shadow: var(--shadow);
-  }
-
-  :root:not([data-theme-mode="light"]) .info-item {
-    background: var(--surface-elevated);
-    border-color: var(--border);
-  }
-
-  :root:not([data-theme-mode="light"]) .info-item label {
-    color: var(--primary);
-  }
-
-  :root:not([data-theme-mode="light"]) .info-item span {
-    color: var(--text);
-  }
-
-  :root:not([data-theme-mode="light"]) .meta-chip {
-    background: var(--chip-bg);
-    border-color: var(--chip-border);
-    color: var(--chip-text);
-  }
-
-  :root:not([data-theme-mode="light"]) .alert-panel {
-    background: var(--warn-bg);
-    border-color: var(--warn-border);
-    color: var(--warn-text);
-  }
-
-  :root:not([data-theme-mode="light"]) .alert-panel.urgent {
-    background: var(--alert-danger-bg);
-    border-color: var(--alert-danger-border);
-    color: var(--severity-grave-text);
-  }
-}
 
 /* ── Dark mode: contraste global (fondos claros → texto oscuro) ── */
 
@@ -6422,19 +6231,6 @@ textarea::placeholder {
   color: var(--text-on-light-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] {
-    color: var(--text-on-light);
-  }
-
-  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] h3 {
-    color: var(--text-on-light);
-  }
-
-  :root:not([data-theme-mode="light"]) .feature-card[style*="light"] p {
-    color: var(--text-on-light-muted);
-  }
-}
 
 /* Welcome — feature cards (fondo oscuro explícito + texto claro) */
 :root[data-theme="dark"] .welcome-features .feature-card,
@@ -6495,50 +6291,6 @@ textarea::placeholder {
   background: var(--surface-alt);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card {
-    color: var(--text);
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card h3,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card-title {
-    color: var(--text);
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card p,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card-text,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card .feature-number {
-    color: var(--text-muted);
-    opacity: 1;
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--tools,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--predis,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dictionary,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--estudio,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--flashcards,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--evaluacion {
-    background: var(--surface);
-    border-color: var(--border);
-    color: var(--text);
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark {
-    background: var(--primary-dark);
-    color: var(--on-primary);
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark h3,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark p,
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--dark .feature-number {
-    color: inherit;
-    opacity: 1;
-  }
-
-  :root:not([data-theme-mode="light"]) .welcome-features .feature-card--sage {
-    background: var(--surface-alt);
-  }
-}
 
 /* Home — sidebar, stats, categorías */
 :root[data-theme="dark"] .stats-panel,
@@ -6567,16 +6319,6 @@ textarea::placeholder {
   opacity: 0.85;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .stats-panel,
-  :root:not([data-theme-mode="light"]) .category-card {
-    color: var(--text);
-  }
-
-  :root:not([data-theme-mode="light"]) .category-card span {
-    color: var(--text-muted);
-  }
-}
 
 /* Badges y chips con fondo de color (texto acoplado a variable semántica) */
 :root[data-theme="dark"] .severity-leve,
@@ -6641,18 +6383,6 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .tools-card,
-  :root:not([data-theme-mode="light"]) .tox-card,
-  :root:not([data-theme-mode="light"]) .triaje-card,
-  :root:not([data-theme-mode="light"]) .flashcard,
-  :root:not([data-theme-mode="light"]) .dictionary-term-card,
-  :root:not([data-theme-mode="light"]) .changelog-entry,
-  :root:not([data-theme-mode="light"]) .welcome-tour-popover,
-  :root:not([data-theme-mode="light"]) .disclaimer-modal-inner {
-    color: var(--text);
-  }
-}
 
 /* Detalle raza / enfermedad — paneles y alertas */
 :root[data-theme="dark"] .detail-panel,
@@ -6686,14 +6416,6 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .detail-panel,
-  :root:not([data-theme-mode="light"]) .breed-hero,
-  :root:not([data-theme-mode="light"]) .disease-detail-card,
-  :root:not([data-theme-mode="light"]) .visual-floating-card {
-    color: var(--text);
-  }
-}
 
 /* Footer — texto claro sobre fondo oscuro/cian */
 :root[data-theme="dark"] .footer,
@@ -6706,15 +6428,6 @@ textarea::placeholder {
   color: var(--text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme-mode="light"]) .footer {
-    color: var(--inverse-text-subtle);
-  }
-
-  :root:not([data-theme-mode="light"]) .footer-contribute {
-    color: var(--text);
-  }
-}
 
 /* ── Criaderos / instalaciones ───────────────────────────────────────────── */
 .criaderos-page {
@@ -6810,7 +6523,7 @@ textarea::placeholder {
   height: auto;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: #f7f4ee;
+  background: var(--surface-alt);
 }
 
 .criaderos-table-wrap {

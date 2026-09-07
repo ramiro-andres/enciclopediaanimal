@@ -34,6 +34,9 @@ class CriaderosSectionTest < Minitest::Test
 
   def test_sin_catalogo_ni_fuente_id
     refute @json.key?('fuentes_catalogo')
+    blob = File.read(File.join(@root, 'data', 'criaderos.json')).downcase
+    refute_includes blob, 'fuente'
+    refute_includes blob, 'citad'
     @json['especies'].each do |sp|
       sp.dig('espacio', 'metricas').each do |m|
         refute m.key?('fuente_id'), "#{sp['id']} métrica con fuente_id"
@@ -75,7 +78,7 @@ class CriaderosSectionTest < Minitest::Test
 
   def test_sw_precache_y_version
     assert_includes @sw, './data/criaderos.js'
-    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:5[3-9]|[6-9]\d|\d{3,})'/, @sw)
+    assert_match(/CACHE_VERSION\s*=\s*'atlas-v(?:5[4-9]|[6-9]\d|\d{3,})'/, @sw)
   end
 
   def test_sitemap_incluye_criaderos

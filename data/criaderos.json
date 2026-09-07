@@ -1,6 +1,6 @@
 {
-  "titulo": "Guía de criaderos e instalaciones por especie",
-  "introduccion": "Orientación educativa sobre alojamiento, espacio útil, alimentación y cuidados básicos a nivel de especie. Los valores de área son orientativos: cambian según país, normativa local, sistema de producción y estado del animal. No sustituyen el criterio veterinario ni la legislación vigente.",
+  "titulo": "Criaderos e instalaciones por especie",
+  "introduccion": "Orientación educativa sobre alojamiento, espacio útil, alimentación y cuidados básicos a nivel de especie. Los valores de área son aproximados y cambian con el país, el sistema productivo y el estado del animal. No sustituyen el criterio veterinario.",
   "disclaimer": "Uso educativo. Antes de construir o ampliar un criadero, revisa bienestar animal, sanidad y zonificación en tu región.",
   "actualizado": "2026-09-07",
   "especies": [
@@ -10,7 +10,7 @@
       "icono": "🐕",
       "ambito": "compañía / refugio / crianza",
       "espacio": {
-        "resumen": "En alojamientos colectivos conviene un canil que permita descanso y movimiento. Como referencia práctica: unos 4 m² (por ejemplo 2×2 m) para perros de hasta ~20 kg y unos 8 m² (por ejemplo 4×2 m) entre ~20 y 30 kg, con altura libre cercana a 2 m. Animales más grandes necesitan más superficie; una hembra con camada suele requerir el doble del área de su rango de peso.",
+        "resumen": "En alojamientos colectivos conviene un canil que permita descanso y movimiento. unos 4 m² (por ejemplo 2×2 m) para perros de hasta ~20 kg y unos 8 m² (por ejemplo 4×2 m) entre ~20 y 30 kg, con altura libre cercana a 2 m. Animales más grandes necesitan más superficie; una hembra con camada suele requerir el doble del área de su rango de peso.",
         "metricas": [
           {
             "condicion": "Perro <20 kg (canil individual)",
@@ -246,7 +246,7 @@
       "icono": "🐷",
       "ambito": "producción porcina",
       "espacio": {
-        "resumen": "El piso libre por cerdo en grupo suele escalarse con el peso: desde ~0,15 m² en lechones muy pequeños hasta ~1 m² en animales de más de ~110 kg. Cerdas en grupo necesitan más superficie (en torno a 2 m² o más por cabeza). Estos valores son mínimos de referencia; sistemas de mayor bienestar usan más espacio y enriquecimiento.",
+        "resumen": "El piso libre por cerdo en grupo suele escalarse con el peso: desde ~0,15 m² en lechones muy pequeños hasta ~1 m² en animales de más de ~110 kg. Cerdas en grupo necesitan más superficie (en torno a 2 m² o más por cabeza). Estos valores son mínimos orientativos; sistemas de mayor bienestar usan más espacio y enriquecimiento.",
         "metricas": [
           {
             "condicion": "Cerdo >110 kg (grupo)",
@@ -309,7 +309,7 @@
             "altura_min": "≥45 cm o orejas erguidas"
           },
           {
-            "condicion": "Adulto mediano (referencia por peso)",
+            "condicion": "Adulto mediano (según peso)",
             "valor": "orden de 80×80–115 cm",
             "ejemplo_dimensiones": "más espacio si hay nido/camada",
             "altura_min": "≈45–60 cm"
