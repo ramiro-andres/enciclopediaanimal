@@ -85,6 +85,17 @@ class RegionFilterSprint13Test < Minitest::Test
     assert_includes @app, 'renderRegionFilters'
   end
 
+  def test_sidebar_region_se_refresca_tras_chunks
+    # Con lazy-load el menú se oculta si aún no hay razas; al hidratar chunks
+    # hay que volver a llamar updateSidebar o el filtro desaparece.
+    preload = @app[/\basync preloadAllChunks\(\) \{.*?\n  \},/m]
+    render_home = @app[/\brenderHome\(\) \{.*?\n  \},/m]
+    assert preload, 'Falta preloadAllChunks'
+    assert render_home, 'Falta renderHome'
+    assert_includes preload, 'updateSidebar'
+    assert_includes render_home, 'updateSidebar'
+  end
+
   def test_i18n_region_es_en
     %w[sidebar.region region.all region.countries region.macro.LATAM region.macro.Europa].each do |key|
       assert_includes @i18n, "'#{key}'"
@@ -104,6 +115,8 @@ class RegionFilterSprint13Test < Minitest::Test
   def test_estilos_region
     assert_includes @css, '.region-filters'
     assert_includes @css, '.region-filter-heading'
+    assert_includes @css, '.region-filters .region-btn'
+    assert_match(/\[data-theme="dark"\][^\n]*\.region-filters \.region-btn/, @css)
   end
 end
 

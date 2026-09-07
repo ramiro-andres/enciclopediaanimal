@@ -431,6 +431,8 @@ const App = {
     this.renderStats();
     this.showLoadStatus();
     if (this.currentView === 'home') this.renderHome();
+    // Tras hidratar razas, re-evaluar filtros de región (si no, el menú queda hidden).
+    this.updateSidebar();
     this.exportE2EState();
   },
 
@@ -1357,6 +1359,7 @@ const App = {
     document.getElementById('browseSection').hidden = false;
     this.renderBreeds();
     this.updateResultsTitle();
+    this.updateSidebar();
     this.exportE2EState();
   },
 

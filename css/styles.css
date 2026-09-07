@@ -3255,11 +3255,14 @@ body.disclaimer-open {
   font-family: inherit;
   font-size: 0.88rem;
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .region-filters .region-btn:hover {
   background: var(--surface-alt);
   border-color: var(--primary);
+  color: var(--text);
 }
 
 .region-filters .region-btn.active {
@@ -3267,6 +3270,16 @@ body.disclaimer-open {
   border-color: var(--primary);
   color: var(--on-primary);
   font-weight: 700;
+}
+
+:root[data-theme="dark"] .region-filters .region-btn,
+:root[data-theme-mode="dark"] .region-filters .region-btn {
+  color: #F1F5F9;
+}
+
+:root[data-theme="dark"] .region-filters .region-btn.active,
+:root[data-theme-mode="dark"] .region-filters .region-btn.active {
+  color: #0F172A;
 }
 
 .region-filters .region-filter-heading {
