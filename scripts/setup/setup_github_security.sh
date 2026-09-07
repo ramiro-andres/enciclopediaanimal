@@ -3,8 +3,8 @@
 set -euo pipefail
 
 REPO="ramiro-andres/enciclopediaanimal"
-# Debe coincidir con el nombre del check en Actions (workflow test.yml → check "test").
-CHECK_CONTEXT="test"
+# Debe coincidir con el nombre del check en Actions (workflow ci.yml → job test).
+CHECK_CONTEXT="CI / test"
 PAGES_JSON='{"build_type":"workflow","source":{"branch":"main","path":"/"}}'
 
 if ! command -v gh >/dev/null 2>&1; then

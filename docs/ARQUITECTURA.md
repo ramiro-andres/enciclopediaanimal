@@ -37,7 +37,7 @@ flowchart LR
   end
 
   subgraph deploy [GitHub Pages]
-    WF[deploy-pages.yml]
+    WF[ci.yml]
     SITE[_site/]
     WF --> SITE
     HTML --> WF

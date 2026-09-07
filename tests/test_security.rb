@@ -224,14 +224,14 @@ class WorkflowSecurityTest < Minitest::Test
   end
 
   def test_test_workflow_solo_lectura
-    wf = read_repo('.github/workflows/test.yml')
-    assert_match(/contents:\s*read/, wf)
+    wf = read_repo('.github/workflows/ci.yml')
+    assert_match(/test:\n(?:.*\n)*?    permissions:\n      contents: read/, wf)
   end
 
   def test_deploy_sin_token_excesivo
-    wf = read_repo('.github/workflows/deploy-pages.yml')
-    refute_includes wf, 'GITHUB_TOKEN' # no hardcodear tokens
-    assert_match(/contents:\s*read/, wf)
+    wf = read_repo('.github/workflows/ci.yml')
+    refute_includes wf, 'GITHUB_TOKEN: ' # no hardcodear tokens
+    assert_match(/build:\n(?:.*\n)*?    permissions:\n      contents: read\n      pages: write/, wf)
   end
 end
 

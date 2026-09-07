@@ -1,0 +1,299 @@
+name: CI
+
+# Pipeline único: calidad (test/e2e/lighthouse/preview) + deploy Pages + cleanup.
+# Un solo workflow por push/PR evita N ejecuciones paralelas independientes.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, closed]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  # ── Calidad ───────────────────────────────────────────────────────────────
+  test:
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: false
+
+      - name: Instalar minitest
+        run: gem install minitest
+
+      - name: Ejecutar pruebas unitarias
+        run: ruby -e 'Dir["tests/test_*.rb"].sort.each { |f| require File.expand_path(f) }'
+
+      - name: Auditoría de seguridad estática
+        run: ruby tests/test_security.rb
+
+      - name: Validar contenido clínico
+        run: ruby scripts/data/validate_clinical_content.rb
+
+      - name: Detección de inconsistencias (Sprint 11)
+        run: ruby scripts/data/detect_inconsistencies.rb
+
+      - name: Sugerencias enlaces glosario↔enfermedad (Sprint 12)
+        run: ruby scripts/data/suggest_glossary_links.rb
+
+      - name: Verificar imágenes de razas (F4-03)
+        run: |
+          ruby scripts/images/list_missing_images.rb > /tmp/missing.txt
+          if [ -s /tmp/missing.txt ]; then
+            echo "Razas sin imagen JPG válida:"
+            cat /tmp/missing.txt
+            exit 1
+          fi
+          echo "Todas las razas tienen imagen JPG o SVG de respaldo."
+
+      - name: Verificar imágenes de enfermedades (F3-02 / US-DEV-18)
+        run: |
+          ruby scripts/images/list_missing_disease_images.rb > /tmp/missing_diseases.txt 2>/tmp/missing_diseases_meta.txt || true
+          if [ -s /tmp/missing_diseases.txt ]; then
+            echo "Enfermedades sin imagen JPG (>8 KB) ni SVG:"
+            cat /tmp/missing_diseases.txt
+            cat /tmp/missing_diseases_meta.txt
+            echo "Ejecuta: ruby scripts/images/download_disease_google_images.rb --only-missing"
+            exit 1
+          fi
+          cat /tmp/missing_diseases_meta.txt
+          echo "Todas las enfermedades únicas tienen imagen JPG o SVG de respaldo."
+
+      - name: Validar sincronización JSON → JS (incluye enlaces clínicos)
+        run: |
+          SOLO_JS=1 bash actualizar_datos.sh
+          git diff --exit-code -- data/enciclopedia.js data/diccionario_medicos.js data/enlaces_clinicos.js
+
+      - name: Validar integridad de datos y enlaces
+        run: ruby scripts/setup/validar_integridad.rb
+
+  e2e:
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci --ignore-scripts
+
+      - name: Instalar navegador Chromium
+        run: ./node_modules/.bin/playwright install --with-deps chromium
+
+      - name: Ejecutar pruebas E2E (file://, sin servidor)
+        run: ./node_modules/.bin/playwright test
+
+      - name: Publicar reporte E2E
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  lighthouse:
+    if: >
+      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      - name: Construir sitio estático (_site)
+        run: |
+          ruby scripts/data/build_sitemap.rb
+          mkdir -p _site
+          cp index.html .nojekyll manifest.webmanifest sw.js sitemap.xml robots.txt _site/ 2>/dev/null || cp index.html _site/
+          cp -r css js data images _site/
+          echo "Archivos en _site: $(find _site -type f | wc -l)"
+
+      - name: Ejecutar Lighthouse CI (accesibilidad >= 90)
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  preview:
+    if: >
+      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: false
+
+      - name: Validar integridad de datos y enlaces
+        run: ruby scripts/setup/validar_integridad.rb
+
+      - name: Construir vista previa estática (_site)
+        run: |
+          ruby scripts/data/build_sitemap.rb
+          mkdir -p _site
+          cp index.html .nojekyll sitemap.xml robots.txt _site/ 2>/dev/null || cp index.html _site/
+          cp -r css js data images _site/
+          echo "Archivos en _site: $(find _site -type f | wc -l)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Tamaño: $(du -sh _site | cut -f1)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Subir artefacto de vista previa
+        uses: actions/upload-artifact@v7
+        with:
+          name: vista-previa-sitio
+          path: _site
+          retention-days: 7
+
+      - name: Resumen de la vista previa
+        run: |
+          {
+            echo "## Vista previa del sitio 🐾"
+            echo ""
+            echo "Se generó una vista previa descargable de la PR en el artefacto **vista-previa-sitio**."
+            echo "Descárgalo desde la pestaña *Summary* de esta ejecución y abre \`index.html\` en tu navegador."
+            echo ""
+            echo "La integridad de datos y de los enlaces clínicos (diccionario ↔ enfermedades) fue validada."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ── Deploy Pages (solo main, tras test + e2e verdes) ───────────────────────
+  # US-DEV-10: needs sustituye el gate por polling / workflow_run.
+  build:
+    needs: [test, e2e]
+    if: >
+      always() &&
+      needs.test.result == 'success' &&
+      needs.e2e.result == 'success' &&
+      (
+        (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+        github.event_name == 'workflow_dispatch'
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+
+      - name: Preparar sitio estático
+        run: |
+          ruby scripts/data/build_sitemap.rb
+          mkdir -p _site
+          cp index.html .nojekyll manifest.webmanifest sw.js sitemap.xml robots.txt _site/
+          cp -r css js data images _site/
+          du -sh _site
+          find _site -type f | wc -l
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+
+      - name: Verificar sitio publicado (F4-06)
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          echo "Comprobando $PAGE_URL"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$PAGE_URL")
+            if [[ "$STATUS" == "200" ]]; then
+              echo "Sitio responde HTTP 200"
+              exit 0
+            fi
+            echo "Intento $i: HTTP $STATUS — reintentando en 10s..."
+            sleep 10
+          done
+          echo "El sitio no respondió HTTP 200 tras el despliegue"
+          exit 1
+
+  # ── Cleanup tras merge ────────────────────────────────────────────────────
+  delete-merged-branch:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref != 'main' &&
+      github.event.pull_request.head.ref != 'master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Eliminar rama remota tras merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          echo "PR #${{ github.event.pull_request.number }} mergeado. Eliminando refs/heads/${HEAD_REF}"
+          if gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEAD_REF}"; then
+            echo "Rama ${HEAD_REF} eliminada."
+          else
+            echo "No se pudo eliminar ${HEAD_REF} (puede que ya no exista). Continuando."
+          fi
+
+  prune-stale-merged:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Prune de ramas remotas ya mergeadas en main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: bash scripts/setup/prune_merged_branches.sh

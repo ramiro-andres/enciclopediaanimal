@@ -8,7 +8,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/).
 - UI solo en español (`js/i18n.js` plano; sin conmutador EN).
 - Scope Sonar vía `.sonarcloud.properties` (Automatic Analysis).
 - Deploy en `push` a `main` con espera de `test` + `e2e` verdes.
-- Borrado automático de ramas al mergear (`cleanup-branch.yml` + `delete_branch_on_merge`).
+- Borrado automático de ramas al mergear (`ci.yml` cleanup + `delete_branch_on_merge`).
+- Pipeline CI unificado en un solo workflow (`.github/workflows/ci.yml`) con jobs paralelos.
 
 ### Fixed
 - Issues Sonar (vulns CI, bug de label, code smells de parse/regex/a11y).

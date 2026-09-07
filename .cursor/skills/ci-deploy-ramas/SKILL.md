@@ -3,7 +3,7 @@ name: ci-deploy-ramas
 description: >-
   Flujo de PR, CI, GitHub Pages y limpieza de ramas en Enciclopedia Animal.
   Usar al crear PRs, tocar workflows, deploy Pages, gate test/e2e, o borrar
-  ramas mergeadas / cleanup-branch / prune_merged_branches.
+  ramas mergeadas / cleanup / prune_merged_branches. Pipeline único: ci.yml.
 ---
 
 # CI, deploy y ramas
@@ -15,27 +15,31 @@ description: >-
 3. PR → checks verdes → merge.
 4. Deploy automático a Pages tras gate.
 
-## Workflows
+## Workflow
 
-| Archivo | Rol |
-|---------|-----|
-| `test.yml` | Ruby, integridad, seguridad estática |
-| `e2e.yml` | Playwright (`file://`, sin servidor) |
-| `lighthouse.yml` | Accesibilidad ≥ 90 en PR |
-| `preview.yml` | Artefacto `_site` |
-| `deploy-pages.yml` | Push `main` / manual; **gate** espera `test` + `e2e` en el mismo SHA |
-| `cleanup-branch.yml` | PR mergeado → borra head + `prune_merged_branches.sh` |
+Un solo archivo: [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml).
+
+| Job | Cuándo | Rol |
+|-----|--------|-----|
+| `test` | push/PR (no closed) | Ruby, integridad, seguridad estática |
+| `e2e` | push/PR (no closed) | Playwright (`file://`, sin servidor) |
+| `lighthouse` | PR / manual | Accesibilidad ≥ 90 |
+| `preview` | PR / manual | Artefacto `_site` |
+| `build` + `deploy` | push `main` / manual | Pages; **needs** `test` + `e2e` verdes |
+| `delete-merged-branch` + `prune-stale-merged` | PR mergeado | Limpieza de ramas |
+
+Checks requeridos en branch protection: **`CI / test`** y **`CI / e2e`**.
 
 ## Deploy Pages
 
 - Sin Jekyll; copia shell + `css/`, `js/`, `data/`, `images/` a `_site/`.
-- No reintroducir `workflow_run` como gate de Sonar.
+- Gate con `needs: [test, e2e]` (sin `workflow_run` ni polling de API).
 - Post-deploy: curl HTTP 200 a la URL de Pages.
 
 ## Ramas
 
 - Repo: `delete_branch_on_merge=true`.
-- Workflow `cleanup-branch.yml`: solo mismo repo (no forks); nunca `main`/`master`.
+- Jobs de cleanup en `ci.yml`: solo mismo repo (no forks); nunca `main`/`master`.
 - Manual: `bash scripts/setup/prune_merged_branches.sh` (`--dry-run` primero).
 - Script con `set -u`: manejar arrays vacíos (sin fallar si no hay candidatas).
 - Worktrees no se borran solos: `git worktree remove`.

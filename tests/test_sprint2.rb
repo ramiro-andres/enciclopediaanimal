@@ -158,11 +158,11 @@ class E2eInfraTest < Minitest::Test
   end
 
   def test_workflow_e2e_existe_y_no_usa_servidor
-    path = File.join(ROOT, '.github', 'workflows', 'e2e.yml')
-    assert File.exist?(path), 'Falta workflow e2e.yml'
+    path = File.join(ROOT, '.github', 'workflows', 'ci.yml')
+    assert File.exist?(path), 'Falta workflow ci.yml'
     wf = File.read(path)
-    assert_includes wf, 'permissions:'
-    assert_includes wf, 'contents: read'
+    assert_includes wf, 'e2e:'
+    assert_match(/e2e:\n(?:.*\n)*?    permissions:\n      contents: read/, wf)
     assert_includes wf, 'playwright'
     assert_includes wf, 'npm ci --ignore-scripts'
     refute_includes wf, 'npx '
@@ -176,10 +176,11 @@ end
 
 class PreviewYValidacionTest < Minitest::Test
   def test_workflow_preview_existe_con_permisos_minimos
-    path = File.join(ROOT, '.github', 'workflows', 'preview.yml')
-    assert File.exist?(path), 'Falta workflow preview.yml'
+    path = File.join(ROOT, '.github', 'workflows', 'ci.yml')
+    assert File.exist?(path), 'Falta workflow ci.yml'
     wf = File.read(path)
-    assert_match(/permissions:\s*\n\s+contents: read/, wf)
+    assert_includes wf, 'preview:'
+    assert_match(/preview:\n(?:.*\n)*?    permissions:\n      contents: read/, wf)
     assert_includes wf, 'validar_integridad.rb'
     assert_includes wf, 'upload-artifact'
     refute_includes wf, 'write-all'
@@ -190,7 +191,7 @@ class PreviewYValidacionTest < Minitest::Test
   end
 
   def test_workflow_test_valida_sincronizacion_de_enlaces
-    wf = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    wf = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
     assert_includes wf, 'actualizar_datos.sh'
     assert_includes wf, 'data/enlaces_clinicos.js'
     assert_includes wf, 'validar_integridad.rb'

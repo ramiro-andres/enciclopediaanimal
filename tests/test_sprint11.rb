@@ -160,7 +160,7 @@ end
 class InconsistenciesCiTest < Minitest::Test
   def setup
     @script = File.join(ROOT, 'scripts', 'data', 'detect_inconsistencies.rb')
-    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'test.yml'))
+    @workflow = File.read(File.join(ROOT, '.github', 'workflows', 'ci.yml'))
     @ejecutar = File.read(File.join(ROOT, 'ejecutar_pruebas.sh'))
   end
 
