@@ -1825,6 +1825,8 @@ body {
   --feature-card-tools-border: #C4B5FD;
   --feature-card-predis-bg: linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%);
   --feature-card-predis-border: #A7F3D0;
+  --feature-card-criaderos-bg: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 100%);
+  --feature-card-criaderos-border: #86EFAC;
   --nutrition-stage-bg: rgba(255, 255, 255, 0.7);
   --disclaimer-icon-gradient-end: #E0E7FF;
   --clinical-note-bg: #ECFDF5;
@@ -6712,4 +6714,148 @@ textarea::placeholder {
   :root:not([data-theme-mode="light"]) .footer-contribute {
     color: var(--text);
   }
+}
+
+/* ── Criaderos / instalaciones ───────────────────────────────────────────── */
+.criaderos-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.criaderos-hero {
+  margin-bottom: 1.5rem;
+}
+
+.criaderos-disclaimer {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.criaderos-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.criaderos-filter-btn {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.criaderos-filter-btn.active,
+.criaderos-filter-btn[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.criaderos-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.criaderos-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.25rem 1.35rem;
+  border-left: 4px solid var(--primary);
+}
+
+.criaderos-card-header h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+}
+
+.criaderos-scope {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.criaderos-scope span {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.criaderos-block {
+  margin-top: 1.1rem;
+}
+
+.criaderos-block h4 {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+}
+
+.criaderos-block ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.criaderos-diagram {
+  margin: 0.85rem 0 0.5rem;
+}
+
+.criaderos-diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f7f4ee;
+}
+
+.criaderos-table-wrap {
+  overflow-x: auto;
+  margin-top: 0.75rem;
+}
+
+.criaderos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.criaderos-table caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.criaderos-table th,
+.criaderos-table td {
+  border: 1px solid var(--border);
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.criaderos-table th {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.criaderos-notes {
+  margin-top: 0.65rem;
+}
+
+.criaderos-block--sources a {
+  color: var(--primary);
+}
+
+.feature-card--criaderos {
+  border-color: var(--feature-card-criaderos-border);
+  background: var(--feature-card-criaderos-bg);
+}
+
+.welcome-features .feature-card--criaderos {
+  border-color: var(--feature-card-criaderos-border);
+  background: var(--feature-card-criaderos-bg);
 }

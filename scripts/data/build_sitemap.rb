@@ -59,6 +59,7 @@ static_routes = [
   ['emergencias-latam', 'monthly', '0.6'],
   ['triaje', 'monthly', '0.6'],
   ['laboratorio', 'monthly', '0.6'],
+  ['criaderos', 'monthly', '0.7'],
   ['changelog', 'monthly', '0.5']
 ]
 
