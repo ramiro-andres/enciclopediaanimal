@@ -114,11 +114,13 @@ class RegionFilterSprint13Test < Minitest::Test
 
   def test_regiones_acotadas_al_animal_filtrado
     assert_includes @app, 'syncRegionFilterToAvailable'
-    # getAvailableRegions debe respetar currentAnimal / currentSize
-    body = @app[/\bgetAvailableRegions\(\) \{.*?\n  \},/m]
-    assert body, 'Falta getAvailableRegions'
+    assert_includes @app, 'rebuildRegionOptions'
+    body = @app[/\brebuildRegionOptions\(\) \{.*?\n  \},/m]
+    assert body, 'Falta rebuildRegionOptions'
     assert_includes body, 'currentAnimal'
     assert_includes body, 'currentSize'
+    # Con animal concreto no se listan macros globales
+    assert_includes body, 'macros = (this.currentAnimal'
   end
 
   def test_estilos_region

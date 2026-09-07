@@ -430,6 +430,8 @@ const App = {
     this.renderBreedOfWeek();
     this.renderStats();
     this.showLoadStatus();
+    this._regionOptions = null;
+    this.rebuildRegionOptions();
     if (this.currentView === 'home') this.renderHome();
     // Tras hidratar razas, re-evaluar filtros de región (si no, el menú queda hidden).
     this.updateSidebar();
@@ -838,7 +840,10 @@ const App = {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.currentSize = btn.dataset.size;
+        this.currentRegion = 'todos';
+        this._regionOptions = null;
         if (this.searchQuery) this.clearSearch(false);
+        this.rebuildRegionOptions();
         this.renderHome();
       });
     });
@@ -939,13 +944,16 @@ const App = {
     return Object.entries(map).find(([key]) => text.includes(key))?.[1] || null;
   },
 
-  getAvailableRegions() {
-    // Solo países (y macros) con razas del animal/tamaño actuales.
+  getRegionScopeKey() {
+    return `${this.currentAnimal || 'todos'}|${this.currentSize || 'todos'}`;
+  },
+
+  rebuildRegionOptions() {
     let breeds = this.getAllBreeds();
-    if (this.currentAnimal !== 'todos') {
+    if (this.currentAnimal && this.currentAnimal !== 'todos') {
       breeds = breeds.filter(b => b.animalId === this.currentAnimal);
     }
-    if (this.currentSize !== 'todos') {
+    if (this.currentSize && this.currentSize !== 'todos') {
       breeds = breeds.filter(b => b.tamano === this.currentSize);
     }
     const countries = new Set();
@@ -953,10 +961,27 @@ const App = {
       const region = this.getBreedRegion(b);
       if (region) countries.add(region);
     });
-    const macros = Object.keys(this.REGION_MACRO_GROUPS).filter(macro =>
-      this.REGION_MACRO_GROUPS[macro].some(c => countries.has(c))
-    );
-    return { macros, countries: Array.from(countries).sort((a, b) => a.localeCompare(b, 'es')) };
+    const countryList = Array.from(countries).sort((a, b) => a.localeCompare(b, 'es'));
+    // Con animal concreto: solo países (sin macros LATAM/Europa/…).
+    const macros = (this.currentAnimal && this.currentAnimal !== 'todos')
+      ? []
+      : Object.keys(this.REGION_MACRO_GROUPS).filter(macro =>
+        this.REGION_MACRO_GROUPS[macro].some(c => countries.has(c))
+      );
+    this._regionOptions = {
+      key: this.getRegionScopeKey(),
+      macros,
+      countries: countryList
+    };
+    return this._regionOptions;
+  },
+
+  getAvailableRegions() {
+    const key = this.getRegionScopeKey();
+    if (!this._regionOptions || this._regionOptions.key !== key) {
+      return this.rebuildRegionOptions();
+    }
+    return this._regionOptions;
   },
 
   syncRegionFilterToAvailable() {
@@ -995,9 +1020,13 @@ const App = {
     container.innerHTML = html;
     container.querySelectorAll('.region-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        this.currentRegion = btn.dataset.region;
+        const next = btn.getAttribute('data-region') || btn.dataset.region || 'todos';
+        this.currentRegion = next;
+        // No recalcular países desde todo el catálogo: mismo alcance animal/tamaño.
         this.renderRegionFilters();
-        this.renderHome();
+        this.renderBreeds();
+        this.updateResultsTitle();
+        this.exportE2EState();
       });
     });
   },
@@ -1527,6 +1556,8 @@ const App = {
     }
     this.currentAnimal = animalId;
     this.currentSize = 'todos';
+    this.currentRegion = 'todos';
+    this._regionOptions = null;
     document.querySelectorAll('.filter-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.size === 'todos');
     });
@@ -1534,6 +1565,7 @@ const App = {
       b.classList.toggle('active', b.dataset.animal === animalId);
     });
     if (this.searchQuery) this.clearSearch(false);
+    this.rebuildRegionOptions();
     this.showView('home');
     this.renderHome();
     if (options.updateHash !== false) this.updateHash(this.browseRoute());
@@ -1543,6 +1575,7 @@ const App = {
     this.currentAnimal = 'todos';
     this.currentSize = 'todos';
     this.currentRegion = 'todos';
+    this._regionOptions = null;
     this.searchQuery = '';
     this.dictionaryQuery = '';
     this.dictionaryCategory = 'todos';
@@ -4936,11 +4969,14 @@ const App = {
     const stats = this.getCatalogStats();
     const breeds = this.getAllBreeds();
     const inBrowse = this.currentView === 'home' && !this.searchQuery;
+    const regionOpts = this.getAvailableRegions();
     window.__E2E_STATE__ = {
       ready: true,
       view: this.currentView,
       welcomeActive: this.currentView === 'welcome',
       currentAnimal: this.currentAnimal,
+      currentRegion: this.currentRegion,
+      regionCountries: regionOpts.countries || [],
       animales: this.data.animales.length,
       razas: stats.breeds || breeds.length,
       enfermedades: stats.diseases || breeds.reduce((n, b) => n + (b.enfermedades?.length || 0), 0),

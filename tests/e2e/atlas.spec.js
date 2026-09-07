@@ -366,6 +366,14 @@ test.describe('Enciclopedia Animal — flujos E2E sin servidor', () => {
     });
     expect(countryCount).toBeGreaterThan(0);
     expect(countryCount).toBeLessThan(25);
+    const scoped = await page.evaluate(() => window.__E2E_STATE__);
+    expect(scoped.currentAnimal).toBe('perros');
+    expect(scoped.regionCountries.length).toBe(countryCount);
+    // Elegir un país no debe reexpandir el menú a todo el catálogo
+    const firstCountry = scoped.regionCountries[0];
+    await page.locator(`#regionFilters .region-btn[data-region="${firstCountry}"]`).click();
+    const afterClick = await page.evaluate(() => window.__E2E_STATE__.regionCountries.length);
+    expect(afterClick).toBe(countryCount);
 
     const estado = await page.evaluate(() => window.__E2E_STATE__);
     // Tras dedupe de alias/paréntesis/sinónimos: ≥550 únicos.
