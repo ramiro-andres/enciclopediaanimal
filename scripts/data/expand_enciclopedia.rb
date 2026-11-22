@@ -193,7 +193,13 @@ load File.join(__dir__, 'expand_breed_data.rb')
 def expand_text(original, extra_sentences)
   base = original.to_s.strip
   return extra_sentences.join(' ') if base.empty?
-  "#{base} #{extra_sentences.join(' ')}"
+
+  # Idempotente: no repetir frases ya presentes y cerrar la frase base con punto.
+  nuevas = extra_sentences.reject { |s| base.include?(s) }
+  return base if nuevas.empty?
+
+  base = "#{base}." unless base.end_with?('.', '!', '?')
+  "#{base} #{nuevas.join(' ')}"
 end
 
 def expand_disease(disease, animal_id, breed_id)
